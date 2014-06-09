@@ -74,6 +74,10 @@ class CreateProposal(BaseProposalView, CreateView):
 class UpdateProposal(BaseProposalView, UpdateView):
     template_name = 'proposal/proposal_form.html'
 
+    def get_context_data(self, **kwargs):
+        kwargs['event'] = Event.objects.get(slug=self.kwargs['event_slug'])
+        return kwargs
+
     def form_valid(self, form):
         self.object = form.save()
         messages.success(self.request, _('Proposal updated.'))
