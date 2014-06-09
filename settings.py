@@ -38,6 +38,8 @@ TEMPLATE_DIRS = [
 # Absolute path to the directory static files should be collected to.
 STATICFILES_DIRS = []
 
+STATIC_ROOT = os.path.join(BASE_DIR, *"speakerfight static/".split())
+
 ALLOWED_HOSTS = []
 
 
