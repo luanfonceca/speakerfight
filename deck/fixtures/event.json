@@ -1,15 +1,15 @@
 [
 {
-    "pk": 1, 
-    "model": "deck.event", 
+    "pk": 1,
+    "model": "deck.event",
     "fields": {
-        "description": "<h3>Propostas de Palestras</h3> <br>\r\nA RuPy re\u00fane tr\u00eas diferentes comunidades de desenvolvedores para intensificar a troca de conhecimento e experi\u00eancia, comparar problemas e solu\u00e7\u00f5es, partilhar metodologias e filosofia, sempre com o objetivo de proporcionar a todos novos olhares e muitas ideias.", 
+        "description": "<h3>Propostas de Palestras</h3> <br>\r\nA RuPy re\u00fane tr\u00eas diferentes comunidades de desenvolvedores para intensificar a troca de conhecimento e experi\u00eancia, comparar problemas e solu\u00e7\u00f5es, partilhar metodologias e filosofia, sempre com o objetivo de proporcionar a todos novos olhares e muitas ideias.",
         "author": [
-            "Luanfonceca"
-        ], 
-        "created_at": "2014-06-09T06:07:53.967Z", 
-        "title": "RuPy Natal", 
-        "allow_public_voting": true, 
+            "user"
+        ],
+        "created_at": "2014-06-09T06:07:53.967Z",
+        "title": "RuPy Natal",
+        "allow_public_voting": true,
         "slug": "rupy-natal"
     }
 }
