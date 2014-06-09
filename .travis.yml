@@ -1,0 +1,10 @@
+language:
+  - python
+install:
+  # Build/test dependencies
+  - pip install -r requirements.txt --use-mirrors
+# command to run tests
+script:
+  - coverage run manage.py test
+after_success:
+  - coveralls

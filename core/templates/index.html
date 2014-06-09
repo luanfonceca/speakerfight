@@ -1,0 +1,11 @@
+{% extends "public_layout.html" %}
+
+{% block content %}
+  <div class="col-md-8">
+    <h1><strong>Speakerfight</strong> is an arena where the speakers can fight each other and the people choose who wins.</h1>
+  </div>
+  <div class="col-md-4">
+    <a href="{% url 'list_events' %}" class="btn-flat info get-started text-center">GET STARTED</a>
+    <br><br>
+  </div>
+{% endblock content %}

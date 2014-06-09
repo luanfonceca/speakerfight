@@ -1,0 +1,38 @@
+[
+{
+    "pk": 1,
+    "model": "auth.user",
+    "fields": {
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "is_active": true,
+        "is_superuser": true,
+        "is_staff": true,
+        "last_login": "2014-04-14T04:55:59.817Z",
+        "groups": [],
+        "user_permissions": [],
+        "password": "pbkdf2_sha256$12000$Rv6xMnG2CIVn$1ivJG0S+/JG1dhMvTFKYutBDM/uNWWC2pB1wgDGDJo0=",
+        "email": "admin@speakerfight.com",
+        "date_joined": "2014-04-14T04:55:59.817Z"
+    }
+},
+{
+    "pk": 2,
+    "model": "auth.user",
+    "fields": {
+        "username": "user",
+        "first_name": "",
+        "last_name": "",
+        "is_active": true,
+        "is_superuser": true,
+        "is_staff": true,
+        "last_login": "2014-04-14T04:55:59.817Z",
+        "groups": [],
+        "user_permissions": [],
+        "password": "pbkdf2_sha256$12000$T9zDvcw4Uk01$2A8DwCmHut+KyXHRiVMfdCZ/gfLsJ+QF4VEiJkMjldc=",
+        "email": "user@speakerfight.com",
+        "date_joined": "2014-04-14T04:55:59.817Z"
+    }
+}
+]

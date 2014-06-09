@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block head_title %}
+  {% if form.instance.pk %}
+    {% trans "Update Proposal" %}: "{{ proposal }}"
+  {% else %}
+    {% trans "New Proposal" %}
+  {% endif %}
+{% endblock %}
+
+{% block head %}
+  <!-- libraries for this page -->
+  <link href="{{ STATIC_URL }}css/lib/uniform.default.css" type="text/css" rel="stylesheet" />
+{% endblock head %}
+
+{% block content %}
+  <div class="row header">
+    <h2>
+      {% if form.instance.pk %}
+        {% trans "Update Proposal" %}: "{{ proposal }}"
+      {% else %}
+        {% trans "New Proposal" %}
+      {% endif %}
+    </h2>
+  </div>
+  <div class="row form-wrapper">
+    <!-- left column -->
+    <div class="column">
+      <form method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form layout="inline" %}
+
+        {% buttons %}
+          <button type="submit" class="btn-flat success text-upper">
+            <i class="icon icon-edit"></i>
+            {% trans "submit" %}
+          </button>
+          <div class="pull-right">
+            {% if form.instance.pk %}
+              <a href="{% url 'view_event' slug=form.instance.event.slug %}" class="link text-upper">
+                <i class="icon-calendar"></i>
+                {% trans "event detail" %}
+              </a>
+            {% endif %}
+          </div>
+        {% endbuttons %}
+      </form>
+    </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block scripts %}
+  <!-- scripts for this page -->
+  <script src="{{ STATIC_URL }}js/lib/jquery.uniform.min.js"></script>
+{% endblock scripts %}

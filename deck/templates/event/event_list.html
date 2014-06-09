@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block head_title %}{% trans "Events" %}{% endblock %}
+
+{% block content %}
+  <div class="row header">
+    <h2><strong>{% trans "Proposals" %}</strong></h2>
+    <a href="{% url 'create_event' %}" class="btn-flat success pull-right text-upper">
+      <i class="icon-plus"></i>
+      {% trans "new event" %}
+    </a>
+  </div>
+
+  <!-- Users table -->
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-hover">
+        <tbody>
+        <!-- row -->
+        {% for event in event_list %}
+          <tr class="linkable {% if forloop.first %}first{% endif %}"
+              data-href="{% url 'view_event' slug=event.slug %}">
+            <td class="text-left">
+              <div class="{% if event.author_id == request.user.id %}col-md-11{% endif%}">
+                <h3>{{ event }}</h3>
+                <blockquote>
+                  <h3>{{ event.description|safe|linebreaks }}</h3>
+                </blockquote>
+              </div>
+              {% if event.author_id == request.user.id %}
+                <div class="col-md-1 event-actions">
+                  <a href="{% url 'update_event' slug=event.slug %}" class="flat-icon">
+                    <i class="update black"></i>
+                  </a>
+                </div>
+              {% endif %}
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="text-center">
+              <h3>{% trans "No Events" %}</h3>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- end events table -->
+{% endblock content %}
+
+
+{% block scripts %}
+  <script src="{{ STATIC_URL }}js/lib/jquery.linkable.js"></script>
+
+  <script type="text/javascript">
+    $(function () {
+      $(".linkable").linkable();
+    });
+  </script>
+{% endblock scripts %}

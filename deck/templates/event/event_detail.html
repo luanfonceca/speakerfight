@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+{% load bootstrap3 %}
+{% load deck_tags %}
+
+{% block head_title %}{% trans "Event Detail" %}{% endblock %}
+
+{% block content %}
+  <!-- header -->
+  <div class="row header">
+    <div class="col-md-12">
+      <h1 class="name text-upper">{{ event }}</h1>
+      <div class="description">
+        <h4 class="col-xs-12">
+          <blockquote>{{ event.description|safe|linebreaks }}</blockquote>
+          {% if event.due_date %}
+            {% trans "Due date at" %}: {{ event.due_date }}<br>
+          {% endif %}
+          {% trans "Created by" %}: <strong>{{ event.author }}</strong>
+          {% trans "at" %} {{ event.created_at }}<br>
+          {% if not event.allow_public_voting %}
+            <i class="icon-exclamation-sign"></i>
+            {% trans "This event doesn't accept Public Voting." %}
+          {% endif %}
+        </h4>
+      </div>
+    </div>
+  </div>
+
+  <!-- row -->
+  <div class="row">
+    <div class="col-md-12">
+      <a class="btn-flat success pull-right text-upper" href="{% url 'create_event_proposal' slug=event.slug %}">
+        <i class="icon-plus"></i>
+        {% trans "add proposal" %}
+      </a>
+      <h2><strong>{% trans "Proposals" %}</strong></h2>
+      <table class="table table-hover">
+        <tbody>
+        {% for proposal in event.proposals.cached_authors %}
+          <tr>
+            <td class="text-left">
+              <div class="{% if event.allow_public_voting or proposal|already_votted_by:request.user %}col-md-7{% elif event.author_id == request.user.id %}col-md-11{% else %}col-md-12{% endif %}">
+                <h3>{{ proposal }}</h3>
+                {% trans "Created by" %}: <strong>{{ proposal.author }}</strong>
+                {% trans "at" %} {{ proposal.created_at }}
+                <blockquote>
+                  <h3>{{ proposal.description|safe|linebreaks }}</h3>
+                </blockquote>
+              </div>
+              <div class="event-actions">
+                {% if request.user|allowed_to_vote:proposal %}
+                  {% for value, name in vote_rates %}
+                    <a href="{% url 'rate_proposal' event_slug=proposal.event.slug slug=proposal.slug rate=name %}" class="flat-icon">
+                      <i class="{{ name }} black"></i>
+                    </a>
+                  {% endfor %}
+                {% elif event.allow_public_voting and not proposal.author_id == request.user.id %}
+                  <h5 class="pull-right">
+                    {% trans "Proposal already rated by you." %}
+                  </h5>
+                {% endif %}
+                {% if proposal.author_id == request.user.id %}
+                  <a href="{% url 'update_proposal' event_slug=event.slug slug=proposal.slug %}" class="flat-icon">
+                    <i class="update black"></i>
+                  </a>
+                {% endif %}
+              </div>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="text-center">
+              <h3>{% trans "No Proposals" %}</h3>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      <!-- recent proposals table -->
+    </div>
+{% endblock content %}

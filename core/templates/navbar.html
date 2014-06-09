@@ -1,0 +1,49 @@
+{% load i18n %}
+
+<header class="navbar navbar-inverse" role="banner">
+  <div class="navbar-header">
+    <button class="navbar-toggle" type="button" data-toggle="collapse" id="menu-toggler">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="{% url 'list_events' %}">
+      <img src="{{ STATIC_URL }}img/speakerfight.png" alt="logo" />
+    </a>
+  </div>
+  <ul class="nav navbar-nav pull-right">
+    {% if request.user.is_authenticated %}
+      <li class="settings">
+        <a href="{% url 'account_logout' %}" role="button">
+          <i class="icon-share-alt"></i>
+        </a>
+      </li>
+    {% else %}
+      <li class="notification-dropdown">
+        <a href="javascript:;" class="trigger">
+          <i class="icon-reply"></i> {% trans "Sign In" %}
+        </a>
+        <div class="pop-dialog">
+          <div class="pointer right">
+            <div class="arrow"></div>
+            <div class="arrow_border"></div>
+          </div>
+          <div class="body">
+            <h4>
+              <i class="icon-signin"></i>
+              {% blocktrans %} Sign in with one
+of your account {% endblocktrans %}
+            </h4>
+            <div class="messages">
+              {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+              <div class="footer">
+                <a href="{% url 'account_login' %}">{% trans "Using Email and Password" %}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    {% endif %}
+  </ul>
+</header>

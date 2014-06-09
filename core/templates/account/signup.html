@@ -1,0 +1,37 @@
+{% extends "public_layout.html" %}
+
+{% load i18n %}
+{% load account %}
+{% load bootstrap3 %}
+{% load url from future %}
+
+{% block head_title %}{% trans "Sign Up" %}{% endblock %}
+
+{% block content %}
+  <div class="col-md-offset-3 col-md-6">
+    <h1>{% trans "Sign Up" %}</h1>
+
+    <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+      {% csrf_token %}
+      {% bootstrap_form form layout="inline" %}
+      {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <button class="btn-flat success text-upper" type="submit">{% trans "Sign Up" %}</button>
+    </form>
+    <hr>
+    <div class="col-md-offset-2 col-md-8">
+      <p class="text-center">
+        {% blocktrans with site.name as site_name %}
+          Or sign up using your social networks:
+        {% endblocktrans %}
+      </p>
+      {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+    </div>
+  </div>
+
+{% endblock %}
+
+

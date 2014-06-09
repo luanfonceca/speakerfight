@@ -1,0 +1,8 @@
+[run]
+source = .
+omit = */migrations/*,
+	   *__init__*,
+	   */tests/*
+
+[html]
+directory = docs/report

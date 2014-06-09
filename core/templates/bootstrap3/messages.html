@@ -1,0 +1,9 @@
+{% for message in messages %}
+  <div class="col-md-12">
+    <div class="alert{% if message.tags %} alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}{% endif %} alert-dismissable">
+      <i class="icon-exclamation-sign"></i>
+      {{ message|safe }}
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#215;</button>
+    </div>
+  </div>
+{% endfor %}

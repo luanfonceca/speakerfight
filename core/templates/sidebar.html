@@ -1,0 +1,27 @@
+{% load activelink %}
+
+{% block scripts %}
+  <script type="text/javascript">
+    function div(text, classes) {
+      return '<div class="' + classes + '">' + text;
+    };
+    $(function () {
+      var pointer = '<div class="pointer">' +
+                      '<div class="arrow"></div>' +
+                      '<div class="arrow_border"></div>' +
+                    '</div>';
+      $('#dashboard-menu').find('li.active').append(pointer);
+    });
+  </script>
+{% endblock scripts %}
+
+<div id="sidebar-nav">
+  <ul id="dashboard-menu">
+    <li {% ifstartswith "/events/" %}class="active"{% endifstartswith %}>
+      <a href="{% url 'list_events' %}">
+        <i class="icon-calendar-empty"></i>
+        <span>Events</span>
+      </a>
+    </li>
+  </ul>
+</div>

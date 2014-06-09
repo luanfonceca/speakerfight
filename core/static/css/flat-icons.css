@@ -1,0 +1,76 @@
+a.flat-icon {
+  opacity: 0.6;
+  text-decoration: none;
+}
+
+a.flat-icon:hover {
+  opacity: 1;
+}
+
+a.flat-icon i {
+  display: inline-block;
+  background: url("../img/flat-icons.png") no-repeat;
+  width: 70px;
+  height: 70px;
+}
+
+.flat-icon i.detail{
+  background-position: -10px -5px;
+}
+
+.flat-icon i.detail.black{
+  background-position: -568px -87px;
+}
+
+.flat-icon i.update{
+  background-position: -90px -5px;
+}
+
+.flat-icon i.update.black{
+  background-position: -493px -87px;
+}
+
+
+.flat-icon i.delete{
+  background-position: -495px -5px;
+}
+
+/*.flat-icon i.manage{
+  background-position: -229px;
+}
+*/
+.flat-icon i.publish{
+  background-position: -250px -5px;
+}
+
+.flat-icon i.save{
+  background-position: -320px;
+}
+
+.flat-icon i.unpublish{
+  background-position: -335px -8px;
+}
+
+.flat-icon i.url{
+  background-position: -570px -4px;
+}
+
+.flat-icon i.angry.black{
+  background-position: -5px -85px;
+}
+
+.flat-icon i.sleepy.black{
+  background-position: -90px -87px;
+}
+
+.flat-icon i.sad.black{
+  background-position: -173px -87px;
+}
+
+.flat-icon i.happy.black{
+  background-position: -253px -85px;
+}
+
+.flat-icon i.laughing.black{
+  background-position: -338px -85px;
+}
