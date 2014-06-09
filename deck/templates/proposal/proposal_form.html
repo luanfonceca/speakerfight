@@ -19,6 +19,7 @@
 {% block content %}
   <div class="row header">
     <h2>
+      {{ event }}
       {% if form.instance.pk %}
         {% trans "Update Proposal" %}: "{{ proposal }}"
       {% else %}
@@ -39,12 +40,10 @@
             {% trans "submit" %}
           </button>
           <div class="pull-right">
-            {% if form.instance.pk %}
-              <a href="{% url 'view_event' slug=form.instance.event.slug %}" class="link text-upper">
-                <i class="icon-calendar"></i>
-                {% trans "event detail" %}
-              </a>
-            {% endif %}
+            <a href="{% url 'view_event' slug=event.slug %}" class="link text-upper">
+              <i class="icon-calendar"></i>
+              {% trans "event detail" %}
+            </a>
           </div>
         {% endbuttons %}
       </form>
