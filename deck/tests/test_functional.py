@@ -6,7 +6,7 @@ from deck.tests.test_unit import EVENT_DATA, PROPOSAL_DATA
 
 
 class EventTest(TestCase):
-    fixtures = ['socialapp.json', 'user.json']
+    fixtures = ['user.json']
 
     def setUp(self):
         self.client = Client()
@@ -100,7 +100,7 @@ class EventTest(TestCase):
 
 
 class ProposalTest(TestCase):
-    fixtures = ['socialapp.json', 'user.json']
+    fixtures = ['user.json']
 
     def setUp(self):
         self.client = Client()
