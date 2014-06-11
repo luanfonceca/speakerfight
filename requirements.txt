@@ -24,3 +24,4 @@ six==1.6.1
 sqlparse==0.1.11
 uWSGI==2.0.5
 wsgiref==0.1.2
+smarturls

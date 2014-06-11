@@ -36,8 +36,8 @@ class ProposalUrlTest(TestCase):
 
     def test_assert_proposal_should_have_an_rate_url(self):
         kwargs = self.url_kwargs.copy()
-        kwargs.update(rate=1)
+        kwargs.update(rate='happy')
         self.assertEquals(
-            '/events/rupy/proposals/python-for-zombies/rate/1',
+            '/events/rupy/proposals/python-for-zombies/rate/happy/',
             reverse('rate_proposal', kwargs=kwargs)
         )
