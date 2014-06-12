@@ -1,0 +1,7 @@
+[program:{project_name}]
+command=/{user}/.virtualenvs/{project_name}/bin/python /{user}/{project_name}/manage.py run_gunicorn -c /{user}/{project_name}/gunicorn.conf.py
+user={user}
+autostart=true
+autorestart=true
+stdout_logfile = /{user}/log/supervisor.{project_name}.log
+redirect_stderr=true

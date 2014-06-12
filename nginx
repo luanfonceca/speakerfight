@@ -1,0 +1,19 @@
+server {
+    server_name {host};
+    access_log /{user}/log/access.{project_name}.log;
+    error_log /{user}/log/error.{project_name}.log;
+
+    location /static/ {
+        alias /{user}/{project_name}/static/;
+        expires 30d;
+    }
+
+    location / {
+        proxy_pass_header Server;
+        proxy_set_header Host $host;
+        proxy_redirect off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+        proxy_pass http://0.0.0.0:8000;
+    }
+}
