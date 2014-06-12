@@ -69,6 +69,7 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount.providers.twitter',
     'allauth.socialaccount.providers.facebook',
     'debug_toolbar',
+    'gunicorn'
 ]
 
 LOCAL_APPS = [
