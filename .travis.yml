@@ -1,11 +1,12 @@
 language:
   - python
 install:
-  # Build/test dependencies
   - pip install -r requirements.txt --use-mirrors
-# command to run tests
 script:
   - coverage run manage.py test
 after_success:
   - coveralls
   - fab deploy
+env:
+  global:
+    secure: NVviNmcfvqqxxVRGUzkyqZFb8tSX0FxUGxyAtvtdho67xje+Xhn1l0Wtzh1RfItJVjZ/JWXYzYRPmKgj5fC9ormQVgm/P1g7BeKEn/u7fnI2waBM1XStYne1FteCad7g/ZxQNBqlJiKkYOGCAOaVgEkM5QkSmZV1UCCHGRfkuqQ=

@@ -1,5 +1,6 @@
 # coding: utf-8
 
+from os import environ
 from fabric.api import env, cd, run, sudo
 from fabric.contrib.files import exists
 from fabric.colors import yellow, green
@@ -10,6 +11,7 @@ REMOTE = 'origin'
 BRANCH = 'master'
 env.hosts = ['speakerfight.com']
 env.user = 'root'
+env.password = environ.get('PASSWORD')
 env.app_dir = 'speakerfight'
 env.project_name = 'speakerfight'
 env.virtualenv_dir = '~/.virtualenvs'
