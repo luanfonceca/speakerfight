@@ -79,9 +79,9 @@ LOCAL_APPS = [
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'speakerfight.urls'
 
-WSGI_APPLICATION = 'wsgi.application'
+WSGI_APPLICATION = 'speakerfight.wsgi.application'
 
 
 # Database
