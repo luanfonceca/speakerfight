@@ -1,0 +1,7 @@
+uwsgi:
+    http: :8001
+    chdir: {app_dir}
+    module: speakerfight.wsgi
+    virtualenv: {venv_dir}
+    chown-socket: www-data:www-data
+    daemonize: /var/log/uwsgi.log
