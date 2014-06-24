@@ -38,7 +38,7 @@ TEMPLATE_DIRS = [
 # Absolute path to the directory static files should be collected to.
 STATICFILES_DIRS = []
 
-STATIC_ROOT = os.path.join(BASE_DIR, *"speakerfight static/".split())
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 ALLOWED_HOSTS = []
 
@@ -159,3 +159,9 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 # Django Debug Toolbar
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
+
+
+try:
+    from local_settings import *
+except ImportError:
+    pass

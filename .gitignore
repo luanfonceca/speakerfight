@@ -48,6 +48,10 @@ coverage.xml
 # Django stuff:
 *.log
 *.pot
+speakerfight/local_settings.py
 
 # Sphinx documentation
 docs/_build/
+
+# Development database
+db.sqlite3
