@@ -13,6 +13,9 @@ class DeckBaseManager(models.Manager):
     def cached_authors(self):
         return super(DeckBaseManager, self).select_related('author')
 
+    def published_ones(self):
+        return self.cached_authors().filter(is_published=True)
+
 
 class DeckBaseModel(models.Model):
     title = models.CharField(_('Title'), max_length=50)
@@ -95,6 +98,7 @@ class Proposal(DeckBaseModel):
 class Event(DeckBaseModel):
     allow_public_voting = models.BooleanField(_('Allow Public Voting'),
                                               default=True)
+    is_published = models.BooleanField(_('Publish'), default=False)
 
     class Meta:
         verbose_name = _('Event')

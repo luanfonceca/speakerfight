@@ -84,6 +84,15 @@ class EventModelIntegrityTest(TestCase):
     def test_assert_event_author_should_have_a_related_name(self):
         self.assertEquals('events', self.fields['author'].rel.related_name)
 
+    def test_assert_event_should_have_a_publish_flag(self):
+        self.assertIn('is_published', Event._meta.get_all_field_names())
+
+    def test_assert_event_is_published_should_be_a_BooleanField(self):
+        self.assertIsInstance(self.fields['is_published'], BooleanField)
+
+    def test_assert_event_is_published_should_be_False_as_default(self):
+        self.assertEquals(False, self.fields['is_published'].default)
+
 
 class EventObjectTest(TestCase):
     def setUp(self):
@@ -103,6 +112,9 @@ class EventObjectTest(TestCase):
 
     def test_assert_event_allow_public_voting(self):
         self.assertEquals(True, self.event.allow_public_voting)
+
+    def test_assert_event_is_published(self):
+        self.assertEquals(False, self.event.is_published)
 
 
 class ProposalModelIntegrityTest(TestCase):

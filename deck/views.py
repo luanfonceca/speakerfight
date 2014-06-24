@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext as _
 from django.contrib import messages
-from django.db import IntegrityError
+from django.db import IntegrityError, models
 from django.core.exceptions import ValidationError
 
 from vanilla import CreateView, ListView, UpdateView, DetailView
@@ -18,6 +18,16 @@ class BaseEventView(object):
 
 class ListEvents(BaseEventView, ListView):
     template_name = 'event/event_list.html'
+    queryset = Event.objects.published_ones()
+
+    def get_context_data(self, **kwargs):
+        context = super(ListEvents, self).get_context_data(**kwargs)
+        if self.request.user.is_authenticated():
+            event_list = Event.objects.filter(
+                models.Q(is_published=True) |
+                models.Q(author=self.request.user))
+            context.update(event_list=event_list)
+        return context
 
 
 class CreateEvent(BaseEventView, CreateView):

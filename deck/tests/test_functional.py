@@ -27,6 +27,25 @@ class EventTest(TestCase):
         self.assertEquals('RuPy', event.title)
         self.assertEquals('A really good event.', event.description)
         self.assertEquals('admin', event.author.username)
+        self.assertEquals(False, event.is_published)
+
+    def test_empty_list_event(self):
+        self.client.login(username='user', password='user')
+
+        Event.objects.create(**self.event_data)
+        response = self.client.get(reverse('list_events'), follow=True)
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_list'], [])
+
+    def test_list_event(self):
+        event_data = self.event_data.copy()
+        event_data.update(is_published=True)
+        Event.objects.create(**event_data)
+
+        response = self.client.get(reverse('list_events'), follow=True)
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_list'],
+                                 ["<Event: RuPy>"])
 
     def test_detail_event(self):
         event = Event.objects.create(**self.event_data)
@@ -72,6 +91,21 @@ class EventTest(TestCase):
         self.assertEquals(200, response.status_code)
         event = response.context['event']
         self.assertEquals('rupy-2014', event.slug)
+
+    def test_publish_event(self):
+        event = Event.objects.create(**self.event_data)
+        event_data = self.event_data.copy()
+        event_data['is_published'] = True
+
+        self.assertEquals(False, event.is_published)
+        response = self.client.post(
+            reverse('update_event', kwargs={'slug': event.slug}),
+            event_data, follow=True
+        )
+
+        self.assertEquals(200, response.status_code)
+        event = response.context['event']
+        self.assertEquals(True, event.is_published)
 
     def test_event_create_event_proposal_context(self):
         event = Event.objects.create(**self.event_data)
