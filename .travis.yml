@@ -9,4 +9,4 @@ after_success:
   - fab deploy
 env:
   global:
-    secure: NVviNmcfvqqxxVRGUzkyqZFb8tSX0FxUGxyAtvtdho67xje+Xhn1l0Wtzh1RfItJVjZ/JWXYzYRPmKgj5fC9ormQVgm/P1g7BeKEn/u7fnI2waBM1XStYne1FteCad7g/ZxQNBqlJiKkYOGCAOaVgEkM5QkSmZV1UCCHGRfkuqQ=
+    secure: "SgMWHeQrGfCKt808tVr88FQ0yqXjpaXxqq8O3TNq7l+ZbLQcr31oRlkqmuct5YrSAQXU6xi0c6UuW2uOWk0I3KQcWhxK/m5GpNIU+PSkM3kKrHO2utCxlEmkmYbjlhVM86Fqq/1g1senHM2ycqPXGQixW7y5wkR96qIATSsbMIs="
