@@ -34,6 +34,9 @@ def _update_app():
         print yellow('Update the Python Requirements')
         _run('install -r requirements.txt', 'pip')
 
+        print yellow('Cleanning the .pyc files')
+        _run('manage.py clean_pyc')
+
         print yellow('Migrate the DB')
         _run('manage.py syncdb --migrate --noinput')
 
@@ -47,7 +50,7 @@ def _restart_app():
     sudo('service nginx restart')
 
     print yellow('Restart the Uwsgi')
-    sudo('service nginx uwsgi')
+    sudo('service uwsgi restart')
 
     print green('Services succefully restarted')
 
