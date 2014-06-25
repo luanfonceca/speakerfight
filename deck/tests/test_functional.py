@@ -144,6 +144,30 @@ class ProposalTest(TestCase):
         self.proposal = Proposal.objects.create(**self.proposal_data)
         self.client.login(username='user', password='user')
 
+    def test_empty_list_proposal(self):
+        self.client.login(username='user', password='user')
+
+        Proposal.objects.create(**self.proposal_data)
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'], [])
+
+    def test_list_proposal(self):
+        proposal_data = self.proposal_data.copy()
+        proposal_data.update(is_published=True)
+        Proposal.objects.create(**proposal_data)
+
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'],
+                                 ["<Proposal: Python For Zombies>"])
+
     def test_update_proposal(self):
         new_proposal_data = self.proposal_data.copy()
         new_proposal_data['description'] = 'A really really good proposal.'

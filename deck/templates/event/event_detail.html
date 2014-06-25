@@ -38,7 +38,7 @@
       <h2><strong>{% trans "Proposals" %}</strong></h2>
       <table class="table table-hover">
         <tbody>
-        {% for proposal in event.proposals.cached_authors %}
+        {% for proposal in event_proposals %}
           <tr>
             <td class="text-left">
               <div class="{% if event.allow_public_voting or proposal|already_votted_by:request.user %}col-md-7{% elif event.author_id == request.user.id %}col-md-11{% else %}col-md-12{% endif %}">

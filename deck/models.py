@@ -23,6 +23,7 @@ class DeckBaseModel(models.Model):
                          max_length=60, unique=True, db_index=True)
     description = models.TextField(_('Description'), max_length=400)
     created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
+    is_published = models.BooleanField(_('Publish'), default=False)
 
     # relations
     author = models.ForeignKey(to=settings.AUTH_USER_MODEL,
@@ -98,7 +99,6 @@ class Proposal(DeckBaseModel):
 class Event(DeckBaseModel):
     allow_public_voting = models.BooleanField(_('Allow Public Voting'),
                                               default=True)
-    is_published = models.BooleanField(_('Publish'), default=False)
 
     class Meta:
         verbose_name = _('Event')

@@ -184,6 +184,15 @@ class ProposalModelIntegrityTest(TestCase):
         self.assertEquals(False, self.fields['event'].null)
         self.assertEquals(False, self.fields['event'].blank)
 
+    def test_assert_proposal_should_have_a_publish_flag(self):
+        self.assertIn('is_published', Proposal._meta.get_all_field_names())
+
+    def test_assert_proposal_is_published_should_be_a_BooleanField(self):
+        self.assertIsInstance(self.fields['is_published'], BooleanField)
+
+    def test_assert_proposal_is_published_should_be_False_as_default(self):
+        self.assertEquals(False, self.fields['is_published'].default)
+
 
 class ProposalObjectTest(TestCase):
     fixtures = ['user.json']
@@ -219,6 +228,9 @@ class ProposalObjectTest(TestCase):
         self.vote.save()
 
         self.assertTrue(self.proposal.user_already_votted(self.user))
+
+    def test_assert_proposal_is_published(self):
+        self.assertEquals(False, self.proposal.is_published)
 
 
 class VoteModelIntegrityTest(TestCase):
