@@ -5,7 +5,7 @@
 
 {% block head_title %}
   {% if form.instance.pk %}
-    {% trans "Update Proposal" %}: "{{ proposal }}"
+    {% trans "Update Proposal" %}: "{{ object }}"
   {% else %}
     {% trans "New Proposal" %}
   {% endif %}
@@ -21,7 +21,7 @@
     <h2>
       {{ event }}
       {% if form.instance.pk %}
-        {% trans "Update Proposal" %}: "{{ proposal }}"
+        {% trans "Update Proposal" %}: "{{ object }}"
       {% else %}
         {% trans "New Proposal" %}
       {% endif %}
