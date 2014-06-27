@@ -47,8 +47,7 @@ def _update_app():
 
 def _restart_app():
     print yellow('Restart the Uwsgi')
-    sudo('service uwsgi stop')
-    sudo('service uwsgi start')
+    sudo('service uwsgi restart')
 
     print yellow('Restart the Nginx')
     sudo('service nginx restart')
