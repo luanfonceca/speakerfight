@@ -40,7 +40,9 @@ STATICFILES_DIRS = []
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "speakerfight.com",
+]
 
 
 # Application definition
