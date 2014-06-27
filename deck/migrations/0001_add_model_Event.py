@@ -82,13 +82,6 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'slug': ('django_extensions.db.fields.AutoSlugField', [], {'allow_duplicates': 'False', 'max_length': '60', 'separator': "u'-'", 'blank': 'True', 'unique': 'True', 'populate_from': "'title'", 'overwrite': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '50'})
-        },
-        u'deck.vote': {
-            'Meta': {'unique_together': "(('proposal', 'user'),)", 'object_name': 'Vote'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'proposal': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'votes'", 'to': u"orm['deck.Proposal']"}),
-            'rate': ('django.db.models.fields.SmallIntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'votes'", 'to': u"orm['auth.User']"})
         }
     }
 
