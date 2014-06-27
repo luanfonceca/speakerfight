@@ -4,6 +4,7 @@ from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError, models
+from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
 
 from vanilla import CreateView, ListView, UpdateView, DetailView
@@ -73,6 +74,13 @@ class UpdateEvent(BaseEventView, UpdateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        event = self.get_object()
+        if event.author != self.request.user:
+            messages.error(
+                self.request, _('You are not allowed to see this page.'))
+            return HttpResponseRedirect(
+                reverse('view_event', kwargs={'slug': event.slug}),
+            )
         return super(UpdateEvent, self).dispatch(*args, **kwargs)
 
 

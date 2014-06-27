@@ -117,6 +117,21 @@ class EventTest(TestCase):
                           response.context_data.get('redirect_field_value'))
         self.assertEquals('RuPy', event.title)
 
+    def test_not_author_update_events(self):
+        self.client.login(username='user', password='user')
+        event = Event.objects.create(**self.event_data)
+        event_update_url = reverse('update_event',
+                                   kwargs={'slug': event.slug})
+        new_event_data = self.event_data.copy()
+        new_event_data['title'] = 'RuPy 2014'
+        response = self.client.post(
+            event_update_url,
+            new_event_data, follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertEquals('event/event_detail.html', response.template_name[0])
+        self.assertEquals('RuPy', event.title)
+
     def test_publish_event(self):
         event = Event.objects.create(**self.event_data)
         event_data = self.event_data.copy()
