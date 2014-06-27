@@ -45,10 +45,6 @@ def _update_app():
         _run('manage.py collectstatic --noinput')
         print green('App succefully updated')
 
-        print yellow('Setting the DEBUG=False')
-        with cd(env.app_dir):
-            append('speakerfight/local_settings.py', 'DEBUG = False')
-
         print green('App succefully updated')
 
 
