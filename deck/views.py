@@ -1,6 +1,8 @@
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext as _
+from django.utils.decorators import method_decorator
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError, models
 from django.core.exceptions import ValidationError
 
@@ -40,6 +42,10 @@ class CreateEvent(BaseEventView, CreateView):
         messages.success(self.request, _('Event created.'))
         return HttpResponseRedirect(self.get_success_url())
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CreateEvent, self).dispatch(*args, **kwargs)
+
 
 class DetailEvent(BaseEventView, DetailView):
     template_name = 'event/event_detail.html'
@@ -65,6 +71,10 @@ class UpdateEvent(BaseEventView, UpdateView):
         messages.success(self.request, _('Event updated.'))
         return HttpResponseRedirect(self.get_success_url())
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(UpdateEvent, self).dispatch(*args, **kwargs)
+
 
 class BaseProposalView(object):
     model = Proposal
@@ -88,6 +98,10 @@ class CreateProposal(BaseProposalView, CreateView):
         messages.success(self.request, _('Proposal created.'))
         return HttpResponseRedirect(self.get_success_url())
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CreateProposal, self).dispatch(*args, **kwargs)
+
 
 class UpdateProposal(BaseProposalView, UpdateView):
     template_name = 'proposal/proposal_form.html'
@@ -101,6 +115,10 @@ class UpdateProposal(BaseProposalView, UpdateView):
         self.object = form.save()
         messages.success(self.request, _('Proposal updated.'))
         return HttpResponseRedirect(self.get_success_url())
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(UpdateProposal, self).dispatch(*args, **kwargs)
 
 
 class RateProposal(BaseProposalView, UpdateView):
@@ -117,3 +135,7 @@ class RateProposal(BaseProposalView, UpdateView):
         else:
             messages.success(self.request, _('Proposal rated.'))
         return HttpResponseRedirect(self.get_success_url())
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(RateProposal, self).dispatch(*args, **kwargs)
