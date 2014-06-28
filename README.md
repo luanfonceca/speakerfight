@@ -10,7 +10,7 @@ Speakerfight is an arena where the Speakers can fight each other and the people 
 ```sh
 $ git clone git@github.com:luanfonceca/speakerfight.git
 $ cd speakerfight
-$ pip install -r requiremets.txt
+$ sudo pip install -r requirements.txt
 $ python manage.py syncdb --migrate # we have a fixture for the users...
 $ python manage.py loaddata deck/fixtures/user.json 
 # username: admin, password: admin; 
