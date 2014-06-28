@@ -29,7 +29,7 @@ class DeckBaseModel(models.Model):
     author = models.ForeignKey(to=settings.AUTH_USER_MODEL,
                                related_name='%(class)ss')
 
-    #managers
+    # managers
     objects = DeckBaseManager()
 
     class Meta:
