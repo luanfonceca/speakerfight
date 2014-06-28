@@ -3,7 +3,6 @@
 from os import environ
 from fabric.api import env, cd, run, sudo
 from fabric.colors import yellow, green
-from fabric.contrib.files import append
 
 
 REPOSITORY = 'git@github.com:luanfonceca/speakerfight.git'
@@ -43,7 +42,6 @@ def _update_app():
 
         print yellow('Collecting the static files')
         _run('manage.py collectstatic --noinput')
-        print green('App succefully updated')
 
         print green('App succefully updated')
 
