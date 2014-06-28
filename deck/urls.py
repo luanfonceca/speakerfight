@@ -1,5 +1,4 @@
 from django.conf.urls import patterns
-from django.contrib.auth.decorators import login_required
 
 from smarturls import surl as url
 
