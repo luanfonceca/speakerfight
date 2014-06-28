@@ -3,6 +3,8 @@ speakerfight
 
 Speakerfight is an arena where the Speakers can fight each other and the people choose who wins.
 
+[![Stories in Ready](http://waffle2shields.herokuapp.com/?user=luanfonceca&repo=speakerfight&label=ready&style=flat)](https://waffle.io/luanfonceca/speakerfight) [![Build Status](http://img.shields.io/travis/luanfonceca/speakerfight.svg?branch=master&style=flat)](https://travis-ci.org/luanfonceca/speakerfight) [![Github Issues](http://img.shields.io/github/issues/luanfonceca/speakerfight.svg?style=flat)](https://github.com/luanfonceca/speakerfight/issues?sort=updated&state=open) [![Coverage Status](http://img.shields.io/coveralls/luanfonceca/speakerfight.svg?branch=master&style=flat)](https://coveralls.io/r/luanfonceca/speakerfight?branch=master)
+
 ============
 ### Install and Run
 ```sh
