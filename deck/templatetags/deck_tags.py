@@ -11,5 +11,5 @@ def allowed_to_vote(user, proposal):
 
 
 @register.filter
-def already_votted_by(proposal, user):
+def already_voted(user, proposal):
     return proposal.user_already_votted(user)

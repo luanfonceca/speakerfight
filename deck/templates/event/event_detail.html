@@ -41,23 +41,29 @@
         {% for proposal in event_proposals %}
           <tr>
             <td class="text-left">
-              <div class="{% if event.allow_public_voting or proposal|already_votted_by:request.user %}col-md-7{% elif event.author_id == request.user.id %}col-md-11{% else %}col-md-12{% endif %}">
+            {% if request.user|allowed_to_vote:proposal %}
+              <div class="col-md-7">
+            {% elif request.user|already_voted:proposal %}
+              <div class="col-md-9">
+            {% elif proposal.author_id == request.user.id %}
+              <div class="col-md-11">
+            {% else %}
+              <div class="col-md-12">
+            {% endif %}
                 <h3>{{ proposal }}</h3>
                 {% trans "Created by" %}: <strong>{{ proposal.author }}</strong>
                 {% trans "at" %} {{ proposal.created_at }}
-                <blockquote>
-                  <h3>{{ proposal.description|safe|linebreaks }}</h3>
-                </blockquote>
               </div>
-              <div class="event-actions">
+              <div class="pull-right">
                 {% if request.user|allowed_to_vote:proposal %}
                   {% for value, name in vote_rates %}
                     <a href="{% url 'rate_proposal' event_slug=proposal.event.slug slug=proposal.slug rate=name %}" class="flat-icon">
                       <i class="{{ name }} black"></i>
                     </a>
                   {% endfor %}
-                {% elif event.allow_public_voting and not proposal.author_id == request.user.id %}
+                {% elif request.user|already_voted:proposal %}
                   <h5 class="pull-right">
+                    <i class="icon-exclamation-sign"></i>
                     {% trans "Proposal already rated by you." %}
                   </h5>
                 {% endif %}
@@ -66,6 +72,11 @@
                     <i class="update black"></i>
                   </a>
                 {% endif %}
+              </div>
+              <div class="pull-left">
+                <blockquote>
+                  <h3>{{ proposal.description|safe|linebreaks }}</h3>
+                </blockquote>
               </div>
             </td>
           </tr>
