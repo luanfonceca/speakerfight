@@ -473,9 +473,9 @@ input.search {
   width: 50%;
   float: left; } }
 
-
 .social-account.btn-group {
-  margin-left: 3px;
+  margin-left: 13%;
+  margin-bottom: 10px;
 }
 
 .social-account .btn-large {

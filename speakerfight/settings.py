@@ -68,7 +68,6 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.twitter',
     'allauth.socialaccount.providers.facebook',
     'debug_toolbar',
 ]
@@ -78,7 +77,7 @@ LOCAL_APPS = [
     'deck',
 ]
 
-INSTALLED_APPS = LOCAL_APPS + THIRD_PARTY_APPS + DEFAULT_APPS
+INSTALLED_APPS = THIRD_PARTY_APPS + LOCAL_APPS + DEFAULT_APPS
 
 ROOT_URLCONF = 'speakerfight.urls'
 
