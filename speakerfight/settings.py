@@ -73,11 +73,11 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    'core',
     'deck',
+    'core',
 ]
 
-INSTALLED_APPS = THIRD_PARTY_APPS + LOCAL_APPS + DEFAULT_APPS
+INSTALLED_APPS = LOCAL_APPS + THIRD_PARTY_APPS +  DEFAULT_APPS
 
 ROOT_URLCONF = 'speakerfight.urls'
 

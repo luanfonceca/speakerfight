@@ -4,9 +4,7 @@
   {% for provider in socialaccount.providers %}
     <a class="btn btn-flat btn-large icon icon-black" href="{% provider_login_url provider.id process=process %}">
       <i class="icon-white icon-{% if provider.id == 'google' %}google-plus{% else %}{{ provider.id }}{% endif %}"></i>
-      <span>
-	      {{ provider.name|title }}
-      </span>
-  </a>
+      <span>{{ provider.name|title }}</span>
+    </a>
   {% endfor %}
 </div>

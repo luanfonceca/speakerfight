@@ -2,7 +2,7 @@
 from south.utils import datetime_utils as datetime
 from south.db import db
 from south.v2 import DataMigration
-from django.db import models
+from django.db import models, OperationalError
 
 class Migration(DataMigration):
 
@@ -14,7 +14,7 @@ class Migration(DataMigration):
             from allauth.socialaccount.models import SocialApp
         try:
             provider = SocialApp.objects.get(provider='twitter')
-        except SocialApp.DoesNotExist:
+        except (SocialApp.DoesNotExist, OperationalError):
             pass
         else:
             provider.delete()
@@ -27,5 +27,5 @@ class Migration(DataMigration):
 
     }
 
-    complete_apps = ['allauth', 'core']
+    complete_apps = ['core']
     symmetrical = True

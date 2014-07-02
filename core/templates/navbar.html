@@ -12,17 +12,18 @@
       <img src="{{ STATIC_URL }}img/speakerfight.png" alt="logo" />
     </a>
   </div>
-  <ul class="nav navbar-nav pull-right">
+  <ul class="nav navbar-nav pull-right hidden-xs">
     {% if request.user.is_authenticated %}
-      <li class="settings">
+      <li class="settings hidden-xs hidden-sm">
         <a href="{% url 'account_logout' %}" role="button">
           <i class="icon-share-alt"></i>
         </a>
       </li>
     {% else %}
-      <li class="notification-dropdown">
-        <a href="javascript:;" class="trigger">
-          <i class="icon-reply"></i> {% trans "Sign In" %}
+      <li class="notification-dropdown hidden-xs hidden-sm">
+        <a href="#" class="trigger">
+          <i class="icon-reply"></i>
+          {% trans "Sign In" %}
         </a>
         <div class="pop-dialog">
           <div class="pointer right">
@@ -33,7 +34,7 @@
             <h4>
               <i class="icon-signin"></i>
               {% blocktrans %} Sign in with one
-of your account {% endblocktrans %}
+  of your account {% endblocktrans %}
             </h4>
             <div class="messages">
               {% include "socialaccount/snippets/provider_list.html" with process="login" %}
