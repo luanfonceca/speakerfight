@@ -48,6 +48,7 @@ coverage.xml
 # Django stuff:
 *.log
 *.pot
+*.mo
 speakerfight/local_settings.py
 speakerfight/uwsgi.yaml
 speakerfight/nginx.conf
