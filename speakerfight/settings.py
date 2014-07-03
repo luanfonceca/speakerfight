@@ -77,7 +77,7 @@ LOCAL_APPS = [
     'core',
 ]
 
-INSTALLED_APPS = LOCAL_APPS + THIRD_PARTY_APPS +  DEFAULT_APPS
+INSTALLED_APPS = LOCAL_APPS + THIRD_PARTY_APPS + DEFAULT_APPS
 
 ROOT_URLCONF = 'speakerfight.urls'
 
@@ -142,7 +142,10 @@ AUTHENTICATION_BACKENDS = global_settings.AUTHENTICATION_BACKENDS + (
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
-        'SCOPE': ['https://www.googleapis.com/auth/userinfo.profile'],
+        'SCOPE': [
+            'https://www.googleapis.com/auth/userinfo.profile',
+            'https://www.googleapis.com/auth/userinfo.email'
+        ],
         'AUTH_PARAMS': {'access_type': 'online'}
     },
     'facebook': {
@@ -154,13 +157,13 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
+
 LOGIN_URL = '/accounts/login/'
 LOGOUT_URL = '/'
 LOGIN_REDIRECT_URL = '/events/'
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
-# ACCOUNT_EMAIL_REQUIRED = True
-# ACCOUNT_USER_MODEL_USERNAME_FIELD = 'email'
+SOCIALACCOUNT_QUERY_EMAIL = True
 
 
 # Django Debug Toolbar
