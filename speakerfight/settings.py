@@ -67,7 +67,6 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
-    'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
     'debug_toolbar',
 ]
@@ -99,7 +98,7 @@ DATABASES = {
 
 TIME_ZONE = 'America/Sao_Paulo'
 
-LANGUAGE_CODE = 'pt_BR'
+LANGUAGE_CODE = 'en'
 
 LANGUAGES = (
     ('en', 'English'),
@@ -141,13 +140,6 @@ AUTHENTICATION_BACKENDS = global_settings.AUTHENTICATION_BACKENDS + (
 )
 
 SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'https://www.googleapis.com/auth/userinfo.profile',
-            'https://www.googleapis.com/auth/userinfo.email'
-        ],
-        'AUTH_PARAMS': {'access_type': 'online'}
-    },
     'facebook': {
         'SCOPE': ['email', 'publish_stream'],
         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},

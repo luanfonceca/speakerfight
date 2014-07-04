@@ -26,19 +26,5 @@
         "key": "",
         "provider": "github"
     }
-},
-{
-    "pk": 3,
-    "model": "socialaccount.socialapp",
-    "fields": {
-        "name": "Speaker Fight",
-        "sites": [
-            1
-        ],
-        "secret": "YOUR_SECRET",
-        "client_id": "YOUR_CLIENT",
-        "key": "",
-        "provider": "google"
-    }
 }
 ]
