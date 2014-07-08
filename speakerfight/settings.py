@@ -66,6 +66,7 @@ THIRD_PARTY_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.facebook',
     'debug_toolbar',
@@ -140,6 +141,13 @@ AUTHENTICATION_BACKENDS = global_settings.AUTHENTICATION_BACKENDS + (
 )
 
 SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'https://www.googleapis.com/auth/userinfo.profile',
+            'https://www.googleapis.com/auth/userinfo.email'
+        ],
+        'AUTH_PARAMS': {'access_type': 'online'}
+    },
     'facebook': {
         'SCOPE': ['email', 'publish_stream'],
         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
@@ -149,13 +157,13 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-
 LOGIN_URL = '/accounts/login/'
-LOGOUT_URL = '/'
 LOGIN_REDIRECT_URL = '/events/'
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_REQUIRED = True
 SOCIALACCOUNT_QUERY_EMAIL = True
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'email'
 
 
 # Django Debug Toolbar
