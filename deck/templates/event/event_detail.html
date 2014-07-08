@@ -17,7 +17,7 @@
           {% if event.due_date %}
             {% trans "Due date at" %}: {{ event.due_date }}<br>
           {% endif %}
-          {% trans "Created by" %}: <strong>{{ event.author }}</strong>
+          {% trans "Created by" %}: <strong>{{ event.author.get_full_name }}</strong>
           {% trans "at" %} {{ event.created_at }}<br>
           {% if not event.allow_public_voting %}
             <i class="icon-exclamation-sign"></i>
@@ -51,7 +51,7 @@
               <div class="col-md-12">
             {% endif %}
                 <h3>{{ proposal }}</h3>
-                {% trans "Created by" %}: <strong>{{ proposal.author }}</strong>
+                {% trans "Created by" %}: <strong>{{ proposal.author.get_full_name }}</strong>
                 {% trans "at" %} {{ proposal.created_at }}
               </div>
               <div class="pull-right">
