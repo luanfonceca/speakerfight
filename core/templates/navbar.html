@@ -12,15 +12,15 @@
       <img src="{{ STATIC_URL }}img/speakerfight.png" alt="logo" />
     </a>
   </div>
-  <ul class="nav navbar-nav pull-right hidden-xs">
+  <ul class="nav navbar-nav pull-right">
     {% if request.user.is_authenticated %}
-      <li class="settings hidden-xs hidden-sm">
+      <li class="settings">
         <a href="{% url 'account_logout' %}" role="button">
           <i class="icon-share-alt"></i>
         </a>
       </li>
     {% else %}
-      <li class="notification-dropdown hidden-xs hidden-sm">
+      <li class="notification-dropdown">
         <a href="#" class="trigger">
           <i class="icon-reply"></i>
           {% trans "Sign In" %}

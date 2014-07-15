@@ -45,7 +45,7 @@ class Vote(models.Model):
                   (SLEEPY, 'sleepy'),
                   (SAD, 'sad'),
                   (HAPPY, 'happy'),
-                  (LAUGHING, 'laughing'),)
+                  (LAUGHING, 'laughing'))
     rate = models.SmallIntegerField(_('Rate Index'), null=True, blank=True,
                                     choices=VOTE_RATES)
 

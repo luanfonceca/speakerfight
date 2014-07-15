@@ -3,11 +3,32 @@
 {% block head_title %}Index{% endblock head_title %}
 
 {% block content %}
-  <div class="col-md-8">
-    <h1><strong>Speakerfight</strong> is an arena where the speakers can fight each other and the people choose who wins.</h1>
+  <div class="row">
+    <div class="col-md-8">
+      <h1><strong>Speakerfight</strong> is an arena where the speakers can fight each other and the people choose who wins.</h1>
+    </div>
+    <div class="col-md-4">
+      <a href="{% url 'list_events' %}" class="btn-flat info get-started text-center">GET STARTED</a>
+    </div>
   </div>
-  <div class="col-md-4">
-    <a href="{% url 'list_events' %}" class="btn-flat info get-started text-center">GET STARTED</a>
-    <br><br>
+  <hr>
+  <div class="row">
+    <div class="text-center">
+      <h2>Event List.</h2>
+      <img src="{{ STATIC_URL }}img/event-list.png" alt="Event List" />
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="text-center">
+      <h2>Event Detail.</h2>
+      <img src="{{ STATIC_URL }}img/event-detail.png" alt="Event Detail" />
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-offset-4 col-md-4">
+      <a href="{% url 'list_events' %}" class="btn-flat info get-started text-center">JOIN THE FIGHTERS</a>
+    </div>
   </div>
 {% endblock content %}

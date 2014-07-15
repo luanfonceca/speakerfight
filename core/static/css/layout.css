@@ -345,8 +345,7 @@ input.search {
   padding: 0px 50px;
   margin-top: 55px; }
   #pad-wrapper h4 {
-  color: #696d73;
-  font-style: italic; }
+  color: #696d73; }
 
 .content {
   min-width: 400px;
@@ -581,4 +580,18 @@ body.modal-open,
 
 .full-width {
   width: 100%;
+}
+
+.navbar-nav {
+  margin: 0 !important;
+}
+
+.list-hover:hover {
+  background-color: #f5fafc;
+}
+
+.itens-list li {
+  padding: 8px;
+  vertical-align: top;
+  border-top: 1px solid #edf2f7;
 }
