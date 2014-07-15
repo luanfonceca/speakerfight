@@ -27,7 +27,7 @@ def _run(command, pip='python'):
 def _update_app():
     with cd(env.app_dir):
         print yellow('Fetch the Code')
-        run('git pull {remote} {branch}'.format(
+        sudo('git pull {remote} {branch}'.format(
             remote=REMOTE,
             branch=BRANCH))
 
