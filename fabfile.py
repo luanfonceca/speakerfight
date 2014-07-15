@@ -11,6 +11,7 @@ BRANCH = 'master'
 env.hosts = ['speakerfight.com']
 env.user = 'root'
 env.password = environ.get('PASSWORD')
+env.shell = '/bin/rbash -l -c'
 env.app_dir = '/home/speakerfight'
 env.project_name = 'speakerfight'
 env.virtualenv_dir = '/home/virtualenv'
