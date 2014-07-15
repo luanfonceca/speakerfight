@@ -33,16 +33,16 @@ def _update_app():
             branch=BRANCH))
 
         print yellow('Update the Python Requirements')
-        _run('install -r requirements.txt', 'pip')
+        _run('install -r requirements.txt --quiet', 'pip')
 
         print yellow('Cleanning the .pyc files')
         _run('manage.py clean_pyc')
 
         print yellow('Migrate the DB')
-        _run('manage.py syncdb --migrate --noinput')
+        _run('manage.py syncdb --migrate --noinput --verbosity=0')
 
         print yellow('Collecting the static files')
-        _run('manage.py collectstatic --noinput')
+        _run('manage.py collectstatic --noinput --verbosity=0')
 
         print green('App succefully updated')
 
