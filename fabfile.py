@@ -1,7 +1,7 @@
 # coding: utf-8
 
 from os import environ
-from fabric.api import env, cd, local, run, sudo
+from fabric.api import env, cd, run
 from fabric.colors import yellow, green
 
 
@@ -11,14 +11,13 @@ BRANCH = 'master'
 env.hosts = ['speakerfight.com']
 env.user = 'root'
 env.password = environ.get('PASSWORD')
-# env.shell = '/bin/rbash -l -c'
 env.app_dir = '/home/speakerfight'
 env.project_name = 'speakerfight'
 env.virtualenv_dir = '/home/virtualenv'
 
 
 def _run(command, pip='python'):
-    sudo('{venv}/bin/{target} {command}'.format(
+    run('{venv}/bin/{target} {command}'.format(
         venv=env.virtualenv_dir,
         project_name=env.project_name,
         command=command,
@@ -28,7 +27,7 @@ def _run(command, pip='python'):
 def _update_app():
     with cd(env.app_dir):
         print yellow('Fetch the Code')
-        local('git pull {remote} {branch}'.format(
+        run('git pull {remote} {branch}'.format(
             remote=REMOTE,
             branch=BRANCH))
 
@@ -49,10 +48,10 @@ def _update_app():
 
 def _restart_app():
     print yellow('Restart the Uwsgi')
-    sudo('service uwsgi restart')
+    run('service uwsgi restart')
 
     print yellow('Restart the Nginx')
-    sudo('service nginx restart')
+    run('service nginx restart')
 
     print green('Services succefully restarted')
 
