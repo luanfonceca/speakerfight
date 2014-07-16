@@ -13,16 +13,23 @@
     <div class="description">
       <h4 class="col-xs-12">
         <blockquote>{{ event.description|safe|linebreaks }}</blockquote>
-        {% if event.due_date %}
-          {% trans "Due date at" %}: {{ event.due_date }}<br>
-        {% endif %}
         {% trans "Created by" %}: <strong>{{ event.author.get_full_name }}</strong>
         {% trans "at" %} {{ event.created_at }}<br>
+        {% if event.due_date %}
+          {% if event.due_date_is_passed %}
+            <div class="text-danger"><i class="icon-exclamation-sign"></i>
+              {% trans "Due date at" %}: {{ event.due_date }}<br>
+            </div>
+          {% else %}
+            {% trans "Due date at" %}: {{ event.due_date }}<br>
+          {% endif %}
+        {% endif %}
+
         {% if not event.allow_public_voting %}
-          <span class="text-danger">
+          <div class="text-danger">
             <i class="icon-exclamation-sign"></i>
             {% trans "This event doesn't accept Public Voting." %}
-          </span>
+          </div>
         {% endif %}
       </h4>
     </div>
@@ -31,10 +38,12 @@
   <!-- row -->
   <div class="row">
     <div class="col-md-12">
-      <a class="btn-flat success pull-right text-upper" href="{% url 'create_event_proposal' slug=event.slug %}">
-        <i class="icon-plus"></i>
-        {% trans "add proposal" %}
-      </a>
+      {% if not event.due_date_is_passed %}
+        <a class="btn-flat success pull-right text-upper" href="{% url 'create_event_proposal' slug=event.slug %}">
+          <i class="icon-plus"></i>
+          {% trans "add proposal" %}
+        </a>
+      {% endif %}
       <h2><strong>{% trans "Proposals" %}</strong></h2>
       <ul class="itens-list list-unstyled">
         {% for proposal in event_proposals %}

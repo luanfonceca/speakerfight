@@ -98,6 +98,18 @@ class CreateProposal(BaseProposalView, CreateView):
         context['event'] = Event.objects.get(slug=self.kwargs['slug'])
         return context
 
+    def get(self, request, *args, **kwargs):
+        data = self.get_context_data()
+        event = data.get('event')
+        if event.due_date_is_passed:
+            messages.error(
+                self.request,
+                _("This Event doesn't accept Proposals anymore."))
+            return HttpResponseRedirect(
+                reverse('view_event', kwargs={'slug': event.slug}),
+            )
+        return super(CreateProposal, self).get(request, *args, **kwargs)
+
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.author = self.request.user

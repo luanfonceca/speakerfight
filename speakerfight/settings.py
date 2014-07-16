@@ -70,6 +70,7 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.facebook',
     'debug_toolbar',
+    'datetimewidget',
 ]
 
 LOCAL_APPS = [

@@ -1,4 +1,5 @@
 from django.utils.translation import ugettext as _
+from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.core.exceptions import ValidationError
@@ -7,6 +8,8 @@ from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 
 from django_extensions.db.fields import AutoSlugField
+
+from datetime import timedelta
 
 
 class DeckBaseManager(models.Manager):
@@ -83,6 +86,12 @@ class Proposal(DeckBaseModel):
         verbose_name = _('Proposal')
         verbose_name_plural = _('Proposals')
 
+    def save(self, *args, **kwargs):
+        if self.event.due_date_is_passed:
+            raise ValidationError(
+                _("This Event doesn't accept Proposals anymore."))
+        return super(Proposal, self).save(*args, **kwargs)
+
     @property
     def rate(self):
         return self.votes.aggregate(Sum('rate'))['rate__sum'] or 0
@@ -99,6 +108,7 @@ class Proposal(DeckBaseModel):
 class Event(DeckBaseModel):
     allow_public_voting = models.BooleanField(_('Allow Public Voting'),
                                               default=True)
+    due_date = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         verbose_name = _('Event')
@@ -107,5 +117,9 @@ class Event(DeckBaseModel):
     def get_absolute_url(self):
         return reverse('view_event', kwargs={'slug': self.slug})
 
-    # def proposals_with_authors(self):
-    #     return self.proposals.select_related('author')
+    @property
+    def due_date_is_passed(self):
+        if not self.due_date:
+            return False
+        yesterday = timezone.now() - timedelta(hours=24)
+        return yesterday > self.due_date

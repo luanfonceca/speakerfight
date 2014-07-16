@@ -9,6 +9,7 @@ django-activelink==0.4
 django-allauth==0.16.1
 django-bootstrap3==3.3.0
 django-coverage==1.2.4
+django-datetime-widget==0.6
 django-debug-toolbar==1.2.1
 django-extensions==1.3.3
 django-vanilla-views==1.0.2

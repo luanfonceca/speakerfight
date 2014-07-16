@@ -1,5 +1,8 @@
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ValidationError
+
+from datetime import datetime, timedelta
 
 from deck.models import Event, Proposal, Vote
 from deck.tests.test_unit import EVENT_DATA, PROPOSAL_DATA
@@ -184,6 +187,17 @@ class EventTest(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertEquals(event_create_proposal_url,
                           response.context_data.get('redirect_field_value'))
+        self.assertEquals(0, event.proposals.count())
+
+    def test_event_create_event_proposal_with_passed_due_date(self):
+        event_data = self.event_data.copy()
+        event_data.update(due_date=datetime.now() - timedelta(hours=24))
+        event = Event.objects.create(**event_data)
+        with self.assertRaises(ValidationError):
+            self.client.post(
+                reverse('create_event_proposal', kwargs={'slug': event.slug}),
+                self.proposal_data
+            )
         self.assertEquals(0, event.proposals.count())
 
 
