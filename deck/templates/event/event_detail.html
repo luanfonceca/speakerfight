@@ -19,8 +19,10 @@
         {% trans "Created by" %}: <strong>{{ event.author.get_full_name }}</strong>
         {% trans "at" %} {{ event.created_at }}<br>
         {% if not event.allow_public_voting %}
-          <i class="icon-exclamation-sign"></i>
-          {% trans "This event doesn't accept Public Voting." %}
+          <span class="text-danger">
+            <i class="icon-exclamation-sign"></i>
+            {% trans "This event doesn't accept Public Voting." %}
+          </span>
         {% endif %}
       </h4>
     </div>
@@ -36,8 +38,10 @@
       <h2><strong>{% trans "Proposals" %}</strong></h2>
       <ul class="itens-list list-unstyled">
         {% for proposal in event_proposals %}
-          <li class="list-hover">
-            <h3>{{ proposal }}</h3>
+          <li id="{{ proposal.slug }}" class="list-hover">
+            <h3 class="linkable" data-href="#{{ proposal.slug }}">
+              {{ proposal }}
+            </h3>
             {% trans "Created by" %}:
             <strong>{{ proposal.author.get_full_name }}</strong>
             {% trans "at" %} {{ proposal.created_at }}
@@ -72,3 +76,13 @@
       <!-- recent proposals list -->
     </div>
 {% endblock content %}
+
+{% block scripts %}
+  <script src="{{ STATIC_URL }}js/libs/jquery.linkable.js"></script>
+
+  <script type="text/javascript">
+    $(function () {
+      $(".linkable").linkable();
+    });
+  </script>
+{% endblock scripts %}
