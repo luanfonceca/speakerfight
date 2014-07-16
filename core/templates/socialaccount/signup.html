@@ -1,1 +1,32 @@
-{% extends "account/signup.html" %}
+{% extends "public_layout.html" %}
+
+{% load i18n %}
+{% load account %}
+{% load bootstrap3 %}
+{% load url from future %}
+
+{% block head_title %}{% trans "Sign Up" %}{% endblock %}
+
+{% block content %}
+  <div class="col-md-12">
+    <div class="alert alert-danger alert-dismissable">
+      <i class="icon-remove-sign"></i>
+      {% blocktrans %}
+        Do you already have an account, but choose the wrong Provider to access right now.
+      {% endblocktrans %}
+      {% trans "Click" %} <a href="{% url 'account_signup' %}">{% trans "here" %}</a>
+      {% trans "to be redirected to the right  page" %}
+    </div>
+  </div>
+
+  <div class="col-md-offset-3 col-md-6">
+    <div class="col-md-offset-2 col-md-8">
+      <p class="text-center">
+        {% blocktrans %}
+          Or try another social network provider:
+        {% endblocktrans %}
+      </p>
+      {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+    </div>
+  </div>
+{% endblock %}
