@@ -19,6 +19,7 @@ networkx==1.8.1
 oauthlib==0.6.1
 python-coveralls
 python-openid==2.2.5
+raven==5.0.0
 requests-oauthlib==0.4.0
 requests==2.2.1
 six==1.6.1

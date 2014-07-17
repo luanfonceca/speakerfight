@@ -71,6 +71,7 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount.providers.facebook',
     'debug_toolbar',
     'datetimewidget',
+    'raven.contrib.django.raven_compat'
 ]
 
 LOCAL_APPS = [
