@@ -13,7 +13,7 @@
     <div class="description">
       <h4 class="col-xs-12">
         <blockquote>{{ event.description|safe|linebreaks }}</blockquote>
-        {% trans "Created by" %}: <strong>{{ event.author.get_full_name }}</strong>
+        <strong>{{ event.author.get_full_name|default:'@'|add:event.author.username }}</strong>
         {% trans "at" %} {{ event.created_at }}<br>
         {% if event.due_date %}
           {% if event.due_date_is_passed %}
@@ -52,7 +52,7 @@
               {{ proposal }}
             </h3>
             {% trans "Created by" %}:
-            <strong>{{ proposal.author.get_full_name }}</strong>
+            <strong>{{ proposal.author.get_full_name|default:'@'|add:proposal.author.username }}</strong>
             {% trans "at" %} {{ proposal.created_at }}
             <blockquote>
               <h3>{{ proposal.description|safe|linebreaks }}</h3>
