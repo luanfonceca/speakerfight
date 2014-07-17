@@ -47,8 +47,8 @@
       <h2><strong>{% trans "Proposals" %}</strong></h2>
       <ul class="itens-list list-unstyled">
         {% for proposal in event_proposals %}
-          <li id="{{ proposal.slug }}" class="list-hover">
-            <h3 class="linkable" data-href="#{{ proposal.slug }}">
+          <li id="{{ proposal.slug }}" class="linkable">
+            <h3 data-href="#{{ proposal.slug }}">
               {{ proposal }}
             </h3>
             {% trans "Created by" %}:
@@ -91,7 +91,7 @@
 
   <script type="text/javascript">
     $(function () {
-      $(".linkable").linkable();
+      $(".linkable h3").linkable();
     });
   </script>
 {% endblock scripts %}
