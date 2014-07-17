@@ -48,12 +48,14 @@
       <ul class="itens-list list-unstyled">
         {% for proposal in event_proposals %}
           <li id="{{ proposal.slug }}" class="linkable">
-            <h3 data-href="#{{ proposal.slug }}">
-              {{ proposal }}
-            </h3>
-            {% trans "Created by" %}:
-            <strong>{{ proposal.author.get_full_name|default:'@'|add:proposal.author.username }}</strong>
-            {% trans "at" %} {{ proposal.created_at }}
+            <div class="proposal-header" data-href="#{{ proposal.slug }}">
+              <h3>
+                {{ proposal }}
+              </h3>
+              {% trans "Created by" %}:
+              <strong>{{ proposal.author.get_full_name|default:'@'|add:proposal.author.username }}</strong>
+              {% trans "at" %} {{ proposal.created_at }}
+            </div>
             <blockquote>
               <h3>{{ proposal.description|safe|linebreaks }}</h3>
             </blockquote>
@@ -91,7 +93,7 @@
 
   <script type="text/javascript">
     $(function () {
-      $(".linkable h3").linkable();
+      $(".linkable .proposal-header").linkable();
     });
   </script>
 {% endblock scripts %}
