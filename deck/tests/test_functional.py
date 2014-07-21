@@ -71,6 +71,18 @@ class EventTest(TestCase):
         self.assertEquals('RuPy', event.title)
         self.assertEquals('A really good event.', event.description)
 
+    def test_detail_from_an_event_with_now_allow_public_boting(self):
+        self.client.logout()
+        event_data = self.event_data.copy()
+        event_data.update(allow_public_voting=False)
+        event = Event.objects.create(**event_data)
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual([], response.context['event_proposals'])
+
     def test_update_event(self):
         event = Event.objects.create(**self.event_data)
         self.assertEquals(1, Event.objects.count())

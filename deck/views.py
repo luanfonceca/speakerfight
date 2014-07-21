@@ -54,12 +54,16 @@ class DetailEvent(BaseEventView, DetailView):
     def get_context_data(self, **kwargs):
         context = super(DetailEvent, self).get_context_data(**kwargs)
         context['vote_rates'] = Vote.VOTE_RATES
-
         event_proposals = self.object.proposals.published_ones()
         if self.request.user.is_authenticated():
             event_proposals = self.object.proposals.cached_authors().filter(
                 models.Q(is_published=True) |
                 models.Q(author=self.request.user))
+            if not self.object.allow_public_voting:
+                event_proposals = event_proposals.filter(
+                    author=self.request.user)
+        else:
+            event_proposals = self.object.proposals.none()
         context.update(event_proposals=event_proposals)
         return context
 

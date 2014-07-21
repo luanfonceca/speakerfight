@@ -13,6 +13,7 @@
     <div class="description">
       <h4 class="col-xs-12">
         <blockquote>{{ event.description|safe|linebreaks }}</blockquote>
+        {% trans "Created by:" %}
         <strong>{{ event.author.get_full_name|default:event.author.username }}</strong>
         {% trans "at" %} {{ event.created_at }}<br>
         {% if event.due_date %}
@@ -28,7 +29,9 @@
         {% if not event.allow_public_voting %}
           <div class="text-danger">
             <i class="icon-exclamation-sign"></i>
-            {% trans "This event doesn't accept Public Voting." %}
+            {% blocktrans %}
+              This event doesn't accept <strong>Public Voting</strong>, cause of this you can just see you own Proposals.
+            {% endblocktrans %}
           </div>
         {% endif %}
       </h4>
