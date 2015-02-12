@@ -34,5 +34,23 @@
         "email": "user@speakerfight.com",
         "date_joined": "2014-04-14T04:55:59.817Z"
     }
+},
+{
+    "pk": 3,
+    "model": "auth.user",
+    "fields": {
+        "username": "another",
+        "first_name": "",
+        "last_name": "",
+        "is_active": true,
+        "is_superuser": false,
+        "is_staff": false,
+        "last_login": "2014-04-14T04:55:59.817Z",
+        "groups": [],
+        "user_permissions": [],
+        "password": "pbkdf2_sha256$15000$wGb8bX8jTsAw$AplqwCQWKtNJqTpzXGspKB5tMdAP56bz535JZOfydYY=",
+        "email": "another@speakerfight.com",
+        "date_joined": "2014-04-14T04:55:59.817Z"
+    }
 }
 ]

@@ -4,6 +4,14 @@
 {% load bootstrap3 %}
 {% load deck_tags %}
 
+{% block head %}
+  <style type="text/css">
+    tr td.first-has-no-border:first-child {
+      border-top: none;
+    }
+  </style>
+{% endblock head %}
+
 {% block head_title %}{{ event }}{% endblock %}
 
 {% block content %}
@@ -25,7 +33,6 @@
             {% trans "Due date at" %}: {{ event.due_date }}<br>
           {% endif %}
         {% endif %}
-
         {% if not event.allow_public_voting %}
           <div class="text-danger">
             <i class="icon-exclamation-sign"></i>
@@ -52,9 +59,7 @@
         {% for proposal in event_proposals %}
           <li id="{{ proposal.slug }}" class="linkable">
             <div class="proposal-header" data-href="#{{ proposal.slug }}">
-              <h3>
-                {{ proposal }}
-              </h3>
+              <h3>{{ proposal }}</h3>
               {% trans "Created by" %}:
               <strong>{{ proposal.author.get_full_name|default:proposal.author.username }}</strong>
               {% trans "at" %} {{ proposal.created_at }}
@@ -62,24 +67,7 @@
             <blockquote>
               <h3>{{ proposal.description|safe|linebreaks }}</h3>
             </blockquote>
-            <div class="text-center">
-              {% if request.user|allowed_to_vote:proposal %}
-                {% for value, name in vote_rates %}
-                  <a href="{% url 'rate_proposal' event_slug=proposal.event.slug slug=proposal.slug rate=name %}" class="flat-icon" title="{{ name|title }}">
-                    <i class="{{ name }} black"></i>
-                  </a>
-                {% endfor %}
-              {% elif request.user|already_voted:proposal %}
-                <h5 class="text-success">
-                  <i class="icon-ok"></i>
-                  {% trans "Rated." %}
-                </h5>
-              {% elif proposal.author_id == request.user.id %}
-                <a href="{% url 'update_proposal' event_slug=event.slug slug=proposal.slug %}" class="flat-icon">
-                  <i class="update black"></i>
-                </a>
-              {% endif %}
-            </div>
+            {% include "event/vote_block.html" %}
           </li>
         {% empty %}
           <li class="text-center">

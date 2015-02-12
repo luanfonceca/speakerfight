@@ -59,7 +59,6 @@ DEFAULT_APPS = [
 
 THIRD_PARTY_APPS = [
     'activelink',
-    'south',
     'django_extensions',
     'vanilla',
     'bootstrap3',
@@ -71,12 +70,13 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount.providers.facebook',
     'debug_toolbar',
     'datetimewidget',
-    'raven.contrib.django.raven_compat'
+    'raven.contrib.django.raven_compat',
 ]
 
 LOCAL_APPS = [
     'deck',
     'core',
+    'jury',
 ]
 
 INSTALLED_APPS = LOCAL_APPS + THIRD_PARTY_APPS + DEFAULT_APPS
@@ -140,6 +140,12 @@ TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
 AUTHENTICATION_BACKENDS = global_settings.AUTHENTICATION_BACKENDS + (
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+MIDDLEWARE_CLASSES = global_settings.AUTHENTICATION_BACKENDS + (
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware'
 )
 
 SOCIALACCOUNT_PROVIDERS = {

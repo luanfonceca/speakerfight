@@ -77,8 +77,10 @@ textarea {
 	border-radius: 4px;*/
 }
 .inline-input input[type="text"],
+.inline-input input[type="email"],
 .inline-input input[type="password"],
 input[type="text"].inline-input,
+input[type="email"].inline-input,
 input[type="password"].inline-input {
 	background: #fff;
 	border-top: 0 none;
@@ -90,15 +92,19 @@ input[type="password"].inline-input {
 	border-color: #dee3ea;
 }
 .inline-input input[type="text"]:focus,
+.inline-input input[type="email"]:focus,
 .inline-input input[type="password"]:focus,
 input[type="text"].inline-input:focus,
+input[type="email"].inline-input:focus,
 input[type="password"].inline-input:focus {
 	box-shadow: none;
 	border-color: #5d6a80;
 }
 .inline-input input[type="text"]:hover,
+.inline-input input[type="email"]:hover,
 .inline-input input[type="password"]:hover,
 input[type="text"].inline-input:hover,
+input[type="email"].inline-input:hover,
 input[type="password"].inline-input:hover {
 	border-color: #959fb0;
 }

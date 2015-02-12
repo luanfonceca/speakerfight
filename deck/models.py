@@ -4,12 +4,16 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.db.models.aggregates import Sum
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 
 from django_extensions.db.fields import AutoSlugField
 
 from datetime import timedelta
+
+from jury.models import Jury
 
 
 class DeckBaseManager(models.Manager):
@@ -65,11 +69,16 @@ class Vote(models.Model):
 
     def save(self, *args, **kwargs):
         validation_message = None
-        if self.user == self.proposal.author:
+
+        user_is_in_jury = self.proposal.event.jury.users.filter(
+            pk=self.user.pk).exists()
+        if (self.user.is_superuser or user_is_in_jury):
+            pass
+        elif self.user == self.proposal.author:
             validation_message = 'You cannot Rate your own proposals.'
-        if not self.proposal.event.allow_public_voting:
+        elif not self.proposal.event.allow_public_voting:
             validation_message = "Proposal doesn't accept Public Voting."
-        if self.proposal.user_already_votted(self.user):
+        elif self.proposal.user_already_votted(self.user):
             validation_message = 'Proposal already Rated by you.'
 
         if validation_message:
@@ -110,6 +119,10 @@ class Event(DeckBaseModel):
                                               default=True)
     due_date = models.DateTimeField(null=True, blank=True)
 
+    # relations
+    jury = models.OneToOneField(to='jury.Jury', related_name='event',
+                                null=True, blank=True)
+
     class Meta:
         verbose_name = _('Event')
         verbose_name_plural = _('Events')
@@ -123,3 +136,14 @@ class Event(DeckBaseModel):
             return False
         yesterday = timezone.now() - timedelta(hours=24)
         return yesterday > self.due_date
+
+
+@receiver(post_save, sender=Event)
+def create_initial_jury(sender, instance, signal, created, **kwargs):
+    if not created:
+        return
+    jury = Jury()
+    jury.save()
+    jury.users.add(instance.author)
+    instance.jury = jury
+    instance.save()

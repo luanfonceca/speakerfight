@@ -10,6 +10,6 @@ urlpatterns = patterns(
     url(r'^accounts/', include('allauth.urls')),
 
     url(r'^', include('core.urls')),
-
     url(r'^', include('deck.urls')),
+    url(r'^', include('jury.urls')),
 )

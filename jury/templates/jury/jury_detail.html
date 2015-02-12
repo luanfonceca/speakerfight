@@ -1,0 +1,122 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block head_title %}
+  {% trans "Update" %} "{{ jury.event }}" {% trans "jury" %}
+{% endblock %}
+
+{% block head %}
+  <!-- libraries for this page -->
+  <link href="{{ STATIC_URL }}css/libs/uniform.default.css" type="text/css" rel="stylesheet" />
+  {{ form.media }}
+
+  <style type="text/css">
+    .table .no-top-border {
+      border-top: none;
+    }
+
+    #add-user {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    #add-user input {
+      padding-left: 5px;
+      padding-right: 25px;
+    }
+
+    #add-user button {
+      position: relative;
+      bottom: 25px;
+      right: 5px;
+    }
+
+    #add-user i {
+      position: relative;
+      left: 5px;
+    }
+  </style>
+{% endblock head %}
+
+{% block content %}
+  <div class="row header">
+    <h2>{% trans "Update" %} "{{ jury.event }}" {% trans "jury" %}</h2>
+  </div>
+
+  <div class="row col-md-12 form-wrapper">
+    <div class="col-md-6">
+      <h3>{% trans "Manage users" %}</h3>
+      <p>{% trans "Here you can add or remove people from Jury." %}</p>
+      <table class="table table-condensed">
+        <tbody>
+          {% for user in jury.users.all %}
+            <tr>
+              <td {% if forloop.first %}class="no-top-border"{% endif %}>
+                <form role="form" method="POST" action="{% url 'event_remove_from_jury' slug=jury.event.slug user_pk=user.pk %}">
+                  {% csrf_token %}
+
+                  {{ user.email }}
+                  <button type="button" class="close pull-right remove-user">
+                    <i class="icon icon-trash"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+          <tr>
+            <td>
+              <form role="form" method="POST" action="{% url 'event_invite_to_jury' slug=jury.event.slug %}">
+                {% csrf_token %}
+                
+                <div id="add-user" class="input-group col-md-12 col-sm-12 col-xs-12">
+                  <input type="email" placeholder="E-mail address" name="email" class="form-control inline-input" required="required">
+                  <button type="submit" class="close pull-right">
+                    <i class="icon icon-plus"></i>
+                  </button>
+                </div>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr>
+
+  <div class="row form-wrapper">
+    {% buttons %}
+      <div class="pull-right">
+        {% if form.instance.pk %}
+          <a href="{% url 'view_event' slug=form.instance.event.slug %}" class="link text-upper">
+            <i class="icon-calendar"></i>
+            {% trans "event detail" %}
+          </a> |
+        {% endif %}
+        <a href="{% url 'list_events' %}" class="link text-upper">
+          <i class="icon-calendar-empty"></i>
+          {% trans "event list" %}
+        </a>
+      </div>
+    {% endbuttons %}
+  </div>
+{% endblock content %}
+
+{% block scripts %}
+  <!-- scripts for this page -->
+  <script src="{{ STATIC_URL }}js/libs/jquery.uniform.min.js"></script>
+
+  <!-- call this page plugins -->
+  <script type="text/javascript">
+    $(function () {
+      // add uniform plugin styles to html elements
+      $("input:checkbox, input:radio").uniform();
+
+      $(".remove-user").click(function() {
+        if (confirm('Tu vai remover, certeza?')) {
+          $(this).parents('form').submit();
+        };
+      })
+    });
+  </script>
+{% endblock scripts %}

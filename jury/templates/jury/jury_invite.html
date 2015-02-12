@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block head_title %}
+  {% trans "Accept invite" %}
+{% endblock %}
+
+{% block head %}
+  <!-- libraries for this page -->
+  <link href="{{ STATIC_URL }}css/libs/uniform.default.css" type="text/css" rel="stylesheet" />
+  {{ form.media }}
+{% endblock head %}
+
+{% block content %}
+  <div class="row header">
+    <h2>{% trans "Accept invite" %}</h2>
+  </div>
+  <div class="row form-wrapper">
+    <!-- left column -->
+    <div class="column col-md-offset-2 col-md-8 text-center">
+      <h3>
+        {% trans "By Accepting this invite you will Vote in any Proposals maded on the event: " %}
+        <a target="_blank" href="{% url 'view_event' slug=event.slug %}" class="link">
+          "{{ event }}"
+        </a>.
+      </h3>
+      <br>
+      <div class="col-md-offset-2 col-md-8">
+        <form method="POST" action="{% url 'event_invite_to_jury' event.slug %}?code={{ jury_code }}">
+          {% csrf_token %}
+          {% bootstrap_form form layout='inline' %}
+
+          {% buttons %}
+            <button type="submit" class="btn-flat btn-block success text-upper">
+              <i class="icon icon-check"></i> {% trans "Accept" %}
+            </button>
+          {% endbuttons %}
+        </form>
+      </div>  
+    </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block scripts %}
+  <!-- scripts for this page -->
+  <script src="{{ STATIC_URL }}js/libs/jquery.uniform.min.js"></script>
+
+  <!-- call this page plugins -->
+  <script type="text/javascript">
+    $(function () {
+      // add uniform plugin styles to html elements
+      $("input:checkbox, input:radio").uniform();
+    });
+  </script>
+{% endblock scripts %}

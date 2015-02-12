@@ -29,14 +29,17 @@
                 <blockquote>
                   <h3>{{ event.description|safe|linebreaks }}</h3>
                 </blockquote>
+                {% if event.author_id == request.user.id %}
+                  <div class="text-center">
+                    <a href="{% url 'update_event' slug=event.slug %}" class="flat-icon">
+                      <i class="update black"></i>
+                    </a>
+                    <a href="{% url 'jury_event' slug=event.slug %}" class="flat-icon">
+                      <i class="jury black"></i>
+                    </a>
+                  </div>
+                {% endif %}
               </div>
-              {% if event.author_id == request.user.id %}
-                <div class="col-md-1 event-actions">
-                  <a href="{% url 'update_event' slug=event.slug %}" class="flat-icon">
-                    <i class="update black"></i>
-                  </a>
-                </div>
-              {% endif %}
             </td>
           </tr>
         {% empty %}

@@ -1,10 +1,10 @@
 from django.test import TestCase
 from django.db.models import (CharField, TextField,
                               BooleanField, ForeignKey,
-                              SmallIntegerField)
+                              SmallIntegerField, ManyToManyField)
 from django.contrib.auth.models import User
 
-from deck.models import Event, Proposal, Vote
+from deck.models import Event, Proposal, Vote, Jury
 
 EVENT_DATA = {
     'title': 'RuPy',
@@ -92,6 +92,22 @@ class EventModelIntegrityTest(TestCase):
 
     def test_assert_event_is_published_should_be_False_as_default(self):
         self.assertEquals(False, self.fields['is_published'].default)
+
+    def test_assert_event_should_have_a_jury(self):
+        self.assertIn('jury', Event._meta.get_all_field_names())
+
+    def test_assert_event_jury_should_be_an_Jury(self):
+        self.assertEquals(Jury, self.fields['jury'].rel.to)
+
+    def test_assert_event_jury_should_be_a_ForeignKey(self):
+        self.assertIsInstance(self.fields['jury'], ForeignKey)
+
+    def test_assert_event_jury_should_not_be_required(self):
+        self.assertEquals(True, self.fields['jury'].null)
+        self.assertEquals(True, self.fields['jury'].blank)
+
+    def test_assert_event_jury_should_have_a_related_name(self):
+        self.assertEquals('event', self.fields['jury'].rel.related_name)
 
 
 class EventObjectTest(TestCase):

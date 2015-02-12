@@ -3,14 +3,14 @@ from django.utils.translation import ugettext as _
 from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.db import IntegrityError, models
+from django.db import IntegrityError, models, transaction
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
 
 from vanilla import CreateView, ListView, UpdateView, DetailView
 
 from .models import Event, Proposal, Vote
-from .forms import EventForm, ProposalForm
+from .forms import (EventForm, ProposalForm)
 
 
 class BaseEventView(object):
@@ -40,7 +40,7 @@ class CreateEvent(BaseEventView, CreateView):
         self.object = form.save(commit=False)
         self.object.author = self.request.user
         self.object.save()
-        messages.success(self.request, _('Event created.'))
+        messages.success(self.request, _(u'Event created.'))
         return HttpResponseRedirect(self.get_success_url())
 
     @method_decorator(login_required)
@@ -54,16 +54,20 @@ class DetailEvent(BaseEventView, DetailView):
     def get_context_data(self, **kwargs):
         context = super(DetailEvent, self).get_context_data(**kwargs)
         context['vote_rates'] = Vote.VOTE_RATES
-        event_proposals = self.object.proposals.published_ones()
-        if self.request.user.is_authenticated():
-            event_proposals = self.object.proposals.cached_authors().filter(
+        event_proposals = self.object.proposals.cached_authors()
+        if (self.request.user.is_superuser or self.object.author == self.request.user): 
+            # Admin users and event authors can see all proposals.
+            pass
+        elif (not self.object.allow_public_voting and
+              self.request.user.is_authenticated()):
+            event_proposals = event_proposals.filter(author=self.request.user)
+        elif (self.object.allow_public_voting and
+              self.request.user.is_authenticated()):
+            event_proposals = event_proposals.filter(
                 models.Q(is_published=True) |
                 models.Q(author=self.request.user))
-            if not self.object.allow_public_voting:
-                event_proposals = event_proposals.filter(
-                    author=self.request.user)
         else:
-            event_proposals = self.object.proposals.none()
+            event_proposals = event_proposals.none()
         context.update(event_proposals=event_proposals)
         return context
 
@@ -73,7 +77,7 @@ class UpdateEvent(BaseEventView, UpdateView):
 
     def form_valid(self, form):
         self.object = form.save()
-        messages.success(self.request, _('Event updated.'))
+        messages.success(self.request, _(u'Event updated.'))
         return HttpResponseRedirect(self.get_success_url())
 
     @method_decorator(login_required)
@@ -81,7 +85,7 @@ class UpdateEvent(BaseEventView, UpdateView):
         event = self.get_object()
         if event.author != self.request.user:
             messages.error(
-                self.request, _('You are not allowed to see this page.'))
+                self.request, _(u'You are not allowed to see this page.'))
             return HttpResponseRedirect(
                 reverse('view_event', kwargs={'slug': event.slug}),
             )
@@ -119,7 +123,7 @@ class CreateProposal(BaseProposalView, CreateView):
         self.object.author = self.request.user
         self.object.event = Event.objects.get(slug=self.kwargs['slug'])
         self.object.save()
-        messages.success(self.request, _('Proposal created.'))
+        messages.success(self.request, _(u'Proposal created.'))
         return HttpResponseRedirect(self.get_success_url())
 
     @method_decorator(login_required)
@@ -137,7 +141,7 @@ class UpdateProposal(BaseProposalView, UpdateView):
 
     def form_valid(self, form):
         self.object = form.save()
-        messages.success(self.request, _('Proposal updated.'))
+        messages.success(self.request, _(u'Proposal updated.'))
         return HttpResponseRedirect(self.get_success_url())
 
     @method_decorator(login_required)
@@ -149,15 +153,17 @@ class RateProposal(BaseProposalView, UpdateView):
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         rate = kwargs.get('rate')
+
         try:
             rate_int = [r[0] for r in Vote.VOTE_RATES if rate in r][0]
-            self.object.votes.create(user=request.user, rate=rate_int)
+            with transaction.atomic():
+                self.object.votes.create(user=request.user, rate=rate_int)
         except IndexError:
-            messages.error(self.request, _('Rate Index not found.'))
+            messages.error(self.request, _(u'Rate Index not found.'))
         except (IntegrityError, ValidationError), e:
             messages.error(self.request, e.message)
         else:
-            messages.success(self.request, _('Proposal rated.'))
+            messages.success(self.request, _(u'Proposal rated.'))
         return HttpResponseRedirect(self.get_success_url())
 
     @method_decorator(login_required)

@@ -1,10 +1,12 @@
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext as _
+from django.contrib.auth.models import User
 
 from datetime import datetime, timedelta
 
-from deck.models import Event, Proposal, Vote
+from deck.models import Event, Proposal, Vote, Jury
 from deck.tests.test_unit import EVENT_DATA, PROPOSAL_DATA
 
 
@@ -31,6 +33,17 @@ class EventTest(TestCase):
         self.assertEquals('A really good event.', event.description)
         self.assertEquals('admin', event.author.username)
         self.assertEquals(False, event.is_published)
+
+    def test_create_event_with_jury(self):
+        event_data = self.event_data.copy()
+
+        response = self.client.post(reverse('create_event'),
+                                    event_data, follow=True)
+        self.assertEquals(200, response.status_code)
+
+        event = response.context['event']
+        self.assertEquals(Jury.objects.count(), 1)
+        self.assertQuerysetEqual(event.jury.users.all(), ['<User: admin>'])
 
     def test_anonymous_user_create_events(self):
         self.client.logout()
@@ -225,9 +238,7 @@ class ProposalTest(TestCase):
         self.client.login(username='user', password='user')
 
     def test_empty_list_proposal(self):
-        self.client.login(username='user', password='user')
-
-        Proposal.objects.create(**self.proposal_data)
+        self.proposal.delete()
         response = self.client.get(
             reverse('view_event', kwargs={'slug': self.event.slug}),
             follow=True
@@ -236,10 +247,6 @@ class ProposalTest(TestCase):
         self.assertQuerysetEqual(response.context['event_proposals'], [])
 
     def test_list_proposal(self):
-        proposal_data = self.proposal_data.copy()
-        proposal_data.update(is_published=True)
-        Proposal.objects.create(**proposal_data)
-
         response = self.client.get(
             reverse('view_event', kwargs={'slug': self.event.slug}),
             follow=True
@@ -300,6 +307,9 @@ class ProposalTest(TestCase):
         self.assertEquals(3, self.proposal.rate)
 
     def test_rate_proposal_in_a_disallowed_event(self):
+        self.client.logout()
+        self.client.login(username='another', password='another')
+
         self.event.allow_public_voting = False
         self.event.save()
 
@@ -354,7 +364,10 @@ class ProposalTest(TestCase):
         self.assertEquals(3, self.proposal.rate)
 
     def test_rate_proposal_with_the_same_author(self):
-        self.client.login(username='admin', password='admin')
+        self.client.logout()
+        self.client.login(username='another', password='another')
+        self.proposal.author = User.objects.get(username='another')
+        self.proposal.save()
 
         rate_proposal_data = {
             'event_slug': self.proposal.event.slug,
@@ -386,3 +399,44 @@ class ProposalTest(TestCase):
         self.assertEquals(0, self.proposal.rate)
         self.assertEquals(0, self.proposal.votes.count())
         self.assertEquals(0, Vote.objects.count())
+
+    def test_rate_proposal_with_the_admin_user(self):
+        self.client.logout()
+        self.client.login(username='admin', password='admin')
+        self.proposal.author = User.objects.get(username='admin')
+        self.proposal.save()
+
+        rate_proposal_data = {
+            'event_slug': self.proposal.event.slug,
+            'slug': self.proposal.slug,
+            'rate': 'sad'
+        }
+        response = self.client.get(
+            reverse('rate_proposal', kwargs=rate_proposal_data),
+            follow=True
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(1, self.proposal.rate)
+        self.assertEquals(1, self.proposal.votes.count())
+        self.assertEquals(1, Vote.objects.count())
+
+    def test_rate_proposal_with_the_jury_user(self):
+        self.event.jury.users.add(User.objects.get(username='another'))
+        self.client.logout()
+        self.client.login(username='another', password='another')
+
+        rate_proposal_data = {
+            'event_slug': self.proposal.event.slug,
+            'slug': self.proposal.slug,
+            'rate': 'sad'
+        }
+        response = self.client.get(
+            reverse('rate_proposal', kwargs=rate_proposal_data),
+            follow=True
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(1, self.proposal.rate)
+        self.assertEquals(1, self.proposal.votes.count())
+        self.assertEquals(1, Vote.objects.count())

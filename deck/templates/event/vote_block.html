@@ -1,0 +1,22 @@
+{% load i18n %}
+{% load deck_tags %}
+
+
+<div class="text-center">
+  {% if request.user|already_voted:proposal %}
+    <h5 class="text-success">
+      <i class="icon-ok"></i>
+      {% trans "Rated." %}
+    </h5>
+  {% elif request.user|allowed_to_vote:proposal %}
+    {% for value, name in vote_rates %}
+      <a href="{% url 'rate_proposal' event_slug=proposal.event.slug slug=proposal.slug rate=name %}" class="flat-icon" title="{{ name|title }}">
+        <i class="{{ name }} black"></i>
+      </a>
+    {% endfor %}
+  {% elif proposal.author_id == request.user.id %}
+    <a href="{% url 'update_proposal' event_slug=event.slug slug=proposal.slug %}" class="flat-icon">
+      <i class="update black"></i>
+    </a>
+  {% endif %}
+</div>

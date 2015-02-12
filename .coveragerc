@@ -3,8 +3,9 @@ source = .
 omit = */migrations/*,
 	   *__init__*,
 	   */tests/*,
-       speakerfight/settings.py,
-       fabfile.py
+       speakerfight/*,
+       fabfile.py,
+       manage.py
 
 [html]
 directory = docs/report
