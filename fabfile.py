@@ -38,7 +38,7 @@ def _update_app():
         _run('manage.py clean_pyc')
 
         print yellow('Migrate the DB')
-        _run('manage.py syncdb --noinput --verbosity=0')
+        _run('manage.py migrate --noinput --verbosity=0')
 
         print yellow('Collecting the static files')
         _run('manage.py collectstatic --noinput --verbosity=0')
