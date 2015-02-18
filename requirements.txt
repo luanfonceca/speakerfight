@@ -1,8 +1,7 @@
-Django==1.6.2
+Django==1.7.4
 MarkupSafe==0.23
 PyYAML==3.11
 Pygments==1.6
-South==0.8.4
 Werkzeug==0.9.4
 coverage==3.7.1
 django-activelink==0.4
