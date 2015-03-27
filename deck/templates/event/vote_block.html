@@ -3,6 +3,11 @@
 
 
 <div class="text-center">
+  {% if proposal.author_id == request.user.id or request.user.is_superuser %}
+    <a href="{% url 'update_proposal' event_slug=event.slug slug=proposal.slug %}" class="flat-icon">
+      <i class="update black"></i>
+    </a>
+  {% endif %}
   {% if request.user|already_voted:proposal %}
     <h5 class="text-success">
       <i class="icon-ok"></i>
@@ -14,9 +19,5 @@
         <i class="{{ name }} black"></i>
       </a>
     {% endfor %}
-  {% elif proposal.author_id == request.user.id %}
-    <a href="{% url 'update_proposal' event_slug=event.slug slug=proposal.slug %}" class="flat-icon">
-      <i class="update black"></i>
-    </a>
   {% endif %}
 </div>
