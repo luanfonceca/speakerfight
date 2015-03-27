@@ -55,16 +55,20 @@ class DetailEvent(BaseEventView, DetailView):
         context = super(DetailEvent, self).get_context_data(**kwargs)
         context['vote_rates'] = Vote.VOTE_RATES
         event_proposals = self.object.proposals.cached_authors()
-        if (self.request.user.is_superuser or self.object.author == self.request.user): 
+        if (self.request.user.is_superuser or self.object.author == self.request.user):
             # Admin users and event authors can see all proposals.
             pass
-        elif (not self.object.allow_public_voting and
-              self.request.user.is_authenticated()):
-            event_proposals = event_proposals.filter(author=self.request.user)
+        elif (self.object.allow_public_voting and
+              not self.request.user.is_authenticated()):
+            event_proposals = event_proposals.filter(is_published=True)
         elif (self.object.allow_public_voting and
               self.request.user.is_authenticated()):
             event_proposals = event_proposals.filter(
                 models.Q(is_published=True) |
+                models.Q(author=self.request.user))
+        elif (not self.object.allow_public_voting and
+              self.request.user.is_authenticated()):
+            event_proposals = event_proposals.filter(
                 models.Q(author=self.request.user))
         else:
             event_proposals = event_proposals.none()

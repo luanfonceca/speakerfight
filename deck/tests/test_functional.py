@@ -84,7 +84,7 @@ class EventTest(TestCase):
         self.assertEquals('RuPy', event.title)
         self.assertEquals('A really good event.', event.description)
 
-    def test_detail_from_an_event_with_now_allow_public_boting(self):
+    def test_detail_from_an_event_with_now_allow_public_voting(self):
         self.client.logout()
         event_data = self.event_data.copy()
         event_data.update(allow_public_voting=False)
@@ -247,6 +247,228 @@ class ProposalTest(TestCase):
         self.assertQuerysetEqual(response.context['event_proposals'], [])
 
     def test_list_proposal(self):
+        self.client.logout()
+        self.client.login(username='admin', password='admin')
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'],
+                                 ["<Proposal: Python For Zombies>"])
+
+    # Starts Admin Overview
+    def test_list_proposal_as_admin_user(self):
+        self.client.login(username='admin', password='admin')
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'],
+                                 ["<Proposal: Python For Zombies>"])
+
+    def test_list_proposal_without_public_voting_as_admin_user(self):
+        self.client.login(username='admin', password='admin')
+        self.event.allow_public_voting = False
+        self.event.save()
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'],
+                                 ["<Proposal: Python For Zombies>"])
+
+    def test_list_proposal_without_published_and_as_admin_user(self):
+        self.client.login(username='admin', password='admin')
+        self.event.save()
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'],
+                                 ["<Proposal: Python For Zombies>"])
+
+    def test_list_proposal_without_public_voting_and_without_published_and_as_admin_user(self):
+        self.client.login(username='admin', password='admin')
+        self.event.allow_public_voting = False
+        self.event.save()
+        self.proposal.is_published = False
+        self.proposal.save()
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'],
+                                 ["<Proposal: Python For Zombies>"])
+    # Ends Admin Overview
+
+    # Starts Author Overview
+    def test_list_proposal_as_author(self):
+        self.client.logout()
+        self.client.login(username='another', password='another')
+        self.event.author = User.objects.get(username='another')
+        self.event.save()
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'],
+                                 ["<Proposal: Python For Zombies>"])
+
+    def test_list_proposal_without_public_voting_as_author(self):
+        self.client.logout()
+        self.client.login(username='another', password='another')
+        self.event.author = User.objects.get(username='another')
+        self.event.allow_public_voting = False
+        self.event.save()
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'],
+                                 ["<Proposal: Python For Zombies>"])
+
+    def test_list_proposal_without_published_and_as_author(self):
+        self.client.logout()
+        self.client.login(username='another', password='another')
+        self.event.author = User.objects.get(username='another')
+        self.event.save()
+        self.proposal.is_published = False
+        self.proposal.save()
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'],
+                                 ["<Proposal: Python For Zombies>"])
+
+    def test_list_proposal_without_public_voting_and_without_published_and_as_author(self):
+        self.client.logout()
+        self.client.login(username='another', password='another')
+        self.event.author = User.objects.get(username='another')
+        self.event.allow_public_voting = False
+        self.event.save()
+        self.proposal.is_published = False
+        self.proposal.save()
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'],
+                                 ["<Proposal: Python For Zombies>"])
+    # Ends Author Overview
+
+    # Starts User Overview
+    def test_list_proposal_as_user(self):
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'], [])
+
+    def test_list_proposal_without_public_voting_as_user(self):
+        self.event.allow_public_voting = False
+        self.event.save()
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'], [])
+
+    def test_list_proposal_without_published_and_as_user(self):
+        self.proposal.is_published = False
+        self.proposal.save()
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'], [])
+
+    def test_list_proposal_without_public_voting_and_without_published_and_as_user(self):
+        self.event.allow_public_voting = False
+        self.event.save()
+        self.proposal.is_published = False
+        self.proposal.save()
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'], [])
+    # Ends User Overview
+
+    def test_list_proposal_without_logged_user(self):
+        self.client.logout()
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'], [])
+
+    def test_list_proposal_without_public_voting(self):
+        self.client.logout()
+        self.client.login(username='another', password='another')
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'], [])
+
+    def test_list_proposal_without_public_voting_and_without_logged_user(self):
+        self.client.logout()
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'], [])
+
+    def test_list_proposal_without_published_proposals(self):
+        self.client.logout()
+        self.client.login(username='another', password='another')
+        self.event.allow_public_voting = True
+        self.event.save()
+
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'], [])
+
+    def test_list_proposal_public_voting_without_published_proposals_and_without_logged_user(self):
+        self.client.logout()
+        self.event.allow_public_voting = True
+        self.event.save()
+
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'], [])
+
+    def test_list_proposal_with_public_voting(self):
+        self.client.logout()
+        self.client.login(username='another', password='another')
+        self.event.allow_public_voting = True
+        self.event.save()
+        self.proposal.is_published = True
+        self.proposal.save()
+
         response = self.client.get(
             reverse('view_event', kwargs={'slug': self.event.slug}),
             follow=True
