@@ -25,9 +25,9 @@ class DeckBaseManager(models.Manager):
 
 
 class DeckBaseModel(models.Model):
-    title = models.CharField(_('Title'), max_length=50)
+    title = models.CharField(_('Title'), max_length=200)
     slug = AutoSlugField(populate_from='title', overwrite=True,
-                         max_length=60, unique=True, db_index=True)
+                         max_length=200, unique=True, db_index=True)
     description = models.TextField(_('Description'), max_length=400)
     created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
     is_published = models.BooleanField(_('Publish'), default=False)

@@ -43,8 +43,8 @@ class EventModelIntegrityTest(TestCase):
         self.assertEquals(False, self.fields['title'].null)
         self.assertEquals(False, self.fields['title'].blank)
 
-    def test_assert_event_title_should_have_at_most_50_characters(self):
-        self.assertEquals(50, self.fields['title'].max_length)
+    def test_assert_event_title_should_have_at_most_200_characters(self):
+        self.assertEquals(200, self.fields['title'].max_length)
 
     def test_assert_event_should_have_a_description(self):
         self.assertIn('description', Event._meta.get_all_field_names())
@@ -155,8 +155,8 @@ class ProposalModelIntegrityTest(TestCase):
         self.assertEquals(False, self.fields['title'].null)
         self.assertEquals(False, self.fields['title'].blank)
 
-    def test_assert_proposal_title_should_have_at_most_50_characters(self):
-        self.assertEquals(50, self.fields['title'].max_length)
+    def test_assert_proposal_title_should_have_at_most_200_characters(self):
+        self.assertEquals(200, self.fields['title'].max_length)
 
     def test_assert_proposal_should_have_a_description(self):
         self.assertIn('description', Proposal._meta.get_all_field_names())
