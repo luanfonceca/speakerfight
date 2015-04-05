@@ -76,6 +76,9 @@ a.flat-icon i {
 }
 
 .flat-icon i.jury.black{
-  background-position: -645px -85px;
+  background-position: -648px -85px;
 }
 
+.flat-icon i.export.black{
+  background-position: -728px -85px;
+}

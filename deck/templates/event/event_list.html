@@ -37,6 +37,9 @@
                     <a href="{% url 'jury_event' slug=event.slug %}" class="flat-icon">
                       <i class="jury black"></i>
                     </a>
+                    <a href="{% url 'export_event' slug=event.slug %}" class="flat-icon">
+                      <i class="export black"></i>
+                    </a>
                   </div>
                 {% endif %}
               </div>

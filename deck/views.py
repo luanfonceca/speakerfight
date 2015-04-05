@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
 
 from vanilla import CreateView, ListView, UpdateView, DetailView
+from djqscsv import render_to_csv_response
 
 from .models import Event, Proposal, Vote
 from .forms import (EventForm, ProposalForm)
@@ -94,6 +95,25 @@ class UpdateEvent(BaseEventView, UpdateView):
                 reverse('view_event', kwargs={'slug': event.slug}),
             )
         return super(UpdateEvent, self).dispatch(*args, **kwargs)
+
+
+class ExportEvent(BaseEventView, DetailView):
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        event = self.get_object()
+        if event.author != self.request.user:
+            messages.error(
+                self.request, _(u'You are not allowed to see this page.'))
+            return HttpResponseRedirect(reverse('list_events'))
+        return super(ExportEvent, self).dispatch(*args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        event = self.get_object()
+        proposals = event.proposals.values('id', 'title', 'author__username')
+        filename = "event_%s_export" % event.slug.replace('-', '_')
+        return render_to_csv_response(
+            proposals, append_datestamp=True, filename=filename,
+            field_header_map={'author__username': 'Author'})
 
 
 class BaseProposalView(object):
