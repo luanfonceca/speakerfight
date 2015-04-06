@@ -4,6 +4,7 @@ from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError, models, transaction
+from django.db.models.aggregates import Sum
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
 
@@ -77,7 +78,8 @@ class UpdateEvent(BaseEventView, UpdateView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         event = self.get_object()
-        if event.author != self.request.user and not self.request.user.is_superuser:
+        if (event.author != self.request.user and
+           not self.request.user.is_superuser):
             messages.error(
                 self.request, _(u'You are not allowed to see this page.'))
             return HttpResponseRedirect(
@@ -90,7 +92,8 @@ class ExportEvent(BaseEventView, DetailView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         event = self.get_object()
-        if event.author != self.request.user:
+        if (event.author != self.request.user and
+           not self.request.user.is_superuser):
             messages.error(
                 self.request, _(u'You are not allowed to see this page.'))
             return HttpResponseRedirect(reverse('list_events'))
@@ -98,11 +101,19 @@ class ExportEvent(BaseEventView, DetailView):
 
     def get(self, request, *args, **kwargs):
         event = self.get_object()
-        proposals = event.proposals.values('id', 'title', 'author__username')
         filename = "event_%s_export" % event.slug.replace('-', '_')
+        field_header_map = {
+            'author__username': 'Author',
+            'votes__rate__sum': 'Votes'
+        }
+        proposals = event.proposals.values(
+            'id', 'title', 'author__username').annotate(Sum('votes__rate'))
         return render_to_csv_response(
-            proposals, append_datestamp=True, filename=filename,
-            field_header_map={'author__username': 'Author'})
+            proposals,
+            append_datestamp=True,
+            filename=filename,
+            field_header_map=field_header_map
+        )
 
 
 class BaseProposalView(object):
