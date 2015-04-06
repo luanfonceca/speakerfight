@@ -110,6 +110,19 @@ class Proposal(DeckBaseModel):
             return False
         return self.votes.filter(user=user).exists()
 
+    def user_can_vote(self, user):
+        can_vote = False
+        if self.user_already_votted(user) or \
+           (self.author == user and not self.event.author == user):
+            pass
+        elif self.event.allow_public_voting:
+            can_vote = True
+        elif user.is_superuser:
+            can_vote = True
+        elif self.event.jury.users.filter(pk=user.pk).exists():
+            can_vote = True
+        return can_vote
+
     def get_absolute_url(self):
         return reverse('view_event', kwargs={'slug': self.event.slug})
 
@@ -136,6 +149,17 @@ class Event(DeckBaseModel):
             return False
         yesterday = timezone.now() - timedelta(hours=24)
         return yesterday > self.due_date
+
+    def user_can_see_proposals(self, user):
+        can_see_proposals = False
+        if user.is_superuser or self.author == user:
+            can_see_proposals = True
+        elif self.allow_public_voting:
+            can_see_proposals = True
+        elif (not user.is_anonymous() and
+              self.jury.users.filter(pk=user.pk).exists()):
+            can_see_proposals = True
+        return can_see_proposals
 
 
 @receiver(post_save, sender=Event)

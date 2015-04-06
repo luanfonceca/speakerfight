@@ -10,15 +10,9 @@ def already_voted(user, proposal):
 
 @register.filter
 def allowed_to_vote(user, proposal):
-    if user.is_superuser:
-        return True
-    if not proposal.event.allow_public_voting:
-        return False
-    if not user.is_authenticated():
-        return True
-    if proposal.author_id == user.pk:
-        return False
-    if already_voted(user, proposal):
-        return False
-    if proposal.event.jury.users.filter(pk=user.pk).exists():
-        return True
+    return proposal.user_can_vote(user)
+
+
+@register.filter
+def get_rate_display(user, proposal):
+    return proposal.votes.get(user=user).get_rate_display()

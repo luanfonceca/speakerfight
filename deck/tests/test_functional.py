@@ -373,7 +373,8 @@ class ProposalTest(TestCase):
             follow=True
         )
         self.assertEquals(200, response.status_code)
-        self.assertQuerysetEqual(response.context['event_proposals'], [])
+        self.assertQuerysetEqual(response.context['event_proposals'],
+                                 ['<Proposal: Python For Zombies>'])
 
     def test_list_proposal_without_public_voting_as_user(self):
         self.event.allow_public_voting = False
@@ -393,7 +394,8 @@ class ProposalTest(TestCase):
             follow=True
         )
         self.assertEquals(200, response.status_code)
-        self.assertQuerysetEqual(response.context['event_proposals'], [])
+        self.assertQuerysetEqual(response.context['event_proposals'],
+                                 ['<Proposal: Python For Zombies>'])
 
     def test_list_proposal_without_public_voting_and_without_published_and_as_user(self):
         self.event.allow_public_voting = False
@@ -415,31 +417,13 @@ class ProposalTest(TestCase):
             follow=True
         )
         self.assertEquals(200, response.status_code)
-        self.assertQuerysetEqual(response.context['event_proposals'], [])
+        self.assertQuerysetEqual(response.context['event_proposals'], 
+                                 ['<Proposal: Python For Zombies>'])
 
     def test_list_proposal_without_public_voting(self):
         self.client.logout()
         self.client.login(username='another', password='another')
-        response = self.client.get(
-            reverse('view_event', kwargs={'slug': self.event.slug}),
-            follow=True
-        )
-        self.assertEquals(200, response.status_code)
-        self.assertQuerysetEqual(response.context['event_proposals'], [])
-
-    def test_list_proposal_without_public_voting_and_without_logged_user(self):
-        self.client.logout()
-        response = self.client.get(
-            reverse('view_event', kwargs={'slug': self.event.slug}),
-            follow=True
-        )
-        self.assertEquals(200, response.status_code)
-        self.assertQuerysetEqual(response.context['event_proposals'], [])
-
-    def test_list_proposal_without_published_proposals(self):
-        self.client.logout()
-        self.client.login(username='another', password='another')
-        self.event.allow_public_voting = True
+        self.event.allow_public_voting = False
         self.event.save()
 
         response = self.client.get(
@@ -449,9 +433,9 @@ class ProposalTest(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertQuerysetEqual(response.context['event_proposals'], [])
 
-    def test_list_proposal_public_voting_without_published_proposals_and_without_logged_user(self):
+    def test_list_proposal_without_public_voting_and_without_logged_user(self):
         self.client.logout()
-        self.event.allow_public_voting = True
+        self.event.allow_public_voting = False
         self.event.save()
 
         response = self.client.get(

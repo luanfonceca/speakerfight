@@ -9,10 +9,11 @@
     </a>
   {% endif %}
   {% if request.user|already_voted:proposal %}
-    <h5 class="text-success">
-      <i class="icon-ok"></i>
-      {% trans "Rated." %}
-    </h5>
+    {% with request.user|get_rate_display:proposal as rate %}
+      <a class="flat-icon" title="{{ rate|title }}">
+        <i class="{{ rate }} black"></i>
+      </a>
+    {% endwith %}
   {% elif request.user|allowed_to_vote:proposal %}
     {% for value, name in vote_rates %}
       <a href="{% url 'rate_proposal' event_slug=proposal.event.slug slug=proposal.slug rate=name %}" class="flat-icon" title="{{ name|title }}">

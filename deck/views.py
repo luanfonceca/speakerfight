@@ -56,21 +56,10 @@ class DetailEvent(BaseEventView, DetailView):
         context = super(DetailEvent, self).get_context_data(**kwargs)
         context['vote_rates'] = Vote.VOTE_RATES
         event_proposals = self.object.proposals.cached_authors()
-        if (self.request.user.is_superuser or self.object.author == self.request.user):
-            # Admin users and event authors can see all proposals.
+        if self.object.user_can_see_proposals(self.request.user):
             pass
-        elif (self.object.allow_public_voting and
-              not self.request.user.is_authenticated()):
-            event_proposals = event_proposals.filter(is_published=True)
-        elif (self.object.allow_public_voting and
-              self.request.user.is_authenticated()):
-            event_proposals = event_proposals.filter(
-                models.Q(is_published=True) |
-                models.Q(author=self.request.user))
-        elif (not self.object.allow_public_voting and
-              self.request.user.is_authenticated()):
-            event_proposals = event_proposals.filter(
-                models.Q(author=self.request.user))
+        elif not self.request.user.is_anonymous():
+            event_proposals = event_proposals.filter(author=self.request.user)
         else:
             event_proposals = event_proposals.none()
         context.update(event_proposals=event_proposals)
@@ -88,7 +77,7 @@ class UpdateEvent(BaseEventView, UpdateView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         event = self.get_object()
-        if event.author != self.request.user:
+        if event.author != self.request.user and not self.request.user.is_superuser:
             messages.error(
                 self.request, _(u'You are not allowed to see this page.'))
             return HttpResponseRedirect(
@@ -192,4 +181,11 @@ class RateProposal(BaseProposalView, UpdateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        proposal = self.get_object()
+        if not proposal.user_can_vote(self.request.user):
+            messages.error(
+                self.request, _(u'You are not allowed to see this page.'))
+            return HttpResponseRedirect(
+                reverse('view_event', kwargs={'slug': proposal.event.slug}),
+            )
         return super(RateProposal, self).dispatch(*args, **kwargs)

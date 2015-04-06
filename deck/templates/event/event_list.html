@@ -24,25 +24,23 @@
           <tr class="linkable {% if forloop.first %}first{% endif %}"
               data-href="{% url 'view_event' slug=event.slug %}">
             <td class="text-left">
-              <div class="{% if event.author_id == request.user.id %}col-md-11{% endif%}">
-                <h3>{{ event }}</h3>
-                <blockquote>
-                  <h3>{{ event.description|safe|linebreaks }}</h3>
-                </blockquote>
-                {% if event.author_id == request.user.id %}
-                  <div class="text-center">
-                    <a href="{% url 'update_event' slug=event.slug %}" class="flat-icon">
-                      <i class="update black"></i>
-                    </a>
-                    <a href="{% url 'jury_event' slug=event.slug %}" class="flat-icon">
-                      <i class="jury black"></i>
-                    </a>
-                    <a href="{% url 'export_event' slug=event.slug %}" class="flat-icon">
-                      <i class="export black"></i>
-                    </a>
-                  </div>
-                {% endif %}
-              </div>
+              <h3>{{ event }}</h3>
+              <blockquote>
+                <h3>{{ event.description|safe|linebreaks }}</h3>
+              </blockquote>
+              {% if event.author_id == request.user.id or request.user.is_superuser %}
+                <div class="text-center">
+                  <a href="{% url 'update_event' slug=event.slug %}" class="flat-icon">
+                    <i class="update black"></i>
+                  </a>
+                  <a href="{% url 'jury_event' slug=event.slug %}" class="flat-icon">
+                    <i class="jury black"></i>
+                  </a>
+                  <a href="{% url 'export_event' slug=event.slug %}" class="flat-icon">
+                    <i class="export black"></i>
+                  </a>
+                </div>
+              {% endif %}
             </td>
           </tr>
         {% empty %}

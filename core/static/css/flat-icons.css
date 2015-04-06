@@ -1,13 +1,13 @@
-a.flat-icon {
+.flat-icon {
   opacity: 0.6;
   text-decoration: none;
 }
 
-a.flat-icon:hover {
+.flat-icon:hover {
   opacity: 1;
 }
 
-a.flat-icon i {
+.flat-icon i {
   display: inline-block;
   background: url("../img/flat-icons.png") no-repeat;
   width: 70px;
