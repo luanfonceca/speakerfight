@@ -65,7 +65,7 @@ class Vote(models.Model):
         unique_together = (('proposal', 'user'),)
 
     def __unicode__(self):
-        return unicode("{0.user}: {0.rate} in {0.proposal}".format(self))
+        return u"{0.user}: {0.rate} in {0.proposal}".format(self)
 
     def save(self, *args, **kwargs):
         validation_message = None
