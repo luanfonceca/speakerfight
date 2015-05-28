@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-02 05:23-0300\n"
+"POT-Creation-Date: 2015-05-28 15:29-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,26 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-#: core/templates/navbar.html:26 core/templates/account/login.html:8
-#: core/templates/account/login.html:12 core/templates/account/login.html:35
-#: core/templates/account/password_change.html:8
-msgid "Sign In"
-msgstr ""
-
-#: core/templates/navbar.html:36
-msgid ""
-" Sign in with one\n"
-"  of your account "
-msgstr ""
-
-#: core/templates/navbar.html:42
-msgid "Using Email and Password"
-msgstr ""
-
-#: core/templates/public_layout.html:50
-msgid "You need to be logged in to continue to the next step."
-msgstr ""
 
 #: core/templates/account/account_inactive.html:5
 #: core/templates/account/account_inactive.html:8
@@ -106,12 +86,39 @@ msgstr ""
 msgid "Do you really want to remove the selected e-mail address?"
 msgstr ""
 
+#: core/templates/account/email/email_confirmation_message.txt:1
+#, python-format
+msgid ""
+"User %(user_display)s at %(site_name)s has given this as an email address.\n"
+"\n"
+"To confirm this is correct, go to %(activate_url)s\n"
+msgstr ""
+
+#: core/templates/account/email/email_confirmation_subject.txt:3
 #: core/templates/account/email_confirm.html:7
 #: core/templates/account/email_confirm.html:11
 #: core/templates/account/email_confirmed.html:6
 #: core/templates/account/email_confirmed.html:11
-#: core/templates/account/email/email_confirmation_subject.txt:3
 msgid "Confirm E-mail Address"
+msgstr ""
+
+#: core/templates/account/email/password_reset_key_message.txt:1
+#, python-format
+msgid ""
+"You're receiving this e-mail because you or someone else has requested a "
+"password for your user account at %(site_domain)s.\n"
+"It can be safely ignored if you did not request a password reset. Click the "
+"link below to reset your password.\n"
+"\n"
+"%(password_reset_url)s\n"
+"\n"
+"In case you forgot, your username is %(username)s.\n"
+"\n"
+"Thanks for using our site!\n"
+msgstr ""
+
+#: core/templates/account/email/password_reset_key_subject.txt:3
+msgid "Password Reset E-mail"
 msgstr ""
 
 #: core/templates/account/email_confirm.html:17
@@ -139,6 +146,12 @@ msgid ""
 "mail address for user %(user_display)s."
 msgstr ""
 
+#: core/templates/account/login.html:8 core/templates/account/login.html:12
+#: core/templates/account/login.html:35
+#: core/templates/account/password_change.html:8 core/templates/navbar.html:26
+msgid "Sign In"
+msgstr ""
+
 #: core/templates/account/login.html:16
 #, python-format
 msgid ""
@@ -162,7 +175,7 @@ msgstr ""
 msgid "Forgot Password?"
 msgstr ""
 
-#: core/templates/account/login.html:43 core/templates/account/signup.html:27
+#: core/templates/account/login.html:43 core/templates/account/signup.html:38
 msgid ""
 "\n"
 "          Or sign up using your social networks:\n"
@@ -176,6 +189,51 @@ msgstr ""
 
 #: core/templates/account/logout.html:11
 msgid "Are you sure you want to sign out?"
+msgstr ""
+
+#: core/templates/account/messages/cannot_delete_primary_email.txt:2
+#, python-format
+msgid "You cannot remove your primary e-mail address (%(email)s)."
+msgstr ""
+
+#: core/templates/account/messages/email_confirmation_sent.txt:2
+#, python-format
+msgid "Confirmation e-mail sent to %(email)s."
+msgstr ""
+
+#: core/templates/account/messages/email_confirmed.txt:2
+#, python-format
+msgid "You have confirmed %(email)s."
+msgstr ""
+
+#: core/templates/account/messages/email_deleted.txt:2
+#, python-format
+msgid "Removed e-mail address %(email)s."
+msgstr ""
+
+#: core/templates/account/messages/logged_in.txt:4
+#, python-format
+msgid "Successfully signed in as %(name)s."
+msgstr ""
+
+#: core/templates/account/messages/logged_out.txt:2
+msgid "You have signed out."
+msgstr ""
+
+#: core/templates/account/messages/password_changed.txt:2
+msgid "Password successfully changed."
+msgstr ""
+
+#: core/templates/account/messages/password_set.txt:2
+msgid "Password successfully set."
+msgstr ""
+
+#: core/templates/account/messages/primary_email_set.txt:2
+msgid "Primary e-mail address set."
+msgstr ""
+
+#: core/templates/account/messages/unverified_primary_email.txt:2
+msgid "Your primary e-mail address must be verified."
 msgstr ""
 
 #: core/templates/account/password_change.html:12
@@ -241,14 +299,13 @@ msgstr ""
 msgid "Set Password"
 msgstr ""
 
-#: core/templates/account/signup.html:8 core/templates/account/signup.html:12
-#: core/templates/account/signup.html:22
-#: core/templates/socialaccount/signup.html:9
-#: core/templates/socialaccount/signup.html:20
+#: core/templates/account/signup.html:8 core/templates/account/signup.html:23
+#: core/templates/account/signup.html:33
+#: core/templates/socialaccount/signup.html:8
 msgid "Sign Up"
 msgstr ""
 
-#: core/templates/account/signup.html:14
+#: core/templates/account/signup.html:25
 #, python-format
 msgid ""
 "Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
@@ -261,6 +318,15 @@ msgstr ""
 
 #: core/templates/account/signup_closed.html:11
 msgid "We are sorry, but the sign up is currently closed."
+msgstr ""
+
+#: core/templates/account/snippets/already_logged_in.html:5
+msgid "Note"
+msgstr ""
+
+#: core/templates/account/snippets/already_logged_in.html:5
+#, python-format
+msgid "you are already logged in as %(user_display)s."
 msgstr ""
 
 #: core/templates/account/verification_sent.html:5
@@ -298,89 +364,22 @@ msgid ""
 "mail address</a>."
 msgstr ""
 
-#: core/templates/account/email/email_confirmation_message.txt:1
-#, python-format
+#: core/templates/navbar.html:36
 msgid ""
-"User %(user_display)s at %(site_name)s has given this as an email address.\n"
-"\n"
-"To confirm this is correct, go to %(activate_url)s\n"
+" Sign in with one\n"
+"  of your account "
 msgstr ""
 
-#: core/templates/account/email/password_reset_key_message.txt:1
-#, python-format
-msgid ""
-"You're receiving this e-mail because you or someone else has requested a "
-"password for your user account at %(site_domain)s.\n"
-"It can be safely ignored if you did not request a password reset. Click the "
-"link below to reset your password.\n"
-"\n"
-"%(password_reset_url)s\n"
-"\n"
-"In case you forgot, your username is %(username)s.\n"
-"\n"
-"Thanks for using our site!\n"
-msgstr ""
-
-#: core/templates/account/email/password_reset_key_subject.txt:3
-msgid "Password Reset E-mail"
-msgstr ""
-
-#: core/templates/account/messages/cannot_delete_primary_email.txt:2
-#, python-format
-msgid "You cannot remove your primary e-mail address (%(email)s)."
-msgstr ""
-
-#: core/templates/account/messages/email_confirmation_sent.txt:2
-#, python-format
-msgid "Confirmation e-mail sent to %(email)s."
-msgstr ""
-
-#: core/templates/account/messages/email_confirmed.txt:2
-#, python-format
-msgid "You have confirmed %(email)s."
-msgstr ""
-
-#: core/templates/account/messages/email_deleted.txt:2
-#, python-format
-msgid "Removed e-mail address %(email)s."
-msgstr ""
-
-#: core/templates/account/messages/logged_in.txt:4
-#, python-format
-msgid "Successfully signed in as %(name)s."
-msgstr ""
-
-#: core/templates/account/messages/logged_out.txt:2
-msgid "You have signed out."
-msgstr ""
-
-#: core/templates/account/messages/password_changed.txt:2
-msgid "Password successfully changed."
-msgstr ""
-
-#: core/templates/account/messages/password_set.txt:2
-msgid "Password successfully set."
-msgstr ""
-
-#: core/templates/account/messages/primary_email_set.txt:2
-msgid "Primary e-mail address set."
-msgstr ""
-
-#: core/templates/account/messages/unverified_primary_email.txt:2
-msgid "Your primary e-mail address must be verified."
-msgstr ""
-
-#: core/templates/account/snippets/already_logged_in.html:5
-msgid "Note"
-msgstr ""
-
-#: core/templates/account/snippets/already_logged_in.html:5
-#, python-format
-msgid "you are already logged in as %(user_display)s."
+#: core/templates/navbar.html:42
+msgid "Using Email and Password"
 msgstr ""
 
 #: core/templates/openid/login.html:10
 msgid "OpenID Sign In"
+msgstr ""
+
+#: core/templates/public_layout.html:55
+msgid "You need to be logged in to continue to the next step."
 msgstr ""
 
 #: core/templates/socialaccount/authentication_error.html:5
@@ -426,17 +425,6 @@ msgid ""
 "\">sign in</a>."
 msgstr ""
 
-#: core/templates/socialaccount/signup.html:6
-msgid "Signup"
-msgstr ""
-
-#: core/templates/socialaccount/signup.html:11
-#, python-format
-msgid ""
-"You are about to use your %(provider_name)s account to login to\n"
-"%(site_name)s. As a final step, please complete the following form:"
-msgstr ""
-
 #: core/templates/socialaccount/messages/account_connected.txt:2
 msgid "The social account has been connected."
 msgstr ""
@@ -449,138 +437,161 @@ msgstr ""
 msgid "The social account has been disconnected."
 msgstr ""
 
-#: deck/models.py:21
+#: core/templates/socialaccount/signup.html:14
+msgid ""
+"\n"
+"        Do you already have an account, but choose the wrong Provider to "
+"access right now.\n"
+"      "
+msgstr ""
+
+#: core/templates/socialaccount/signup.html:17
+msgid "Click"
+msgstr ""
+
+#: core/templates/socialaccount/signup.html:17
+msgid "here"
+msgstr ""
+
+#: core/templates/socialaccount/signup.html:18
+msgid "to be redirected to the right  page"
+msgstr ""
+
+#: core/templates/socialaccount/signup.html:25
+msgid ""
+"\n"
+"          Or try another social network provider:\n"
+"        "
+msgstr ""
+
+#: deck/forms.py:33 jury/forms.py:10
+msgid "User email"
+msgstr ""
+
+#: deck/forms.py:45 jury/forms.py:22
+#, python-format
+msgid ""
+"The \"%s\" are not a Speakerfight user. For now, we just allow already "
+"joined users."
+msgstr ""
+
+#: deck/forms.py:49 jury/forms.py:26
+#, python-format
+msgid "The \"@%s\" already is being part of this jury."
+msgstr ""
+
+#: deck/models.py:28
 msgid "Title"
 msgstr ""
 
-#: deck/models.py:24
+#: deck/models.py:31
 msgid "Description"
 msgstr ""
 
-#: deck/models.py:25
+#: deck/models.py:32
 msgid "Created At"
 msgstr ""
 
-#: deck/models.py:26
+#: deck/models.py:33
 msgid "Publish"
 msgstr ""
 
-#: deck/models.py:49
+#: deck/models.py:56
 msgid "Rate Index"
 msgstr ""
 
-#: deck/models.py:56
+#: deck/models.py:63
 msgid "Vote"
 msgstr ""
 
-#: deck/models.py:57
+#: deck/models.py:64
 msgid "Votes"
 msgstr ""
 
-#: deck/models.py:83
+#: deck/models.py:95
 msgid "Proposal"
 msgstr ""
 
-#: deck/models.py:84 deck/templates/event/event_detail.html:38
+#: deck/models.py:96 deck/templates/event/event_detail.html:57
 msgid "Proposals"
 msgstr ""
 
-#: deck/models.py:100
+#: deck/models.py:101 deck/views.py:139
+msgid "This Event doesn't accept Proposals anymore."
+msgstr ""
+
+#: deck/models.py:131
 msgid "Allow Public Voting"
 msgstr ""
 
-#: deck/models.py:104
+#: deck/models.py:140
 msgid "Event"
 msgstr ""
 
-#: deck/models.py:105 deck/templates/event/event_list.html:6
+#: deck/models.py:141 deck/templates/event/event_list.html:6
 #: deck/templates/event/event_list.html:10
 msgid "Events"
 msgstr "Eventos"
 
-#: deck/views.py:43
-msgid "Event created."
+#: deck/templates/event/event_detail.html:24
+msgid "Created by:"
 msgstr ""
 
-#: deck/views.py:72
-msgid "Event updated."
-msgstr ""
-
-#: deck/views.py:80
-msgid "You are not allowed to see this page."
-msgstr ""
-
-#: deck/views.py:106
-msgid "Proposal created."
-msgstr ""
-
-#: deck/views.py:124
-msgid "Proposal updated."
-msgstr ""
-
-#: deck/views.py:140
-msgid "Rate Index not found."
-msgstr ""
-
-#: deck/views.py:144
-msgid "Proposal rated."
-msgstr ""
-
-#: deck/templates/event/event_detail.html:7
-msgid "Event Detail"
-msgstr ""
-
-#: deck/templates/event/event_detail.html:18
-msgid "Due date at"
-msgstr ""
-
-#: deck/templates/event/event_detail.html:20
-#: deck/templates/event/event_detail.html:54
-msgid "Created by"
-msgstr ""
-
-#: deck/templates/event/event_detail.html:21
-#: deck/templates/event/event_detail.html:55
+#: deck/templates/event/event_detail.html:26
+#: deck/templates/event/event_detail.html:65
 msgid "at"
 msgstr ""
 
-#: deck/templates/event/event_detail.html:24
-msgid "This event doesn't accept Public Voting."
+#: deck/templates/event/event_detail.html:30
+#: deck/templates/event/event_detail.html:33
+msgid "Due date at"
 msgstr ""
 
-#: deck/templates/event/event_detail.html:36
+#: deck/templates/event/event_detail.html:39
+msgid ""
+"\n"
+"              This event doesn't accept <strong>Public Voting</strong>, "
+"'cause of this you can only see your own Proposals.\n"
+"            "
+msgstr ""
+
+#: deck/templates/event/event_detail.html:54
 msgid "add proposal"
 msgstr ""
 
-#: deck/templates/event/event_detail.html:67
-msgid "Proposal already rated by you."
+#: deck/templates/event/event_detail.html:63
+msgid "Created by"
 msgstr ""
 
-#: deck/templates/event/event_detail.html:86
+#: deck/templates/event/event_detail.html:74
 msgid "No Proposals"
 msgstr ""
 
 #: deck/templates/event/event_form.html:8
-#: deck/templates/event/event_form.html:23
+#: deck/templates/event/event_form.html:24
+#: jury/templates/jury/jury_detail.html:7
+#: jury/templates/jury/jury_detail.html:44
 msgid "Update"
 msgstr ""
 
 #: deck/templates/event/event_form.html:10
-#: deck/templates/event/event_form.html:25
+#: deck/templates/event/event_form.html:26
 msgid "New Event"
 msgstr ""
 
-#: deck/templates/event/event_form.html:39
+#: deck/templates/event/event_form.html:40
 #: deck/templates/proposal/proposal_form.html:40
 msgid "submit"
 msgstr ""
 
-#: deck/templates/event/event_form.html:45
+#: deck/templates/event/event_form.html:46
 #: deck/templates/proposal/proposal_form.html:45
+#: jury/templates/jury/jury_detail.html:93
 msgid "event detail"
 msgstr ""
 
-#: deck/templates/event/event_form.html:50
+#: deck/templates/event/event_form.html:51
+#: jury/templates/jury/jury_detail.html:98
 msgid "event list"
 msgstr ""
 
@@ -588,7 +599,7 @@ msgstr ""
 msgid "new event"
 msgstr ""
 
-#: deck/templates/event/event_list.html:45
+#: deck/templates/event/event_list.html:49
 msgid "No Events"
 msgstr ""
 
@@ -600,4 +611,91 @@ msgstr ""
 #: deck/templates/proposal/proposal_form.html:10
 #: deck/templates/proposal/proposal_form.html:26
 msgid "New Proposal"
+msgstr ""
+
+#: deck/views.py:45
+msgid "Event created."
+msgstr ""
+
+#: deck/views.py:75
+msgid "Event updated."
+msgstr ""
+
+#: deck/views.py:84 deck/views.py:98 deck/views.py:198
+msgid "You are not allowed to see this page."
+msgstr ""
+
+#: deck/views.py:150
+msgid "Proposal created."
+msgstr ""
+
+#: deck/views.py:168
+msgid "Proposal updated."
+msgstr ""
+
+#: deck/views.py:186
+msgid "Rate Index not found."
+msgstr ""
+
+#: deck/views.py:190
+msgid "Proposal rated."
+msgstr ""
+
+#: jury/models.py:12
+msgid "Jury"
+msgstr ""
+
+#: jury/models.py:13
+msgid "Juries"
+msgstr ""
+
+#: jury/templates/jury/jury_detail.html:7
+#: jury/templates/jury/jury_detail.html:44
+msgid "jury"
+msgstr ""
+
+#: jury/templates/jury/jury_detail.html:49
+msgid "Manage users"
+msgstr ""
+
+#: jury/templates/jury/jury_detail.html:50
+msgid "Here you can add or remove people from Jury."
+msgstr ""
+
+#: jury/templates/jury/jury_invite.html:7
+#: jury/templates/jury/jury_invite.html:18
+msgid "Accept invite"
+msgstr ""
+
+#: jury/templates/jury/jury_invite.html:24
+msgid ""
+"By Accepting this invite you will Vote in any Proposals maded on the event: "
+msgstr ""
+
+#: jury/templates/jury/jury_invite.html:37
+msgid "Accept"
+msgstr ""
+
+#: jury/tests/test_functional.py:28 jury/views.py:40
+#, python-format
+msgid "The \"@%s\" are successfully joined to the Jury."
+msgstr ""
+
+#: jury/tests/test_functional.py:42
+msgid "The \"@admin\" already is being part of this jury."
+msgstr ""
+
+#: jury/tests/test_functional.py:56
+msgid ""
+"The \"new_user@speakerfight.com\" are not a Speakerfight user. For now, we "
+"just allow already joined users."
+msgstr ""
+
+#: jury/tests/test_functional.py:75
+msgid "The \"@user\" was successfully removed from the Jury."
+msgstr ""
+
+#: jury/views.py:58
+#, python-format
+msgid "The \"@%s\" was successfully removed from the Jury."
 msgstr ""
