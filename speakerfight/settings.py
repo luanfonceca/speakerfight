@@ -101,7 +101,7 @@ DATABASES = {
 
 TIME_ZONE = 'America/Sao_Paulo'
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'pt_BR'
 
 LANGUAGES = (
     ('en', 'English'),

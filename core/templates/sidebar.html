@@ -1,4 +1,5 @@
 {% load activelink %}
+{% load i18n %}
 
 {% block scripts %}
   <script type="text/javascript">
@@ -20,7 +21,7 @@
     <li {% ifstartswith "/events/" %}class="active"{% endifstartswith %}>
       <a href="{% url 'list_events' %}">
         <i class="icon-calendar-empty"></i>
-        <span>Events</span>
+        <span>{% trans "Events" %}</span>
       </a>
     </li>
   </ul>
