@@ -43,6 +43,9 @@ def _update_app():
         print yellow('Collecting the static files')
         _run('manage.py collectstatic --noinput --verbosity=0')
 
+        print yellow('Compiling the strings')
+        _run('manage.py compilemessages')
+
         print green('App succefully updated')
 
 
