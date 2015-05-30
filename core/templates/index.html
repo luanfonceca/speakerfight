@@ -1,34 +1,66 @@
 {% extends "public_layout.html" %}
 
+{% load i18n %}
+
 {% block head_title %}Index{% endblock head_title %}
 
 {% block content %}
-  <div class="row">
+
+  <div class="row" id="hero">
     <div class="col-md-8">
-      <h1><strong>Speakerfight</strong> is an arena where the speakers can fight each other and the people choose who wins.</h1>
+      <h1>
+        {% blocktrans %}
+          <strong>SpeakerFight</strong> is an arena where the speakers can
+          fight each other and the people choose who wins.
+        {% endblocktrans %}
+      </h1>
     </div>
     <div class="col-md-4">
-      <a href="{% url 'list_events' %}" class="btn-flat info get-started text-center">GET STARTED</a>
+      <a href="{% url 'list_events' %}" class="btn-flat info big-button text-center">{% trans "GET STARTED" %}</a>
     </div>
   </div>
+
   <hr>
-  <div class="row">
-    <div class="text-center">
-      <h2>Event List.</h2>
-      <img src="{{ STATIC_URL }}img/event-list.png" alt="Event List" />
-    </div>
-  </div>
+
+  <h1 class="text-center">{% trans "Some features" %}</h1>
+
   <hr>
+
   <div class="row">
-    <div class="text-center">
-      <h2>Event Detail.</h2>
-      <img src="{{ STATIC_URL }}img/event-detail.png" alt="Event Detail" />
+    <div class="col-lg-offset-1 col-lg-3 col-md-4">
+      <h2>{% trans "Event list" %}</h2>
+      <p>{% trans "The event list show all public events to let you join to the vote." %}</p>
+      <p>{% trans "You can create new events and receive proposals from anyone in the world. All the events can be either public or private." %}</p>
+    </div>
+    <div class="col-lg-6 col-md-8">
+      <img src="{{ STATIC_URL }}img/event-list.png" alt="{% trans "Event List" %}" width="100%" class="image-shadow" />
     </div>
   </div>
+
   <hr>
+
   <div class="row">
-    <div class="col-md-offset-4 col-md-4">
-      <a href="{% url 'list_events' %}" class="btn-flat info get-started text-center">JOIN THE FIGHTERS</a>
+    <div class="col-lg-offset-1 col-lg-6 col-md-8">
+      <img src="{{ STATIC_URL }}img/event-detail.png" alt="{% trans "Event details" %}" width="100%" class="image-shadow" />
+    </div>
+    <div class="col-lg-3 col-md-4">
+      <h2>{% trans "Event details" %}</h2>
+      <p>{% trans "Every event can be configured to receive votes from everyone, only logged users or only the people you choose." %}</p>
+      <p>{% trans "All the events have an URL that can be shared as you like." %}</p>
     </div>
   </div>
+
+  <hr>
+
+  <div class="row" id="join-call-to-action">
+    <div class="col-md-12 text-center">
+      <h1>{% trans "Enter in the arena" %}</h1>
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+          <a href="{% url 'list_events' %}" class="btn-flat info big-button text-center">{% trans "JOIN THE FIGHTERS" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
 {% endblock content %}
