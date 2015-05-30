@@ -3,7 +3,8 @@
     return this.each(function() {
       $(this).css({cursor: 'pointer'});
 
-      $(this).click(function () {
+      $(this).click(function (event) {
+        event.preventDefault();
         window.location.replace(
           $(this).attr("data-href")
         );
