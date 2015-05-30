@@ -4,10 +4,12 @@
       $(this).css({cursor: 'pointer'});
 
       $(this).click(function (event) {
-        event.preventDefault();
-        window.location.replace(
-          $(this).attr("data-href")
-        );
+        if (!event.target.href) {
+          event.preventDefault();
+          window.location.replace(
+            $(this).attr("data-href")
+          );
+        }
       });
     });
   };
