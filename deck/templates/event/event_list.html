@@ -15,43 +15,46 @@
   </div>
 
   <!-- Users table -->
-  <div class="row">
+  <div class="row" id="events-list">
     <div class="col-md-12">
-      <table class="table table-hover">
-        <tbody>
-        <!-- row -->
-        {% for event in event_list %}
-          <tr class="linkable {% if forloop.first %}first{% endif %}"
-              data-href="{% url 'view_event' slug=event.slug %}">
-            <td class="text-left">
-              <h3>{{ event }}</h3>
-              <blockquote>
-                <h3>{{ event.description|safe|linebreaks }}</h3>
-              </blockquote>
-              {% if event.author_id == request.user.id or request.user.is_superuser %}
-                <div class="text-center">
-                  <a href="{% url 'update_event' slug=event.slug %}" class="flat-icon">
-                    <i class="update black"></i>
-                  </a>
-                  <a href="{% url 'jury_event' slug=event.slug %}" class="flat-icon">
-                    <i class="jury black"></i>
-                  </a>
-                  <a href="{% url 'export_event' slug=event.slug %}" class="flat-icon">
-                    <i class="export black"></i>
-                  </a>
-                </div>
-              {% endif %}
-            </td>
-          </tr>
-        {% empty %}
-          <tr>
-            <td class="text-center">
-              <h3>{% trans "No Events" %}</h3>
-            </td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
+      {% for event in event_list %}
+        <div class="event-item linkable" data-href="{% url 'view_event' slug=event.slug %}">
+          <h3>{{ event.title }}</h3>
+          <p>
+            {% blocktrans with author=event.author.get_full_name|default:event.author.username created_at=event.created_at %}
+            Create by {{ author }} at {{ created_at }}
+            {% endblocktrans %}
+            {% if event.due_date %}
+              <br/>
+              {% blocktrans with due_date=event.due_date|timeuntil %}
+              Due date in {{ due_date }}
+              {% endblocktrans %}
+            {% endif %}
+          </p>
+          <blockquote>
+            <h3>{{ event.description|safe|linebreaks }}</h3>
+          </blockquote>
+          {% if event.author_id == request.user.id or request.user.is_superuser %}
+            <hr/>
+            <div class="event-actions">
+              {% trans "Actions" %}:
+              <a href="{% url 'update_event' slug=event.slug %}" class="btn btn-sm btn-default" data-toggle="tooltip" title="{% trans "Edit the event." %}">
+                <i class="icon-pencil"></i>
+              </a>
+              <a href="{% url 'jury_event' slug=event.slug %}" class="btn btn-sm btn-default" data-toggle="tooltip" title="{% trans "Manage the jury." %}">
+                <i class="icon-group"></i>
+              </a>
+              <a href="{% url 'export_event' slug=event.slug %}" class="btn btn-sm btn-default" data-toggle="tooltip" title="{% trans "Export CSV with all proposals and vote results." %}">
+                <i class="icon-cloud-download"></i>
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      {% empty %}
+        <div>
+          <h3 class="text-center">{% trans "No Events" %}</h3>
+        </div>
+      {% endfor %}
     </div>
   </div>
   <!-- end events table -->
