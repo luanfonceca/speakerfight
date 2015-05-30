@@ -12,15 +12,20 @@
   </style>
 {% endblock head %}
 
+{% block before_body_end %}
+  <!-- Go to www.addthis.com/dashboard to customize your tools -->
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f777bac7bca077f" async="async"></script>
+{% endblock %}
+
 {% block head_title %}{{ event }}{% endblock %}
 
 {% block content %}
   <!-- header -->
-  <div class="row header">
-    <h1 class="name">{{ event }}</h1>
-    <div class="description">
-      <h4 class="col-xs-12">
-        <blockquote>{{ event.description|safe|linebreaks }}</blockquote>
+  <div class="row" id="event-title">
+    <div class="col-md-12">
+      <h1>{{ event }}</h1>
+      <blockquote>{{ event.description|safe|linebreaks }}</blockquote>
+      <p>
         {% trans "Created by:" %}
         <strong>{{ event.author.get_full_name|default:event.author.username }}</strong>
         {% trans "at" %} {{ event.created_at }}<br>
@@ -41,7 +46,10 @@
             {% endblocktrans %}
           </div>
         {% endif %}
-      </h4>
+      </p>
+
+      <!-- Go to www.addthis.com/dashboard to customize your tools -->
+      <div class="addthis_native_toolbox"></div>
     </div>
   </div>
 
