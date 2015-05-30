@@ -18,34 +18,34 @@
   <div class="row" id="events-list">
     <div class="col-md-12">
       {% for event in event_list %}
-        <div class="event-item linkable" data-href="{% url 'view_event' slug=event.slug %}">
-          <h3>{{ event.title }}</h3>
-          <p>
-            {% blocktrans with author=event.author.get_full_name|default:event.author.username created_at=event.created_at %}
-            Create by {{ author }} at {{ created_at }}
-            {% endblocktrans %}
-            {% if event.due_date %}
-              <br/>
-              {% blocktrans with due_date=event.due_date|timeuntil %}
-              Due date in {{ due_date }}
+        <div class="panel panel-default event-item linkable" data-href="{% url 'view_event' slug=event.slug %}">
+          <div class="panel-body">
+            <h3 class="panel-title event-title">{{ event.title }}</h3>
+            <p class="event-metadata">
+              {% blocktrans with author=event.author.get_full_name|default:event.author.username created_at=event.created_at %}
+              Create by <strong>{{ author }}</strong> at {{ created_at }}
               {% endblocktrans %}
-            {% endif %}
-          </p>
-          <blockquote>
-            <h3>{{ event.description|safe|linebreaks }}</h3>
-          </blockquote>
+              {% if event.due_date %}
+                <br/>
+                {% blocktrans with due_date=event.due_date|timeuntil %}
+                Due date in {{ due_date }}
+                {% endblocktrans %}
+              {% endif %}
+            </p>
+            <div class="event-description">
+              {{ event.description|safe|linebreaks }}
+            </div>
+          </div>
           {% if event.author_id == request.user.id or request.user.is_superuser %}
-            <hr/>
-            <div class="event-actions">
-              {% trans "Actions" %}:
-              <a href="{% url 'update_event' slug=event.slug %}" class="btn btn-sm btn-default" data-toggle="tooltip" title="{% trans "Edit the event." %}">
-                <i class="icon-pencil"></i>
+            <div class="panel-footer event-actions">
+              <a href="{% url 'update_event' slug=event.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans "Edit the event." %}">
+                <i class="icon-pencil"></i> {% trans "Edit" %}
               </a>
-              <a href="{% url 'jury_event' slug=event.slug %}" class="btn btn-sm btn-default" data-toggle="tooltip" title="{% trans "Manage the jury." %}">
-                <i class="icon-group"></i>
+              <a href="{% url 'jury_event' slug=event.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans "Manage the jury." %}">
+                <i class="icon-group"></i> {% trans "Manage Jury" %}
               </a>
-              <a href="{% url 'export_event' slug=event.slug %}" class="btn btn-sm btn-default" data-toggle="tooltip" title="{% trans "Export CSV with all proposals and vote results." %}">
-                <i class="icon-cloud-download"></i>
+              <a href="{% url 'export_event' slug=event.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans "Export CSV with all proposals and vote results." %}">
+                <i class="icon-cloud-download"></i> {% trans "Export votes" %}
               </a>
             </div>
           {% endif %}
