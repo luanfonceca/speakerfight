@@ -45,27 +45,45 @@
       </a>
     </div>
 
-    <div class="content-wrap col-md-offset-1 col-md-10">
-      <div>
+    <div class="row">
+      <div class="content-wrap col-md-offset-1 col-md-10">
         {% if redirect_field_value %}
-          <div class="col-md-12">
-            <div class="alert alert-info alert-dismissable">
-              <i class="icon-exclamation-sign"></i>
-              {% trans "You need to be logged in to continue to the next step." %}
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#215;</button>
+          <div>
+            <div class="col-md-12">
+              <div class="alert alert-info alert-dismissable">
+                <i class="icon-exclamation-sign"></i>
+                {% trans "You need to be logged in to continue to the next step." %}
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#215;</button>
+              </div>
             </div>
           </div>
         {% endif %}
+
         {% bootstrap_messages messages %}
+
+        {% block content %}{% endblock content %}
       </div>
+    </div>
 
-      {% block content %}{% endblock content %}
-
-      <div class="col-md-offset-2 col-md-8 footer-icons">
-        <hr>
-        <a href="https://github.com/luanfonceca/speakerfight" target="_blank">
-          <i class="icon-github-sign"></i>
-        </a>
+    <div id="footer">
+      <div class="row">
+        <div class="content-wrap col-md-offset-4 col-md-4 text-center">
+          <p>
+            {% with anchor_start='<a href="https://github.com/luanfonceca/speakerfight/issues">' anchor_end='</a>' %}
+              {% blocktrans %}
+                <strong>SpeakerFight</strong> is proudly an open-source
+                project and is always being enhanced. If the software
+                has any odd behavior
+                {{ anchor_start }}please let us know{{ anchor_end }}.
+              {% endblocktrans %}
+            {% endwith %}
+          </p>
+          <div class="text-center footer-icons">
+            <a href="https://github.com/luanfonceca/speakerfight" target="_blank">
+              <i class="icon-github-sign"></i>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
