@@ -605,10 +605,40 @@ body.modal-open,
   margin-top: 40px;
 }
 
+.content {
+  margin-bottom: 50px;
+  min-height: 385px;
+}
+
 
 /* ==========================================================================
    Custom style
    ========================================================================== */
+
+html {
+  background: #2c3742;
+}
+
+#footer {
+  background: #2c3742;
+  /*box-shadow: inset rgba(255, 255, 255, 0.3) 0 1px 0, inset rgba(0, 0, 0, 0.22) 0 -1px 0, rgba(0, 0, 0, 0.14) 0 1px 2px;*/
+  width: 100%;
+  padding: 50px 0 10px;
+  color: #FFF;
+}
+
+#footer .row {
+  /* Fixing an issue with horizontal scrolling. */
+  margin: 0;
+}
+
+#footer .footer-icons {
+  font-size: 38px;
+}
+
+#footer .footer-icons a:hover {
+  text-decoration: none;
+}
 
 .event-item {
   /* nothing. */
