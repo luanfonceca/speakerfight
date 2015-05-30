@@ -137,7 +137,7 @@ class Event(DeckBaseModel):
                                 null=True, blank=True)
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['due_date', '-created_at']
         verbose_name = _('Event')
         verbose_name_plural = _('Events')
 
