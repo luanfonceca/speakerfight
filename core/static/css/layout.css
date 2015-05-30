@@ -613,3 +613,19 @@ body.modal-open,
 #event-title {
   margin-bottom: 40px;
 }
+
+.event-item {
+  padding: 20px;
+  background-color: #FAFAFA;
+  border: 1px solid #DDD;
+  /*border-radius: 10px;*/
+  margin-bottom: 20px;
+}
+
+.event-actions {
+  font-size: 14px;
+}
+
+.event-actions a {
+  color: #000;
+}

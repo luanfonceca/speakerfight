@@ -32,6 +32,8 @@ class ListEvents(BaseEventView, ListView):
                 models.Q(is_published=True) |
                 models.Q(author=self.request.user))
             context.update(event_list=event_list)
+        # Ordering the events so the first will be the nearest.
+        context['event_list'] = context['event_list'].order_by('due_date')
         return context
 
 
