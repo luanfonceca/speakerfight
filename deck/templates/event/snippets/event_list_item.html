@@ -1,0 +1,47 @@
+{% load i18n %}
+
+{% if event_detail %}
+<div class="panel panel-default event-item">
+{% else %}
+<div class="panel panel-default event-item linkable" data-href="{% url 'view_event' slug=event.slug %}">
+{% endif %}
+  <div class="panel-body">
+    <h3 class="panel-title event-title">{{ event.title }}</h3>
+    <p class="event-metadata">
+      {% blocktrans with author=event.author.get_full_name|default:event.author.username created_at=event.created_at %}
+      Created by <strong>{{ author }}</strong> at {{ created_at }}
+      {% endblocktrans %}
+      {% if event.due_date %}
+        <br/>
+        {% if event.due_date_is_passed %}
+          <span class="text-danger">
+            <i class="icon-exclamation-sign"></i>
+            {% trans "Due date pasted" %} {{ event.due_date|timesince }}
+          </span>
+        {% else %}
+          {% trans "Due date in" %} {{ event.due_date|timeuntil }}
+        {% endif %}
+      {% endif %}
+    </p>
+    <div class="event-description">
+      {{ event.description|safe|linebreaks }}
+    </div>
+    {% if event_detail %}
+      <!-- Go to www.addthis.com/dashboard to customize your tools -->
+      <div class="addthis_native_toolbox"></div>
+    {% endif %}
+  </div>
+  {% if event.author_id == request.user.id or request.user.is_superuser %}
+    <div class="panel-footer event-actions text-center">
+      <a href="{% url 'update_event' slug=event.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans "Edit the event." %}">
+        <i class="icon-pencil"></i> {% trans "Edit" %}
+      </a>
+      <a href="{% url 'jury_event' slug=event.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans "Manage the jury." %}">
+        <i class="icon-group"></i> {% trans "Manage Jury" %}
+      </a>
+      <a href="{% url 'export_event' slug=event.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans "Export CSV with all proposals and vote results." %}">
+        <i class="icon-cloud-download"></i> {% trans "Export votes" %}
+      </a>
+    </div>
+  {% endif %}
+</div>
