@@ -3,7 +3,7 @@
     "pk": 1,
     "model": "socialaccount.socialapp",
     "fields": {
-        "name": "Speaker Fight",
+        "name": "Speakerfight",
         "sites": [
             1
         ],
@@ -17,7 +17,7 @@
     "pk": 2,
     "model": "socialaccount.socialapp",
     "fields": {
-        "name": "Speaker Fight",
+        "name": "Speakerfight",
         "sites": [
             1
         ],
