@@ -49,8 +49,8 @@ class DeckBaseModel(models.Model):
 class Vote(models.Model):
     ANGRY, SLEEPY, SAD, HAPPY, LAUGHING = range(-1, 4)
     VOTE_RATES = ((ANGRY, 'angry'),
-                  (SLEEPY, 'sleepy'),
                   (SAD, 'sad'),
+                  (SLEEPY, 'sleepy'),
                   (HAPPY, 'happy'),
                   (LAUGHING, 'laughing'))
     rate = models.SmallIntegerField(_('Rate Index'), null=True, blank=True,
