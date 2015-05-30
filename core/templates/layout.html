@@ -42,6 +42,7 @@
     <!-- scripts -->
     <script src="{{ STATIC_URL }}js/libs/jquery.min.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <script src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
     <script src="{{ STATIC_URL }}js/theme.js"></script>
 
     {% block scripts %}{% endblock scripts %}
