@@ -610,22 +610,22 @@ body.modal-open,
    Custom style
    ========================================================================== */
 
-#event-title {
-  margin-bottom: 40px;
-}
-
 .event-item {
-  padding: 20px;
-  background-color: #FAFAFA;
-  border: 1px solid #DDD;
-  /*border-radius: 10px;*/
-  margin-bottom: 20px;
+  /* nothing. */
 }
 
-.event-actions {
+.event-item .event-actions {
   font-size: 14px;
 }
 
-.event-actions a {
-  color: #000;
+.event-item .event-title {
+  font-size: 24px;
+}
+
+.event-item .event-description {
+  font-size: 16px;
+}
+
+.event-item .event-metadata {
+  color: #999;
 }
