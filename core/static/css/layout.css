@@ -629,3 +629,12 @@ body.modal-open,
 .event-item .event-metadata {
   color: #999;
 }
+
+#event-detail .event-title {
+  font-size: 30px;
+}
+
+#event-detail .event-proposals-header {
+  margin-bottom: 10px;
+  overflow: hidden;
+}
