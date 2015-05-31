@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: speakerfight\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-31 12:52-0300\n"
+"POT-Creation-Date: 2015-05-31 14:21-0300\n"
 "PO-Revision-Date: 2015-05-29 08:57+0000\n"
 "Last-Translator: Luan Fonseca de Farias <luanfonceca@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
@@ -24,70 +24,73 @@ msgstr ""
 #: core/templates/account/account_inactive.html:5
 #: core/templates/account/account_inactive.html:8
 msgid "Account Inactive"
-msgstr ""
+msgstr "Conta Inativa"
 
 #: core/templates/account/account_inactive.html:10
 msgid "This account is inactive."
-msgstr ""
+msgstr "Está conta está inativa"
 
 #: core/templates/account/email.html:6
 msgid "Account"
-msgstr ""
+msgstr "Conta"
 
 #: core/templates/account/email.html:9
 msgid "E-mail Addresses"
-msgstr ""
+msgstr "Endereço de e-mail"
 
 #: core/templates/account/email.html:11
 msgid "The following e-mail addresses are associated with your account:"
-msgstr ""
+msgstr "Os seguintes endereços de e-mail estão associados à sua conta:"
 
 #: core/templates/account/email.html:25
 msgid "Verified"
-msgstr ""
+msgstr "Verificado"
 
 #: core/templates/account/email.html:27
 msgid "Unverified"
-msgstr ""
+msgstr "Não Verificado"
 
 #: core/templates/account/email.html:29
 msgid "Primary"
-msgstr ""
+msgstr "Primeiro"
 
 #: core/templates/account/email.html:35
 msgid "Make Primary"
-msgstr ""
+msgstr "Tornar principal"
 
 #: core/templates/account/email.html:36
 msgid "Re-send Verification"
-msgstr ""
+msgstr "Reenviar verificação"
 
 #: core/templates/account/email.html:37
 #: core/templates/socialaccount/connections.html:36
 msgid "Remove"
-msgstr ""
+msgstr "Remover"
 
 #: core/templates/account/email.html:44
 msgid "Warning:"
-msgstr ""
+msgstr "Atenção:"
 
 #: core/templates/account/email.html:44
 msgid ""
 "You currently do not have any e-mail address set up. You should really add "
 "an e-mail address so you can receive notifications, reset your password, etc."
 msgstr ""
+"Você não tem nenhum endereço de e-mail registrado. Você realmente deveria "
+"adicionar um endereço de e-mail, para que seja possível receber "
+"notificações, alterar sua senha, etc."
 
 #: core/templates/account/email.html:49
 msgid "Add E-mail Address"
-msgstr ""
+msgstr "Adicionar endereço de e-mail"
 
 #: core/templates/account/email.html:54
 msgid "Add E-mail"
-msgstr ""
+msgstr "Adicionar e-mail"
 
 #: core/templates/account/email.html:63
 msgid "Do you really want to remove the selected e-mail address?"
-msgstr ""
+msgstr "Você realmente quer remover o endereço de e-mail selecionado ?"
 
 #: core/templates/account/email/email_confirmation_message.txt:1
 #, python-format
@@ -96,6 +99,11 @@ msgid ""
 "\n"
 "To confirm this is correct, go to %(activate_url)s\n"
 msgstr ""
+"O usuário %(user_display)s em %(site_name)s informou este endereço de e-"
+"mail.\n"
+"\n"
+"Para confirmar este endereço, vá para  %(activate_url)s\n"
+"\n"
 
 #: core/templates/account/email/email_confirmation_subject.txt:3
 #: core/templates/account/email_confirm.html:7
@@ -103,7 +111,7 @@ msgstr ""
 #: core/templates/account/email_confirmed.html:6
 #: core/templates/account/email_confirmed.html:11
 msgid "Confirm E-mail Address"
-msgstr ""
+msgstr "Confirme o endereço de e-mail"
 
 #: core/templates/account/email/password_reset_key_message.txt:1
 #, python-format
@@ -119,10 +127,20 @@ msgid ""
 "\n"
 "Thanks for using our site!\n"
 msgstr ""
+"Você recebeu este e-mail porque você ou uma outra pessoa requisitou uma "
+"senha para sua conta de usuário em  %(site_domain)s.\n"
+"Este e-mail pode ser ignorado se você não pediu uma nova senha. Clique no "
+"link abaixo para resetar sua senha.\n"
+"\n"
+"%(password_reset_url)s\n"
+"\n"
+"Em caso de você ter esquecido, seu nome de usuário é %(username)s.\n"
+"\n"
+"obrigado por usar nosso site\n"
 
 #: core/templates/account/email/password_reset_key_subject.txt:3
 msgid "Password Reset E-mail"
-msgstr ""
+msgstr "Senha enviada para e-mail"
 
 #: core/templates/account/email_confirm.html:17
 #, python-format
@@ -130,10 +148,12 @@ msgid ""
 "Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
 "address for user %(user_display)s."
 msgstr ""
+"Por favor confirme se <a href=\"mailto:%(email)s\">%(email)s</a> é um "
+"endereço de e-mail para o usuário %(user_display)s."
 
 #: core/templates/account/email_confirm.html:21
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmar"
 
 #: core/templates/account/email_confirm.html:28
 #, python-format
@@ -141,6 +161,8 @@ msgid ""
 "This e-mail confirmation link expired or is invalid. Please <a href="
 "\"%(email_url)s\">issue a new e-mail confirmation request</a>."
 msgstr ""
+"O link de confirmação do e-mail expirou ou é inválido. Por favor  <a href="
+"\"%(email_url)s\">faça um novo pedido de e-mail para confirmação</a>"
 
 #: core/templates/account/email_confirmed.html:15
 #, python-format
@@ -148,12 +170,14 @@ msgid ""
 "You have confirmed that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-"
 "mail address for user %(user_display)s."
 msgstr ""
+"Você confirmou que <a href=\"mailto:%(email)s\">%(email)s</a> é um endereço "
+"de e-mail do usuário %(user_display)s."
 
 #: core/templates/account/login.html:8 core/templates/account/login.html:12
 #: core/templates/account/login.html:35
 #: core/templates/account/password_change.html:8 core/templates/navbar.html:31
 msgid "Sign In"
-msgstr ""
+msgstr "Registrar-se"
 
 #: core/templates/account/login.html:16
 #, python-format
@@ -164,6 +188,10 @@ msgid ""
 "in below:\n"
 "        "
 msgstr ""
+"\n"
+"Por favor acesse usando uam de suas contas de terceiros. Ou, <a href="
+"\"%(signup_url)s\">registre-se</a>   para uma conta no  %(site_name)s e "
+"acesse abaixo:"
 
 #: core/templates/account/login.html:23
 #, python-format
@@ -173,10 +201,13 @@ msgid ""
 "\"%(signup_url)s\">sign up</a> first.\n"
 "        "
 msgstr ""
+"\n"
+"Se você ainda não criou uma conta, então por favor <a href=\"%(signup_url)s"
+"\">registre-se</a> primeiro."
 
 #: core/templates/account/login.html:37
 msgid "Forgot Password?"
-msgstr ""
+msgstr "Recuperar a senha?"
 
 #: core/templates/account/login.html:43 core/templates/account/signup.html:38
 msgid ""
@@ -184,60 +215,62 @@ msgid ""
 "          Or sign up using your social networks:\n"
 "        "
 msgstr ""
+"\n"
+"Ou acesse usando uma rede social"
 
 #: core/templates/account/logout.html:6 core/templates/account/logout.html:9
 #: core/templates/account/logout.html:18
 msgid "Sign Out"
-msgstr ""
+msgstr "Desconectar"
 
 #: core/templates/account/logout.html:11
 msgid "Are you sure you want to sign out?"
-msgstr ""
+msgstr "Tem certeza que deseja sair do sistema ?"
 
 #: core/templates/account/messages/cannot_delete_primary_email.txt:2
 #, python-format
 msgid "You cannot remove your primary e-mail address (%(email)s)."
-msgstr ""
+msgstr "Você não pode remover seu endereço de e-mail principal (%(email)s)."
 
 #: core/templates/account/messages/email_confirmation_sent.txt:2
 #, python-format
 msgid "Confirmation e-mail sent to %(email)s."
-msgstr ""
+msgstr "Confirmarção enviada para o e-mail %(email)s."
 
 #: core/templates/account/messages/email_confirmed.txt:2
 #, python-format
 msgid "You have confirmed %(email)s."
-msgstr ""
+msgstr "Você confirmou seu %(email)s."
 
 #: core/templates/account/messages/email_deleted.txt:2
 #, python-format
 msgid "Removed e-mail address %(email)s."
-msgstr ""
+msgstr "Endereços de e-mail removidos %(email)s."
 
 #: core/templates/account/messages/logged_in.txt:4
 #, python-format
 msgid "Successfully signed in as %(name)s."
-msgstr ""
+msgstr "Acesso bem sussedido como %(name)s"
 
 #: core/templates/account/messages/logged_out.txt:2
 msgid "You have signed out."
-msgstr ""
+msgstr "Você saiu do sistema."
 
 #: core/templates/account/messages/password_changed.txt:2
 msgid "Password successfully changed."
-msgstr ""
+msgstr "Senha alterada com sucesso"
 
 #: core/templates/account/messages/password_set.txt:2
 msgid "Password successfully set."
-msgstr ""
+msgstr "Senha informada com sucesso."
 
 #: core/templates/account/messages/primary_email_set.txt:2
 msgid "Primary e-mail address set."
-msgstr ""
+msgstr "Endereço de e-mail principal informado."
 
 #: core/templates/account/messages/unverified_primary_email.txt:2
 msgid "Your primary e-mail address must be verified."
-msgstr ""
+msgstr "Seu endereço de e-mail principal deve ser verificado."
 
 #: core/templates/account/password_change.html:12
 #: core/templates/account/password_change.html:17
@@ -246,38 +279,43 @@ msgstr ""
 #: core/templates/account/password_reset_from_key_done.html:5
 #: core/templates/account/password_reset_from_key_done.html:8
 msgid "Change Password"
-msgstr ""
+msgstr "Alterar Senha"
 
 #: core/templates/account/password_reset.html:7
 #: core/templates/account/password_reset.html:11
 #: core/templates/account/password_reset_done.html:6
 #: core/templates/account/password_reset_done.html:9
 msgid "Password Reset"
-msgstr ""
+msgstr "Resetar Senha"
 
 #: core/templates/account/password_reset.html:16
 msgid ""
 "Forgotten your password? Enter your e-mail address below, and we'll send you "
 "an e-mail allowing you to reset it."
 msgstr ""
+"Esqueceu sua senha ? Informe seu endereço de e-mail abaixo, e nós lhe "
+"enviaremos um e-mail para que você a altere."
 
 #: core/templates/account/password_reset.html:21
 msgid "Reset My Password"
-msgstr ""
+msgstr "Resetar Minha Senha"
 
 #: core/templates/account/password_reset.html:24
 msgid "Please contact us if you have any trouble resetting your password."
 msgstr ""
+"Por favor entre em contato se tive qualquer problema para alterar sua senha."
 
 #: core/templates/account/password_reset_done.html:15
 msgid ""
 "We have sent you an e-mail. Please contact us if you do not receive it "
 "within a few minutes."
 msgstr ""
+"Nós he enviamos um e-mail. Por favor entre em contato se não recebê-lo em "
+"alguns minutos."
 
 #: core/templates/account/password_reset_from_key.html:8
 msgid "Bad Token"
-msgstr ""
+msgstr "Autenticação inválida"
 
 #: core/templates/account/password_reset_from_key.html:12
 #, python-format
@@ -286,58 +324,61 @@ msgid ""
 "used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
 "a>."
 msgstr ""
+"O link para alterar sua senha é inválido, possivelmente porque já foi "
+"utilizado. Por favor requeira uma <a href=\"%(passwd_reset_url)s\">nova "
+"alteração de senha</a>"
 
 #: core/templates/account/password_reset_from_key.html:18
 msgid "change password"
-msgstr ""
+msgstr "alterar senha"
 
 #: core/templates/account/password_reset_from_key.html:21
 #: core/templates/account/password_reset_from_key_done.html:9
 msgid "Your password is now changed."
-msgstr ""
+msgstr "Sua senha foi alterada."
 
 #: core/templates/account/password_set.html:6
 #: core/templates/account/password_set.html:9
 #: core/templates/account/password_set.html:14
 msgid "Set Password"
-msgstr ""
+msgstr "Informe a senha"
 
 #: core/templates/account/signup.html:8 core/templates/account/signup.html:23
 #: core/templates/account/signup.html:33
 #: core/templates/socialaccount/signup.html:8
 msgid "Sign Up"
-msgstr ""
+msgstr "Registre-se"
 
 #: core/templates/account/signup.html:25
 #, python-format
 msgid ""
 "Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
-msgstr ""
+msgstr "Já te uma conta ? Por favor  <a href=\"%(login_url)s\"> acesse </a>"
 
 #: core/templates/account/signup_closed.html:6
 #: core/templates/account/signup_closed.html:9
 msgid "Sign Up Closed"
-msgstr ""
+msgstr "Registro fechado"
 
 #: core/templates/account/signup_closed.html:11
 msgid "We are sorry, but the sign up is currently closed."
-msgstr ""
+msgstr "Desculpe, mas o registro está fechado."
 
 #: core/templates/account/snippets/already_logged_in.html:5
 msgid "Note"
-msgstr ""
+msgstr "Nota"
 
 #: core/templates/account/snippets/already_logged_in.html:5
 #, python-format
 msgid "you are already logged in as %(user_display)s."
-msgstr ""
+msgstr "Você já está logado como %(user_display)s."
 
 #: core/templates/account/verification_sent.html:5
 #: core/templates/account/verification_sent.html:8
 #: core/templates/account/verified_email_required.html:6
 #: core/templates/account/verified_email_required.html:9
 msgid "Verify Your E-mail Address"
-msgstr ""
+msgstr "Verifique seu endereço de e-mail"
 
 #: core/templates/account/verification_sent.html:10
 msgid ""
@@ -345,6 +386,10 @@ msgid ""
 "finalize the signup process. Please contact us if you do not receive it "
 "within a few minutes."
 msgstr ""
+"Nós lhe enviamos um e-mail para verificação. Siga o link fornecido para "
+"finalizar o \n"
+"processo de registro. Por favor, entre em contato se não receber um e-mail "
+"em alguns minutos."
 
 #: core/templates/account/verified_email_required.html:13
 msgid ""
@@ -352,6 +397,9 @@ msgid ""
 "you are who you claim to be. For this purpose, we require that you\n"
 "verify ownership of your e-mail address. "
 msgstr ""
+"Essa parte do site requer que verifiquemos se \n"
+"você é quem você diz que seja. Por esse motivo, nós requeremos que \n"
+"você confirme seu endereço de e-mail."
 
 #: core/templates/account/verified_email_required.html:17
 msgid ""
@@ -359,6 +407,9 @@ msgid ""
 "verification. Please click on the link inside this e-mail. Please\n"
 "contact us if you do not receive it within a few minutes."
 msgstr ""
+"Nós lhe enviamos um e-mail\n"
+"de verificação. Por favor, clique no link deste e-mail. \n"
+"Por favor, entre em contato se você não recebê-lo em alguns minutos."
 
 #: core/templates/account/verified_email_required.html:21
 #, python-format
@@ -366,6 +417,8 @@ msgid ""
 "<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
 "mail address</a>."
 msgstr ""
+"<strong>Nota::</strong> você ainda pode  <a href=\"%(email_url)s\">alterar "
+"seu endereço de e-mail</a>."
 
 #: core/templates/index.html:12
 msgid ""
@@ -384,8 +437,10 @@ msgid "Some features"
 msgstr ""
 
 #: core/templates/index.html:31
+#, fuzzy
+#| msgid "event list"
 msgid "Event list"
-msgstr ""
+msgstr "Lista de evento"
 
 #: core/templates/index.html:32
 msgid "The event list show all public events to let you join to the vote."
@@ -398,12 +453,16 @@ msgid ""
 msgstr ""
 
 #: core/templates/index.html:36
+#, fuzzy
+#| msgid "event list"
 msgid "Event List"
-msgstr ""
+msgstr "Lista de evento"
 
 #: core/templates/index.html:44 core/templates/index.html.py:47
+#, fuzzy
+#| msgid "event detail"
 msgid "Event details"
-msgstr ""
+msgstr "Detalhe do evento"
 
 #: core/templates/index.html:48
 msgid ""
@@ -439,20 +498,26 @@ msgid "Logout"
 msgstr ""
 
 #: core/templates/navbar.html:41
+#, fuzzy
+#| msgid ""
+#| " Sign in with one\n"
+#| "  of your account "
 msgid "Sign in with one of your account"
 msgstr ""
+"Acesse com uma \n"
+"de suas contas"
 
 #: core/templates/navbar.html:46
 msgid "Using Email and Password"
-msgstr ""
+msgstr "Usando Email e Senha"
 
 #: core/templates/openid/login.html:10
 msgid "OpenID Sign In"
-msgstr ""
+msgstr "Acesso OpenID"
 
 #: core/templates/public_layout.html:56
 msgid "You need to be logged in to continue to the next step."
-msgstr ""
+msgstr "Você precisa estar logado para ir para o próximo passo."
 
 #: core/templates/public_layout.html:74
 #, python-format
@@ -470,42 +535,46 @@ msgstr ""
 #: deck/templates/event/event_list.html:6
 #: deck/templates/event/event_list.html:10
 msgid "Events"
-msgstr ""
+msgstr "Eventos"
 
 #: core/templates/socialaccount/authentication_error.html:5
 #: core/templates/socialaccount/authentication_error.html:8
 msgid "Social Network Login Failure"
-msgstr ""
+msgstr "Login através de conta de rede social falhou."
 
 #: core/templates/socialaccount/authentication_error.html:10
 msgid ""
 "An error occurred while attempting to login via your social network account."
 msgstr ""
+"Um erro ocorreu enquanto tentávamos fazer seu login através de uma conta de "
+"rede social."
 
 #: core/templates/socialaccount/connections.html:6
 #: core/templates/socialaccount/connections.html:9
 msgid "Account Connections"
-msgstr ""
+msgstr "Contas de conexão"
 
 #: core/templates/socialaccount/connections.html:12
 msgid ""
 "You can sign in to your account using any of the following third party "
 "accounts:"
 msgstr ""
+"Você pode registrar sua conta utilizando qualquer uma das seguintes contas "
+"de terceiros:"
 
 #: core/templates/socialaccount/connections.html:44
 msgid ""
 "You currently have no social network accounts connected to this account."
-msgstr ""
+msgstr "Você não tem um conta de uma rede social conectada nessa conta."
 
 #: core/templates/socialaccount/connections.html:47
 msgid "Add a 3rd Party Account"
-msgstr ""
+msgstr "Adicione uma conta de terceiros"
 
 #: core/templates/socialaccount/login_cancelled.html:6
 #: core/templates/socialaccount/login_cancelled.html:10
 msgid "Login Cancelled"
-msgstr ""
+msgstr "Login Cancelado"
 
 #: core/templates/socialaccount/login_cancelled.html:14
 #, python-format
@@ -514,18 +583,21 @@ msgid ""
 "accounts. If this was a mistake, please proceed to <a href=\"%(login_url)s"
 "\">sign in</a>."
 msgstr ""
+"Você decidiu cancelar seu logging em nosso site usando uma de suas contas "
+"existentes. Se isso foi um erro, por favor acesse <a href=\"%(login_url)s"
+"\">sign in</a>."
 
 #: core/templates/socialaccount/messages/account_connected.txt:2
 msgid "The social account has been connected."
-msgstr ""
+msgstr "A conta social foi conectada."
 
 #: core/templates/socialaccount/messages/account_connected_other.txt:2
 msgid "The social account is already connected to a different account."
-msgstr ""
+msgstr "Essa conta social está conectada a um outro registro de usuário."
 
 #: core/templates/socialaccount/messages/account_disconnected.txt:2
 msgid "The social account has been disconnected."
-msgstr ""
+msgstr "A conta social foi desconectada."
 
 #: core/templates/socialaccount/signup.html:14
 msgid ""
@@ -534,18 +606,20 @@ msgid ""
 "access right now.\n"
 "      "
 msgstr ""
+"\n"
+"Você já tem uma conta, mas escolheu o provedor errado para acessar desta vez."
 
 #: core/templates/socialaccount/signup.html:17
 msgid "Click"
-msgstr ""
+msgstr "Clique"
 
 #: core/templates/socialaccount/signup.html:17
 msgid "here"
-msgstr ""
+msgstr "aqui"
 
 #: core/templates/socialaccount/signup.html:18
 msgid "to be redirected to the right  page"
-msgstr ""
+msgstr "para ser redirecionado para a página correta."
 
 #: core/templates/socialaccount/signup.html:25
 msgid ""
@@ -553,10 +627,12 @@ msgid ""
 "          Or try another social network provider:\n"
 "        "
 msgstr ""
+"\n"
+"Ou tente uma outra rede social provedora"
 
 #: deck/forms.py:33 jury/forms.py:10
 msgid "User email"
-msgstr ""
+msgstr "E-mail do usuário"
 
 #: deck/forms.py:45 jury/forms.py:22
 #, python-format
@@ -564,75 +640,89 @@ msgid ""
 "The \"%s\" are not a Speakerfight user. For now, we just allow already "
 "joined users."
 msgstr ""
+"O \"%s\" não são  usuários Speakerfight. Por enquanto, nós somente "
+"permitimos usuários registrados no sistema."
 
 #: deck/forms.py:49 jury/forms.py:26
 #, python-format
 msgid "The \"@%s\" already is being part of this jury."
-msgstr ""
+msgstr "O \"@%s\" já faz parte deste júri."
 
 #: deck/models.py:28
 msgid "Title"
-msgstr ""
+msgstr "Título"
 
 #: deck/models.py:31 deck/templates/event/event_form.html:38
+#: deck/templates/proposal/proposal_form.html:39
 msgid "Description"
-msgstr ""
+msgstr "Descrição"
 
 #: deck/models.py:32
 msgid "Created At"
-msgstr ""
+msgstr "Criado em"
 
 #: deck/models.py:33
 msgid "Publish"
-msgstr ""
+msgstr "Publicar"
 
 #: deck/models.py:56
 msgid "Rate Index"
-msgstr ""
+msgstr "Índice de classficação"
 
 #: deck/models.py:63
 msgid "Vote"
-msgstr ""
+msgstr "Voto"
 
 #: deck/models.py:64
 msgid "Votes"
-msgstr ""
+msgstr "Votos"
 
 #: deck/models.py:95
 msgid "Proposal"
-msgstr ""
+msgstr "Proposta"
 
 #: deck/models.py:96 deck/templates/event/event_detail.html:57
 msgid "Proposals"
-msgstr ""
+msgstr "Propostas"
 
 #: deck/models.py:101 deck/views.py:139
 msgid "This Event doesn't accept Proposals anymore."
-msgstr ""
+msgstr "Este evento não aceita mais propostar."
 
 #: deck/models.py:131
 msgid "Allow Public Voting"
-msgstr ""
+msgstr "Permitir votação pública"
 
 #: deck/models.py:141
 msgid "Event"
-msgstr ""
+msgstr "Evento"
 
 #: deck/templates/event/event_detail.html:21
 msgid "Home"
 msgstr ""
 
 #: deck/templates/event/event_detail.html:36
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "              This event doesn't accept <strong>Public Voting</strong>, "
+#| "'cause of this you can only see your own Proposals.\n"
+#| "            "
 msgid ""
 "\n"
 "          This event doesn't accept <strong>Public Voting</strong>, because "
 "of this you can only see your own proposals.\n"
 "        "
 msgstr ""
+"\n"
+"Este evento não aceita <strong>votos públicos</strong>, devido a isto você "
+"somente poderá ver suas póprias propostas."
 
 #: deck/templates/event/event_detail.html:53
+#, fuzzy
+#| msgid "add proposal"
 msgid "Send a proposal"
-msgstr ""
+msgstr "adiciona proposta"
 
 #: deck/templates/event/event_detail.html:70
 #, python-format
@@ -643,8 +733,10 @@ msgid ""
 msgstr ""
 
 #: deck/templates/event/event_detail.html:81
+#, fuzzy
+#| msgid "add proposal"
 msgid "Edit the proposal."
-msgstr ""
+msgstr "adiciona proposta"
 
 #: deck/templates/event/event_detail.html:82
 #: deck/templates/event/snippets/event_list_item.html:37
@@ -660,32 +752,32 @@ msgstr ""
 #: jury/templates/jury/jury_detail.html:7
 #: jury/templates/jury/jury_detail.html:44
 msgid "Update"
-msgstr ""
+msgstr "Atualizado"
 
 #: deck/templates/event/event_form.html:10
 #: deck/templates/event/event_form.html:26
 msgid "New Event"
-msgstr ""
+msgstr "Novo Evento"
 
 #: deck/templates/event/event_form.html:47
-#: deck/templates/proposal/proposal_form.html:40
+#: deck/templates/proposal/proposal_form.html:49
 msgid "submit"
-msgstr ""
+msgstr "Enviar"
 
 #: deck/templates/event/event_form.html:53
-#: deck/templates/proposal/proposal_form.html:45
+#: deck/templates/proposal/proposal_form.html:54
 #: jury/templates/jury/jury_detail.html:93
 msgid "event detail"
-msgstr ""
+msgstr "Detalhe do evento"
 
 #: deck/templates/event/event_form.html:58
 #: jury/templates/jury/jury_detail.html:98
 msgid "event list"
-msgstr ""
+msgstr "Lista de evento"
 
 #: deck/templates/event/event_list.html:13
 msgid "new event"
-msgstr ""
+msgstr "Novo evento"
 
 #: deck/templates/event/event_list.html:23
 msgid "There are no events to show to you :("
@@ -700,24 +792,32 @@ msgid ""
 msgstr ""
 
 #: deck/templates/event/snippets/event_list_item.html:19
+#, fuzzy
+#| msgid "Due date at"
 msgid "Due date pasted"
-msgstr ""
+msgstr "Data de finalização"
 
 #: deck/templates/event/snippets/event_list_item.html:22
+#, fuzzy
+#| msgid "Due date at"
 msgid "Due date in"
-msgstr ""
+msgstr "Data de finalização"
 
 #: deck/templates/event/snippets/event_list_item.html:36
 msgid "Edit the event."
 msgstr ""
 
 #: deck/templates/event/snippets/event_list_item.html:39
+#, fuzzy
+#| msgid "Manage users"
 msgid "Manage the jury."
-msgstr ""
+msgstr "Gerência de usuários"
 
 #: deck/templates/event/snippets/event_list_item.html:40
+#, fuzzy
+#| msgid "Manage users"
 msgid "Manage Jury"
-msgstr ""
+msgstr "Gerência de usuários"
 
 #: deck/templates/event/snippets/event_list_item.html:42
 msgid "Export CSV with all proposals and vote results."
@@ -730,96 +830,115 @@ msgstr ""
 #: deck/templates/proposal/proposal_form.html:8
 #: deck/templates/proposal/proposal_form.html:24
 msgid "Update Proposal"
-msgstr ""
+msgstr "Atualizar Proposta"
 
 #: deck/templates/proposal/proposal_form.html:10
 #: deck/templates/proposal/proposal_form.html:26
 msgid "New Proposal"
-msgstr ""
+msgstr "Nova proposta"
 
 #: deck/views.py:45
 msgid "Event created."
-msgstr ""
+msgstr "Evento criado"
 
 #: deck/views.py:75
 msgid "Event updated."
-msgstr ""
+msgstr "Evento Atualizado"
 
 #: deck/views.py:84 deck/views.py:98 deck/views.py:198
 msgid "You are not allowed to see this page."
-msgstr ""
+msgstr "Você não tem permissão para ver esta página."
 
 #: deck/views.py:150
 msgid "Proposal created."
-msgstr ""
+msgstr "Proposta criada"
 
 #: deck/views.py:168
 msgid "Proposal updated."
-msgstr ""
+msgstr "Proposta Atualizada"
 
 #: deck/views.py:186
 msgid "Rate Index not found."
-msgstr ""
+msgstr "Índice de classificação não encontrado."
 
 #: deck/views.py:190
 msgid "Proposal rated."
-msgstr ""
+msgstr "Proposta classificada."
 
 #: jury/models.py:12
 msgid "Jury"
-msgstr ""
+msgstr "Juri"
 
 #: jury/models.py:13
 msgid "Juries"
-msgstr ""
+msgstr "júris"
 
 #: jury/templates/jury/jury_detail.html:7
 #: jury/templates/jury/jury_detail.html:44
 msgid "jury"
-msgstr ""
+msgstr "júri"
 
 #: jury/templates/jury/jury_detail.html:49
 msgid "Manage users"
-msgstr ""
+msgstr "Gerência de usuários"
 
 #: jury/templates/jury/jury_detail.html:50
 msgid "Here you can add or remove people from Jury."
-msgstr ""
+msgstr "Aqui você pode adicionar ou remover pessoas do júri."
 
 #: jury/templates/jury/jury_invite.html:7
 #: jury/templates/jury/jury_invite.html:18
 msgid "Accept invite"
-msgstr ""
+msgstr "Aceitar convite"
 
 #: jury/templates/jury/jury_invite.html:24
 msgid ""
 "By Accepting this invite you will Vote in any Proposals maded on the event: "
 msgstr ""
+"Aceitando este convite você poderá votar em qualquer proposta para este "
+"evento."
 
 #: jury/templates/jury/jury_invite.html:37
 msgid "Accept"
-msgstr ""
+msgstr "Aceitar"
 
 #: jury/tests/test_functional.py:28 jury/views.py:40
 #, python-format
 msgid "The \"@%s\" are successfully joined to the Jury."
-msgstr ""
+msgstr "Os \"@%s\" foram adicionados ao júri com sucesso."
 
 #: jury/tests/test_functional.py:42
 msgid "The \"@admin\" already is being part of this jury."
-msgstr ""
+msgstr "O \"@admin\" já faz parte deste júri."
 
 #: jury/tests/test_functional.py:56
 msgid ""
 "The \"new_user@speakerfight.com\" are not a Speakerfight user. For now, we "
 "just allow already joined users."
 msgstr ""
+"O \"new_user@speakerfight.com\" não é um usuário Speakerfight. Por enquanto, "
+"nós somente permitimos usuários do registrados no sistema."
 
 #: jury/tests/test_functional.py:75
 msgid "The \"@user\" was successfully removed from the Jury."
-msgstr ""
+msgstr "O  \"@user\" foi removido do júri com sucesso."
 
 #: jury/views.py:58
 #, python-format
 msgid "The \"@%s\" was successfully removed from the Jury."
-msgstr ""
+msgstr "Os \"@%s\" foram removidos do júri com sucesso."
+
+#~ msgid "Created by:"
+#~ msgstr "Criado por:"
+
+#~ msgid "at"
+#~ msgstr "em"
+
+#~ msgid "Created by"
+#~ msgstr "Criado por:"
+
+#~ msgid "No Proposals"
+#~ msgstr "Sem propostas"
+
+#~ msgid "No Events"
+#~ msgstr "Sem eventos"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-31 12:52-0300\n"
+"POT-Creation-Date: 2015-05-31 14:21-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -571,6 +571,7 @@ msgid "Title"
 msgstr ""
 
 #: deck/models.py:31 deck/templates/event/event_form.html:38
+#: deck/templates/proposal/proposal_form.html:39
 msgid "Description"
 msgstr ""
 
@@ -664,12 +665,12 @@ msgid "New Event"
 msgstr ""
 
 #: deck/templates/event/event_form.html:47
-#: deck/templates/proposal/proposal_form.html:40
+#: deck/templates/proposal/proposal_form.html:49
 msgid "submit"
 msgstr ""
 
 #: deck/templates/event/event_form.html:53
-#: deck/templates/proposal/proposal_form.html:45
+#: deck/templates/proposal/proposal_form.html:54
 #: jury/templates/jury/jury_detail.html:93
 msgid "event detail"
 msgstr ""
