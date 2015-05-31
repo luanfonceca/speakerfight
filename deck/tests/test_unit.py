@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.db.models import (CharField, TextField,
                               BooleanField, ForeignKey,
-                              SmallIntegerField, ManyToManyField)
+                              SmallIntegerField)
 from django.contrib.auth.models import User
 
 from deck.models import Event, Proposal, Vote, Jury
@@ -56,8 +56,8 @@ class EventModelIntegrityTest(TestCase):
         self.assertEquals(False, self.fields['description'].null)
         self.assertEquals(False, self.fields['description'].blank)
 
-    def test_assert_event_description_should_have_at_most_400_characters(self):
-        self.assertEquals(400, self.fields['description'].max_length)
+    def test_assert_event_description_should_have_at_most_10000_characters(self):
+        self.assertEquals(10000, self.fields['description'].max_length)
 
     def test_assert_event_should_allow_public_voting(self):
         self.assertIn('allow_public_voting', Event._meta.get_all_field_names())
@@ -168,8 +168,8 @@ class ProposalModelIntegrityTest(TestCase):
         self.assertEquals(False, self.fields['description'].null)
         self.assertEquals(False, self.fields['description'].blank)
 
-    def test_assert_proposal_description_should_have_400_characters(self):
-        self.assertEquals(400, self.fields['description'].max_length)
+    def test_assert_proposal_description_should_have_10000_characters(self):
+        self.assertEquals(10000, self.fields['description'].max_length)
 
     def test_assert_proposal_should_have_a_author(self):
         self.assertIn('author', Proposal._meta.get_all_field_names())
