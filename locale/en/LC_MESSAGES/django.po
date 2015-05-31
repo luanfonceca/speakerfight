@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-30 15:36-0300\n"
+"POT-Creation-Date: 2015-05-31 12:52-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -147,7 +147,7 @@ msgstr ""
 
 #: core/templates/account/login.html:8 core/templates/account/login.html:12
 #: core/templates/account/login.html:35
-#: core/templates/account/password_change.html:8 core/templates/navbar.html:26
+#: core/templates/account/password_change.html:8 core/templates/navbar.html:31
 msgid "Sign In"
 msgstr ""
 
@@ -366,7 +366,7 @@ msgstr ""
 #: core/templates/index.html:12
 msgid ""
 "\n"
-"          <strong>SpeakerFight</strong> is an arena where the speakers can\n"
+"          <strong>Speakerfight</strong> is an arena where the speakers can\n"
 "          fight each other and the people choose who wins.\n"
 "        "
 msgstr ""
@@ -419,13 +419,26 @@ msgstr ""
 msgid "JOIN THE FIGHTERS"
 msgstr ""
 
-#: core/templates/navbar.html:36
+#: core/templates/layout.html:81
+#, python-format
 msgid ""
-" Sign in with one\n"
-"  of your account "
+"\n"
+"                <strong>SpeakerFight</strong> is proudly an open-source\n"
+"                project and is always being enhanced. If the software\n"
+"                has any odd behavior\n"
+"                %(anchor_start)splease let us know%(anchor_end)s.\n"
+"              "
 msgstr ""
 
-#: core/templates/navbar.html:42
+#: core/templates/navbar.html:24
+msgid "Logout"
+msgstr ""
+
+#: core/templates/navbar.html:41
+msgid "Sign in with one of your account"
+msgstr ""
+
+#: core/templates/navbar.html:46
 msgid "Using Email and Password"
 msgstr ""
 
@@ -441,7 +454,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"                <strong>SpeakerFight</strong> is proudly an open-source\n"
+"                <strong>Speakerfight</strong> is proudly an open-source\n"
 "                project and is always being enhanced. If the software\n"
 "                has any odd behavior\n"
 "                %(anchor_start)splease let us know%(anchor_end)s.\n"
@@ -449,6 +462,7 @@ msgid ""
 msgstr ""
 
 #: core/templates/sidebar.html:24 deck/models.py:142
+#: deck/templates/event/event_detail.html:22
 #: deck/templates/event/event_list.html:6
 #: deck/templates/event/event_list.html:10
 msgid "Events"
@@ -600,38 +614,41 @@ msgstr ""
 msgid "Event"
 msgstr ""
 
-#: deck/templates/event/event_detail.html:24
-msgid "Created by:"
+#: deck/templates/event/event_detail.html:21
+msgid "Home"
 msgstr ""
 
-#: deck/templates/event/event_detail.html:26
-#: deck/templates/event/event_detail.html:65
-msgid "at"
-msgstr ""
-
-#: deck/templates/event/event_detail.html:30
-#: deck/templates/event/event_detail.html:33
-msgid "Due date at"
-msgstr ""
-
-#: deck/templates/event/event_detail.html:39
+#: deck/templates/event/event_detail.html:36
 msgid ""
 "\n"
-"              This event doesn't accept <strong>Public Voting</strong>, "
-"'cause of this you can only see your own Proposals.\n"
-"            "
+"          This event doesn't accept <strong>Public Voting</strong>, because "
+"of this you can only see your own proposals.\n"
+"        "
 msgstr ""
 
-#: deck/templates/event/event_detail.html:54
-msgid "add proposal"
+#: deck/templates/event/event_detail.html:53
+msgid "Send a proposal"
 msgstr ""
 
-#: deck/templates/event/event_detail.html:63
-msgid "Created by"
+#: deck/templates/event/event_detail.html:70
+#, python-format
+msgid ""
+"\n"
+"                Proposed by <strong>%(author)s</strong> at %(created_at)s\n"
+"                "
 msgstr ""
 
-#: deck/templates/event/event_detail.html:74
-msgid "No Proposals"
+#: deck/templates/event/event_detail.html:81
+msgid "Edit the proposal."
+msgstr ""
+
+#: deck/templates/event/event_detail.html:82
+#: deck/templates/event/snippets/event_list_item.html:37
+msgid "Edit"
+msgstr ""
+
+#: deck/templates/event/event_detail.html:89
+msgid "There are no proposals to show"
 msgstr ""
 
 #: deck/templates/event/event_form.html:8
@@ -666,8 +683,44 @@ msgstr ""
 msgid "new event"
 msgstr ""
 
-#: deck/templates/event/event_list.html:49
-msgid "No Events"
+#: deck/templates/event/event_list.html:23
+msgid "There are no events to show to you :("
+msgstr ""
+
+#: deck/templates/event/snippets/event_list_item.html:11
+#, python-format
+msgid ""
+"\n"
+"      Created by <strong>%(author)s</strong> at %(created_at)s\n"
+"      "
+msgstr ""
+
+#: deck/templates/event/snippets/event_list_item.html:19
+msgid "Due date pasted"
+msgstr ""
+
+#: deck/templates/event/snippets/event_list_item.html:22
+msgid "Due date in"
+msgstr ""
+
+#: deck/templates/event/snippets/event_list_item.html:36
+msgid "Edit the event."
+msgstr ""
+
+#: deck/templates/event/snippets/event_list_item.html:39
+msgid "Manage the jury."
+msgstr ""
+
+#: deck/templates/event/snippets/event_list_item.html:40
+msgid "Manage Jury"
+msgstr ""
+
+#: deck/templates/event/snippets/event_list_item.html:42
+msgid "Export CSV with all proposals and vote results."
+msgstr ""
+
+#: deck/templates/event/snippets/event_list_item.html:43
+msgid "Export votes"
 msgstr ""
 
 #: deck/templates/proposal/proposal_form.html:8
