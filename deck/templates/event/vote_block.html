@@ -1,23 +1,18 @@
 {% load i18n %}
 {% load deck_tags %}
 
-
 <div class="text-center">
-  {% if proposal.author_id == request.user.id or request.user.is_superuser %}
-    <a href="{% url 'update_proposal' event_slug=event.slug slug=proposal.slug %}" class="flat-icon">
-      <i class="update black"></i>
-    </a>
-  {% endif %}
   {% if request.user|already_voted:proposal %}
     {% with request.user|get_rate_display:proposal as rate %}
       <a class="flat-icon" title="{{ rate|title }}">
-        <i class="{{ rate }} black"></i>
+        <i class="{{ rate }} black" title="{{ rate|title }}" data-toggle="tooltip"></i>
       </a>
     {% endwith %}
   {% elif request.user|allowed_to_vote:proposal %}
+    Use the buttons bellow to vote:<br/>
     {% for value, name in vote_rates %}
-      <a href="{% url 'rate_proposal' event_slug=proposal.event.slug slug=proposal.slug rate=name %}" class="flat-icon" title="{{ name|title }}">
-        <i class="{{ name }} black"></i>
+      <a href="{% url 'rate_proposal' event_slug=proposal.event.slug slug=proposal.slug rate=name %}" class="flat-icon">
+        <i class="{{ name }} black" title="{{ name|title }}" data-toggle="tooltip"></i>
       </a>
     {% endfor %}
   {% endif %}

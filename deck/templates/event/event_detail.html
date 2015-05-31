@@ -10,73 +10,88 @@
       border-top: none;
     }
   </style>
+  <!-- Go to www.addthis.com/dashboard to customize your tools -->
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f777bac7bca077f" async="async"></script>
 {% endblock head %}
 
 {% block head_title %}{{ event }}{% endblock %}
 
 {% block content %}
+  <ol class="breadcrumb">
+    <li><a href="{% url 'index_page' %}">{% trans "Home" %}</a></li>
+    <li><a href="{% url 'list_events' %}">{% trans "Events" %}</a></li>
+    <li class="active">{{ event.title }}</li>
+  </ol>
+
   <!-- header -->
-  <div class="row header">
-    <h1 class="name">{{ event }}</h1>
-    <div class="description">
-      <h4 class="col-xs-12">
-        <blockquote>{{ event.description|safe|linebreaks }}</blockquote>
-        {% trans "Created by:" %}
-        <strong>{{ event.author.get_full_name|default:event.author.username }}</strong>
-        {% trans "at" %} {{ event.created_at }}<br>
-        {% if event.due_date %}
-          {% if event.due_date_is_passed %}
-            <div class="text-danger"><i class="icon-exclamation-sign"></i>
-              {% trans "Due date at" %}: {{ event.due_date }}<br>
+  <div class="row" id="event-detail">
+    <div class="col-md-12">
+      {% include "event/snippets/event_list_item.html" with event_detail=True %}
+    </div>
+
+    {% if not event.allow_public_voting %}
+    <div class="col-md-12">
+      <div class="alert alert-warning">
+        <i class="icon-eye-close"></i>
+        {% blocktrans %}
+          This event doesn't accept <strong>Public Voting</strong>, because of this you can only see your own proposals.
+        {% endblocktrans %}
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="col-md-10 col-md-offset-1">
+      <div class="event-proposals-header">
+        {% if event.due_date_is_passed %}
+          <span class="pull-right text-danger">
+            <i class="icon-warning-sign"></i>
+            The event is no longer accepting proposals.
+          </span>
+        {% else %}
+          <a class="btn-flat success pull-right text-upper" href="{% url 'create_event_proposal' slug=event.slug %}">
+            <i class="icon-plus"></i>
+            {% trans "Send a proposal" %}
+          </a>
+        {% endif %}
+
+        <h3>{% trans "Proposals" %}</h3>
+      </div>
+
+      <div id="event-proposals">
+        {% for proposal in event_proposals %}
+          <div id="{{ proposal.slug }}" class="panel panel-default proposal-item">
+            <div class="panel-body">
+              <h3 class="panel-title proposal-title">
+                <a href="#{{ proposal.slug }}">
+                  {{ proposal }}
+                </a>
+              </h3>
+              <p class="proposal-metadata">
+                {% blocktrans with author=proposal.author.get_full_name|default:proposal.author.username created_at=proposal.created_at %}
+                Proposed by <strong>{{ author }}</strong> at {{ created_at }}
+                {% endblocktrans %}
+              </p>
+              <div class="proposal-description">
+                {{ proposal.description|safe|linebreaks }}
+              </div>
+              {% include "event/vote_block.html" %}
             </div>
-          {% else %}
-            {% trans "Due date at" %}: {{ event.due_date }}<br>
-          {% endif %}
-        {% endif %}
-        {% if not event.allow_public_voting %}
-          <div class="text-danger">
-            <i class="icon-exclamation-sign"></i>
-            {% blocktrans %}
-              This event doesn't accept <strong>Public Voting</strong>, 'cause of this you can only see your own Proposals.
-            {% endblocktrans %}
+            {% if proposal.author_id == request.user.id or request.user.is_superuser %}
+            <div class="panel-footer proposal-actions text-center">
+              <a href="{% url 'update_proposal' event_slug=event.slug slug=proposal.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans "Edit the proposal." %}">
+                <i class="icon-pencil"></i> {% trans "Edit" %}
+              </a>
+            </div>
+            {% endif %}
           </div>
-        {% endif %}
-      </h4>
+        {% empty %}
+          <p class="lead">
+            {% trans "There are no proposals to show" %}
+          </p>
+        {% endfor %}
+      </div>
     </div>
   </div>
-
-  <!-- row -->
-  <div class="row">
-    <div class="col-md-12">
-      {% if not event.due_date_is_passed %}
-        <a class="btn-flat success pull-right text-upper" href="{% url 'create_event_proposal' slug=event.slug %}">
-          <i class="icon-plus"></i>
-          {% trans "add proposal" %}
-        </a>
-      {% endif %}
-      <h2><strong>{% trans "Proposals" %}</strong></h2>
-      <ul class="itens-list list-unstyled">
-        {% for proposal in event_proposals %}
-          <li id="{{ proposal.slug }}" class="linkable">
-            <div class="proposal-header" data-href="#{{ proposal.slug }}">
-              <h3>{{ proposal }}</h3>
-              {% trans "Created by" %}:
-              <strong>{{ proposal.author.get_full_name|default:proposal.author.username }}</strong>
-              {% trans "at" %} {{ proposal.created_at }}
-            </div>
-            <blockquote>
-              <h3>{{ proposal.description|safe|linebreaks }}</h3>
-            </blockquote>
-            {% include "event/vote_block.html" %}
-          </li>
-        {% empty %}
-          <li class="text-center">
-            <h3>{% trans "No Proposals" %}</h3>
-          </li>
-        {% endfor %}
-      </ul>
-      <!-- recent proposals list -->
-    </div>
 {% endblock content %}
 
 {% block scripts %}
@@ -84,7 +99,7 @@
 
   <script type="text/javascript">
     $(function () {
-      $(".linkable .proposal-header").linkable();
+      $(".linkable").linkable();
     });
   </script>
 {% endblock scripts %}

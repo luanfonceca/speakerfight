@@ -15,43 +15,13 @@
   </div>
 
   <!-- Users table -->
-  <div class="row">
+  <div class="row" id="events-list">
     <div class="col-md-12">
-      <table class="table table-hover">
-        <tbody>
-        <!-- row -->
-        {% for event in event_list %}
-          <tr class="linkable {% if forloop.first %}first{% endif %}"
-              data-href="{% url 'view_event' slug=event.slug %}">
-            <td class="text-left">
-              <h3>{{ event }}</h3>
-              <blockquote>
-                <h3>{{ event.description|safe|linebreaks }}</h3>
-              </blockquote>
-              {% if event.author_id == request.user.id or request.user.is_superuser %}
-                <div class="text-center">
-                  <a href="{% url 'update_event' slug=event.slug %}" class="flat-icon">
-                    <i class="update black"></i>
-                  </a>
-                  <a href="{% url 'jury_event' slug=event.slug %}" class="flat-icon">
-                    <i class="jury black"></i>
-                  </a>
-                  <a href="{% url 'export_event' slug=event.slug %}" class="flat-icon">
-                    <i class="export black"></i>
-                  </a>
-                </div>
-              {% endif %}
-            </td>
-          </tr>
-        {% empty %}
-          <tr>
-            <td class="text-center">
-              <h3>{% trans "No Events" %}</h3>
-            </td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
+      {% for event in event_list %}
+        {% include "event/snippets/event_list_item.html" %}
+      {% empty %}
+        <h3 class="text-center">{% trans "There are no events to show to you :(" %}</h3>
+      {% endfor %}
     </div>
   </div>
   <!-- end events table -->
