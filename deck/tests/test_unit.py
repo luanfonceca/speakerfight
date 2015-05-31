@@ -3,6 +3,7 @@ from django.db.models import (CharField, TextField,
                               BooleanField, ForeignKey,
                               SmallIntegerField)
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext as _
 
 from deck.models import Event, Proposal, Vote, Jury
 
@@ -28,10 +29,10 @@ class EventModelIntegrityTest(TestCase):
         }
 
     def test_assert_event_should_have_a_verbose_name(self):
-        self.assertEquals(u'Event', Event._meta.verbose_name)
+        self.assertEquals(_('Event'), Event._meta.verbose_name)
 
     def test_assert_event_should_have_a_verbose_name_plural(self):
-        self.assertEquals(u'Events', Event._meta.verbose_name_plural)
+        self.assertEquals(_('Events'), Event._meta.verbose_name_plural)
 
     def test_assert_event_should_have_a_title(self):
         self.assertIn('title', Event._meta.get_all_field_names())
@@ -140,10 +141,10 @@ class ProposalModelIntegrityTest(TestCase):
         }
 
     def test_assert_proposal_should_have_a_verbose_name(self):
-        self.assertEquals(u'Proposal', Proposal._meta.verbose_name)
+        self.assertEquals(_('Proposal'), Proposal._meta.verbose_name)
 
     def test_assert_proposal_should_have_a_verbose_name_plural(self):
-        self.assertEquals(u'Proposals', Proposal._meta.verbose_name_plural)
+        self.assertEquals(_('Proposals'), Proposal._meta.verbose_name_plural)
 
     def test_assert_proposal_should_have_a_title(self):
         self.assertIn('title', Proposal._meta.get_all_field_names())
@@ -256,10 +257,10 @@ class VoteModelIntegrityTest(TestCase):
         }
 
     def test_assert_vote_should_have_a_verbose_name(self):
-        self.assertEquals(u'Vote', Vote._meta.verbose_name)
+        self.assertEquals(_('Vote'), Vote._meta.verbose_name)
 
     def test_assert_vote_should_have_a_verbose_name_plural(self):
-        self.assertEquals(u'Votes', Vote._meta.verbose_name_plural)
+        self.assertEquals(_('Votes'), Vote._meta.verbose_name_plural)
 
     def test_assert_vote_should_have_a_unique_together_constraint(self):
         self.assertEquals((('proposal', 'user'),), Vote._meta.unique_together)
