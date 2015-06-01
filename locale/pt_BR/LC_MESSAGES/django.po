@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: speakerfight\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-29 13:17-0300\n"
+"POT-Creation-Date: 2015-05-31 14:21-0300\n"
 "PO-Revision-Date: 2015-05-29 08:57+0000\n"
 "Last-Translator: Luan Fonseca de Farias <luanfonceca@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
@@ -175,7 +175,7 @@ msgstr ""
 
 #: core/templates/account/login.html:8 core/templates/account/login.html:12
 #: core/templates/account/login.html:35
-#: core/templates/account/password_change.html:8 core/templates/navbar.html:26
+#: core/templates/account/password_change.html:8 core/templates/navbar.html:31
 msgid "Sign In"
 msgstr "Registrar-se"
 
@@ -420,15 +420,94 @@ msgstr ""
 "<strong>Nota::</strong> você ainda pode  <a href=\"%(email_url)s\">alterar "
 "seu endereço de e-mail</a>."
 
-#: core/templates/navbar.html:36
+#: core/templates/index.html:12
 msgid ""
-" Sign in with one\n"
-"  of your account "
+"\n"
+"          <strong>Speakerfight</strong> is an arena where the speakers can\n"
+"          fight each other and the people choose who wins.\n"
+"        "
+msgstr ""
+
+#: core/templates/index.html:19
+msgid "GET STARTED"
+msgstr ""
+
+#: core/templates/index.html:25
+msgid "Some features"
+msgstr ""
+
+#: core/templates/index.html:31
+#, fuzzy
+#| msgid "event list"
+msgid "Event list"
+msgstr "Lista de evento"
+
+#: core/templates/index.html:32
+msgid "The event list show all public events to let you join to the vote."
+msgstr ""
+
+#: core/templates/index.html:33
+msgid ""
+"You can create new events and receive proposals from anyone in the world. "
+"All the events can be either public or private."
+msgstr ""
+
+#: core/templates/index.html:36
+#, fuzzy
+#| msgid "event list"
+msgid "Event List"
+msgstr "Lista de evento"
+
+#: core/templates/index.html:44 core/templates/index.html.py:47
+#, fuzzy
+#| msgid "event detail"
+msgid "Event details"
+msgstr "Detalhe do evento"
+
+#: core/templates/index.html:48
+msgid ""
+"Every event can be configured to receive votes from everyone, only logged "
+"users or only the people you choose."
+msgstr ""
+
+#: core/templates/index.html:49
+msgid "All the events have an URL that can be shared as you like."
+msgstr ""
+
+#: core/templates/index.html:57
+msgid "Enter in the arena"
+msgstr ""
+
+#: core/templates/index.html:60
+msgid "JOIN THE FIGHTERS"
+msgstr ""
+
+#: core/templates/layout.html:81
+#, python-format
+msgid ""
+"\n"
+"                <strong>SpeakerFight</strong> is proudly an open-source\n"
+"                project and is always being enhanced. If the software\n"
+"                has any odd behavior\n"
+"                %(anchor_start)splease let us know%(anchor_end)s.\n"
+"              "
+msgstr ""
+
+#: core/templates/navbar.html:24
+msgid "Logout"
+msgstr ""
+
+#: core/templates/navbar.html:41
+#, fuzzy
+#| msgid ""
+#| " Sign in with one\n"
+#| "  of your account "
+msgid "Sign in with one of your account"
 msgstr ""
 "Acesse com uma \n"
 "de suas contas"
 
-#: core/templates/navbar.html:42
+#: core/templates/navbar.html:46
 msgid "Using Email and Password"
 msgstr "Usando Email e Senha"
 
@@ -436,11 +515,23 @@ msgstr "Usando Email e Senha"
 msgid "OpenID Sign In"
 msgstr "Acesso OpenID"
 
-#: core/templates/public_layout.html:55
+#: core/templates/public_layout.html:56
 msgid "You need to be logged in to continue to the next step."
 msgstr "Você precisa estar logado para ir para o próximo passo."
 
-#: core/templates/sidebar.html:23 deck/models.py:141
+#: core/templates/public_layout.html:74
+#, python-format
+msgid ""
+"\n"
+"                <strong>Speakerfight</strong> is proudly an open-source\n"
+"                project and is always being enhanced. If the software\n"
+"                has any odd behavior\n"
+"                %(anchor_start)splease let us know%(anchor_end)s.\n"
+"              "
+msgstr ""
+
+#: core/templates/sidebar.html:24 deck/models.py:142
+#: deck/templates/event/event_detail.html:22
 #: deck/templates/event/event_list.html:6
 #: deck/templates/event/event_list.html:10
 msgid "Events"
@@ -561,7 +652,8 @@ msgstr "O \"@%s\" já faz parte deste júri."
 msgid "Title"
 msgstr "Título"
 
-#: deck/models.py:31
+#: deck/models.py:31 deck/templates/event/event_form.html:38
+#: deck/templates/proposal/proposal_form.html:39
 msgid "Description"
 msgstr "Descrição"
 
@@ -601,46 +693,59 @@ msgstr "Este evento não aceita mais propostar."
 msgid "Allow Public Voting"
 msgstr "Permitir votação pública"
 
-#: deck/models.py:140
+#: deck/models.py:141
 msgid "Event"
 msgstr "Evento"
 
-#: deck/templates/event/event_detail.html:24
-msgid "Created by:"
-msgstr "Criado por:"
+#: deck/templates/event/event_detail.html:21
+msgid "Home"
+msgstr ""
 
-#: deck/templates/event/event_detail.html:26
-#: deck/templates/event/event_detail.html:65
-msgid "at"
-msgstr "em"
-
-#: deck/templates/event/event_detail.html:30
-#: deck/templates/event/event_detail.html:33
-msgid "Due date at"
-msgstr "Data de finalização"
-
-#: deck/templates/event/event_detail.html:39
+#: deck/templates/event/event_detail.html:36
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "              This event doesn't accept <strong>Public Voting</strong>, "
+#| "'cause of this you can only see your own Proposals.\n"
+#| "            "
 msgid ""
 "\n"
-"              This event doesn't accept <strong>Public Voting</strong>, "
-"'cause of this you can only see your own Proposals.\n"
-"            "
+"          This event doesn't accept <strong>Public Voting</strong>, because "
+"of this you can only see your own proposals.\n"
+"        "
 msgstr ""
 "\n"
 "Este evento não aceita <strong>votos públicos</strong>, devido a isto você "
 "somente poderá ver suas póprias propostas."
 
-#: deck/templates/event/event_detail.html:54
-msgid "add proposal"
+#: deck/templates/event/event_detail.html:53
+#, fuzzy
+#| msgid "add proposal"
+msgid "Send a proposal"
 msgstr "adiciona proposta"
 
-#: deck/templates/event/event_detail.html:63
-msgid "Created by"
-msgstr "Criado por:"
+#: deck/templates/event/event_detail.html:70
+#, python-format
+msgid ""
+"\n"
+"                Proposed by <strong>%(author)s</strong> at %(created_at)s\n"
+"                "
+msgstr ""
 
-#: deck/templates/event/event_detail.html:74
-msgid "No Proposals"
-msgstr "Sem propostas"
+#: deck/templates/event/event_detail.html:81
+#, fuzzy
+#| msgid "add proposal"
+msgid "Edit the proposal."
+msgstr "adiciona proposta"
+
+#: deck/templates/event/event_detail.html:82
+#: deck/templates/event/snippets/event_list_item.html:37
+msgid "Edit"
+msgstr ""
+
+#: deck/templates/event/event_detail.html:89
+msgid "There are no proposals to show"
+msgstr ""
 
 #: deck/templates/event/event_form.html:8
 #: deck/templates/event/event_form.html:24
@@ -654,18 +759,18 @@ msgstr "Atualizado"
 msgid "New Event"
 msgstr "Novo Evento"
 
-#: deck/templates/event/event_form.html:40
-#: deck/templates/proposal/proposal_form.html:40
+#: deck/templates/event/event_form.html:47
+#: deck/templates/proposal/proposal_form.html:49
 msgid "submit"
 msgstr "Enviar"
 
-#: deck/templates/event/event_form.html:46
-#: deck/templates/proposal/proposal_form.html:45
+#: deck/templates/event/event_form.html:53
+#: deck/templates/proposal/proposal_form.html:54
 #: jury/templates/jury/jury_detail.html:93
 msgid "event detail"
 msgstr "Detalhe do evento"
 
-#: deck/templates/event/event_form.html:51
+#: deck/templates/event/event_form.html:58
 #: jury/templates/jury/jury_detail.html:98
 msgid "event list"
 msgstr "Lista de evento"
@@ -674,9 +779,53 @@ msgstr "Lista de evento"
 msgid "new event"
 msgstr "Novo evento"
 
-#: deck/templates/event/event_list.html:49
-msgid "No Events"
-msgstr "Sem eventos"
+#: deck/templates/event/event_list.html:23
+msgid "There are no events to show to you :("
+msgstr ""
+
+#: deck/templates/event/snippets/event_list_item.html:11
+#, python-format
+msgid ""
+"\n"
+"      Created by <strong>%(author)s</strong> at %(created_at)s\n"
+"      "
+msgstr ""
+
+#: deck/templates/event/snippets/event_list_item.html:19
+#, fuzzy
+#| msgid "Due date at"
+msgid "Due date pasted"
+msgstr "Data de finalização"
+
+#: deck/templates/event/snippets/event_list_item.html:22
+#, fuzzy
+#| msgid "Due date at"
+msgid "Due date in"
+msgstr "Data de finalização"
+
+#: deck/templates/event/snippets/event_list_item.html:36
+msgid "Edit the event."
+msgstr ""
+
+#: deck/templates/event/snippets/event_list_item.html:39
+#, fuzzy
+#| msgid "Manage users"
+msgid "Manage the jury."
+msgstr "Gerência de usuários"
+
+#: deck/templates/event/snippets/event_list_item.html:40
+#, fuzzy
+#| msgid "Manage users"
+msgid "Manage Jury"
+msgstr "Gerência de usuários"
+
+#: deck/templates/event/snippets/event_list_item.html:42
+msgid "Export CSV with all proposals and vote results."
+msgstr ""
+
+#: deck/templates/event/snippets/event_list_item.html:43
+msgid "Export votes"
+msgstr ""
 
 #: deck/templates/proposal/proposal_form.html:8
 #: deck/templates/proposal/proposal_form.html:24
@@ -778,3 +927,18 @@ msgstr "O  \"@user\" foi removido do júri com sucesso."
 #, python-format
 msgid "The \"@%s\" was successfully removed from the Jury."
 msgstr "Os \"@%s\" foram removidos do júri com sucesso."
+
+#~ msgid "Created by:"
+#~ msgstr "Criado por:"
+
+#~ msgid "at"
+#~ msgstr "em"
+
+#~ msgid "Created by"
+#~ msgstr "Criado por:"
+
+#~ msgid "No Proposals"
+#~ msgstr "Sem propostas"
+
+#~ msgid "No Events"
+#~ msgstr "Sem eventos"
