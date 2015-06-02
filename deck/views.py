@@ -199,10 +199,10 @@ class RateProposal(BaseProposalView, UpdateView):
                 settings.LOGIN_URL,
                 reverse('view_event', kwargs={'slug': proposal.event.slug})
             )
-            return HttpResponse(response_url, status=405)
+            return HttpResponse(response_url, status=400)
 
         if not proposal.user_can_vote(self.request.user):
             messages.error(
                 self.request, _(u'You are not allowed to see this page.'))
-            return HttpResponse(reverse('view_event', kwargs={'slug': proposal.event.slug}), status=405)
+            return HttpResponse(reverse('view_event', kwargs={'slug': proposal.event.slug}), status=400)
         return super(RateProposal, self).dispatch(*args, **kwargs)

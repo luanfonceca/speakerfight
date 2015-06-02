@@ -108,10 +108,10 @@
           $.ajax(
             $me.attr('href')
           ).success(function(data, status, xhr) {
-            $me.parent('.proposal-votes').find('.voting-link').not($me).remove()
+            $me.parent('.proposal-votes').find('.voting-link').not($me).remove();
             $me.attr('href', '');
           }).error(function(xhr, status, error) {
-            if (xhr.status == 405) {
+            if (xhr.status == 400) {
               window.location.href = xhr.responseText;
             } else {
               alert(error);
