@@ -28,7 +28,7 @@ msgstr "Conta Inativa"
 
 #: core/templates/account/account_inactive.html:10
 msgid "This account is inactive."
-msgstr "Está conta está inativa"
+msgstr "Está conta está inativa."
 
 #: core/templates/account/email.html:6
 msgid "Account"
@@ -162,7 +162,7 @@ msgid ""
 "\"%(email_url)s\">issue a new e-mail confirmation request</a>."
 msgstr ""
 "O link de confirmação do e-mail expirou ou é inválido. Por favor  <a href="
-"\"%(email_url)s\">faça um novo pedido de e-mail para confirmação</a>"
+"\"%(email_url)s\">faça um novo pedido de e-mail para confirmação</a>."
 
 #: core/templates/account/email_confirmed.html:15
 #, python-format
@@ -207,7 +207,7 @@ msgstr ""
 
 #: core/templates/account/login.html:37
 msgid "Forgot Password?"
-msgstr "Recuperar a senha?"
+msgstr "esqueceu sua senha?"
 
 #: core/templates/account/login.html:43 core/templates/account/signup.html:38
 msgid ""
@@ -216,7 +216,8 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"Ou acesse usando uma rede social"
+"          Ou acesse usando suas redes sociais:\n"
+"        "
 
 #: core/templates/account/logout.html:6 core/templates/account/logout.html:9
 #: core/templates/account/logout.html:18
@@ -225,7 +226,7 @@ msgstr "Desconectar"
 
 #: core/templates/account/logout.html:11
 msgid "Are you sure you want to sign out?"
-msgstr "Tem certeza que deseja sair do sistema ?"
+msgstr "Tem certeza que deseja sair do sistema?"
 
 #: core/templates/account/messages/cannot_delete_primary_email.txt:2
 #, python-format
@@ -250,7 +251,7 @@ msgstr "Endereços de e-mail removidos %(email)s."
 #: core/templates/account/messages/logged_in.txt:4
 #, python-format
 msgid "Successfully signed in as %(name)s."
-msgstr "Acesso bem sussedido como %(name)s"
+msgstr "Acesso bem sucedido como %(name)s."
 
 #: core/templates/account/messages/logged_out.txt:2
 msgid "You have signed out."
@@ -258,7 +259,7 @@ msgstr "Você saiu do sistema."
 
 #: core/templates/account/messages/password_changed.txt:2
 msgid "Password successfully changed."
-msgstr "Senha alterada com sucesso"
+msgstr "Senha alterada com sucesso."
 
 #: core/templates/account/messages/password_set.txt:2
 msgid "Password successfully set."
@@ -326,7 +327,7 @@ msgid ""
 msgstr ""
 "O link para alterar sua senha é inválido, possivelmente porque já foi "
 "utilizado. Por favor requeira uma <a href=\"%(passwd_reset_url)s\">nova "
-"alteração de senha</a>"
+"alteração de senha</a>."
 
 #: core/templates/account/password_reset_from_key.html:18
 msgid "change password"
@@ -353,7 +354,7 @@ msgstr "Registre-se"
 #, python-format
 msgid ""
 "Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
-msgstr "Já te uma conta ? Por favor  <a href=\"%(login_url)s\"> acesse </a>"
+msgstr "Já tem uma conta? Por favor <a href=\"%(login_url)s\"> acesse </a>."
 
 #: core/templates/account/signup_closed.html:6
 #: core/templates/account/signup_closed.html:9
@@ -378,7 +379,7 @@ msgstr "Você já está logado como %(user_display)s."
 #: core/templates/account/verified_email_required.html:6
 #: core/templates/account/verified_email_required.html:9
 msgid "Verify Your E-mail Address"
-msgstr "Verifique seu endereço de e-mail"
+msgstr "Verifique seu Endereço de E-mail"
 
 #: core/templates/account/verification_sent.html:10
 msgid ""
@@ -811,7 +812,7 @@ msgstr ""
 #, fuzzy
 #| msgid "Manage users"
 msgid "Manage the jury."
-msgstr "Gerência de usuários"
+msgstr "Gerência de usuários."
 
 #: deck/templates/event/snippets/event_list_item.html:40
 #, fuzzy
@@ -851,11 +852,11 @@ msgstr "Você não tem permissão para ver esta página."
 
 #: deck/views.py:150
 msgid "Proposal created."
-msgstr "Proposta criada"
+msgstr "Proposta criada."
 
 #: deck/views.py:168
 msgid "Proposal updated."
-msgstr "Proposta Atualizada"
+msgstr "Proposta Atualizada."
 
 #: deck/views.py:186
 msgid "Rate Index not found."
@@ -895,8 +896,7 @@ msgstr "Aceitar convite"
 msgid ""
 "By Accepting this invite you will Vote in any Proposals maded on the event: "
 msgstr ""
-"Aceitando este convite você poderá votar em qualquer proposta para este "
-"evento."
+"Aceitando este convite você poderá votar em qualquer proposta para este evento."
 
 #: jury/templates/jury/jury_invite.html:37
 msgid "Accept"
