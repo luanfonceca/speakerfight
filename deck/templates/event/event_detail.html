@@ -111,7 +111,7 @@
             $me.parent('.proposal-votes').find('.voting-link').not($me).remove();
             $me.attr('href', '');
           }).error(function(xhr, status, error) {
-            if (xhr.status == 400) {
+            if (xhr.status == 401) {
               window.location.href = xhr.responseText;
             } else {
               alert(error);

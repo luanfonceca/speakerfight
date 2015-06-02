@@ -530,7 +530,7 @@ class ProposalTest(TestCase):
             follow=True
         )
 
-        self.assertEquals(400, response.status_code)
+        self.assertEquals(401, response.status_code)
         self.assertEquals(0, self.proposal.rate)
         self.assertEquals(0, self.proposal.votes.count())
         self.assertEquals(0, Vote.objects.count())
@@ -565,7 +565,7 @@ class ProposalTest(TestCase):
             reverse('rate_proposal', kwargs=rate_proposal_data),
             follow=True
         )
-        self.assertEquals(400, response.status_code)
+        self.assertEquals(401, response.status_code)
         self.assertEquals(1, Vote.objects.count())
         self.assertEquals(1, self.proposal.votes.count())
         self.assertEquals(3, self.proposal.rate)
@@ -586,7 +586,7 @@ class ProposalTest(TestCase):
             follow=True
         )
 
-        self.assertEquals(400, response.status_code)
+        self.assertEquals(401, response.status_code)
         self.assertEquals(0, self.proposal.rate)
         self.assertEquals(0, self.proposal.votes.count())
         self.assertEquals(0, Vote.objects.count())
@@ -604,7 +604,7 @@ class ProposalTest(TestCase):
         )
         proposal_rate_url = reverse('rate_proposal', kwargs=rate_proposal_data)
         response = self.client.get(proposal_rate_url, follow=True)
-        self.assertEquals(400, response.status_code)
+        self.assertEquals(401, response.status_code)
         self.assertEquals(expected_content, response.content)
         self.assertEquals(0, self.proposal.rate)
         self.assertEquals(0, self.proposal.votes.count())
