@@ -1,6 +1,7 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.translation import ugettext as _
 from django.utils.decorators import method_decorator
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError, models, transaction
@@ -188,15 +189,20 @@ class RateProposal(BaseProposalView, UpdateView):
             messages.error(self.request, e.message)
         else:
             messages.success(self.request, _(u'Proposal rated.'))
-        return HttpResponseRedirect(self.get_success_url())
+        return HttpResponse(_(u'Proposal rated.'), status=200)
 
-    @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         proposal = self.get_object()
+
+        if not self.request.user.is_authenticated():
+            response_url = u'{}?next={}'.format(
+                settings.LOGIN_URL,
+                reverse('view_event', kwargs={'slug': proposal.event.slug})
+            )
+            return HttpResponse(response_url, status=405)
+
         if not proposal.user_can_vote(self.request.user):
             messages.error(
                 self.request, _(u'You are not allowed to see this page.'))
-            return HttpResponseRedirect(
-                reverse('view_event', kwargs={'slug': proposal.event.slug}),
-            )
+            return HttpResponse(reverse('view_event', kwargs={'slug': proposal.event.slug}), status=405)
         return super(RateProposal, self).dispatch(*args, **kwargs)
