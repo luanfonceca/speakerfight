@@ -30,7 +30,7 @@ class DeckBaseModel(models.Model):
                          max_length=200, unique=True, db_index=True)
     description = models.TextField(_('Description'), max_length=10000)
     created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
-    is_published = models.BooleanField(_('Publish'), default=False)
+    is_published = models.BooleanField(_('Publish'), default=True)
 
     # relations
     author = models.ForeignKey(to=settings.AUTH_USER_MODEL,

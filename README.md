@@ -19,6 +19,7 @@ $ python manage.py loaddata deck/fixtures/user.json
 # username: user, password: user
 $ python manage.py loaddata deck/fixtures/event.json
 $ python manage.py loaddata deck/fixtures/proposal.json
+$ python manage.py loaddata deck/fixtures/socialapp.json
 $ python manage.py runserver
 Validating models...
 
