@@ -1,5 +1,6 @@
+import json
+
 from django.test import TestCase, Client
-from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
@@ -546,7 +547,8 @@ class ProposalTest(TestCase):
             follow=True
         )
 
-        self.assertEquals(200, response.status_code)
+        self.assertEquals(400, response.status_code)
+        self.assertIn('errorMessage', json.loads(response.content))
         self.assertEquals(0, self.proposal.rate)
         self.assertEquals(0, self.proposal.votes.count())
         self.assertEquals(0, Vote.objects.count())
@@ -598,14 +600,11 @@ class ProposalTest(TestCase):
             'slug': self.proposal.slug,
             'rate': 'sad'
         }
-        expected_content = u'{}?next={}'.format(
-            settings.LOGIN_URL,
-            reverse('view_event', kwargs={'slug': self.proposal.event.slug})
-        )
+
         proposal_rate_url = reverse('rate_proposal', kwargs=rate_proposal_data)
         response = self.client.get(proposal_rate_url, follow=True)
         self.assertEquals(401, response.status_code)
-        self.assertEquals(expected_content, response.content)
+        self.assertIn('errorMessage', json.loads(response.content))
         self.assertEquals(0, self.proposal.rate)
         self.assertEquals(0, self.proposal.votes.count())
         self.assertEquals(0, Vote.objects.count())

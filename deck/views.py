@@ -1,8 +1,12 @@
+# -*- encoding: utf-8 -*
+import json
+
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.translation import ugettext as _
 from django.utils.decorators import method_decorator
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError, models, transaction
 from django.db.models.aggregates import Sum
@@ -178,30 +182,42 @@ class RateProposal(BaseProposalView, UpdateView):
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         rate = kwargs.get('rate')
+        response_content = {}
+        response_status = 200
 
         try:
             rate_int = [r[0] for r in Vote.VOTE_RATES if rate in r][0]
             with transaction.atomic():
                 self.object.votes.create(user=request.user, rate=rate_int)
         except IndexError:
-            messages.error(self.request, _(u'Rate Index not found.'))
+            response_content['errorMessage'] = _(u'Rate Index not found.')
+            response_status = 400
         except (IntegrityError, ValidationError), e:
-            messages.error(self.request, e.message)
+            response_content['errorMessage'] = e.message
+            response_status = 400
         else:
-            messages.success(self.request, _(u'Proposal rated.'))
-        return HttpResponse(_(u'Proposal rated.'), status=200)
+            response_content['message'] = _(u'Proposal rated.')
+        return HttpResponse(
+            json.dumps(response_content),
+            status=response_status,
+            content_type='application/json')
 
     def dispatch(self, *args, **kwargs):
         proposal = self.get_object()
 
         if not self.request.user.is_authenticated():
-            response_url = u'{}?next={}'.format(
+            response = {}
+            response['errorMessage'] = _(u' You need to be logged in to continue to the next step.')
+            response['redirectUrl'] = u'{}?{}={}'.format(
                 settings.LOGIN_URL,
+                REDIRECT_FIELD_NAME,
                 reverse('view_event', kwargs={'slug': proposal.event.slug})
             )
-            return HttpResponse(response_url, status=401)
+            return HttpResponse(json.dumps(response), status=401, content_type='application/json')
 
         if not proposal.user_can_vote(self.request.user):
-            messages.error(self.request, _(u'You are not allowed to see this page.'))
-            return HttpResponse(reverse('view_event', kwargs={'slug': proposal.event.slug}), status=401)
+            response = {}
+            response['errorMessage'] = _(u'You are not allowed to see this page.')
+            response['redirectUrl'] = ''
+            return HttpResponse(json.dumps(response), status=401, content_type='application/json')
         return super(RateProposal, self).dispatch(*args, **kwargs)

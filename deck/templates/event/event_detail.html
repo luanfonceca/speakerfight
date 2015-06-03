@@ -96,29 +96,11 @@
 
 {% block scripts %}
   <script src="{{ STATIC_URL }}js/libs/jquery.linkable.js"></script>
+  <script src="{{ STATIC_URL }}js/voting.js"></script>
 
   <script type="text/javascript">
     $(function () {
       $(".linkable").linkable();
-
-      $(".voting-link").on('click', function(e) {
-        e.preventDefault();
-        var $me = $(this);
-        if ($me.attr('href')) {
-          $.ajax(
-            $me.attr('href')
-          ).success(function(data, status, xhr) {
-            $me.parent('.proposal-votes').find('.voting-link').not($me).remove();
-            $me.attr('href', '');
-          }).error(function(xhr, status, error) {
-            if (xhr.status == 401) {
-              window.location.href = xhr.responseText;
-            } else {
-              alert(error);
-            }
-          });
-        }
-      });
     });
   </script>
 {% endblock scripts %}
