@@ -11,7 +11,8 @@ EVENT_DATA = {
     'title': 'RuPy',
     'slug': 'rupy',
     'description': 'A really good event.',
-    'author_id': 1
+    'author_id': 1,
+    'is_published': False,
 }
 
 PROPOSAL_DATA = {
@@ -91,8 +92,8 @@ class EventModelIntegrityTest(TestCase):
     def test_assert_event_is_published_should_be_a_BooleanField(self):
         self.assertIsInstance(self.fields['is_published'], BooleanField)
 
-    def test_assert_event_is_published_should_be_False_as_default(self):
-        self.assertEquals(False, self.fields['is_published'].default)
+    def test_assert_event_is_published_should_be_True_as_default(self):
+        self.assertEquals(True, self.fields['is_published'].default)
 
     def test_assert_event_should_have_a_jury(self):
         self.assertIn('jury', Event._meta.get_all_field_names())
@@ -207,8 +208,8 @@ class ProposalModelIntegrityTest(TestCase):
     def test_assert_proposal_is_published_should_be_a_BooleanField(self):
         self.assertIsInstance(self.fields['is_published'], BooleanField)
 
-    def test_assert_proposal_is_published_should_be_False_as_default(self):
-        self.assertEquals(False, self.fields['is_published'].default)
+    def test_assert_proposal_is_published_should_be_True_as_default(self):
+        self.assertEquals(True, self.fields['is_published'].default)
 
 
 class ProposalObjectTest(TestCase):
@@ -247,7 +248,7 @@ class ProposalObjectTest(TestCase):
         self.assertTrue(self.proposal.user_already_votted(self.user))
 
     def test_assert_proposal_is_published(self):
-        self.assertEquals(False, self.proposal.is_published)
+        self.assertEquals(True, self.proposal.is_published)
 
 
 class VoteModelIntegrityTest(TestCase):
