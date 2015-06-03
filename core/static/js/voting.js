@@ -7,7 +7,8 @@ $(function () {
     }
 
     $.ajax({
-      url: $me.attr('href')
+      url: $me.attr('href'),
+      method: 'POST'
     })
     .success(function(data, status, xhr) {
       $me.parent('.proposal-votes').find('.voting-link').not($me).remove();

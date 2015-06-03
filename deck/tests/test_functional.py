@@ -504,7 +504,7 @@ class ProposalTest(TestCase):
             'slug': self.proposal.slug,
             'rate': 'laughing'
         }
-        response = self.client.get(
+        response = self.client.post(
             reverse('rate_proposal', kwargs=rate_proposal_data),
             follow=True
         )
@@ -526,7 +526,7 @@ class ProposalTest(TestCase):
             'slug': self.proposal.slug,
             'rate': 'sad'
         }
-        response = self.client.get(
+        response = self.client.post(
             reverse('rate_proposal', kwargs=rate_proposal_data),
             follow=True
         )
@@ -542,7 +542,7 @@ class ProposalTest(TestCase):
             'slug': self.proposal.slug,
             'rate': 'whatever'
         }
-        response = self.client.get(
+        response = self.client.post(
             reverse('rate_proposal', kwargs=rate_proposal_data),
             follow=True
         )
@@ -559,11 +559,13 @@ class ProposalTest(TestCase):
             'slug': self.proposal.slug,
             'rate': 'laughing'
         }
-        self.client.get(reverse('rate_proposal', kwargs=rate_proposal_data),
-                        follow=True)
+        self.client.post(
+            reverse('rate_proposal', kwargs=rate_proposal_data),
+            follow=True
+        )
 
         rate_proposal_data.update({'rate': 'happy'})
-        response = self.client.get(
+        response = self.client.post(
             reverse('rate_proposal', kwargs=rate_proposal_data),
             follow=True
         )
@@ -583,7 +585,7 @@ class ProposalTest(TestCase):
             'slug': self.proposal.slug,
             'rate': 'sad'
         }
-        response = self.client.get(
+        response = self.client.post(
             reverse('rate_proposal', kwargs=rate_proposal_data),
             follow=True
         )
@@ -620,7 +622,7 @@ class ProposalTest(TestCase):
             'slug': self.proposal.slug,
             'rate': 'sad'
         }
-        response = self.client.get(
+        response = self.client.post(
             reverse('rate_proposal', kwargs=rate_proposal_data),
             follow=True
         )
@@ -640,7 +642,7 @@ class ProposalTest(TestCase):
             'slug': self.proposal.slug,
             'rate': 'sad'
         }
-        response = self.client.get(
+        response = self.client.post(
             reverse('rate_proposal', kwargs=rate_proposal_data),
             follow=True
         )

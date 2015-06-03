@@ -179,7 +179,7 @@ class UpdateProposal(BaseProposalView, UpdateView):
 
 
 class RateProposal(BaseProposalView, UpdateView):
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         rate = kwargs.get('rate')
         response_content = {}
