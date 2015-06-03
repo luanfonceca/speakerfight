@@ -92,6 +92,7 @@ class Proposal(DeckBaseModel):
     event = models.ForeignKey(to='deck.Event', related_name='proposals')
 
     class Meta:
+        ordering = ['title']
         verbose_name = _('Proposal')
         verbose_name_plural = _('Proposals')
 
