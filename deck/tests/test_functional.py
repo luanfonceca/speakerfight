@@ -7,7 +7,8 @@ from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 
 from deck.models import Event, Proposal, Vote, Jury
-from deck.tests.test_unit import EVENT_DATA, PROPOSAL_DATA
+from deck.tests.test_unit import (
+    EVENT_DATA, PROPOSAL_DATA, ANOTHER_PROPOSAL_DATA)
 
 
 class EventTest(TestCase):
@@ -646,3 +647,41 @@ class ProposalTest(TestCase):
         self.assertEquals(1, self.proposal.rate)
         self.assertEquals(1, self.proposal.votes.count())
         self.assertEquals(1, Vote.objects.count())
+    def test_proposal_ordering(self):
+        another_proposal_data = ANOTHER_PROPOSAL_DATA.copy()
+        another_proposal_data.update(event=self.event)
+        another_proposal = Proposal.objects.create(**another_proposal_data)
+
+        self.client.login(username='another', password='another')
+
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+
+        self.assertEquals(
+            response.context['event_proposals'][0], another_proposal)
+        self.assertEquals(
+            response.context['event_proposals'][1], self.proposal)
+
+        rate_proposal_data = {
+            'event_slug': another_proposal.event.slug,
+            'slug': another_proposal.slug,
+            'rate': 'laughing'
+        }
+
+        self.client.get(
+            reverse('rate_proposal', kwargs=rate_proposal_data),
+            follow=True
+        )
+
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+
+        self.assertEquals(
+            response.context['event_proposals'][0], self.proposal)
+        self.assertEquals(
+            response.context['event_proposals'][1], another_proposal)
+ 

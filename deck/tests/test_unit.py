@@ -22,6 +22,13 @@ PROPOSAL_DATA = {
     'author_id': 1
 }
 
+ANOTHER_PROPOSAL_DATA = {
+    'title': 'A Python 3 Metaprogramming Tutorial',
+    'slug': 'python-3-metaprogramming',
+    'description': 'An advanced tutorial on Python 3 and Metaprogramming',
+    'author_id': 1
+}
+
 
 class EventModelIntegrityTest(TestCase):
     def setUp(self):

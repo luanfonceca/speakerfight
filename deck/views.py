@@ -58,7 +58,8 @@ class DetailEvent(BaseEventView, DetailView):
         context['vote_rates'] = Vote.VOTE_RATES
         event_proposals = self.object.proposals.cached_authors()
         if self.object.user_can_see_proposals(self.request.user):
-            pass
+            event_proposals = sorted(event_proposals, key=lambda p:
+                                     p.user_already_votted(self.request.user))
         elif not self.request.user.is_anonymous():
             event_proposals = event_proposals.filter(author=self.request.user)
         else:
