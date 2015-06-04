@@ -647,6 +647,7 @@ class ProposalTest(TestCase):
         self.assertEquals(1, self.proposal.rate)
         self.assertEquals(1, self.proposal.votes.count())
         self.assertEquals(1, Vote.objects.count())
+
     def test_proposal_ordering(self):
         another_proposal_data = ANOTHER_PROPOSAL_DATA.copy()
         another_proposal_data.update(event=self.event)
@@ -684,4 +685,3 @@ class ProposalTest(TestCase):
             response.context['event_proposals'][0], self.proposal)
         self.assertEquals(
             response.context['event_proposals'][1], another_proposal)
- 
