@@ -12,17 +12,37 @@ from django.contrib.auth.models import AnonymousUser
 from django_extensions.db.fields import AutoSlugField
 
 from datetime import timedelta
+from textwrap import dedent
 
 from jury.models import Jury
 
 
-class DeckBaseManager(models.Manager):
+class DeckBaseManager(models.QuerySet):
     def cached_authors(self):
         return super(DeckBaseManager, self).select_related('author')
 
     def published_ones(self):
         return self.cached_authors().filter(is_published=True)
 
+    def order_by_never_voted(self, user_id):
+        if self.model != Proposal:
+            raise AttributeError(
+                "%s object has no attribute %s" % (
+                    self.model, 'order_by_never_voted'))
+
+        order_by_criteria = dedent("""
+            SELECT 1
+              FROM `deck_vote`
+             WHERE `deck_vote`.user_id = %s AND
+                   `deck_vote`.proposal_id = `deck_proposal`.id
+             LIMIT 1
+        """)
+        new_ordering = ['never_voted_first']
+        new_ordering.extend(Proposal._meta.ordering)
+        return self.extra(
+            select=dict(never_voted_first=order_by_criteria % user_id),
+            order_by=new_ordering
+        )
 
 class DeckBaseModel(models.Model):
     title = models.CharField(_('Title'), max_length=200)
@@ -37,7 +57,7 @@ class DeckBaseModel(models.Model):
                                related_name='%(class)ss')
 
     # managers
-    objects = DeckBaseManager()
+    objects = DeckBaseManager.as_manager()
 
     class Meta:
         abstract = True

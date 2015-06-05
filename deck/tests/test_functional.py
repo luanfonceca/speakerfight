@@ -462,6 +462,39 @@ class ProposalTest(TestCase):
         self.assertQuerysetEqual(response.context['event_proposals'],
                                  ["<Proposal: Python For Zombies>"])
 
+    def test_list_proposal_ordering_when_user_is_logged(self):
+        another_proposal_data = ANOTHER_PROPOSAL_DATA.copy()
+        another_proposal_data.update(event=self.event)
+        another_proposal = Proposal.objects.create(**another_proposal_data)
+
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'],
+                                 ["<Proposal: A Python 3 Metaprogramming Tutorial>",
+                                  "<Proposal: Python For Zombies>"])
+
+        rate_proposal_data = {
+            'event_slug': another_proposal.event.slug,
+            'slug': another_proposal.slug,
+            'rate': 'laughing'
+        }
+        self.client.get(
+            reverse('rate_proposal', kwargs=rate_proposal_data),
+            follow=True
+        )
+
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': self.event.slug}),
+            follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_proposals'],
+                                 ["<Proposal: Python For Zombies>",
+                                  "<Proposal: A Python 3 Metaprogramming Tutorial>"])
+
     def test_update_proposal(self):
         new_proposal_data = self.proposal_data.copy()
         new_proposal_data['description'] = 'A really really good proposal.'
@@ -647,41 +680,3 @@ class ProposalTest(TestCase):
         self.assertEquals(1, self.proposal.rate)
         self.assertEquals(1, self.proposal.votes.count())
         self.assertEquals(1, Vote.objects.count())
-
-    def test_proposal_ordering(self):
-        another_proposal_data = ANOTHER_PROPOSAL_DATA.copy()
-        another_proposal_data.update(event=self.event)
-        another_proposal = Proposal.objects.create(**another_proposal_data)
-
-        self.client.login(username='another', password='another')
-
-        response = self.client.get(
-            reverse('view_event', kwargs={'slug': self.event.slug}),
-            follow=True
-        )
-
-        self.assertEquals(
-            response.context['event_proposals'][0], another_proposal)
-        self.assertEquals(
-            response.context['event_proposals'][1], self.proposal)
-
-        rate_proposal_data = {
-            'event_slug': another_proposal.event.slug,
-            'slug': another_proposal.slug,
-            'rate': 'laughing'
-        }
-
-        self.client.get(
-            reverse('rate_proposal', kwargs=rate_proposal_data),
-            follow=True
-        )
-
-        response = self.client.get(
-            reverse('view_event', kwargs={'slug': self.event.slug}),
-            follow=True
-        )
-
-        self.assertEquals(
-            response.context['event_proposals'][0], self.proposal)
-        self.assertEquals(
-            response.context['event_proposals'][1], another_proposal)
