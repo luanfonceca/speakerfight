@@ -32,15 +32,18 @@ class DeckBaseManager(models.QuerySet):
 
         order_by_criteria = dedent("""
             SELECT 1
-              FROM `deck_vote`
-             WHERE `deck_vote`.user_id = %s AND
-                   `deck_vote`.proposal_id = `deck_proposal`.id
+              FROM deck_vote
+             WHERE deck_vote.user_id = %s AND
+                   deck_vote.proposal_id = deck_proposal.id
              LIMIT 1
         """)
-        new_ordering = ['never_voted_first']
+
+        new_ordering = ['-never_voted']
+        if settings.DATABASES['default'].get('ENGINE') == 'django.db.backends.sqlite3':
+            new_ordering = ['never_voted']
         new_ordering.extend(Proposal._meta.ordering)
         return self.extra(
-            select=dict(never_voted_first=order_by_criteria % user_id),
+            select=dict(never_voted=order_by_criteria % user_id),
             order_by=new_ordering
         )
 
