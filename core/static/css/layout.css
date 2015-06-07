@@ -668,3 +668,7 @@ html {
   margin-bottom: 10px;
   overflow: hidden;
 }
+
+.author-photo {
+  width: 40px;
+}

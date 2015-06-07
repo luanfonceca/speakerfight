@@ -1,3 +1,5 @@
+import hashlib
+
 from django import template
 
 register = template.Library()
@@ -16,3 +18,14 @@ def allowed_to_vote(user, proposal):
 @register.filter
 def get_rate_display(user, proposal):
     return proposal.votes.get(user=user).get_rate_display()
+
+
+@register.filter
+def get_user_photo(user):
+    social = user.socialaccount_set.first()
+
+    if social:
+        return social.get_avatar_url()
+
+    return 'http://www.gravatar.com/avatar/{}'.format(
+        hashlib.md5(user.email).hexdigest())

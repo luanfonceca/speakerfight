@@ -61,6 +61,7 @@
         {% for proposal in event_proposals %}
           <div id="{{ proposal.slug }}" class="panel panel-default proposal-item">
             <div class="panel-body">
+              <img src="{{ proposal.author|get_user_photo }}" alt="author photo" class="img-circle pull-right author-photo">
               <h3 class="panel-title proposal-title">
                 <a href="#{{ proposal.slug }}">
                   {{ proposal }}
