@@ -1,3 +1,5 @@
+import json
+
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
@@ -418,7 +420,7 @@ class ProposalTest(TestCase):
             follow=True
         )
         self.assertEquals(200, response.status_code)
-        self.assertQuerysetEqual(response.context['event_proposals'], 
+        self.assertQuerysetEqual(response.context['event_proposals'],
                                  ['<Proposal: Python For Zombies>'])
 
     def test_list_proposal_without_public_voting(self):
@@ -536,7 +538,7 @@ class ProposalTest(TestCase):
             'slug': self.proposal.slug,
             'rate': 'laughing'
         }
-        response = self.client.get(
+        response = self.client.post(
             reverse('rate_proposal', kwargs=rate_proposal_data),
             follow=True
         )
@@ -558,12 +560,12 @@ class ProposalTest(TestCase):
             'slug': self.proposal.slug,
             'rate': 'sad'
         }
-        response = self.client.get(
+        response = self.client.post(
             reverse('rate_proposal', kwargs=rate_proposal_data),
             follow=True
         )
 
-        self.assertEquals(200, response.status_code)
+        self.assertEquals(401, response.status_code)
         self.assertEquals(0, self.proposal.rate)
         self.assertEquals(0, self.proposal.votes.count())
         self.assertEquals(0, Vote.objects.count())
@@ -574,12 +576,13 @@ class ProposalTest(TestCase):
             'slug': self.proposal.slug,
             'rate': 'whatever'
         }
-        response = self.client.get(
+        response = self.client.post(
             reverse('rate_proposal', kwargs=rate_proposal_data),
             follow=True
         )
 
-        self.assertEquals(200, response.status_code)
+        self.assertEquals(400, response.status_code)
+        self.assertIn('errorMessage', json.loads(response.content))
         self.assertEquals(0, self.proposal.rate)
         self.assertEquals(0, self.proposal.votes.count())
         self.assertEquals(0, Vote.objects.count())
@@ -590,15 +593,17 @@ class ProposalTest(TestCase):
             'slug': self.proposal.slug,
             'rate': 'laughing'
         }
-        self.client.get(reverse('rate_proposal', kwargs=rate_proposal_data),
-                        follow=True)
-
-        rate_proposal_data.update({'rate': 'happy'})
-        response = self.client.get(
+        self.client.post(
             reverse('rate_proposal', kwargs=rate_proposal_data),
             follow=True
         )
-        self.assertEquals(200, response.status_code)
+
+        rate_proposal_data.update({'rate': 'happy'})
+        response = self.client.post(
+            reverse('rate_proposal', kwargs=rate_proposal_data),
+            follow=True
+        )
+        self.assertEquals(401, response.status_code)
         self.assertEquals(1, Vote.objects.count())
         self.assertEquals(1, self.proposal.votes.count())
         self.assertEquals(3, self.proposal.rate)
@@ -614,12 +619,12 @@ class ProposalTest(TestCase):
             'slug': self.proposal.slug,
             'rate': 'sad'
         }
-        response = self.client.get(
+        response = self.client.post(
             reverse('rate_proposal', kwargs=rate_proposal_data),
             follow=True
         )
 
-        self.assertEquals(200, response.status_code)
+        self.assertEquals(401, response.status_code)
         self.assertEquals(0, self.proposal.rate)
         self.assertEquals(0, self.proposal.votes.count())
         self.assertEquals(0, Vote.objects.count())
@@ -631,11 +636,11 @@ class ProposalTest(TestCase):
             'slug': self.proposal.slug,
             'rate': 'sad'
         }
+
         proposal_rate_url = reverse('rate_proposal', kwargs=rate_proposal_data)
         response = self.client.get(proposal_rate_url, follow=True)
-        self.assertEquals(200, response.status_code)
-        self.assertEquals(proposal_rate_url,
-                          response.context_data.get('redirect_field_value'))
+        self.assertEquals(401, response.status_code)
+        self.assertIn('errorMessage', json.loads(response.content))
         self.assertEquals(0, self.proposal.rate)
         self.assertEquals(0, self.proposal.votes.count())
         self.assertEquals(0, Vote.objects.count())
@@ -651,7 +656,7 @@ class ProposalTest(TestCase):
             'slug': self.proposal.slug,
             'rate': 'sad'
         }
-        response = self.client.get(
+        response = self.client.post(
             reverse('rate_proposal', kwargs=rate_proposal_data),
             follow=True
         )
@@ -671,7 +676,7 @@ class ProposalTest(TestCase):
             'slug': self.proposal.slug,
             'rate': 'sad'
         }
-        response = self.client.get(
+        response = self.client.post(
             reverse('rate_proposal', kwargs=rate_proposal_data),
             follow=True
         )
