@@ -1,7 +1,7 @@
 from django.utils.translation import ugettext as _
 from django.utils import timezone
 from django.core.urlresolvers import reverse
-from django.db import models
+from django.db import models, transaction
 from django.core.exceptions import ValidationError
 from django.db.models.aggregates import Sum
 from django.db.models.signals import post_save
@@ -126,8 +126,14 @@ class Proposal(DeckBaseModel):
         return super(Proposal, self).save(*args, **kwargs)
 
     @property
-    def rate(self):
+    def get_rate(self):
         return self.votes.aggregate(Sum('rate'))['rate__sum'] or 0
+
+    def rate(self, user, rate):
+        rate_int = [r[0] for r in Vote.VOTE_RATES if rate in r][0]
+        with transaction.atomic():
+            self.votes.create(user=user, rate=rate_int)
+
 
     def user_already_votted(self, user):
         if isinstance(user, AnonymousUser):

@@ -188,14 +188,12 @@ class RateProposal(BaseProposalView, UpdateView):
         response_status = 200
 
         try:
-            rate_int = [r[0] for r in Vote.VOTE_RATES if rate in r][0]
-            with transaction.atomic():
-                self.object.votes.create(user=request.user, rate=rate_int)
+            self.object.rate(self.request.user, rate)
         except IndexError:
-            response_content['errorMessage'] = _(u'Rate Index not found.')
+            response_content['message'] = _(u'Rate Index not found.')
             response_status = 400
         except (IntegrityError, ValidationError), e:
-            response_content['errorMessage'] = e.message
+            response_content['message'] = e.message
             response_status = 400
         else:
             response_content['message'] = _(u'Proposal rated.')
@@ -204,22 +202,51 @@ class RateProposal(BaseProposalView, UpdateView):
             status=response_status,
             content_type='application/json')
 
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        rate = kwargs.get('rate')
+
+        try:
+            self.object.rate(self.request.user, rate)
+        except IndexError:
+            messages.error(self.request, _(u'Rate Index not found.'))
+        except (IntegrityError, ValidationError), e:
+            messages.error(self.request, e.message)
+        else:
+            messages.success(self.request, _(u'Proposal rated.'))
+        return HttpResponseRedirect(self.get_success_url())
+
     def dispatch(self, *args, **kwargs):
         proposal = self.get_object()
+        view_event_url = reverse('view_event', kwargs={'slug': proposal.event.slug})
 
         if not self.request.user.is_authenticated():
+            message = _(u'You need to be logged in to continue to the next step.')
+            if self.request.method == 'GET':
+                messages.error(self.request, message)
+                return HttpResponseRedirect(view_event_url)
             response = {}
-            response['errorMessage'] = _(u' You need to be logged in to continue to the next step.')
+            response['message'] = message
             response['redirectUrl'] = u'{}?{}={}'.format(
                 settings.LOGIN_URL,
                 REDIRECT_FIELD_NAME,
-                reverse('view_event', kwargs={'slug': proposal.event.slug})
+                self.request.META.get('PATH_INFO')
             )
-            return HttpResponse(json.dumps(response), status=401, content_type='application/json')
-
-        if not proposal.user_can_vote(self.request.user):
+            return HttpResponse(
+                json.dumps(response),
+                status=401,
+                content_type='application/json')
+        elif not proposal.user_can_vote(self.request.user):
+            message = _(u'You are not allowed to see this page.')
+            if self.request.method == 'GET':
+                messages.error(self.request, message)
+                return HttpResponseRedirect(view_event_url)
             response = {}
-            response['errorMessage'] = _(u'You are not allowed to see this page.')
+            response['message'] = message
             response['redirectUrl'] = ''
-            return HttpResponse(json.dumps(response), status=401, content_type='application/json')
+            return HttpResponse(
+                json.dumps(response),
+                status=401,
+                content_type='application/json'
+            )
         return super(RateProposal, self).dispatch(*args, **kwargs)
