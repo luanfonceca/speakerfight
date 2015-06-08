@@ -1,6 +1,8 @@
+from django.conf import settings
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
+from django.core import mail
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
 
@@ -33,6 +35,15 @@ class EventTest(TestCase):
         self.assertEquals('A really good event.', event.description)
         self.assertEquals('admin', event.author.username)
         self.assertEquals(False, event.is_published)
+
+    def test_notify_event_creator_after_creation(self):
+        self.client.post(reverse('create_event'), self.event_data)
+        event = Event.objects.get()
+
+        self.assertEqual(1, len(mail.outbox))
+        email = mail.outbox[0]
+        self.assertIn(event.author.email, email.recipients())
+        self.assertIn(settings.NO_REPLY_EMAIL, email.from_email)
 
     def test_create_event_with_jury(self):
         event_data = self.event_data.copy()
@@ -417,7 +428,7 @@ class ProposalTest(TestCase):
             follow=True
         )
         self.assertEquals(200, response.status_code)
-        self.assertQuerysetEqual(response.context['event_proposals'], 
+        self.assertQuerysetEqual(response.context['event_proposals'],
                                  ['<Proposal: Python For Zombies>'])
 
     def test_list_proposal_without_public_voting(self):
