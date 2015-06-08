@@ -1,10 +1,10 @@
 from django.conf import settings
-from django.test import TestCase, Client
-from django.core.urlresolvers import reverse
-from django.core.exceptions import ValidationError
-from django.core import mail
-from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
+from django.core import mail
+from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
+from django.test import TestCase, Client
+from django.utils.translation import ugettext as _
 
 from datetime import datetime, timedelta
 
