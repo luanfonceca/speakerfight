@@ -39,6 +39,7 @@ TEMPLATE_DIRS = [
 STATICFILES_DIRS = []
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+NO_REPLY_EMAIL = 'noreply@speakerfight.com'
 
 ALLOWED_HOSTS = [
     "speakerfight.com",
