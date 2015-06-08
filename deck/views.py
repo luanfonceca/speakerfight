@@ -159,8 +159,18 @@ class CreateProposal(BaseProposalView, CreateView):
         self.object.author = self.request.user
         self.object.event = Event.objects.get(slug=self.kwargs['slug'])
         self.object.save()
+        self.send_new_proposal_to_jury_email()
         messages.success(self.request, _(u'Proposal created.'))
         return HttpResponseRedirect(self.get_success_url())
+
+    def send_new_proposal_to_jury_email(self):
+        proposal = self.object
+        context = {'event_title': proposal.event.title, 'proposal_title': proposal.title}
+        message = render_to_string('mailing/jury_new_proposal.txt', context)
+        subject = 'Your event has new proposals'
+        recipients = proposal.event.jury.users.values_list('email', flat=True)
+        send_mail(subject, message, settings.NO_REPLY_EMAIL, recipients)
+
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):

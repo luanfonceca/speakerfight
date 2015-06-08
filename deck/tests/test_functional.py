@@ -211,6 +211,20 @@ class EventTest(TestCase):
         self.assertEquals('Python For Zombies', python_for_zombies.title)
         self.assertEquals('Brain...', python_for_zombies.description)
 
+    def test_notify_event_jury_and_proposal_author_on_new_proposal(self):
+        event = Event.objects.create(**self.event_data)
+        self.client.post(
+            reverse('create_event_proposal', kwargs={'slug': event.slug}),
+            self.proposal_data, follow=True
+        )
+        proposal = event.proposals.get()
+
+        self.assertEqual(1, len(mail.outbox))
+        jury_email = mail.outbox[0]
+        for jury in event.jury.users.all():
+            self.assertIn(jury.email, jury_email.recipients())
+        self.assertIn(settings.NO_REPLY_EMAIL, jury_email.from_email)
+
     def test_anonymous_user_create_event_proposal(self):
         event = Event.objects.create(**self.event_data)
         self.client.logout()

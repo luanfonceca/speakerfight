@@ -1,0 +1,5 @@
+Hi!
+
+The event {{ event_title }} had just received a new proposal called {{ proposal_title }}.
+
+Cheers!
