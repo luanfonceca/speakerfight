@@ -219,11 +219,15 @@ class EventTest(TestCase):
         )
         proposal = event.proposals.get()
 
-        self.assertEqual(1, len(mail.outbox))
+        self.assertEqual(2, len(mail.outbox))
         jury_email = mail.outbox[0]
         for jury in event.jury.users.all():
             self.assertIn(jury.email, jury_email.recipients())
         self.assertIn(settings.NO_REPLY_EMAIL, jury_email.from_email)
+
+        author_email = mail.outbox[0]
+        self.assertIn(proposal.author.email, author_email.recipients())
+        self.assertIn(settings.NO_REPLY_EMAIL, author_email.from_email)
 
     def test_anonymous_user_create_event_proposal(self):
         event = Event.objects.create(**self.event_data)

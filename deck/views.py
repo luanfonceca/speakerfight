@@ -160,6 +160,7 @@ class CreateProposal(BaseProposalView, CreateView):
         self.object.event = Event.objects.get(slug=self.kwargs['slug'])
         self.object.save()
         self.send_new_proposal_to_jury_email()
+        self.send_proposal_creation_email()
         messages.success(self.request, _(u'Proposal created.'))
         return HttpResponseRedirect(self.get_success_url())
 
@@ -171,6 +172,12 @@ class CreateProposal(BaseProposalView, CreateView):
         recipients = proposal.event.jury.users.values_list('email', flat=True)
         send_mail(subject, message, settings.NO_REPLY_EMAIL, recipients)
 
+    def send_proposal_creation_email(self):
+        proposal = self.object
+        context = {'event_title': proposal.event.title, 'proposal_title': proposal.title}
+        message = render_to_string('mailing/author_proposal_created.txt', context)
+        subject = 'Your proposal was submitted'
+        send_mail(subject, message, settings.NO_REPLY_EMAIL, [proposal.author.email])
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
