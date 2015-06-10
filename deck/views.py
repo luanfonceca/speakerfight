@@ -54,7 +54,6 @@ class CreateEvent(BaseEventView, CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
     def send_event_creation_email(self):
-        import ipdb; ipdb.set_trace()
         event = self.object
         context = {'event_title': event.title}
         message = render_to_string('mailing/event_created.txt', context)
