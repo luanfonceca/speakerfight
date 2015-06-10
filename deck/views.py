@@ -1,17 +1,19 @@
 # -*- encoding: utf-8 -*
 import json
 
-from django.http import HttpResponse, HttpResponseRedirect
-from django.utils.translation import ugettext as _
-from django.utils.decorators import method_decorator
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.decorators import login_required
-from django.db import IntegrityError, models, transaction
-from django.db.models.aggregates import Sum
-from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
+from django.core.mail import send_mail
+from django.core.urlresolvers import reverse
+from django.db import IntegrityError, models
+from django.db.models.aggregates import Sum
+from django.template.loader import render_to_string
+from django.http import HttpResponse, HttpResponseRedirect
+from django.utils.decorators import method_decorator
+from django.utils.translation import ugettext as _
 
 from vanilla import CreateView, ListView, UpdateView, DetailView
 from djqscsv import render_to_csv_response
@@ -47,8 +49,18 @@ class CreateEvent(BaseEventView, CreateView):
         self.object = form.save(commit=False)
         self.object.author = self.request.user
         self.object.save()
+        self.send_event_creation_email()
         messages.success(self.request, _(u'Event created.'))
         return HttpResponseRedirect(self.get_success_url())
+
+    def send_event_creation_email(self):
+        import ipdb; ipdb.set_trace()
+        event = self.object
+        context = {'event_title': event.title}
+        message = render_to_string('mailing/event_created.txt', context)
+        subject = 'Your event is ready to receive proposals'
+        send_mail(subject, message, settings.NO_REPLY_EMAIL, [event.author.email])
+
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -154,8 +166,25 @@ class CreateProposal(BaseProposalView, CreateView):
         self.object.author = self.request.user
         self.object.event = Event.objects.get(slug=self.kwargs['slug'])
         self.object.save()
+        self.send_new_proposal_to_jury_email()
+        self.send_proposal_creation_email()
         messages.success(self.request, _(u'Proposal created.'))
         return HttpResponseRedirect(self.get_success_url())
+
+    def send_new_proposal_to_jury_email(self):
+        proposal = self.object
+        context = {'event_title': proposal.event.title, 'proposal_title': proposal.title}
+        message = render_to_string('mailing/jury_new_proposal.txt', context)
+        subject = 'Your event has new proposals'
+        recipients = proposal.event.jury.users.values_list('email', flat=True)
+        send_mail(subject, message, settings.NO_REPLY_EMAIL, recipients)
+
+    def send_proposal_creation_email(self):
+        proposal = self.object
+        context = {'event_title': proposal.event.title, 'proposal_title': proposal.title}
+        message = render_to_string('mailing/author_proposal_created.txt', context)
+        subject = 'Your proposal was submitted'
+        send_mail(subject, message, settings.NO_REPLY_EMAIL, [proposal.author.email])
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):

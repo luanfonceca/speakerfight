@@ -1,10 +1,12 @@
 import json
 
-from django.test import TestCase, Client
-from django.core.urlresolvers import reverse
-from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext as _
+from django.conf import settings
 from django.contrib.auth.models import User
+from django.core import mail
+from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
+from django.test import TestCase, Client
+from django.utils.translation import ugettext as _
 
 from datetime import datetime, timedelta
 
@@ -36,6 +38,15 @@ class EventTest(TestCase):
         self.assertEquals('A really good event.', event.description)
         self.assertEquals('admin', event.author.username)
         self.assertEquals(False, event.is_published)
+
+    def test_notify_event_creator_after_creation(self):
+        self.client.post(reverse('create_event'), self.event_data)
+        event = Event.objects.get()
+
+        self.assertEqual(1, len(mail.outbox))
+        email = mail.outbox[0]
+        self.assertIn(event.author.email, email.recipients())
+        self.assertIn(settings.NO_REPLY_EMAIL, email.from_email)
 
     def test_create_event_with_jury(self):
         event_data = self.event_data.copy()
@@ -202,6 +213,24 @@ class EventTest(TestCase):
         python_for_zombies = event.proposals.get()
         self.assertEquals('Python For Zombies', python_for_zombies.title)
         self.assertEquals('Brain...', python_for_zombies.description)
+
+    def test_notify_event_jury_and_proposal_author_on_new_proposal(self):
+        event = Event.objects.create(**self.event_data)
+        self.client.post(
+            reverse('create_event_proposal', kwargs={'slug': event.slug}),
+            self.proposal_data, follow=True
+        )
+        proposal = event.proposals.get()
+
+        self.assertEqual(2, len(mail.outbox))
+        jury_email = mail.outbox[0]
+        for jury in event.jury.users.all():
+            self.assertIn(jury.email, jury_email.recipients())
+        self.assertIn(settings.NO_REPLY_EMAIL, jury_email.from_email)
+
+        author_email = mail.outbox[0]
+        self.assertIn(proposal.author.email, author_email.recipients())
+        self.assertIn(settings.NO_REPLY_EMAIL, author_email.from_email)
 
     def test_anonymous_user_create_event_proposal(self):
         event = Event.objects.create(**self.event_data)
