@@ -1,0 +1,5 @@
+Hi!
+
+This email is a confirmation for the creation of your proposal {{ proposal_title }} to the event {{ event_title }} on SpeakerFight! Remember to share the event so you help to engaje more participants!
+
+Good luck!

@@ -39,6 +39,7 @@ TEMPLATE_DIRS = [
 STATICFILES_DIRS = []
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+NO_REPLY_EMAIL = 'noreply@speakerfight.com'
 
 ALLOWED_HOSTS = [
     "speakerfight.com",
@@ -85,6 +86,7 @@ ROOT_URLCONF = 'speakerfight.urls'
 
 WSGI_APPLICATION = 'speakerfight.wsgi.application'
 
+EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
