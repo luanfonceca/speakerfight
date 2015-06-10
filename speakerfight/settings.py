@@ -39,7 +39,7 @@ TEMPLATE_DIRS = [
 STATICFILES_DIRS = []
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-NO_REPLY_EMAIL = 'noreply@speakerfight.com'
+DEFAULT_FROM_EMAIL = NO_REPLY_EMAIL = 'noreply@speakerfight.com'
 
 ALLOWED_HOSTS = [
     "speakerfight.com",
@@ -72,6 +72,7 @@ THIRD_PARTY_APPS = [
     'debug_toolbar',
     'datetimewidget',
     'raven.contrib.django.raven_compat',
+    'djrill',
 ]
 
 LOCAL_APPS = [
