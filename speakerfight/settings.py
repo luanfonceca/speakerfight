@@ -72,7 +72,6 @@ THIRD_PARTY_APPS = [
     'debug_toolbar',
     'datetimewidget',
     'raven.contrib.django.raven_compat',
-    'djrill',
 ]
 
 LOCAL_APPS = [
