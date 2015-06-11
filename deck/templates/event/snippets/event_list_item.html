@@ -9,7 +9,7 @@
     <h3 class="panel-title event-title">{{ event.title }}</h3>
     <p class="event-metadata">
       {% blocktrans with author=event.author.get_full_name|default:event.author.username created_at=event.created_at %}
-      Created by <strong>{{ author }}</strong> at {{ created_at }}
+      Created by <strong>{{ author }}</strong> at {{ created_at }}.
       {% endblocktrans %}
       {% if event.due_date %}
         <br/>

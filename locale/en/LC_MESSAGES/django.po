@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-31 14:21-0300\n"
+"POT-Creation-Date: 2015-06-11 19:29-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,9 +88,10 @@ msgstr ""
 #: core/templates/account/email/email_confirmation_message.txt:1
 #, python-format
 msgid ""
-"User %(user_display)s at %(site_name)s has given this as an email address.\n"
+"User \"%(user_display)s\" at \"%(site_name)s\" has given this as an email "
+"address.\n"
 "\n"
-"To confirm this is correct, go to %(activate_url)s\n"
+"To confirm this is correct, go to \"%(activate_url)s\"\n"
 msgstr ""
 
 #: core/templates/account/email/email_confirmation_subject.txt:3
@@ -292,6 +293,10 @@ msgstr ""
 msgid "Your password is now changed."
 msgstr ""
 
+#: core/templates/account/password_reset_from_key_done.html:11
+msgid "Login"
+msgstr ""
+
 #: core/templates/account/password_set.html:6
 #: core/templates/account/password_set.html:9
 #: core/templates/account/password_set.html:14
@@ -446,7 +451,7 @@ msgstr ""
 msgid "OpenID Sign In"
 msgstr ""
 
-#: core/templates/public_layout.html:56
+#: core/templates/public_layout.html:56 deck/views.py:252
 msgid "You need to be logged in to continue to the next step."
 msgstr ""
 
@@ -461,10 +466,10 @@ msgid ""
 "              "
 msgstr ""
 
-#: core/templates/sidebar.html:24 deck/models.py:142
+#: core/templates/sidebar.html:24 deck/models.py:177
 #: deck/templates/event/event_detail.html:22
 #: deck/templates/event/event_list.html:6
-#: deck/templates/event/event_list.html:10
+#: deck/templates/event/event_list.html:10 deck/tests/test_unit.py:43
 msgid "Events"
 msgstr ""
 
@@ -566,52 +571,73 @@ msgstr ""
 msgid "The \"@%s\" already is being part of this jury."
 msgstr ""
 
-#: deck/models.py:28
+#: deck/models.py:51
 msgid "Title"
 msgstr ""
 
-#: deck/models.py:31 deck/templates/event/event_form.html:38
-#: deck/templates/proposal/proposal_form.html:39
+#: deck/models.py:54 deck/templates/event/event_form.html:38
+#: deck/templates/proposal/proposal_form.html:38
 msgid "Description"
 msgstr ""
 
-#: deck/models.py:32
+#: deck/models.py:55
 msgid "Created At"
 msgstr ""
 
-#: deck/models.py:33
+#: deck/models.py:56
 msgid "Publish"
 msgstr ""
 
-#: deck/models.py:56
+#: deck/models.py:75
+msgid "Angry"
+msgstr ""
+
+#: deck/models.py:75
+msgid "Sad"
+msgstr ""
+
+#: deck/models.py:76
+msgid "Sleepy"
+msgstr ""
+
+#: deck/models.py:76
+msgid "Happy"
+msgstr ""
+
+#: deck/models.py:77
+msgid "Laughing"
+msgstr ""
+
+#: deck/models.py:84
 msgid "Rate Index"
 msgstr ""
 
-#: deck/models.py:63
+#: deck/models.py:91 deck/tests/test_unit.py:268
 msgid "Vote"
 msgstr ""
 
-#: deck/models.py:64
+#: deck/models.py:92 deck/tests/test_unit.py:271
 msgid "Votes"
 msgstr ""
 
-#: deck/models.py:95
+#: deck/models.py:124 deck/tests/test_unit.py:152
 msgid "Proposal"
 msgstr ""
 
-#: deck/models.py:96 deck/templates/event/event_detail.html:57
+#: deck/models.py:125 deck/templates/event/event_detail.html:57
+#: deck/tests/test_unit.py:155
 msgid "Proposals"
 msgstr ""
 
-#: deck/models.py:101 deck/views.py:139
+#: deck/models.py:130 deck/views.py:157
 msgid "This Event doesn't accept Proposals anymore."
 msgstr ""
 
-#: deck/models.py:131
+#: deck/models.py:166
 msgid "Allow Public Voting"
 msgstr ""
 
-#: deck/models.py:141
+#: deck/models.py:176 deck/tests/test_unit.py:40
 msgid "Event"
 msgstr ""
 
@@ -631,7 +657,7 @@ msgstr ""
 msgid "Send a proposal"
 msgstr ""
 
-#: deck/templates/event/event_detail.html:70
+#: deck/templates/event/event_detail.html:71
 #, python-format
 msgid ""
 "\n"
@@ -639,16 +665,16 @@ msgid ""
 "                "
 msgstr ""
 
-#: deck/templates/event/event_detail.html:81
+#: deck/templates/event/event_detail.html:82
 msgid "Edit the proposal."
 msgstr ""
 
-#: deck/templates/event/event_detail.html:82
+#: deck/templates/event/event_detail.html:83
 #: deck/templates/event/snippets/event_list_item.html:37
 msgid "Edit"
 msgstr ""
 
-#: deck/templates/event/event_detail.html:89
+#: deck/templates/event/event_detail.html:90
 msgid "There are no proposals to show"
 msgstr ""
 
@@ -665,12 +691,12 @@ msgid "New Event"
 msgstr ""
 
 #: deck/templates/event/event_form.html:47
-#: deck/templates/proposal/proposal_form.html:49
+#: deck/templates/proposal/proposal_form.html:48
 msgid "submit"
 msgstr ""
 
 #: deck/templates/event/event_form.html:53
-#: deck/templates/proposal/proposal_form.html:54
+#: deck/templates/proposal/proposal_form.html:53
 #: jury/templates/jury/jury_detail.html:93
 msgid "event detail"
 msgstr ""
@@ -692,7 +718,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"      Created by <strong>%(author)s</strong> at %(created_at)s\n"
+"      Created by <strong>%(author)s</strong> at %(created_at)s.\n"
 "      "
 msgstr ""
 
@@ -724,41 +750,48 @@ msgstr ""
 msgid "Export votes"
 msgstr ""
 
+#: deck/templates/event/vote_block.html:12
+msgid "Use the buttons bellow to vote:"
+msgstr ""
+
 #: deck/templates/proposal/proposal_form.html:8
-#: deck/templates/proposal/proposal_form.html:24
+#: deck/templates/proposal/proposal_form.html:23
 msgid "Update Proposal"
 msgstr ""
 
 #: deck/templates/proposal/proposal_form.html:10
-#: deck/templates/proposal/proposal_form.html:26
 msgid "New Proposal"
 msgstr ""
 
-#: deck/views.py:45
+#: deck/templates/proposal/proposal_form.html:25
+msgid "New Proposal for"
+msgstr ""
+
+#: deck/views.py:53
 msgid "Event created."
 msgstr ""
 
-#: deck/views.py:75
+#: deck/views.py:93
 msgid "Event updated."
 msgstr ""
 
-#: deck/views.py:84 deck/views.py:98 deck/views.py:198
+#: deck/views.py:102 deck/views.py:116 deck/views.py:268
 msgid "You are not allowed to see this page."
 msgstr ""
 
-#: deck/views.py:150
+#: deck/views.py:170
 msgid "Proposal created."
 msgstr ""
 
-#: deck/views.py:168
+#: deck/views.py:203
 msgid "Proposal updated."
 msgstr ""
 
-#: deck/views.py:186
+#: deck/views.py:221 deck/views.py:240
 msgid "Rate Index not found."
 msgstr ""
 
-#: deck/views.py:190
+#: deck/views.py:227 deck/views.py:244
 msgid "Proposal rated."
 msgstr ""
 
