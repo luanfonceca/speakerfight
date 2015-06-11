@@ -4,15 +4,15 @@
 <div class="text-center proposal-votes">
   {% if request.user|already_voted:proposal %}
     {% with request.user|get_rate_display:proposal as rate %}
-      <a class="flat-icon" title="{{ rate|title }}">
-        <i class="{{ rate }} black" title="{{ rate|title }}" data-toggle="tooltip"></i>
+      <a class="flat-icon" title="{{ rate|get_rate_title }}">
+        <i class="{{ rate }} black" title="{{ rate|get_rate_title }}" data-toggle="tooltip"></i>
       </a>
     {% endwith %}
   {% elif request.user|allowed_to_vote:proposal %}
-    Use the buttons bellow to vote:<br/>
-    {% for value, name in vote_rates %}
-      <a href="{% url 'rate_proposal' event_slug=proposal.event.slug slug=proposal.slug rate=name %}" class="flat-icon voting-link">
-        <i class="{{ name }} black" title="{{ name|title }}" data-toggle="tooltip"></i>
+    {{ _('Use the buttons bellow to vote:') }}<br/>
+    {% for _, rate in vote_rates %}
+      <a href="{% url 'rate_proposal' event_slug=proposal.event.slug slug=proposal.slug rate=rate %}" class="flat-icon voting-link">
+        <i class="{{ rate }} black" title="{{ rate|get_rate_title }}" data-toggle="tooltip"></i>
       </a>
     {% endfor %}
   {% endif %}

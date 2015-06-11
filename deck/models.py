@@ -71,6 +71,11 @@ class DeckBaseModel(models.Model):
 
 class Vote(models.Model):
     ANGRY, SLEEPY, SAD, HAPPY, LAUGHING = range(-1, 4)
+    VOTE_TITLES = dict(
+        angry=_('Angry'), sad=_('Sad'),
+        sleepy=_('Sleepy'), happy=_('Happy'),
+        laughing=_('Laughing')
+    )
     VOTE_RATES = ((ANGRY, 'angry'),
                   (SAD, 'sad'),
                   (SLEEPY, 'sleepy'),
@@ -79,6 +84,7 @@ class Vote(models.Model):
     rate = models.SmallIntegerField(_('Rate Index'), null=True, blank=True,
                                     choices=VOTE_RATES)
 
+    # relations
     proposal = models.ForeignKey(to='deck.Proposal', related_name='votes')
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name='votes')
 

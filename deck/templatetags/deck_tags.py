@@ -1,8 +1,9 @@
 import hashlib
 
 from django import template
-
 register = template.Library()
+
+from deck.models import Vote
 
 
 @register.filter
@@ -18,6 +19,11 @@ def allowed_to_vote(user, proposal):
 @register.filter
 def get_rate_display(user, proposal):
     return proposal.votes.get(user=user).get_rate_display()
+
+
+@register.filter
+def get_rate_title(rate):
+    return Vote.VOTE_TITLES.get(rate)
 
 
 @register.filter
