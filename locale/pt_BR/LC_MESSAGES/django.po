@@ -28,7 +28,7 @@ msgstr "Conta Inativa"
 
 #: core/templates/account/account_inactive.html:10
 msgid "This account is inactive."
-msgstr "Está conta está inativa."
+msgstr "Esta conta está inativa."
 
 #: core/templates/account/email.html:6
 msgid "Account"
@@ -48,7 +48,7 @@ msgstr "Verificado"
 
 #: core/templates/account/email.html:27
 msgid "Unverified"
-msgstr "Não Verificado"
+msgstr "Não verificado"
 
 #: core/templates/account/email.html:29
 msgid "Primary"
@@ -90,7 +90,7 @@ msgstr "Adicionar e-mail"
 
 #: core/templates/account/email.html:63
 msgid "Do you really want to remove the selected e-mail address?"
-msgstr "Você realmente quer remover o endereço de e-mail selecionado ?"
+msgstr "Você realmente quer remover o endereço de e-mail selecionado?"
 
 #: core/templates/account/email/email_confirmation_message.txt:1
 #, python-format
@@ -136,11 +136,11 @@ msgstr ""
 "\n"
 "Em caso de você ter esquecido, seu nome de usuário é %(username)s.\n"
 "\n"
-"obrigado por usar nosso site\n"
+"Obrigado por usar nosso site!\n"
 
 #: core/templates/account/email/password_reset_key_subject.txt:3
 msgid "Password Reset E-mail"
-msgstr "Senha enviada para e-mail"
+msgstr "Senha enviada por e-mail"
 
 #: core/templates/account/email_confirm.html:17
 #, python-format
@@ -190,7 +190,7 @@ msgid ""
 msgstr ""
 "\n"
 "Por favor acesse usando uam de suas contas de terceiros. Ou, <a href="
-"\"%(signup_url)s\">registre-se</a>   para uma conta no  %(site_name)s e "
+"\"%(signup_url)s\">registre-se</a> para uma conta no  %(site_name)s e "
 "acesse abaixo:"
 
 #: core/templates/account/login.html:23
@@ -207,7 +207,7 @@ msgstr ""
 
 #: core/templates/account/login.html:37
 msgid "Forgot Password?"
-msgstr "esqueceu sua senha?"
+msgstr "Esqueceu sua senha?"
 
 #: core/templates/account/login.html:43 core/templates/account/signup.html:38
 msgid ""
@@ -294,7 +294,7 @@ msgid ""
 "Forgotten your password? Enter your e-mail address below, and we'll send you "
 "an e-mail allowing you to reset it."
 msgstr ""
-"Esqueceu sua senha ? Informe seu endereço de e-mail abaixo, e nós lhe "
+"Esqueceu sua senha? Informe seu endereço de e-mail abaixo, e nós lhe "
 "enviaremos um e-mail para que você a altere."
 
 #: core/templates/account/password_reset.html:21
