@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: speakerfight\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-11 19:29-0300\n"
-"PO-Revision-Date: 2015-06-11 22:43+0000\n"
+"POT-Creation-Date: 2015-06-17 05:15-0300\n"
+"PO-Revision-Date: 2015-06-17 08:18+0000\n"
 "Last-Translator: Luan Fonseca de Farias <luanfonceca@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/speakerfight/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -95,7 +95,7 @@ msgid ""
 "User \"%(user_display)s\" at \"%(site_name)s\" has given this as an email address.\n"
 "\n"
 "To confirm this is correct, go to \"%(activate_url)s\"\n"
-msgstr ""
+msgstr "Usuário \"%(user_display)s\" em \"%(site_name)s\" informou isto como um endereço de e-mail.\n\nPara confirmar que esse é o correto, acesse \"%(activate_url)s\"\n"
 
 #: core/templates/account/email/email_confirmation_subject.txt:3
 #: core/templates/account/email_confirm.html:7
@@ -464,7 +464,7 @@ msgid ""
 "              "
 msgstr "\n                <strong>SpeakerFight</strong> é orgulhosamente um projeto open-source\n                e esta sempre sendo melhorado. Se o software\n                apresentar qualquer comportamento estanho\n                %(anchor_start)spor favor nos informe%(anchor_end)s.\n              "
 
-#: core/templates/sidebar.html:24 deck/models.py:177
+#: core/templates/sidebar.html:24 deck/models.py:178
 #: deck/templates/event/event_detail.html:22
 #: deck/templates/event/event_list.html:6
 #: deck/templates/event/event_list.html:10 deck/tests/test_unit.py:43
@@ -568,73 +568,73 @@ msgstr "O \"%s\" não são  usuários Speakerfight. Por enquanto, nós somente p
 msgid "The \"@%s\" already is being part of this jury."
 msgstr "O \"@%s\" já faz parte deste júri."
 
-#: deck/models.py:51
+#: deck/models.py:52
 msgid "Title"
 msgstr "Título"
 
-#: deck/models.py:54 deck/templates/event/event_form.html:38
+#: deck/models.py:55 deck/templates/event/event_form.html:38
 #: deck/templates/proposal/proposal_form.html:38
 msgid "Description"
 msgstr "Descrição"
 
-#: deck/models.py:55
+#: deck/models.py:56
 msgid "Created At"
 msgstr "Criado em"
 
-#: deck/models.py:56
+#: deck/models.py:57
 msgid "Publish"
 msgstr "Publicar"
 
-#: deck/models.py:75
+#: deck/models.py:76
 msgid "Angry"
 msgstr "Bravo"
 
-#: deck/models.py:75
+#: deck/models.py:76
 msgid "Sad"
 msgstr "Triste"
 
-#: deck/models.py:76
+#: deck/models.py:77
 msgid "Sleepy"
 msgstr "Sonolento"
 
-#: deck/models.py:76
+#: deck/models.py:77
 msgid "Happy"
 msgstr "Alegre"
 
-#: deck/models.py:77
+#: deck/models.py:78
 msgid "Laughing"
 msgstr "Rindo"
 
-#: deck/models.py:84
+#: deck/models.py:85
 msgid "Rate Index"
 msgstr "Índice de classficação"
 
-#: deck/models.py:91 deck/tests/test_unit.py:268
+#: deck/models.py:93 deck/tests/test_unit.py:268
 msgid "Vote"
 msgstr "Voto"
 
-#: deck/models.py:92 deck/tests/test_unit.py:271
+#: deck/models.py:94 deck/tests/test_unit.py:271
 msgid "Votes"
 msgstr "Votos"
 
-#: deck/models.py:124 deck/tests/test_unit.py:152
+#: deck/models.py:126 deck/tests/test_unit.py:152
 msgid "Proposal"
 msgstr "Proposta"
 
-#: deck/models.py:125 deck/templates/event/event_detail.html:57
+#: deck/models.py:127 deck/templates/event/event_detail.html:57
 #: deck/tests/test_unit.py:155
 msgid "Proposals"
 msgstr "Propostas"
 
-#: deck/models.py:130 deck/views.py:157
+#: deck/models.py:132 deck/views.py:157
 msgid "This Event doesn't accept Proposals anymore."
 msgstr "Este evento não aceita mais propostar."
 
-#: deck/models.py:166
+#: deck/models.py:167
 msgid "Allow Public Voting"
 msgstr "Permitir votação pública"
 
-#: deck/models.py:176 deck/tests/test_unit.py:40
+#: deck/models.py:177 deck/tests/test_unit.py:40
 msgid "Event"
 msgstr "Evento"
 
@@ -657,20 +657,32 @@ msgstr "Enviar uma proposta"
 #, python-format
 msgid ""
 "\n"
-"                Proposed by <strong>%(author)s</strong> at %(created_at)s\n"
+"                Proposed by <strong>%(author)s</strong> at %(created_at)s.\n"
 "                "
-msgstr "\nProposto por <strong>%(author)s</strong> em %(created_at)s\n                "
+msgstr "\n                Proposto por <strong>%(author)s</strong> em %(created_at)s.\n                "
+
+#: deck/templates/event/event_detail.html:78
+#, python-format
+msgid ""
+"\n"
+"                        This proposal already received %(votes_count)s vote%(vote_pluralize)s.\n"
+"                      "
+msgstr "\n                        Esta proposta já recebeu %(votes_count)s voto%(vote_pluralize)s.\n                      "
 
 #: deck/templates/event/event_detail.html:82
+msgid "This proposal never received a vote."
+msgstr "Essa proposta nunca recebeu um voto."
+
+#: deck/templates/event/event_detail.html:94
 msgid "Edit the proposal."
 msgstr "Edite a proposta."
 
-#: deck/templates/event/event_detail.html:83
-#: deck/templates/event/snippets/event_list_item.html:37
+#: deck/templates/event/event_detail.html:95
+#: deck/templates/event/snippets/event_list_item.html:51
 msgid "Edit"
 msgstr "Editar"
 
-#: deck/templates/event/event_detail.html:90
+#: deck/templates/event/event_detail.html:102
 msgid "There are no proposals to show"
 msgstr "Não há propostas para exibir"
 
@@ -710,7 +722,7 @@ msgstr "Novo evento"
 msgid "There are no events to show to you :("
 msgstr "Não há eventos para te exibir :("
 
-#: deck/templates/event/snippets/event_list_item.html:11
+#: deck/templates/event/snippets/event_list_item.html:12
 #, python-format
 msgid ""
 "\n"
@@ -718,31 +730,43 @@ msgid ""
 "      "
 msgstr "\n      Criado por <strong>%(author)s</strong> em %(created_at)s.\n      "
 
-#: deck/templates/event/snippets/event_list_item.html:19
+#: deck/templates/event/snippets/event_list_item.html:20
 msgid "Due date pasted"
 msgstr "Data limite ultrapassada"
 
-#: deck/templates/event/snippets/event_list_item.html:22
+#: deck/templates/event/snippets/event_list_item.html:23
 msgid "Due date in"
 msgstr "Data limite em"
 
-#: deck/templates/event/snippets/event_list_item.html:36
+#: deck/templates/event/snippets/event_list_item.html:30
+#, python-format
+msgid ""
+"\n"
+"              This event received %(proposals_count)s proposal%(proposal_pluralize)s from %(proposers_count)s fighter%(proposer_pluralize)s, that proposal%(proposal_pluralize)s in total already received %(votes_count)s vote%(vote_pluralize)s.\n"
+"            "
+msgstr "\n              Este evento receveu %(proposals_count)s proposta%(proposal_pluralize)s de %(proposers_count)s fighter%(proposer_pluralize)s, ao total essas proposal%(proposal_pluralize)s já receberam %(votes_count)s voto%(vote_pluralize)s.\n            "
+
+#: deck/templates/event/snippets/event_list_item.html:34
+msgid "This event never received a proposal."
+msgstr "Este evento nunca recebeu uma proposta."
+
+#: deck/templates/event/snippets/event_list_item.html:50
 msgid "Edit the event."
 msgstr "Edite o evento"
 
-#: deck/templates/event/snippets/event_list_item.html:39
+#: deck/templates/event/snippets/event_list_item.html:53
 msgid "Manage the jury."
 msgstr "Gerencie o Jury"
 
-#: deck/templates/event/snippets/event_list_item.html:40
+#: deck/templates/event/snippets/event_list_item.html:54
 msgid "Manage Jury"
 msgstr "Gerenciar Jury"
 
-#: deck/templates/event/snippets/event_list_item.html:42
+#: deck/templates/event/snippets/event_list_item.html:56
 msgid "Export CSV with all proposals and vote results."
 msgstr "Exporte um CSV com os resultados de  todas as propostas e votos."
 
-#: deck/templates/event/snippets/event_list_item.html:43
+#: deck/templates/event/snippets/event_list_item.html:57
 msgid "Export votes"
 msgstr "Exportar votos"
 
