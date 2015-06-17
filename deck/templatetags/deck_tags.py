@@ -8,7 +8,7 @@ from deck.models import Vote
 
 @register.filter
 def already_voted(user, proposal):
-    return proposal.user_already_votted(user)
+    return proposal.user_already_voted(user)
 
 
 @register.filter

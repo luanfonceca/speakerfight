@@ -47,6 +47,7 @@ class DeckBaseManager(models.QuerySet):
             order_by=new_ordering
         )
 
+
 class DeckBaseModel(models.Model):
     title = models.CharField(_('Title'), max_length=200)
     slug = AutoSlugField(populate_from='title', overwrite=True,
@@ -107,7 +108,7 @@ class Vote(models.Model):
             validation_message = 'You cannot Rate your own proposals.'
         elif not self.proposal.event.allow_public_voting:
             validation_message = "Proposal doesn't accept Public Voting."
-        elif self.proposal.user_already_votted(self.user):
+        elif self.proposal.user_already_voted(self.user):
             validation_message = 'Proposal already Rated by you.'
 
         if validation_message:
@@ -140,15 +141,14 @@ class Proposal(DeckBaseModel):
         with transaction.atomic():
             self.votes.create(user=user, rate=rate_int)
 
-
-    def user_already_votted(self, user):
+    def user_already_voted(self, user):
         if isinstance(user, AnonymousUser):
             return False
         return self.votes.filter(user=user).exists()
 
     def user_can_vote(self, user):
         can_vote = False
-        if self.user_already_votted(user) or \
+        if self.user_already_voted(user) or \
            (self.author == user and not self.event.author == user):
             pass
         elif self.event.allow_public_voting:
@@ -177,15 +177,15 @@ class Event(DeckBaseModel):
         verbose_name = _('Event')
         verbose_name_plural = _('Events')
 
-    def get_absolute_url(self):
-        return reverse('view_event', kwargs={'slug': self.slug})
-
     @property
     def due_date_is_passed(self):
         if not self.due_date:
             return False
         yesterday = timezone.now() - timedelta(hours=24)
         return yesterday > self.due_date
+
+    def get_absolute_url(self):
+        return reverse('view_event', kwargs={'slug': self.slug})
 
     def user_can_see_proposals(self, user):
         can_see_proposals = False

@@ -252,7 +252,7 @@ class ProposalObjectTest(TestCase):
         self.vote.proposal = self.proposal
         self.vote.save()
 
-        self.assertTrue(self.proposal.user_already_votted(self.user))
+        self.assertTrue(self.proposal.user_already_voted(self.user))
 
     def test_assert_proposal_is_published(self):
         self.assertEquals(True, self.proposal.is_published)
