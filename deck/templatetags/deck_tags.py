@@ -1,5 +1,6 @@
 import hashlib
 
+from django.contrib.auth.models import AnonymousUser
 from django import template
 register = template.Library()
 
@@ -35,3 +36,10 @@ def get_user_photo(user):
 
     return 'http://www.gravatar.com/avatar/{}'.format(
         hashlib.md5(user.email).hexdigest())
+
+
+@register.filter
+def is_user_in_jury(event, user):
+    if isinstance(user, AnonymousUser):
+        return False
+    return event.jury.users.filter(pk=user.pk).exists()

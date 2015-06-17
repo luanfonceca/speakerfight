@@ -198,6 +198,13 @@ class Event(DeckBaseModel):
             can_see_proposals = True
         return can_see_proposals
 
+    def get_proposers_count(self):
+        return self.proposals.values_list(
+            'author', flat=True).distinct().count()
+
+    def get_votes_count(self):
+        return self.proposals.values_list('votes', flat=True).count()
+
 
 @receiver(post_save, sender=Event)
 def create_initial_jury(sender, instance, signal, created, **kwargs):

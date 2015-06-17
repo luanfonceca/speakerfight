@@ -1,9 +1,10 @@
 {% load i18n %}
+{% load deck_tags %}
 
 {% if event_detail %}
-<div class="panel panel-default event-item">
+  <div class="panel panel-default event-item">
 {% else %}
-<div class="panel panel-default event-item linkable" data-href="{% url 'view_event' slug=event.slug %}">
+  <div class="panel panel-default event-item linkable" data-href="{% url 'view_event' slug=event.slug %}">
 {% endif %}
   <div class="panel-body">
     <h3 class="panel-title event-title">{{ event.title }}</h3>
@@ -22,12 +23,25 @@
           {% trans "Due date in" %} {{ event.due_date|timeuntil }}
         {% endif %}
       {% endif %}
+      {% if event.author_id == request.user.id or event|is_user_in_jury:request.user or request.user.is_superuser %}
+        <br>
+        {% with proposals_count=event.proposals.count proposers_count=event.get_proposers_count votes_count=event.get_votes_count %}
+          {% if proposals_count > 0 %}
+            {% blocktrans with proposals_count=proposals_count proposal_pluralize=proposals_count|pluralize proposers_count=proposers_count proposer_pluralize=proposers_count|pluralize votes_count=votes_count vote_pluralize=votes_count|pluralize %}
+              This event received {{ proposals_count }} proposal{{ proposal_pluralize }} from {{ proposers_count }} fighter{{ proposer_pluralize }}, that proposal{{ proposal_pluralize }} in total already received {{ votes_count }} vote{{ vote_pluralize }}.
+            {% endblocktrans %}
+          {% else %}
+            {% trans "This event never received a proposal." %}
+          {% endif %}
+        {% endwith %}
+      {% endif %}
     </p>
     <div class="event-description">
       {{ event.description|safe }}
     </div>
     {% if event_detail %}
       <!-- Go to www.addthis.com/dashboard to customize your tools -->
+      <br>
       <div class="addthis_native_toolbox"></div>
     {% endif %}
   </div>

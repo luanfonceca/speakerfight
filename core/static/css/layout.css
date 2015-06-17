@@ -656,7 +656,8 @@ html {
   font-size: 16px;
 }
 
-.event-item .event-metadata {
+.event-item .event-metadata,
+.proposal-item .proposal-metadata {
   color: #999;
 }
 

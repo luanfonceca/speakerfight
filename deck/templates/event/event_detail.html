@@ -69,8 +69,20 @@
               </h3>
               <p class="proposal-metadata">
                 {% blocktrans with author=proposal.author.get_full_name|default:proposal.author.username created_at=proposal.created_at %}
-                Proposed by <strong>{{ author }}</strong> at {{ created_at }}
+                Proposed by <strong>{{ author }}</strong> at {{ created_at }}.
                 {% endblocktrans %}
+                {% if event.author_id == request.user.id or event|is_user_in_jury:request.user or request.user.is_superuser %}
+                  <br>
+                  {% with votes_count=proposal.votes.count %}
+                    {% if votes_count > 0 %}
+                      {% blocktrans with votes_count=votes_count vote_pluralize=votes_count|pluralize %}
+                        This proposal already received {{ votes_count }} vote{{ vote_pluralize }}.
+                      {% endblocktrans %}
+                    {% else %}
+                      {% trans "This proposal never received a vote." %}
+                    {% endif %}
+                  {% endwith %}
+                {% endif %}
               </p>
               <div class="proposal-description">
                 {{ proposal.description|safe|linebreaks }}
