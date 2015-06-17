@@ -744,7 +744,7 @@ msgid ""
 "\n"
 "              This event received %(proposals_count)s proposal%(proposal_pluralize)s from %(proposers_count)s fighter%(proposer_pluralize)s, that proposal%(proposal_pluralize)s in total already received %(votes_count)s vote%(vote_pluralize)s.\n"
 "            "
-msgstr "\n              Este evento receveu %(proposals_count)s proposta%(proposal_pluralize)s de %(proposers_count)s fighter%(proposer_pluralize)s, ao total essas proposal%(proposal_pluralize)s já receberam %(votes_count)s voto%(vote_pluralize)s.\n            "
+msgstr "\n              Este evento recebeu %(proposals_count)s proposta%(proposal_pluralize)s de %(proposers_count)s usuário%(proposer_pluralize)s, ao total essas proposta%(proposal_pluralize)s já receberam %(votes_count)s voto%(vote_pluralize)s.\n            "
 
 #: deck/templates/event/snippets/event_list_item.html:34
 msgid "This event never received a proposal."
