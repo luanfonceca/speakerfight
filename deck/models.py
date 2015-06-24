@@ -136,6 +136,10 @@ class Proposal(DeckBaseModel):
     def get_rate(self):
         return self.votes.aggregate(Sum('rate'))['rate__sum'] or 0
 
+    @property
+    def num_votes(self):
+        return self.votes.count()
+
     def rate(self, user, rate):
         rate_int = [r[0] for r in Vote.VOTE_RATES if rate in r][0]
         with transaction.atomic():
