@@ -431,7 +431,7 @@ msgid ""
 "                has any odd behavior\n"
 "                %(anchor_start)splease let us know%(anchor_end)s.\n"
 "              "
-msgstr "\n                <strong>SpeakerFight</strong> é orgulhosamente um projeto open-source\n                e esta sempre sendo melhorado. Se o software\n                apresentar qualquer comportamento estanho\n                %(anchor_start)spor favor nos informe%(anchor_end)s.\n              "
+msgstr "\n                <strong>SpeakerFight</strong> é orgulhosamente um projeto open-source\n                e esta sempre sendo melhorado. Se o software\n                apresentar qualquer comportamento estranho\n                %(anchor_start)spor favor nos informe%(anchor_end)s.\n              "
 
 #: core/templates/navbar.html:24
 msgid "Logout"
@@ -462,7 +462,7 @@ msgid ""
 "                has any odd behavior\n"
 "                %(anchor_start)splease let us know%(anchor_end)s.\n"
 "              "
-msgstr "\n                <strong>SpeakerFight</strong> é orgulhosamente um projeto open-source\n                e esta sempre sendo melhorado. Se o software\n                apresentar qualquer comportamento estanho\n                %(anchor_start)spor favor nos informe%(anchor_end)s.\n              "
+msgstr "\n                <strong>SpeakerFight</strong> é orgulhosamente um projeto open-source\n                e esta sempre sendo melhorado. Se o software\n                apresentar qualquer comportamento estranho\n                %(anchor_start)spor favor nos informe%(anchor_end)s.\n              "
 
 #: core/templates/sidebar.html:24 deck/models.py:178
 #: deck/templates/event/event_detail.html:22
