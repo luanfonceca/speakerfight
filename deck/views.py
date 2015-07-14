@@ -58,7 +58,7 @@ class CreateEvent(BaseEventView, CreateView):
         event = self.object
         context = {'event_title': event.title}
         message = render_to_string('mailing/event_created.txt', context)
-        subject = 'Your event is ready to receive proposals'
+        subject = _(u'Your event is ready to receive proposals')
         send_mail(subject, message,
                   settings.NO_REPLY_EMAIL, [event.author.email])
 
