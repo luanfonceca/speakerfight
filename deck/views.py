@@ -59,8 +59,8 @@ class CreateEvent(BaseEventView, CreateView):
         context = {'event_title': event.title}
         message = render_to_string('mailing/event_created.txt', context)
         subject = 'Your event is ready to receive proposals'
-        send_mail(subject, message, settings.NO_REPLY_EMAIL, [event.author.email])
-
+        send_mail(subject, message,
+                  settings.NO_REPLY_EMAIL, [event.author.email])
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -122,15 +122,16 @@ class ExportEvent(BaseEventView, DetailView):
         event = self.get_object()
         filename = "event_%s_export" % event.slug.replace('-', '_')
         field_header_map = {
-            'author__username': 'Author',
-            'votes__rate__sum': 'Votes Rate',
-            'author__email': 'Author E-Mail',
-            'votes__count': '#Votes',
-
-
+            'author__username': _('Author'),
+            'author__email': _('Author E-Mail'),
+            'votes__rate__sum': _('Vote Rate'),
+            'votes__count': _('Votes Count'),
         }
         proposals = event.proposals.values(
-            'id', 'title', 'author__username', 'author__email').annotate(Sum('votes__rate')).annotate(Count('votes'))
+            'id', 'title', 'author__username', 'author__email'
+        ).annotate(
+            Sum('votes__rate')
+        ).annotate(Count('votes'))
         return render_to_csv_response(
             proposals,
             append_datestamp=True,
@@ -159,7 +160,7 @@ class CreateProposal(BaseProposalView, CreateView):
         if event.due_date_is_passed:
             messages.error(
                 self.request,
-                _("This Event doesn't accept Proposals anymore."))
+                _(u"This Event doesn't accept Proposals anymore."))
             return HttpResponseRedirect(
                 reverse('view_event', kwargs={'slug': event.slug}),
             )
@@ -177,18 +178,26 @@ class CreateProposal(BaseProposalView, CreateView):
 
     def send_new_proposal_to_jury_email(self):
         proposal = self.object
-        context = {'event_title': proposal.event.title, 'proposal_title': proposal.title}
+        context = {
+            'event_title': proposal.event.title,
+            'proposal_title': proposal.title
+        }
         message = render_to_string('mailing/jury_new_proposal.txt', context)
-        subject = 'Your event has new proposals'
+        subject = _(u'Your event has new proposals')
         recipients = proposal.event.jury.users.values_list('email', flat=True)
         send_mail(subject, message, settings.NO_REPLY_EMAIL, recipients)
 
     def send_proposal_creation_email(self):
         proposal = self.object
-        context = {'event_title': proposal.event.title, 'proposal_title': proposal.title}
-        message = render_to_string('mailing/author_proposal_created.txt', context)
-        subject = 'Your proposal was submitted'
-        send_mail(subject, message, settings.NO_REPLY_EMAIL, [proposal.author.email])
+        context = {
+            'event_title': proposal.event.title,
+            'proposal_title': proposal.title
+        }
+        message = render_to_string(
+            'mailing/author_proposal_created.txt', context)
+        subject = _(u'Your proposal was submitted')
+        recipients = [proposal.author.email]
+        send_mail(subject, message, settings.NO_REPLY_EMAIL, recipients)
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -251,10 +260,12 @@ class RateProposal(BaseProposalView, UpdateView):
 
     def dispatch(self, *args, **kwargs):
         proposal = self.get_object()
-        view_event_url = reverse('view_event', kwargs={'slug': proposal.event.slug})
+        view_event_url = reverse(
+            'view_event', kwargs={'slug': proposal.event.slug})
 
         if not self.request.user.is_authenticated():
-            message = _(u'You need to be logged in to continue to the next step.')
+            message = _(u'You need to be logged in to '
+                        u'continue to the next step.')
             if self.request.method == 'GET':
                 messages.error(self.request, message)
                 return HttpResponseRedirect(view_event_url)
