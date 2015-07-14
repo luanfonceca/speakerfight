@@ -89,12 +89,25 @@
               </div>
               {% include "event/vote_block.html" %}
             </div>
-            {% if proposal.author_id == request.user.id or request.user.is_superuser %}
-            <div class="panel-footer proposal-actions text-center">
-              <a href="{% url 'update_proposal' event_slug=event.slug slug=proposal.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans "Edit the proposal." %}">
-                <i class="icon-pencil"></i> {% trans "Edit" %}
-              </a>
-            </div>
+            {% if request.user in event.jury.users or request.user.is_superuser %}
+              <div class="panel-footer proposal-actions text-center">
+                {% if proposal.is_approved %}
+                  <a href="{% url 'disapprove_proposal' event_slug=event.slug slug=proposal.slug %}" class="btn-flat gray text-upper disapprove-link" data-toggle="tooltip" title="{% trans 'Disapprove the proposal.' %}">
+                    <i class="icon-check-empty"></i>
+                    <span>{% trans "Disapprove" %}</span>
+                  </a>
+                {% else %}
+                  <a href="{% url 'approve_proposal' event_slug=event.slug slug=proposal.slug %}" class="btn-flat gray text-upper approve-link" data-toggle="tooltip" title="{% trans 'Approve the proposal.' %}">
+                    <i class="icon-check"></i>
+                    <span>{% trans "Approve" %}</span>
+                  </a>
+                {% endif %}
+                {% if proposal.author_id == request.user.id or request.user.is_superuser %}
+                    <a href="{% url 'update_proposal' event_slug=event.slug slug=proposal.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Edit the proposal.' %}">
+                      <i class="icon-pencil"></i> {% trans "Edit" %}
+                    </a>
+                {% endif %}
+              </div>
             {% endif %}
           </div>
         {% empty %}

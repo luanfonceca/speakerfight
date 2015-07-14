@@ -870,3 +870,196 @@ class ProposalTest(TestCase):
         self.assertEquals(1, self.proposal.get_rate)
         self.assertEquals(1, self.proposal.votes.count())
         self.assertEquals(1, Vote.objects.count())
+
+    def test_approve_proposal_with_the_anonymous_user(self):
+        self.client.logout()
+        approve_proposal_data = {
+            'event_slug': self.proposal.event.slug,
+            'slug': self.proposal.slug,
+        }
+
+        response = self.client.post(
+            reverse('approve_proposal', kwargs=approve_proposal_data),
+            follow=True
+        )
+        self.proposal = Proposal.objects.first()
+        self.assertEquals(401, response.status_code)
+        self.assertIn('message', json.loads(response.content))
+        self.assertEquals(False, self.proposal.is_approved)
+
+    def test_approve_proposal_with_the_admin_user(self):
+        self.client.logout()
+        self.client.login(username='admin', password='admin')
+        self.proposal.author = User.objects.get(username='admin')
+        self.proposal.save()
+
+        approve_proposal_data = {
+            'event_slug': self.proposal.event.slug,
+            'slug': self.proposal.slug,
+        }
+        response = self.client.post(
+            reverse('approve_proposal', kwargs=approve_proposal_data),
+            follow=True
+        )
+
+        self.proposal = Proposal.objects.first()
+        self.assertEquals(200, response.status_code)
+        self.assertIn('message', json.loads(response.content))
+        self.assertEquals(True, self.proposal.is_approved)
+
+    def test_approve_proposal_with_the_admin_user_by_get(self):
+        self.client.logout()
+        self.client.login(username='admin', password='admin')
+        self.proposal.author = User.objects.get(username='admin')
+        self.proposal.save()
+
+        approve_proposal_data = {
+            'event_slug': self.proposal.event.slug,
+            'slug': self.proposal.slug
+        }
+        response = self.client.get(
+            reverse('approve_proposal', kwargs=approve_proposal_data),
+            follow=True
+        )
+
+        self.proposal = Proposal.objects.first()
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(True, self.proposal.is_approved)
+
+    def test_approve_proposal_with_the_jury_user(self):
+        self.event.jury.users.add(User.objects.get(username='another'))
+        self.client.logout()
+        self.client.login(username='another', password='another')
+
+        approve_proposal_data = {
+            'event_slug': self.proposal.event.slug,
+            'slug': self.proposal.slug
+        }
+        response = self.client.post(
+            reverse('approve_proposal', kwargs=approve_proposal_data),
+            follow=True
+        )
+
+        self.proposal = Proposal.objects.first()
+        self.assertEquals(200, response.status_code)
+        self.assertIn('message', json.loads(response.content))
+        self.assertEquals(True, self.proposal.is_approved)
+
+    def test_approve_proposal_with_the_jury_user_by_get(self):
+        self.event.jury.users.add(User.objects.get(username='another'))
+        self.client.logout()
+        self.client.login(username='another', password='another')
+
+        approve_proposal_data = {
+            'event_slug': self.proposal.event.slug,
+            'slug': self.proposal.slug
+        }
+        response = self.client.get(
+            reverse('approve_proposal', kwargs=approve_proposal_data),
+            follow=True
+        )
+
+        self.proposal = Proposal.objects.first()
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(True, self.proposal.is_approved)
+
+    def test_disapprove_proposal_with_the_anonymous_user(self):
+        self.proposal.is_approved = True
+        self.proposal.save()
+
+        self.client.logout()
+        disapprove_proposal_data = {
+            'event_slug': self.proposal.event.slug,
+            'slug': self.proposal.slug,
+        }
+
+        response = self.client.post(
+            reverse('disapprove_proposal', kwargs=disapprove_proposal_data),
+            follow=True
+        )
+        self.proposal = Proposal.objects.first()
+        self.assertEquals(401, response.status_code)
+        self.assertIn('message', json.loads(response.content))
+        self.assertEquals(True, self.proposal.is_approved)
+
+    def test_disapprove_proposal_with_the_admin_user(self):
+        self.client.logout()
+        self.client.login(username='admin', password='admin')
+        self.proposal.author = User.objects.get(username='admin')
+        self.proposal.is_approved = True
+        self.proposal.save()
+
+        disapprove_proposal_data = {
+            'event_slug': self.proposal.event.slug,
+            'slug': self.proposal.slug,
+        }
+        response = self.client.post(
+            reverse('disapprove_proposal', kwargs=disapprove_proposal_data),
+            follow=True
+        )
+
+        self.proposal = Proposal.objects.first()
+        self.assertEquals(200, response.status_code)
+        self.assertIn('message', json.loads(response.content))
+        self.assertEquals(False, self.proposal.is_approved)
+
+    def test_disapprove_proposal_with_the_admin_user_by_get(self):
+        self.client.logout()
+        self.client.login(username='admin', password='admin')
+        self.proposal.author = User.objects.get(username='admin')
+        self.proposal.is_approved = True
+        self.proposal.save()
+
+        disapprove_proposal_data = {
+            'event_slug': self.proposal.event.slug,
+            'slug': self.proposal.slug
+        }
+        response = self.client.get(
+            reverse('disapprove_proposal', kwargs=disapprove_proposal_data),
+            follow=True
+        )
+
+        self.proposal = Proposal.objects.first()
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(False, self.proposal.is_approved)
+
+    def test_disapprove_proposal_with_the_jury_user(self):
+        self.event.jury.users.add(User.objects.get(username='another'))
+        self.client.logout()
+        self.client.login(username='another', password='another')
+        self.proposal.is_approved = True
+        self.proposal.save()
+
+        disapprove_proposal_data = {
+            'event_slug': self.proposal.event.slug,
+            'slug': self.proposal.slug
+        }
+        response = self.client.post(
+            reverse('disapprove_proposal', kwargs=disapprove_proposal_data),
+            follow=True
+        )
+
+        self.proposal = Proposal.objects.first()
+        self.assertEquals(200, response.status_code)
+        self.assertIn('message', json.loads(response.content))
+        self.assertEquals(False, self.proposal.is_approved)
+
+    def test_disapprove_proposal_with_the_jury_user_by_get(self):
+        self.event.jury.users.add(User.objects.get(username='another'))
+        self.client.logout()
+        self.client.login(username='another', password='another')
+        self.proposal.is_approved = True
+        self.proposal.save()
+
+        disapprove_proposal_data = {
+            'event_slug': self.proposal.event.slug,
+            'slug': self.proposal.slug
+        }
+        response = self.client.get(
+            reverse('disapprove_proposal', kwargs=disapprove_proposal_data),
+            follow=True
+        )
+
+        self.proposal = Proposal.objects.first()
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(False, self.proposal.is_approved)

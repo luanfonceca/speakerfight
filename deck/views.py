@@ -283,3 +283,137 @@ class RateProposal(BaseProposalView, UpdateView):
                 content_type='application/json'
             )
         return super(RateProposal, self).dispatch(*args, **kwargs)
+
+
+class ApproveProposal(BaseProposalView, UpdateView):
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        response_content = {}
+        response_status = 200
+
+        try:
+            self.object.approve()
+        except (IntegrityError, ValidationError), e:
+            response_content['message'] = e.message
+            response_status = 400
+        else:
+            response_content['message'] = _(u'Proposal approved.')
+        return HttpResponse(
+            json.dumps(response_content),
+            status=response_status,
+            content_type='application/json')
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        try:
+            self.object.approve()
+        except (IntegrityError, ValidationError), e:
+            messages.error(self.request, e.message)
+        else:
+            messages.success(self.request, _(u'Proposal approved.'))
+        return HttpResponseRedirect(self.get_success_url())
+
+    def dispatch(self, *args, **kwargs):
+        proposal = self.get_object()
+        view_event_url = reverse(
+            'view_event', kwargs={'slug': proposal.event.slug})
+
+        if not self.request.user.is_authenticated():
+            message = _(u'You need to be logged in to '
+                        u'continue to the next step.')
+            if self.request.method == 'GET':
+                messages.error(self.request, message)
+                return HttpResponseRedirect(view_event_url)
+            response = {}
+            response['message'] = message
+            response['redirectUrl'] = u'{}?{}={}'.format(
+                settings.LOGIN_URL,
+                REDIRECT_FIELD_NAME,
+                self.request.META.get('PATH_INFO')
+            )
+            return HttpResponse(
+                json.dumps(response),
+                status=401,
+                content_type='application/json')
+        elif not proposal.user_can_approve(self.request.user):
+            message = _(u'You are not allowed to see this page.')
+            if self.request.method == 'GET':
+                messages.error(self.request, message)
+                return HttpResponseRedirect(view_event_url)
+            response = {}
+            response['message'] = message
+            response['redirectUrl'] = ''
+            return HttpResponse(
+                json.dumps(response),
+                status=401,
+                content_type='application/json'
+            )
+        return super(ApproveProposal, self).dispatch(*args, **kwargs)
+
+
+class DisapproveProposal(BaseProposalView, UpdateView):
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        response_content = {}
+        response_status = 200
+
+        try:
+            self.object.disapprove()
+        except (IntegrityError, ValidationError), e:
+            response_content['message'] = e.message
+            response_status = 400
+        else:
+            response_content['message'] = _(u'Proposal disapproved.')
+        return HttpResponse(
+            json.dumps(response_content),
+            status=response_status,
+            content_type='application/json')
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        try:
+            self.object.disapprove()
+        except (IntegrityError, ValidationError), e:
+            messages.error(self.request, e.message)
+        else:
+            messages.success(self.request, _(u'Proposal disapproved.'))
+        return HttpResponseRedirect(self.get_success_url())
+
+    def dispatch(self, *args, **kwargs):
+        proposal = self.get_object()
+        view_event_url = reverse(
+            'view_event', kwargs={'slug': proposal.event.slug})
+
+        if not self.request.user.is_authenticated():
+            message = _(u'You need to be logged in to '
+                        u'continue to the next step.')
+            if self.request.method == 'GET':
+                messages.error(self.request, message)
+                return HttpResponseRedirect(view_event_url)
+            response = {}
+            response['message'] = message
+            response['redirectUrl'] = u'{}?{}={}'.format(
+                settings.LOGIN_URL,
+                REDIRECT_FIELD_NAME,
+                self.request.META.get('PATH_INFO')
+            )
+            return HttpResponse(
+                json.dumps(response),
+                status=401,
+                content_type='application/json')
+        elif not proposal.user_can_approve(self.request.user):
+            message = _(u'You are not allowed to see this page.')
+            if self.request.method == 'GET':
+                messages.error(self.request, message)
+                return HttpResponseRedirect(view_event_url)
+            response = {}
+            response['message'] = message
+            response['redirectUrl'] = ''
+            return HttpResponse(
+                json.dumps(response),
+                status=401,
+                content_type='application/json'
+            )
+        return super(DisapproveProposal, self).dispatch(*args, **kwargs)

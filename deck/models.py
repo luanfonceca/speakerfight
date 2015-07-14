@@ -118,6 +118,8 @@ class Vote(models.Model):
 
 
 class Proposal(DeckBaseModel):
+    is_approved = models.BooleanField(_('Is approved'), default=False)
+
     # relations
     event = models.ForeignKey(to='deck.Event', related_name='proposals')
 
@@ -159,8 +161,28 @@ class Proposal(DeckBaseModel):
             can_vote = True
         return can_vote
 
+    def user_can_approve(self, user):
+        can_approve = False
+        if user.is_superuser:
+            can_approve = True
+        elif self.event.jury.users.filter(pk=user.pk).exists():
+            can_approve = True
+        return can_approve
+
     def get_absolute_url(self):
         return reverse('view_event', kwargs={'slug': self.event.slug})
+
+    def approve(self):
+        if self.is_approved:
+            raise ValidationError(_("This Proposal was already approved."))
+        self.is_approved = True
+        self.save()
+
+    def disapprove(self):
+        if not self.is_approved:
+            raise ValidationError(_("This Proposal was already disapproved."))
+        self.is_approved = False
+        self.save()
 
 
 class Event(DeckBaseModel):

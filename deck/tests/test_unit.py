@@ -218,6 +218,12 @@ class ProposalModelIntegrityTest(TestCase):
     def test_assert_proposal_is_published_should_be_True_as_default(self):
         self.assertEquals(True, self.fields['is_published'].default)
 
+    def test_assert_proposal_is_approved_should_be_a_BooleanField(self):
+        self.assertIsInstance(self.fields['is_approved'], BooleanField)
+
+    def test_assert_proposal_is_approved_should_be_False_as_default(self):
+        self.assertEquals(False, self.fields['is_approved'].default)
+
 
 class ProposalObjectTest(TestCase):
     fixtures = ['user.json']
@@ -256,6 +262,25 @@ class ProposalObjectTest(TestCase):
 
     def test_assert_proposal_is_published(self):
         self.assertEquals(True, self.proposal.is_published)
+
+    def test_assert_proposal_approve(self):
+        self.event.save()
+        self.proposal.event = self.event
+        self.proposal.save()
+
+        self.assertEquals(False, self.proposal.is_approved)
+        self.proposal.approve()
+        self.assertEquals(True, self.proposal.is_approved)
+
+    def test_assert_proposal_disapprove(self):
+        self.event.save()
+        self.proposal.event = self.event
+        self.proposal.is_approved = True
+        self.proposal.save()
+
+        self.assertEquals(True, self.proposal.is_approved)
+        self.proposal.disapprove()
+        self.assertEquals(False, self.proposal.is_approved)
 
 
 class VoteModelIntegrityTest(TestCase):

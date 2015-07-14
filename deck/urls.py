@@ -32,4 +32,12 @@ urlpatterns = patterns(
               r'proposals/<slug:slug>/rate/<slug:rate>/',
         view=views.RateProposal.as_view(),
         name='rate_proposal'),
+    url(regex=r'/events/<slug:event_slug>/'
+              r'proposals/<slug:slug>/approve_proposal/',
+        view=views.ApproveProposal.as_view(),
+        name='approve_proposal'),
+    url(regex=r'/events/<slug:event_slug>/'
+              r'proposals/<slug:slug>/disapprove_proposal/',
+        view=views.DisapproveProposal.as_view(),
+        name='disapprove_proposal'),
 )
