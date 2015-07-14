@@ -53,7 +53,7 @@ class InviteForm(forms.ModelForm):
 class ProposalForm(forms.ModelForm):
     class Meta:
         model = Proposal
-        exclude = ['event', 'author', 'rate']
+        exclude = ['event', 'author', 'rate', 'is_approved']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'inline-input'}),
         }
