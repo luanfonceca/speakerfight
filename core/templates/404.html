@@ -1,1 +1,25 @@
-404.html
+{% extends "public_layout.html" %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Page Not Found" %}{% endblock head_title %}
+
+{% block content %}
+  <div class="row" id="hero">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <h1>{% trans "Page Not Found" %}</h1>
+      <h3>{% trans "The requested URL " %}{{ request.path|escape }} {% trans "was not found on this server. Click below to see all events available." %}</h3>
+      <div class="row" id="join-call-to-action">
+        <div class="col-md-12 text-center">
+          <h1>{% trans "Enter in the arena" %}</h1>
+          <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+              <a href="{% url 'list_events' %}" class="btn-flat info big-button text-center">{% trans "SEE ALL EVENTS" %}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+{% endblock content %}
