@@ -670,7 +670,12 @@ html {
   overflow: hidden;
 }
 
-.author-photo {
+#event-detail #event-proposals .proposal-title {
+  font-size: 18px;
+  font-weight: bold
+}
+
+#event-detail #event-proposals .author-photo {
   width: 40px;
   height: 40px;
 }
