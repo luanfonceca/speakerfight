@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-17 05:15-0300\n"
+"POT-Creation-Date: 2015-07-27 10:08-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -451,7 +451,8 @@ msgstr ""
 msgid "OpenID Sign In"
 msgstr ""
 
-#: core/templates/public_layout.html:56 deck/views.py:252
+#: core/templates/public_layout.html:56 deck/views.py:267 deck/views.py:334
+#: deck/views.py:401
 msgid "You need to be logged in to continue to the next step."
 msgstr ""
 
@@ -466,7 +467,7 @@ msgid ""
 "              "
 msgstr ""
 
-#: core/templates/sidebar.html:24 deck/models.py:178
+#: core/templates/sidebar.html:24 deck/models.py:200
 #: deck/templates/event/event_detail.html:22
 #: deck/templates/event/event_list.html:6
 #: deck/templates/event/event_list.html:10 deck/tests/test_unit.py:43
@@ -612,32 +613,56 @@ msgstr ""
 msgid "Rate Index"
 msgstr ""
 
-#: deck/models.py:93 deck/tests/test_unit.py:268
+#: deck/models.py:93 deck/tests/test_unit.py:293
 msgid "Vote"
 msgstr ""
 
-#: deck/models.py:94 deck/tests/test_unit.py:271
+#: deck/models.py:94 deck/tests/test_unit.py:296
 msgid "Votes"
 msgstr ""
 
-#: deck/models.py:126 deck/tests/test_unit.py:152
+#: deck/models.py:108
+msgid "You cannot Rate your own proposals."
+msgstr ""
+
+#: deck/models.py:110
+msgid "Proposal doesn't accept Public Voting."
+msgstr ""
+
+#: deck/models.py:112
+msgid "Proposal already Rated by you."
+msgstr ""
+
+#: deck/models.py:121
+msgid "Is approved"
+msgstr ""
+
+#: deck/models.py:128 deck/tests/test_unit.py:152
 msgid "Proposal"
 msgstr ""
 
-#: deck/models.py:127 deck/templates/event/event_detail.html:57
+#: deck/models.py:129 deck/templates/event/event_detail.html:57
 #: deck/tests/test_unit.py:155
 msgid "Proposals"
 msgstr ""
 
-#: deck/models.py:132 deck/views.py:157
+#: deck/models.py:134 deck/views.py:163
 msgid "This Event doesn't accept Proposals anymore."
 msgstr ""
 
-#: deck/models.py:167
+#: deck/models.py:177
+msgid "This Proposal was already approved."
+msgstr ""
+
+#: deck/models.py:183
+msgid "This Proposal was already disapproved."
+msgstr ""
+
+#: deck/models.py:189
 msgid "Allow Public Voting"
 msgstr ""
 
-#: deck/models.py:177 deck/tests/test_unit.py:40
+#: deck/models.py:199 deck/tests/test_unit.py:40
 msgid "Event"
 msgstr ""
 
@@ -678,16 +703,32 @@ msgstr ""
 msgid "This proposal never received a vote."
 msgstr ""
 
-#: deck/templates/event/event_detail.html:94
+#: deck/templates/event/event_detail.html:95
+msgid "Disapprove the proposal."
+msgstr ""
+
+#: deck/templates/event/event_detail.html:97
+msgid "Disapprove"
+msgstr ""
+
+#: deck/templates/event/event_detail.html:100
+msgid "Approve the proposal."
+msgstr ""
+
+#: deck/templates/event/event_detail.html:102
+msgid "Approve"
+msgstr ""
+
+#: deck/templates/event/event_detail.html:106
 msgid "Edit the proposal."
 msgstr ""
 
-#: deck/templates/event/event_detail.html:95
+#: deck/templates/event/event_detail.html:107
 #: deck/templates/event/snippets/event_list_item.html:51
 msgid "Edit"
 msgstr ""
 
-#: deck/templates/event/event_detail.html:102
+#: deck/templates/event/event_detail.html:115
 msgid "There are no proposals to show"
 msgstr ""
 
@@ -795,32 +836,69 @@ msgstr ""
 msgid "New Proposal for"
 msgstr ""
 
-#: deck/views.py:53
+#: deck/views.py:54
 msgid "Event created."
 msgstr ""
 
-#: deck/views.py:93
+#: deck/views.py:61
+msgid "Your event is ready to receive proposals"
+msgstr ""
+
+#: deck/views.py:94
 msgid "Event updated."
 msgstr ""
 
-#: deck/views.py:102 deck/views.py:116 deck/views.py:268
+#: deck/views.py:103 deck/views.py:117 deck/views.py:284 deck/views.py:351
+#: deck/views.py:418
 msgid "You are not allowed to see this page."
 msgstr ""
 
-#: deck/views.py:170
+#: deck/views.py:125
+msgid "Author"
+msgstr ""
+
+#: deck/views.py:126
+msgid "Author E-Mail"
+msgstr ""
+
+#: deck/views.py:127
+msgid "Vote Rate"
+msgstr ""
+
+#: deck/views.py:128
+msgid "Votes Count"
+msgstr ""
+
+#: deck/views.py:176
 msgid "Proposal created."
 msgstr ""
 
-#: deck/views.py:203
+#: deck/views.py:186
+msgid "Your event has new proposals"
+msgstr ""
+
+#: deck/views.py:198
+msgid "Your proposal was submitted"
+msgstr ""
+
+#: deck/views.py:217
 msgid "Proposal updated."
 msgstr ""
 
-#: deck/views.py:221 deck/views.py:240
+#: deck/views.py:235 deck/views.py:254
 msgid "Rate Index not found."
 msgstr ""
 
-#: deck/views.py:227 deck/views.py:244
+#: deck/views.py:241 deck/views.py:258
 msgid "Proposal rated."
+msgstr ""
+
+#: deck/views.py:311 deck/views.py:325
+msgid "Proposal approved."
+msgstr ""
+
+#: deck/views.py:378 deck/views.py:392
+msgid "Proposal disapproved."
 msgstr ""
 
 #: jury/models.py:12

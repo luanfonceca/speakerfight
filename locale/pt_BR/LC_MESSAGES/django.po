@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: speakerfight\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-17 05:15-0300\n"
-"PO-Revision-Date: 2015-06-17 08:18+0000\n"
+"POT-Creation-Date: 2015-07-27 10:08-0300\n"
+"PO-Revision-Date: 2015-07-27 13:21+0000\n"
 "Last-Translator: Luan Fonseca de Farias <luanfonceca@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/speakerfight/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -449,7 +449,8 @@ msgstr "Usando Email e Senha"
 msgid "OpenID Sign In"
 msgstr "Acesso OpenID"
 
-#: core/templates/public_layout.html:56 deck/views.py:252
+#: core/templates/public_layout.html:56 deck/views.py:267 deck/views.py:334
+#: deck/views.py:401
 msgid "You need to be logged in to continue to the next step."
 msgstr "Você precisa estar logado para ir para o próximo passo."
 
@@ -464,7 +465,7 @@ msgid ""
 "              "
 msgstr "\n                <strong>SpeakerFight</strong> é orgulhosamente um projeto open-source\n                e esta sempre sendo melhorado. Se o software\n                apresentar qualquer comportamento estranho\n                %(anchor_start)spor favor nos informe%(anchor_end)s.\n              "
 
-#: core/templates/sidebar.html:24 deck/models.py:178
+#: core/templates/sidebar.html:24 deck/models.py:200
 #: deck/templates/event/event_detail.html:22
 #: deck/templates/event/event_list.html:6
 #: deck/templates/event/event_list.html:10 deck/tests/test_unit.py:43
@@ -609,32 +610,56 @@ msgstr "Rindo"
 msgid "Rate Index"
 msgstr "Índice de classficação"
 
-#: deck/models.py:93 deck/tests/test_unit.py:268
+#: deck/models.py:93 deck/tests/test_unit.py:293
 msgid "Vote"
 msgstr "Voto"
 
-#: deck/models.py:94 deck/tests/test_unit.py:271
+#: deck/models.py:94 deck/tests/test_unit.py:296
 msgid "Votes"
 msgstr "Votos"
 
-#: deck/models.py:126 deck/tests/test_unit.py:152
+#: deck/models.py:108
+msgid "You cannot Rate your own proposals."
+msgstr "Você não pode Votar nas suas próprias propostas."
+
+#: deck/models.py:110
+msgid "Proposal doesn't accept Public Voting."
+msgstr "Esta Proposta não aceita Votação Pública."
+
+#: deck/models.py:112
+msgid "Proposal already Rated by you."
+msgstr "Proposta anteriormente votada por Você."
+
+#: deck/models.py:121
+msgid "Is approved"
+msgstr "Aprovada"
+
+#: deck/models.py:128 deck/tests/test_unit.py:152
 msgid "Proposal"
 msgstr "Proposta"
 
-#: deck/models.py:127 deck/templates/event/event_detail.html:57
+#: deck/models.py:129 deck/templates/event/event_detail.html:57
 #: deck/tests/test_unit.py:155
 msgid "Proposals"
 msgstr "Propostas"
 
-#: deck/models.py:132 deck/views.py:157
+#: deck/models.py:134 deck/views.py:163
 msgid "This Event doesn't accept Proposals anymore."
 msgstr "Este evento não aceita mais propostar."
 
-#: deck/models.py:167
+#: deck/models.py:177
+msgid "This Proposal was already approved."
+msgstr "Esta Proposta já foi aprovada."
+
+#: deck/models.py:183
+msgid "This Proposal was already disapproved."
+msgstr "Esta Proposta já foi desaprovada."
+
+#: deck/models.py:189
 msgid "Allow Public Voting"
 msgstr "Permitir votação pública"
 
-#: deck/models.py:177 deck/tests/test_unit.py:40
+#: deck/models.py:199 deck/tests/test_unit.py:40
 msgid "Event"
 msgstr "Evento"
 
@@ -673,16 +698,32 @@ msgstr "\n                        Esta proposta já recebeu %(votes_count)s voto
 msgid "This proposal never received a vote."
 msgstr "Essa proposta nunca recebeu um voto."
 
-#: deck/templates/event/event_detail.html:94
+#: deck/templates/event/event_detail.html:95
+msgid "Disapprove the proposal."
+msgstr "Desaprove a proposta."
+
+#: deck/templates/event/event_detail.html:97
+msgid "Disapprove"
+msgstr "Desaprovar"
+
+#: deck/templates/event/event_detail.html:100
+msgid "Approve the proposal."
+msgstr "Aprove a proposta."
+
+#: deck/templates/event/event_detail.html:102
+msgid "Approve"
+msgstr "Aprovar"
+
+#: deck/templates/event/event_detail.html:106
 msgid "Edit the proposal."
 msgstr "Edite a proposta."
 
-#: deck/templates/event/event_detail.html:95
+#: deck/templates/event/event_detail.html:107
 #: deck/templates/event/snippets/event_list_item.html:51
 msgid "Edit"
 msgstr "Editar"
 
-#: deck/templates/event/event_detail.html:102
+#: deck/templates/event/event_detail.html:115
 msgid "There are no proposals to show"
 msgstr "Não há propostas para exibir"
 
@@ -744,7 +785,7 @@ msgid ""
 "\n"
 "              This event received %(proposals_count)s proposal%(proposal_pluralize)s from %(proposers_count)s fighter%(proposer_pluralize)s, that proposal%(proposal_pluralize)s in total already received %(votes_count)s vote%(vote_pluralize)s.\n"
 "            "
-msgstr "\n              Este evento recebeu %(proposals_count)s proposta%(proposal_pluralize)s de %(proposers_count)s usuário%(proposer_pluralize)s, ao total essas proposta%(proposal_pluralize)s já receberam %(votes_count)s voto%(vote_pluralize)s.\n            "
+msgstr "\n              Este evento recebeu %(proposals_count)s proposta%(proposal_pluralize)s de %(proposers_count)s usuário%(proposer_pluralize)s, ao total essa%(proposal_pluralize)s proposta%(proposal_pluralize)s tem %(votes_count)s voto%(vote_pluralize)s.\n            "
 
 #: deck/templates/event/snippets/event_list_item.html:34
 msgid "This event never received a proposal."
@@ -787,33 +828,70 @@ msgstr "Nova proposta"
 msgid "New Proposal for"
 msgstr "Nova Proposta para"
 
-#: deck/views.py:53
+#: deck/views.py:54
 msgid "Event created."
 msgstr "Evento criado"
 
-#: deck/views.py:93
+#: deck/views.py:61
+msgid "Your event is ready to receive proposals"
+msgstr "Seu evento está pronto para receber propostas"
+
+#: deck/views.py:94
 msgid "Event updated."
 msgstr "Evento Atualizado."
 
-#: deck/views.py:102 deck/views.py:116 deck/views.py:268
+#: deck/views.py:103 deck/views.py:117 deck/views.py:284 deck/views.py:351
+#: deck/views.py:418
 msgid "You are not allowed to see this page."
 msgstr "Você não tem permissão para ver esta página."
 
-#: deck/views.py:170
+#: deck/views.py:125
+msgid "Author"
+msgstr "Autor"
+
+#: deck/views.py:126
+msgid "Author E-Mail"
+msgstr "Email do Autor"
+
+#: deck/views.py:127
+msgid "Vote Rate"
+msgstr "Índice de Votos"
+
+#: deck/views.py:128
+msgid "Votes Count"
+msgstr "Quantidade de Votos"
+
+#: deck/views.py:176
 msgid "Proposal created."
 msgstr "Proposta criada."
 
-#: deck/views.py:203
+#: deck/views.py:186
+msgid "Your event has new proposals"
+msgstr "Seu evento recebeu novas propostas"
+
+#: deck/views.py:198
+msgid "Your proposal was submitted"
+msgstr "Sua proposta foi submetida"
+
+#: deck/views.py:217
 msgid "Proposal updated."
 msgstr "Proposta Atualizada."
 
-#: deck/views.py:221 deck/views.py:240
+#: deck/views.py:235 deck/views.py:254
 msgid "Rate Index not found."
 msgstr "Índice de classificação não encontrado."
 
-#: deck/views.py:227 deck/views.py:244
+#: deck/views.py:241 deck/views.py:258
 msgid "Proposal rated."
 msgstr "Proposta classificada."
+
+#: deck/views.py:311 deck/views.py:325
+msgid "Proposal approved."
+msgstr "Proposta aprovada."
+
+#: deck/views.py:378 deck/views.py:392
+msgid "Proposal disapproved."
+msgstr "Proposta desaprovada."
 
 #: jury/models.py:12
 msgid "Jury"
