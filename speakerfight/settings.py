@@ -72,12 +72,14 @@ THIRD_PARTY_APPS = [
     'debug_toolbar',
     'datetimewidget',
     'raven.contrib.django.raven_compat',
+    'rest_framework',
 ]
 
 LOCAL_APPS = [
     'deck',
     'core',
     'jury',
+    'api',
 ]
 
 INSTALLED_APPS = LOCAL_APPS + THIRD_PARTY_APPS + DEFAULT_APPS

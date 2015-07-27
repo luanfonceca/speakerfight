@@ -12,4 +12,5 @@ urlpatterns = patterns(
     url(r'^', include('core.urls')),
     url(r'^', include('deck.urls')),
     url(r'^', include('jury.urls')),
+    url(r'^api/', include('api.urls')),
 )
