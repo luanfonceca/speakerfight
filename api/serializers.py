@@ -27,3 +27,11 @@ class ProposalSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Proposal
         fields = ('title', 'description', 'author')
+
+
+class EventSerializer(serializers.HyperlinkedModelSerializer):
+    proposals = ProposalSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = Proposal
+        fields = ('title', 'description', 'proposals')
