@@ -1,0 +1,15 @@
+{% extends "public_layout.html" %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Internal Server Error" %}{% endblock head_title %}
+
+{% block content %}
+  <div class="row" id="hero">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <h1>{% trans "Internal Server Error" %}</h1>
+      <h3>{% trans "I'm sorry, that page is currently unavailable due to a server misconfiguration. The server administrator has been notified, and we apologise for any inconvenience." %}</h3>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+{% endblock content %}
