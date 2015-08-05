@@ -45,7 +45,7 @@
         {% if event.due_date_is_passed %}
           <span class="pull-right text-danger">
             <i class="icon-warning-sign"></i>
-            The event is no longer accepting proposals.
+            {% trans "The event is no longer accepting proposals." %}
           </span>
         {% else %}
           <a class="btn-flat success pull-right text-upper" href="{% url 'create_event_proposal' slug=event.slug %}">
