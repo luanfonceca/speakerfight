@@ -203,8 +203,7 @@ class Event(DeckBaseModel):
     def due_date_is_passed(self):
         if not self.due_date:
             return False
-        yesterday = timezone.now() - timedelta(hours=24)
-        return yesterday > self.due_date
+        return timezone.now() > self.due_date
 
     def get_absolute_url(self):
         return reverse('view_event', kwargs={'slug': self.slug})
