@@ -1,3 +1,4 @@
+from collections import namedtuple
 import json
 
 from django.conf import settings
@@ -1065,7 +1066,6 @@ class ProposalTest(TestCase):
         self.assertEquals(False, self.proposal.is_approved)
 
     def test_send_welcome_mail(self):
-        from collections import namedtuple
         User = namedtuple('User', 'email')
         fake_user = User('fake@mail.com')
         send_welcome_mail(None, fake_user)
