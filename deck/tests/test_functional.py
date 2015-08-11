@@ -10,7 +10,7 @@ from django.utils.translation import ugettext as _
 
 from datetime import datetime, timedelta
 
-from deck.models import Event, Proposal, Vote, Jury
+from deck.models import Event, Proposal, Vote, Jury, send_welcome_mail
 from deck.tests.test_unit import (
     EVENT_DATA, PROPOSAL_DATA, ANOTHER_PROPOSAL_DATA)
 
@@ -1063,3 +1063,16 @@ class ProposalTest(TestCase):
         self.proposal = Proposal.objects.first()
         self.assertEquals(200, response.status_code)
         self.assertEquals(False, self.proposal.is_approved)
+
+    def test_send_welcome_mail(self):
+        from collections import namedtuple
+        User = namedtuple('User', 'email')
+        fake_user = User('fake@mail.com')
+        send_welcome_mail(None, fake_user)
+
+        self.assertEqual(1, len(mail.outbox))
+        email = mail.outbox[0]
+
+        self.assertTrue('Welcome', email.subject)
+        self.assertIn(fake_user.email, email.recipients())
+        self.assertIn(settings.NO_REPLY_EMAIL, email.from_email)
