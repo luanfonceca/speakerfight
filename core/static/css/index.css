@@ -30,3 +30,7 @@
 #join-call-to-action {
   margin: 60px 0;
 }
+
+form.password_reset {
+  margin: 10px 0px 10px 0px;
+}
