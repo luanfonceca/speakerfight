@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 from datetimewidget.widgets import DateTimeWidget
 
-from .models import Event, Proposal
+from .models import Event, Proposal, Activity
 
 
 class CustomDateTimeWidget(DateTimeWidget):
@@ -13,6 +13,10 @@ class CustomDateTimeWidget(DateTimeWidget):
         return super(CustomDateTimeWidget, self)\
             .format_output(*args, **kwargs).replace(
                 '<i class="icon-th"></i>', '<i class="icon-th hide"></i>')
+
+
+class CustomTimeInputWidget(forms.TimeInput):
+    input_type = 'time'
 
 
 class EventForm(forms.ModelForm):
@@ -53,7 +57,42 @@ class InviteForm(forms.ModelForm):
 class ProposalForm(forms.ModelForm):
     class Meta:
         model = Proposal
-        exclude = ['event', 'author', 'rate', 'is_approved']
+        exclude = [
+            'event', 'author', 'track', 'rate',
+            'is_approved', 'track_order',
+            'activity_type', 'start_timetable', 'end_timetable',
+        ]
         widgets = {
             'title': forms.TextInput(attrs={'class': 'inline-input'}),
+        }
+
+
+class ActivityForm(forms.ModelForm):
+    # Removing the Proposal type from the available options
+    activity_type = forms.ChoiceField(
+        choices=[actitvity_type for actitvity_type in Activity.ACTIVITY_TYPES
+                 if actitvity_type[0] != Activity.PROPOSAL])
+
+    class Meta:
+        model = Activity
+        fields = [
+            'title', 'description', 'activity_type',
+            'start_timetable', 'end_timetable',
+        ]
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'inline-input'}),
+            'start_timetable': CustomTimeInputWidget(format='%H:%M'),
+            'end_timetable': CustomTimeInputWidget(format='%H:%M'),
+        }
+
+
+class ActivityTimetableForm(forms.ModelForm):
+    class Meta:
+        model = Activity
+        fields = [
+            'start_timetable', 'end_timetable',
+        ]
+        widgets = {
+            'start_timetable': CustomTimeInputWidget(format='%H:%M'),
+            'end_timetable': CustomTimeInputWidget(format='%H:%M'),
         }

@@ -1,0 +1,198 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+{% load bootstrap3 %}
+{% load deck_tags %}
+
+{% block head_title %}{% trans "Create the Grade" %}: "{{ event }}"{% endblock %}
+
+{% block head %}
+  <link href="{{ STATIC_URL }}css/libs/dragula.min.css" rel="stylesheet" />  
+{% endblock head %}
+
+{% block content %}
+  <ol class="breadcrumb">
+    <li><a href="{% url 'index_page' %}">{% trans "Home" %}</a></li>
+    <li><a href="{% url 'list_events' %}">{% trans "Events" %}</a></li>
+    <li><a href="{% url 'view_event' event.slug %}">{{ event.title }}</a></li>
+    <li class="active">{% trans "Grade of Talks" %}</li>
+  </ol>
+
+  <!-- header -->
+  <div class="row" id="event-grade" data-event-slug="{{ event.slug }}">
+    <div class="col-md-12">
+      {% include "event/snippets/event_list_item.html" with event_detail=True %}
+    </div>
+
+    <div class="col-md-10 col-md-offset-1">
+      <form method="POST" novalidate>
+        {% csrf_token %}
+
+        <div class="row header" style="margin-bottom: 30px;">
+          <h3>{% trans "Grade of Talks" %}</h3>
+          <div class="pull-right">
+            <a href="#add-activity-modal" data-toggle="modal" class="btn-flat gray text-upper">
+              <i class="icon-plus"></i>
+              {% trans "add activity" %}
+            </a>
+            <button type="submit" class="btn-flat success text-upper">
+              <i class="icon icon-edit"></i>
+              {% trans "submit" %}
+            </button>
+          </div>
+        </div>
+
+        <div id="event-proposals" class="row">
+          <p class="text-center text-muted">{% trans "Approved talks" %}</p>
+          <div id="event-approved-proposals" style="min-height: 90px;">
+            {% for activity in event.get_grade %}
+              {% if activity.activity_type == 'proposal' %}
+                <div id="{{ activity.slug }}" class="panel proposal-item panel-success">
+                  <div class="panel-body">
+                    <input checked="checked" name="approved_activities" value="{{ activity.pk }}" class="hide" type="checkbox" />
+                    <button href="{% url 'update_activity_timetable' event_slug=event.slug slug=activity.slug %}" class="btn-flat gray text-upper pull-right add-activity-timetable-modal-trigger">
+                      <i class="icon-pencil"></i>
+                    </button>
+
+                    <div class="pull-left text-center proposal-rate">
+                      <div class="proposal-points hide">
+                        <p>Points</p>
+                        <h3>{{ activity.proposal.get_rate }}</h3>
+                      </div>
+                      <div class="proposal-timetable">
+                        <p>Talk</p>
+                        <h3>{{ activity.timetable|default:'--:--' }}</h3>
+                      </div>
+                    </div>
+                    <div>
+                      <h3 class="panel-title proposal-title">
+                        <a href="#{{ activity.slug }}">{{ activity }}</a>
+                        <p class="proposal-metadata">
+                          {% blocktrans with author=activity.author.get_full_name|default:activity.author.username created_at=activity.created_at %}
+                            Proposed by <strong>{{ author }}</strong> at {{ created_at }}.
+                          {% endblocktrans %}
+                        </p>
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              {% else %}
+                <div id="{{ activity.slug }}" class="panel panel-success proposal-item event-activity">
+                  <div class="panel-body">
+                    <input checked="checked" name="approved_activities" value="{{ activity.pk }}" class="hide" type="checkbox" />
+                    <div class="pull-right">
+                      <button class="btn-flat gray text-upper remove-activity">
+                        <i class="icon-trash"></i>
+                      </button>
+                    </div>
+                    <div class="pull-left text-center proposal-rate">
+                      <p>{{ activity.get_activity_type_display }}</p>
+                      <h3>{{ activity.timetable }}</h3>
+                    </div>
+                    <div>
+                      <h3 class="panel-title proposal-title">
+                        <a href="#{{ activity.slug }}">{{ activity }}</a>
+                        <p class="proposal-metadata">{{ activity.description }}</p>
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+
+          <p class="text-center text-muted">{% trans "Disapproved talks" %}</p>
+          <div id="event-not-approved-proposals" style="min-height: 90px;">
+            {% for proposal in event.get_not_approved_grade %}
+              <div id="{{ proposal.slug }}" class="panel proposal-item panel-default">
+                <div class="panel-body">
+                  <input name="approved_activities" value="{{ proposal.pk }}" class="hide" type="checkbox" />
+                  <img src="{{ proposal.author|get_user_photo }}" alt="author photo" class="img-circle pull-right author-photo">
+                  <button href="{% url 'update_activity_timetable' event_slug=event.slug slug=proposal.slug %}" class="btn-flat gray text-upper pull-right hide add-activity-timetable-modal-trigger">
+                    <i class="icon-pencil"></i>
+                  </button>
+
+                  <div class="pull-left text-center proposal-rate">
+                    <div class="proposal-points">
+                      <p>Points</p>
+                      <h3>{{ proposal.get_rate }}</h3>
+                    </div>
+                    <div class="proposal-timetable hide">
+                      <p>Talk</p>
+                      <h3>{{ proposal.timetable|default:'--:--' }}</h3>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="panel-title proposal-title">
+                      <a href="#{{ proposal.slug }}">{{ proposal }}</a>
+                      <p class="proposal-metadata">
+                        {% blocktrans with author=proposal.author.get_full_name|default:proposal.author.username created_at=proposal.created_at %}
+                          Proposed by <strong>{{ author }}</strong> at {{ created_at }}.
+                        {% endblocktrans %}
+                      </p>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal fade" id="add-activity-modal">
+    <div class="modal-dialog">
+      <form action="{% url 'create_event_grade_create_activity' slug=event.slug %}" method="POST">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">{% trans "Add activity" %}</h4>
+          </div>
+          <div class="modal-body">
+            {% bootstrap_form activity_form layout='inline' %}
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn-flat success text-upper">
+              <i class="icon icon-plus"></i>
+              {% trans "submit" %}
+            </button>
+          </div>
+        </div><!-- /.modal-content -->
+      </form>
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+  <div class="modal fade" id="add-activity-timetable-modal" data-href="">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">{% trans "Add timetable" %}</h4>
+        </div>
+        <div class="modal-body">
+          {% bootstrap_field activity_form.start_timetable layout='inline' %}
+          {% bootstrap_field activity_form.end_timetable layout='inline' %}
+        </div>
+        <div class="modal-footer">
+          <button id="add-activity-timetable-button" type="submit" class="btn-flat success text-upper">
+            <i class="icon icon-plus"></i>
+            {% trans "submit" %}
+          </button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+{% endblock content %}
+
+{% block scripts %}
+  <script src="{{ STATIC_URL }}js/libs/dragula.min.js"></script>
+
+  <script src="{{ STATIC_URL }}js/event-grade.js"></script>
+{% endblock scripts %}

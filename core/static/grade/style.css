@@ -1,0 +1,350 @@
+body {
+  -webkit-font-smoothing: antialiased;
+  background-color: white;
+  color: #333;
+  font-family: "proxima-nova-condensed", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+  font-size: 1em;
+  line-height: 1.5;
+  padding: 0;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "proxima-nova-soft", "proxima-nova-condensed", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+  line-height: 1.25;
+  margin: 0;
+  text-rendering: optimizeLegibility;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 2.25em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.75em;
+}
+
+h4 {
+  font-size: 1.5em;
+}
+
+h5 {
+  font-size: 1.25em;
+}
+
+h6 {
+  font-size: 1em;
+}
+
+p {
+  margin: 0 0 0.75em;
+}
+
+a {
+  -webkit-transition: color 0.1s linear;
+  -moz-transition: color 0.1s linear;
+  transition: color 0.1s linear;
+  color: #477DCA;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #2c5999;
+}
+a:active, a:focus {
+  color: #2c5999;
+  outline: none;
+}
+
+img,
+picture {
+  margin: 0;
+  max-width: 100%;
+}
+
+input,
+label,
+select {
+  display: block;
+  font-family: "proxima-nova-condensed", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+  font-size: 1em;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 0.375em;
+}
+
+label.required:after {
+  content: "*";
+}
+label abbr {
+  display: none;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+#speakerfight #grade {
+  position: relative;
+  padding-top: 20px;
+}
+
+#speakerfight #grade #grade-nav {
+  display: none;
+  top: 0;
+  margin-bottom: 20px;
+  left: 50%;
+  margin-left: -600px;
+  position: absolute;
+  width: 1200px;
+}
+
+#speakerfight #grade #grade-nav::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+#speakerfight #grade #grade-nav.skrollable-between,
+#speakerfight #grade #grade-nav.skrollable-after {
+  position: fixed;
+}
+
+#speakerfight #grade #grade-nav li {
+  height: 64px;
+  line-height: 64px;
+  width: 33.3333%;
+  float: left;
+  background: #2e4e6b;
+  text-align: center;
+  cursor: pointer;
+}
+
+#speakerfight #grade #grade-nav li label,
+#speakerfight #grade #grade-nav li h3 {
+  display: inline-block;
+  color: #fff;
+  font-size: 1.25em;
+}
+
+#speakerfight #grade #grade-nav li label {
+  margin-right: 1ex;
+  color: #20b9f1;
+}
+
+#speakerfight #grade .day {
+  padding-top: 50px;
+}
+
+#speakerfight #grade .day h2 {
+  margin: 0 0 30px;
+}
+
+#speakerfight #grade .day .event-list .event {
+  border: 3px solid #eeeff0;
+  border-bottom: none;
+  position: relative;
+}
+
+#speakerfight #grade .day .event-list .event:last-child {
+  border-bottom: 3px solid #eeeff0;
+}
+
+#speakerfight #grade .day .event-list .event .short {
+  padding: 20px 80px 20px 240px;
+  position: relative;
+}
+
+@media screen and (max-width: 40em) {
+  #speakerfight #grade .day .event-list .event .short {
+    padding: 50px 10px 10px 80px;
+  }
+}
+
+#speakerfight #grade .day .event-list .event .short .time {
+  position: absolute;
+  left: 80px;
+  top: 20px;
+  font-size: 1.25em;
+  font-weight: 600;
+  color: #6c7173;
+}
+
+@media screen and (max-width: 40em) {
+  #speakerfight #grade .day .event-list .event .short .time {
+    font-size: 1.125em;
+    top: 15px;
+  }
+}
+
+#speakerfight #grade .day .event-list .event .short .name {
+  position: relative;
+}
+
+#speakerfight #grade .day .event-list .event .short .name figure {
+  margin: 0 0 20px;
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+  display: block;
+  background-size: cover;
+  background-position: center center;
+}
+
+#speakerfight #grade .day .event-list .event .short .name .title {
+  font-size: 1.25em;
+  font-weight: 600;
+  display: block;
+}
+
+@media screen and (max-width: 40em) {
+  #speakerfight #grade .day .event-list .event .short .name .title {
+    font-size: 1.125em;
+    line-height: 1.1em;
+    margin-bottom: 1ex;
+  }
+  }
+
+#speakerfight #grade .day .event-list .event .short .name .person {
+  font-size: 1.125em;
+  font-weight: 600;
+  display: block;
+  color: #6c7173;
+}
+
+@media screen and (max-width: 40em) {
+  #speakerfight #grade .day .event-list .event .short .name .person {
+    font-size: 1em;
+    line-height: 1.1em;
+  }
+}
+
+#speakerfight #grade .day .event-list .event .short:before {
+  content: "";
+  display: block;
+  width: 60px;
+  background: #ccc;
+  position: absolute;
+  left: -3px;
+  top: -3px;
+  bottom: 0px;
+}
+
+#speakerfight #grade .day .event-list .event .long {
+  padding: 20px 80px 20px 240px;
+  background: #eeeff0;
+  position: relative;
+}
+
+@media screen and (max-width: 40em) {
+  #speakerfight #grade .day .event-list .event .long {
+    padding: 20px;
+  }
+}
+
+#speakerfight #grade .day .event-list .event .long p {
+  margin: 0;
+  line-height: 1.25em;
+}
+
+#speakerfight #grade .day .event-list .event .buttons {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+#speakerfight #grade .day .event-list .event .buttons .close-button {
+  display: none;
+}
+
+#speakerfight #grade .day .event-list .event .buttons .more-button {
+  display: inline-block;
+  background: #6c7173;
+  padding: 4px 8px;
+  font-size: 1em;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  position: relative;
+  z-index: 100000;
+  cursor: pointer;
+}
+
+#speakerfight #grade .day .event-list .event.lightning .short .name:before {
+  font-weight: 600;
+  padding: 0 10px;
+  line-height: 30px;
+  text-transform: uppercase;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  position: absolute;
+  left: -50px;
+  top: 0px;
+  background: #ffcc00;
+  color: #fff;
+  content: "";
+  display: none;
+}
+
+#speakerfight #grade .day .event-list .event.normal .short:before {
+  background: #666 url(../grade/icons/normal.svg) no-repeat center 19px;
+  background-size: auto 40px;
+}
+
+#speakerfight #grade .day .event-list .event.normal .short .name:after {
+  font-weight: 600;
+  padding: 0 10px;
+  line-height: 30px;
+  text-transform: uppercase;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  position: absolute;
+  left: -50px;
+  top: 0px;
+  background: #15c129;
+  color: #fff;
+  content: "";
+  display: none;
+}
+
+#speakerfight #grade .day .event-list .event.workshops .short:before {
+  background: #666 url(../grade/icons/coffee.svg) no-repeat center 19px;
+  background-size: auto 40px;
+}
+
+#speakerfight #grade .day .event-list .event.coffee-break .short:before,
+#speakerfight #grade .day .event-list .event.lunch .short:before {
+  background: #20b9f1 url(../grade/icons/coffee.svg) no-repeat center 19px;
+  background-size: auto 40px;
+}
+
+#speakerfight #grade .day .event-list .event.keynote .short:before {
+  background: #0b8c41 url(../grade/icons/star.svg) no-repeat center 19px;
+  background-size: auto 40px;
+}
+
+#speakerfight #grade .day .event-list .event.party .short:before {
+  background: #762ca6 url(../grade/icons/party.svg) no-repeat center 19px;
+  background-size: auto 40px;
+}

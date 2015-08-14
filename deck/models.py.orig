@@ -34,7 +34,7 @@ class DeckBaseManager(models.QuerySet):
             SELECT 1
               FROM deck_vote
              WHERE deck_vote.user_id = %s AND
-                   deck_vote.proposal_id = deck_proposal.activity_ptr_id
+                   deck_vote.proposal_id = deck_proposal.id
              LIMIT 1
         """)
 
@@ -117,54 +117,11 @@ class Vote(models.Model):
         return super(Vote, self).save(*args, **kwargs)
 
 
-class Activity(DeckBaseModel):
-    PROPOSAL = 'proposal'
-    OPENNING = 'openning'
-    COFFEEBREAK = 'coffee-break'
-    LUNCH = 'lunch'
-    LIGHTNINGTALKS = 'lightning-talks'
-    ENDING = 'ending'
-    ACTIVITY_TYPES = (
-        (PROPOSAL, _('Proposal')),
-        (OPENNING, _('Openning')),
-        (COFFEEBREAK, _('Coffee Break')),
-        (LUNCH, _('Lunch')),
-        (LIGHTNINGTALKS, _('Lightning Talks')),
-        (ENDING, _('Ending')),
-    )
-    start_timetable = models.TimeField(
-        _('Start Timetable'), default=timezone.now(), null=True, blank=False)
-    end_timetable = models.TimeField(
-        _('End Timetable'), default=timezone.now(), null=True, blank=False)
-    track_order = models.SmallIntegerField(_('Order'), null=True, blank=True)
-    activity_type = models.CharField(
-        _('Type'), choices=ACTIVITY_TYPES, default=PROPOSAL, max_length=50)
-
-    # relations
-    track = models.ForeignKey(to='deck.Track', related_name='activities',
-                              null=True, blank=True)
-
-    class Meta:
-        ordering = ('track_order', 'start_timetable', 'pk')
-        verbose_name = _('Activity')
-        verbose_name_plural = _('Activities')
-
-    @property
-    def timetable(self):
-        return '{0} - {1}'.format(
-            self.start_timetable.strftime('%H:%M'),
-            self.end_timetable.strftime('%H:%M')
-        )
-
-
-class Proposal(Activity):
+class Proposal(DeckBaseModel):
     is_approved = models.BooleanField(_('Is approved'), default=False)
-    # track_order = models.SmallIntegerField(_('Order'), null=True, blank=True)
 
     # relations
     event = models.ForeignKey(to='deck.Event', related_name='proposals')
-    # track = models.ForeignKey(to='deck.Track', related_name='proposals',
-    #                           null=True, blank=True)
 
     class Meta:
         ordering = ['title']
@@ -228,34 +185,10 @@ class Proposal(Activity):
         self.save()
 
 
-class Track(models.Model):
-    title = models.CharField(_('Title'), max_length=200)
-    slug = AutoSlugField(populate_from='title', overwrite=True,
-                         max_length=200, unique=True, db_index=True)
-
-    # relations
-    event = models.ForeignKey(to='deck.Event', related_name='tracks')
-
-    class Meta:
-        verbose_name = _('Track')
-        verbose_name_plural = _('Tracks')
-
-    def __unicode__(self):
-        return 'Track for: "%s"' % self.event.title
-
-    @property
-    def proposals(self):
-        return Proposal.objects.filter(
-            pk__in=self.activities.values_list('pk', flat=True)
-        )
-
-
 class Event(DeckBaseModel):
     allow_public_voting = models.BooleanField(_('Allow Public Voting'),
                                               default=True)
     due_date = models.DateTimeField(null=True, blank=True)
-    slots = models.SmallIntegerField(_('Slots'), default=10)
-    is_grade_published = models.BooleanField(_('Publish grade'), default=False)
 
     # relations
     jury = models.OneToOneField(to='jury.Jury', related_name='event',
@@ -293,33 +226,6 @@ class Event(DeckBaseModel):
     def get_votes_count(self):
         return self.proposals.values_list('votes', flat=True).count()
 
-    def get_grade(self):
-        grade = Activity.objects.filter(track__event=self)\
-            .cached_authors()\
-            .annotate(Sum('proposal__votes__rate'))\
-            .extra(select=dict(track_isnull='track_id IS NULL'))\
-            .order_by('track_isnull', 'track_order',
-                      '-proposal__votes__rate__sum')
-        return grade
-        # return self.proposals\
-        #     .cached_authors()\
-        #     .filter(is_approved=True)\
-        #     .annotate(Sum('votes__rate'))\
-        #     .extra(select=dict(track_isnull='track_id IS NULL'))\
-        #     .order_by('track_isnull', 'track_order',
-        #               '-votes__rate__sum')
-
-    def get_not_approved_grade(self):
-        not_approved_grade = self.proposals\
-            .cached_authors()\
-            .filter(models.Q(is_approved=False) |
-                    models.Q(track__isnull=True))\
-            .annotate(Sum('votes__rate'))\
-            .extra(select=dict(track_isnull='track_id IS NULL'))\
-            .order_by('track_isnull', 'track_order',
-                      '-votes__rate__sum')
-        return not_approved_grade
-
 
 @receiver(post_save, sender=Event)
 def create_initial_jury(sender, instance, signal, created, **kwargs):
@@ -330,10 +236,3 @@ def create_initial_jury(sender, instance, signal, created, **kwargs):
     jury.users.add(instance.author)
     instance.jury = jury
     instance.save()
-
-
-@receiver(post_save, sender=Event)
-def create_initial_track(sender, instance, signal, created, **kwargs):
-    if not created:
-        return
-    Track.objects.create(event=instance)

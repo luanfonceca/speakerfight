@@ -19,8 +19,8 @@ from django.utils.translation import ugettext as _
 from vanilla import CreateView, ListView, UpdateView, DetailView
 from djqscsv import render_to_csv_response
 
-from .models import Event, Proposal, Vote
-from .forms import (EventForm, ProposalForm)
+from .models import Event, Proposal, Vote, Activity
+from .forms import EventForm, ProposalForm, ActivityForm, ActivityTimetableForm
 
 
 class BaseEventView(object):
@@ -138,6 +138,98 @@ class ExportEvent(BaseEventView, DetailView):
             filename=filename,
             field_header_map=field_header_map
         )
+
+
+class CreateEventGrade(BaseEventView, DetailView):
+    template_name = 'event/event_create_grade.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateEventGrade, self).get_context_data(**kwargs)
+        context.update(activity_form=ActivityForm())
+        return context
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        self.object = self.get_object()
+        if (self.object.author != self.request.user and
+           not self.request.user.is_superuser):
+            messages.error(
+                self.request, _(u'You are not allowed to see this page.'))
+            return HttpResponseRedirect(
+                reverse('create_event_grade',
+                        kwargs={'slug': self.object.slug}),
+            )
+        return super(CreateEventGrade, self).dispatch(*args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        approved_activities_pks = self.request.POST.getlist(
+            'approved_activities')
+
+        track = self.object.tracks.first()
+        track.proposals.update(is_approved=False)
+        track.activities.update(track=None, track_order=None)
+
+        if not approved_activities_pks:
+            return HttpResponseRedirect(
+                reverse('create_event_grade',
+                        kwargs={'slug': self.object.slug}),
+            )
+
+        order = 0
+        for activity_pk in approved_activities_pks:
+            activity = Activity.objects.get(pk=activity_pk)
+            activity.track = track
+            activity.track_order = order
+            activity.save()
+            if activity.activity_type == Activity.PROPOSAL:
+                activity.proposal.is_approved = True
+                activity.proposal.save()
+            order += 1
+
+        return HttpResponseRedirect(
+                reverse('create_event_grade',
+                        kwargs={'slug': self.object.slug}),
+            )
+
+
+class DetailEventGrade(BaseEventView, DetailView):
+    template_name = 'event/event_detail_grade.html'
+
+
+def create_activity(request, slug):
+    event = Event.objects.get(slug=slug)
+
+    activity_form = ActivityForm(request.POST or None)
+    if activity_form.is_valid():
+        activity = activity_form.save(commit=False)
+        activity.track = event.tracks.first()
+        activity.author = request.user
+        activity.save()
+    return HttpResponseRedirect(
+        reverse('create_event_grade',
+                kwargs={'slug': event.slug}),
+    )
+
+
+def update_activity_timetable(request, event_slug, slug):
+    response_content = {}
+    response_status = 200
+    event = Event.objects.get(slug=event_slug)
+    proposal = event.proposals.get(slug=slug)
+    activity_timetable_form = ActivityTimetableForm(
+        data=request.POST or None, instance=proposal)
+
+    if activity_timetable_form.is_valid():
+        proposal = activity_timetable_form.save()
+        response_content.update(
+            slug=proposal.slug,
+            timetable=proposal.timetable
+        )
+    return HttpResponse(
+        json.dumps(response_content),
+        status=response_status,
+        content_type='application/json')
 
 
 class BaseProposalView(object):

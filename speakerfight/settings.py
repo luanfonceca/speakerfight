@@ -69,7 +69,7 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.facebook',
-    'debug_toolbar',
+    # 'debug_toolbar',
     'datetimewidget',
     'raven.contrib.django.raven_compat',
     'rest_framework',

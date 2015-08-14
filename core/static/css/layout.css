@@ -665,17 +665,44 @@ html {
   font-size: 30px;
 }
 
-#event-detail .event-proposals-header {
+.event-proposals-header {
   margin-bottom: 10px;
   overflow: hidden;
 }
 
-#event-detail #event-proposals .proposal-title {
+#event-proposals .proposal-title {
   font-size: 18px;
   font-weight: bold
 }
 
-#event-detail #event-proposals .author-photo {
+#event-proposals .proposal-rate {
+  width: 80px;
+  padding-right: 15px;
+}
+
+#event-proposals .author-photo {
   width: 40px;
   height: 40px;
+}
+
+#event-grade label[for="grade-slots"] {
+  font-weight: normal;
+}
+
+#event-grade #grade-slots {
+  font-size: 20px;
+  width: 60px;
+}
+
+#event-grade .proposal-item {
+  cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+#event-grade .proposal-item .proposal-metadata {
+  color: #999;
+  font-size: 12px;
+  font-weight: normal;
 }
