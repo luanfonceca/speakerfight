@@ -324,23 +324,8 @@ ol {
   display: none;
 }
 
-#speakerfight #grade .day .event-list .event.workshops .short:before {
-  background: #666 url(../grade/icons/coffee.svg) no-repeat center 19px;
-  background-size: auto 40px;
-}
-
 #speakerfight #grade .day .event-list .event.coffee-break .short:before,
 #speakerfight #grade .day .event-list .event.lunch .short:before {
   background: #20b9f1 url(../grade/icons/coffee.svg) no-repeat center 19px;
-  background-size: auto 40px;
-}
-
-#speakerfight #grade .day .event-list .event.keynote .short:before {
-  background: #0b8c41 url(../grade/icons/star.svg) no-repeat center 19px;
-  background-size: auto 40px;
-}
-
-#speakerfight #grade .day .event-list .event.party .short:before {
-  background: #762ca6 url(../grade/icons/party.svg) no-repeat center 19px;
   background-size: auto 40px;
 }
