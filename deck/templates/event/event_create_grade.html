@@ -180,8 +180,7 @@
           <h4 class="modal-title">{% trans "Add timetable" %}</h4>
         </div>
         <div class="modal-body">
-          {% bootstrap_field activity_form.start_timetable layout='inline' %}
-          {% bootstrap_field activity_form.end_timetable layout='inline' %}
+          {% bootstrap_form activity_timetable_form layout='inline' %}
         </div>
         <div class="modal-footer">
           <button id="add-activity-timetable-button" type="submit" class="btn-flat success text-upper">

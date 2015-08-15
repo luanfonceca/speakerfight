@@ -146,6 +146,7 @@ class CreateEventGrade(BaseEventView, DetailView):
     def get_context_data(self, **kwargs):
         context = super(CreateEventGrade, self).get_context_data(**kwargs)
         context.update(activity_form=ActivityForm())
+        context.update(activity_timetable_form=ActivityTimetableForm())
         return context
 
     @method_decorator(login_required)
