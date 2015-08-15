@@ -1,7 +1,11 @@
-Hi!
+{% load i18n %}
 
-Welcome to SpeakerFight! Here you will be able to submit proposals and evaluate talks of other possible speakers.
+{% blocktrans %}  
+  Hi!
 
-SpeakerFight it's an open source project that you can help to improve it. Check out: https://github.com/luanfonceca/speakerfight.
+  Welcome to SpeakerFight! Here you will be able to submit proposals and evaluate talks of other possible speakers.
 
-Thank you for use it.
+  SpeakerFight it's an open source project that you can help to improve it. Check out: https://github.com/luanfonceca/speakerfight.
+
+  Thank you for use it.
+{% endblocktrans %}  
