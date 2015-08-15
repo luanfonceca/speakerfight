@@ -1,3 +1,5 @@
+{% load deck_tags %}
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -18,7 +20,7 @@
                     <div class="short">
                       <div class="time">{{ activity.timetable }}</div>
                       <div class="name">
-                        <figure class="face" style="background-image: url(https://avatars.githubusercontent.com/u/1490875?v=3)">&nbsp;</figure>
+                        <figure class="face" style="background-image: url({{ activity.author|get_user_photo }})">&nbsp;</figure>
                         <span class="title">{{ activity.title|title }}</span>
                         <span class="person">{{ activity.author.get_full_name|default:activity.author.username }}</span>
                       </div>
