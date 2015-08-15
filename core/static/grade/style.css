@@ -101,7 +101,6 @@ ol {
 
 #speakerfight #grade {
   position: relative;
-  padding-top: 20px;
 }
 
 #speakerfight #grade #grade-nav {
@@ -145,10 +144,6 @@ ol {
 #speakerfight #grade #grade-nav li label {
   margin-right: 1ex;
   color: #20b9f1;
-}
-
-#speakerfight #grade .day {
-  padding-top: 50px;
 }
 
 #speakerfight #grade .day h2 {

@@ -35,6 +35,10 @@
               <i class="icon-plus"></i>
               {% trans "add activity" %}
             </a>
+            <a href="#get-embedded-grade-modal" data-toggle="modal" class="btn-flat gray text-upper">
+              <i class="icon-code"></i>
+              {% trans "embedded grade" %}
+            </a>
             <button type="submit" class="btn-flat success text-upper">
               <i class="icon icon-edit"></i>
               {% trans "submit" %}
@@ -184,6 +188,31 @@
             <i class="icon icon-plus"></i>
             {% trans "submit" %}
           </button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <div class="modal fade" id="get-embedded-grade-modal" data-href="">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">{% trans "Copy and Paste on your site" %}</h4>
+        </div>
+        <div class="modal-body">
+          {% url 'view_event_grade' event.slug as view_event_grade %}
+          {% with 'http://'|add:request.get_host|add:view_event_grade as grade_url %}
+            <textarea onclick="this.focus();this.select()" class="form-control" id="id_embedded_grade" name="embedded_grade" rows="10">{{ grade_url|event_get_embedded_code }}</textarea>
+          {% endwith %}
+        </div>
+        <div class="modal-footer">
+          <a href="{% url 'api_detail_event_grade' event.slug %}" target="_blank" class="btn-flat gray text-upper">
+            <i class="icon icon-cloud"></i>
+            {% trans "Raw API" %}
+          </a>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

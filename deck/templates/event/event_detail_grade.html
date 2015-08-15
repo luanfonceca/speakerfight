@@ -3,23 +3,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="PolyConf is a three-day, single track, multi-disciplinary conference on advanced technologies for programmers interested in polyglot approach to software development.">
-    <meta name="author" content="PolyConf HQ || Designed by true.pl">
-
     <link rel="stylesheet" href="{{ STATIC_URL }}grade/style.css">
-
     <title>Speakerfight - {{ event }}</title>
   </head>
-
   <body>
-
-  <article>
     <div id="speakerfight">
       <div class="grade" id="grade">
         {% for track in event.tracks.all %}
           <div class="day" id="day-{{ forloop.counter }}">
-            
-            <h2 class="text-center">{{ track.title|default:'Talks' }}</h2>
             <ul class="event-list">
               {% for activity in track.activities.all %}
                 {% if activity.activity_type == activity.PROPOSAL %}
@@ -29,7 +20,7 @@
                       <div class="name">
                         <figure class="face" style="background-image: url(https://avatars.githubusercontent.com/u/1490875?v=3)">&nbsp;</figure>
                         <span class="title">{{ activity.title|title }}</span>
-                        <span class="person">{{ activity.author }}</span>
+                        <span class="person">{{ activity.author.get_full_name|default:activity.author.username }}</span>
                       </div>
                     </div>
                     <div class="long" style="display: none;">
@@ -60,203 +51,14 @@
                   </li>
                 {% endif %}
               {% endfor %}
-
-              <!--<li class="event registration">
-                <div class="short">
-                  <div class="time">8:30 - 9:00</div>
-                  <div class="name">
-                    <span class="title">Mini Registration</span>
-                  </div>
-                </div>
-              </li>
-
-              <li class="event with-description workshops">
-                <div class="short">
-                  <div class="time">9:00 - 12:30</div>
-                  <div class="name">
-                    <span class="title">Workshops</span>
-                    <span class="person">Introduction to Haskell</span>
-                    <span class="person">Write a Relational Scheme Interpreter in miniKanren</span>
-                    <span class="person">Mobile development in the smart way with ionicframework</span>
-                    <span class="person">Why should you learn to program Commodore 64 this year?</span>
-                    <span class="person">Building modern web apps with AngularJS</span>
-                  </div>
-                </div>
-                <div class="long" style="display: none;">
-                  <p>TBA</p>
-                </div>
-              </li>
-              
-              <li class="event lunch">
-                <div class="short">
-                  <div class="time">12:30 - 13:45</div>
-                  <div class="name">
-                    <span class="title">Lunch / Registration </span>
-                  </div>
-                </div>
-              </li>                
-
-              <li class="event registration">
-                <div class="short">
-                  <div class="time">13:45 - 14:00</div>
-                  <div class="name">
-                    <span class="title">Opening Word</span>
-                    <span class="person">Zaiste</span>
-                  </div>
-                </div>
-              </li>
-
-              <li class="event with-description normal">
-                <div class="short">
-                  <div class="time">14:00 - 14:30</div>
-                  <div class="name">
-                    <span class="title">The LISP in the Machine: A Clojure experience report from Braintree</span>
-                    <span class="person">Joe Nash</span>
-                  </div>
-                </div>
-                <div class="long" style="display: none;">
-                  <p>This talk will present an experience report on the use of Clojure at Braintree. Primarily a Ruby shop, this talk will discuss why Braintree chose to use Clojure in the development of a real-time data pipeline, what we have learnt in doing so, and how those lessons are shaping future projects at Braintree.</p>
-                </div>
-                <div class="buttons">
-                  <span class="close-button">Close</span>
-                  <a href="" class="more-button">More</a>
-                </div>
-              </li>
-
-
-              <li class="event with-description normal">
-                <div class="short">
-                  <div class="time">14:40 - 15:10</div>
-                  <div class="name">
-                    <span class="title">Beyond Ruby: easy ways to go polyglot</span>
-                    <span class="person">Wojciech Ogrodowczyk</span>
-                  </div>
-                </div>
-                <div class="long" style="display: none;">
-                  <p>What do Clojure, Java, Scala, and Ruby all have in common? They can run on the JVM. Today going polyglot is easier then ever!</p>
-                  <p> In this talk we're going to learn why it's important to use the best programming language for the job and how to start doing so. By using the polyglot approach, your projects will be more flexible to change, simpler to test, easier to deploy, and understandable to developers with any programming background. Simple actions you can take to increase the versatility of your programming toolbox and finally get paid for writing code in your latest beloved language."</p>
-                </div>
-                <div class="buttons">
-                  <span class="close-button">Close</span>
-                  <a href="" class="more-button">More</a>
-                </div>
-              </li>
-
-              <li class="event with-description normal">
-                <div class="short">
-                  <div class="time">15:20 - 15:50</div>
-                  <div class="name">
-                    <span class="title">Data exchange formats</span>
-                    <span class="person">Przemysław Kamiński</span>
-                  </div>
-                </div>
-                <div class="long" style="display: none;">
-                  <p>JSON or XML? Or maybe something else? I will explore the lesser-known areas of data echange formats including ASN.1, Google's Protocol Buffers, Apache Thrift and others.</p>
-                </div>
-                <div class="buttons">
-                  <span class="close-button">Close</span>
-                  <a href="" class="more-button">More</a>
-                </div>
-              </li>
-
-
-              <li class="event with-description normal">
-                <div class="short">
-                  <div class="time">16:00 - 16:30</div>
-                  <div class="name">
-                    <span class="title">Polyglot persistence</span>
-                    <span class="person">Honza Král</span>
-                  </div>
-                </div>
-                <div class="long" style="display: none;">
-                  <p>It's not only programming languages that have their polyglots, databases too. In this talk I would like to explore the options we have when developing applications, considerations we should make and share several key points from my past where I made the correct or incorrect choice.</p>
-                </div>
-                <div class="buttons">
-                  <span class="close-button">Close</span>
-                  <a href="" class="more-button">More</a>
-                </div>
-              </li>
-
-              <li class="event with-description normal">
-                <div class="short">
-                  <div class="time">16:40 - 17:10</div>
-                  <div class="name">
-                    <span class="title">AngularJS: All you can learn of in 30 minutes</span>
-                    <span class="person">Marek Matczak</span>
-                  </div>
-                </div>
-                <div class="long" style="display: none;">
-                  <p>In fact, the talk will depend on the audience... After a short survey we will decide what AngularJS topic to address. Whether it be live-coding an application from scratch, showing JavaScript tools supporting development (Gulp/Bower/Karma) or demystifying directives, you will not get bored :)</p>
-                </div>
-                <div class="buttons">
-                  <span class="close-button">Close</span>
-                  <a href="" class="more-button">More</a>
-                </div>
-              </li>
-
-              <li class="event coffee">
-                <div class="short">
-                  <div class="time">17:10 - 17:40</div>
-                  <div class="name">
-                    <span class="title">Coffee Break</span>
-                  </div>
-                </div>
-                <div class="long" style="display: none;">
-                  <p>TBA</p>
-                </div>
-              </li>
-
-              <li class="event keynote">
-                <div class="short">
-                  <div class="time">17:40 - 18:10</div>
-                  <div class="name">
-                    <figure class="face" style="background-image: url(https://avatars.githubusercontent.com/u/1490875?v=3)">&nbsp;</figure>
-                    <span class="title">Polyglot in High Performance Computing</span>
-                    <span class="person">Christine Corbett Moran</span>
-                  </div>
-                </div>
-                <div class="long" style="display: none;">
-                  <p>The Cactus framework is a modular environment for parallel high performance computing. It allows development in the high performance language of choice: C, C++, F77, F90, and even OpenCL/CUDA, all while making use of existing components (called "thorns") and other standard high performance computing technology in a language independent manner. In this talk I introduce the Cactus framework with some examples of its use in computational general relativity to simulate black holes, neutron stars and more. </p>
-                </div>
-              </li>
-
-              <li class="event keynote">
-                <div class="short">
-                  <div class="time">18:20 - 18:50</div>
-                  <div class="name">
-                    <figure class="face" style="background-image: url(https://avatars.githubusercontent.com/u/1490875?v=3)">&nbsp;</figure>
-                    <span class="title">The Promise of Relational Programming</span>
-                    <span class="person">William Byrd</span>
-                  </div>
-                </div>
-                <div class="long" style="display: none;">
-                  <p>Programmers often write procedures or methods that model mathematical functions.  These functions clearly distinguish between input arguments and output values.  In contrast, relational programming treats programs as mathematical relations, eliminating the distinction between input and output.  miniKanren is an embedded domain specific language for constraint logic programming, designed for writing interpreters, type inferencers, theorem provers, and other interesting programs as relations.  We will explore the extremely interesting and surprising behavior of these relational programs, and consider how this approach to programming might be made more practical in the future.</p>
-                </div>
-                <div class="buttons">
-                  <span class="close-button">Close</span>
-                  <a href="" class="more-button">More</a>
-                </div>
-              </li>
-              <li class="event party">
-                <div class="short">
-                  <div class="time">21:00</div>
-                  <div class="name">
-                    <span class="title">Warming party</span>
-                  </div>
-                </div>
-                <div class="long" style="display: none;">
-                  <p>TBA</p>
-                </div>
-              </li>-->
             </ul>
           </div>
         {% endfor %}
       </div>
     </div>
-  </article>
 
-  <script src="{{ STATIC_URL }}grade/jquery.min.js"></script>
-  <script src="{{ STATIC_URL }}grade/main.js"></script>
-
-</body>
+    <script type="text/javascript" src="{{ STATIC_URL }}grade/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}grade/main.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}grade/iframeResizer.contentWindow.min.js"></script>
+  </body>
 </html>
