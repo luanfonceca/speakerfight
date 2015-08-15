@@ -162,12 +162,9 @@ class Activity(DeckBaseModel):
 
 class Proposal(Activity):
     is_approved = models.BooleanField(_('Is approved'), default=False)
-    # track_order = models.SmallIntegerField(_('Order'), null=True, blank=True)
 
     # relations
     event = models.ForeignKey(to='deck.Event', related_name='proposals')
-    # track = models.ForeignKey(to='deck.Track', related_name='proposals',
-    #                           null=True, blank=True)
 
     class Meta:
         ordering = ['title']
@@ -304,13 +301,6 @@ class Event(DeckBaseModel):
             .order_by('track_isnull', 'track_order',
                       '-proposal__votes__rate__sum')
         return grade
-        # return self.proposals\
-        #     .cached_authors()\
-        #     .filter(is_approved=True)\
-        #     .annotate(Sum('votes__rate'))\
-        #     .extra(select=dict(track_isnull='track_id IS NULL'))\
-        #     .order_by('track_isnull', 'track_order',
-        #               '-votes__rate__sum')
 
     def get_not_approved_grade(self):
         not_approved_grade = self.proposals\
