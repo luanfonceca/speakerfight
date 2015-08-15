@@ -1,0 +1,11 @@
+{% load i18n %}
+
+{% blocktrans %}  
+  Hi!
+
+  Welcome to SpeakerFight! Here you will be able to submit proposals and evaluate talks of other possible speakers.
+
+  SpeakerFight it's an open source project that you can help to improve it. Check out: https://github.com/luanfonceca/speakerfight.
+
+  Thank you for use it.
+{% endblocktrans %}  
