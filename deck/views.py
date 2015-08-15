@@ -161,6 +161,22 @@ class CreateEventGrade(BaseEventView, DetailView):
             )
         return super(CreateEventGrade, self).dispatch(*args, **kwargs)
 
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        track = self.object.tracks.first()
+
+        # On the first time we generate a grade based on the Slots.
+        if not track.activities.exists():
+            top_not_approved_ones = self.object.get_not_approved_grade()
+            order = 0
+            for proposal in top_not_approved_ones[:self.object.slots]:
+                proposal.track = track
+                proposal.track_order = order
+                proposal.is_approved = True
+                proposal.save()
+                order += 1
+        return super(CreateEventGrade, self).get(request, *args, **kwargs)
+
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         approved_activities_pks = self.request.POST.getlist(

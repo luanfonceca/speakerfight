@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="{{ STATIC_URL }}grade/style.css">
 
-    <title>PolyConf 2015</title>
+    <title>Speakerfight - {{ event }}</title>
   </head>
 
   <body>
@@ -16,17 +16,10 @@
   <article>
     <div id="speakerfight">
       <div class="grade" id="grade">
-        <ul id="grade-nav">
-          {% for track in event.tracks.all %}
-            <li><a href="#"><label>Day #{{ forloop.counter }}</label><h3>July 2nd</h3></a></li>
-          {% endfor %}
-        </ul>
-        
         {% for track in event.tracks.all %}
           <div class="day" id="day-{{ forloop.counter }}">
             
-            <h2>Day #{{ forloop.counter }} July 2nd</h2>
-            
+            <h2 class="text-center">{{ track.title|default:'Talks' }}</h2>
             <ul class="event-list">
               {% for activity in track.activities.all %}
                 {% if activity.activity_type == activity.PROPOSAL %}

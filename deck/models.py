@@ -133,9 +133,9 @@ class Activity(DeckBaseModel):
         (ENDING, _('Ending')),
     )
     start_timetable = models.TimeField(
-        _('Start Timetable'), default=timezone.now(), null=True, blank=False)
+        _('Start Timetable'), null=True, blank=False)
     end_timetable = models.TimeField(
-        _('End Timetable'), default=timezone.now(), null=True, blank=False)
+        _('End Timetable'), null=True, blank=False)
     track_order = models.SmallIntegerField(_('Order'), null=True, blank=True)
     activity_type = models.CharField(
         _('Type'), choices=ACTIVITY_TYPES, default=PROPOSAL, max_length=50)
@@ -172,7 +172,7 @@ class Proposal(Activity):
         verbose_name_plural = _('Proposals')
 
     def save(self, *args, **kwargs):
-        if self.event.due_date_is_passed:
+        if not self.pk and self.event.due_date_is_passed:
             raise ValidationError(
                 _("This Event doesn't accept Proposals anymore."))
         return super(Proposal, self).save(*args, **kwargs)
