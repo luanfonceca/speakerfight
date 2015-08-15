@@ -7,6 +7,6 @@ urlpatterns = [
     url(
         u'^events/(?P<slug>.+)/$',
         RetrieveEventView.as_view(),
-        name='api_detail_event_grade'
+        name='api_view_event_grade'
     ),
 ]
