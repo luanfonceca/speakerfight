@@ -5,13 +5,16 @@ from django.db import models, transaction
 from django.core.exceptions import ValidationError
 from django.db.models.aggregates import Sum
 from django.db.models.signals import post_save
+from django.core.mail import send_mail
 from django.dispatch import receiver
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
+from django.template.loader import render_to_string
 
 from django_extensions.db.fields import AutoSlugField
 
-from datetime import timedelta
+from allauth.account.signals import user_signed_up
+
 from textwrap import dedent
 
 from jury.models import Jury
@@ -319,6 +322,14 @@ class Event(DeckBaseModel):
             .order_by('track_isnull', 'track_order',
                       '-votes__rate__sum')
         return not_approved_grade
+
+
+@receiver(user_signed_up)
+def send_welcome_mail(request, user, **kwargs):
+    message = render_to_string('mailing/welcome.txt')
+    subject = _(u'Welcome')
+    recipients = [user.email]
+    send_mail(subject, message, settings.NO_REPLY_EMAIL, recipients)
 
 
 @receiver(post_save, sender=Event)

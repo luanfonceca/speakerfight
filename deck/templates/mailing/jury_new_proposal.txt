@@ -1,5 +1,9 @@
-Hi!
+{% load i18n %}
 
-The event "{{ event_title }}" had just received a new proposal called "{{ proposal_title }}".
+{% blocktrans %}  
+  Hi!
 
-Cheers!
+  The event "{{ event_title }}" had just received a new proposal called "{{ proposal_title }}".
+
+  Cheers!
+{% endblocktrans %}
