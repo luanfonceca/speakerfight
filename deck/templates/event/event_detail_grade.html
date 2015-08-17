@@ -1,9 +1,12 @@
 {% load deck_tags %}
+{% load static %}
 
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ STATIC_URL }}img/speakerfight.ico"/>
 
     <link rel="stylesheet" href="{{ STATIC_URL }}grade/style.css">
     <title>Speakerfight - {{ event }}</title>
@@ -14,7 +17,7 @@
         {% for track in event.tracks.all %}
           <div class="day" id="day-{{ forloop.counter }}">
             <ul class="event-list">
-              {% for activity in track.activities.all %}
+              {% for activity in track.activities.cached_authors %}
                 {% if activity.activity_type == activity.PROPOSAL %}
                   <li class="event normal">
                     <div class="short">
@@ -56,6 +59,11 @@
             </ul>
           </div>
         {% endfor %}
+      </div>
+      <div id="footer">
+        <a href="{{ 'http://'|add:request.get_host }}" target="_blank">
+          <figure class="logo" style="background-image: url({% static 'img/speakerfight.png' %})">&nbsp;</figure>
+        </a>
       </div>
     </div>
 
