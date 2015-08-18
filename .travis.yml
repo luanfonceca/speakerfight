@@ -8,7 +8,7 @@ script:
 after_success:
 - coveralls
 # Deploy only the master branch
-- if [ "$TRAVIS_BRANCH" == "master" ]; then
+- if [ git rev-parse --abbrev-ref HEAD == "master" ]; then
     fab deploy;
   fi
 
