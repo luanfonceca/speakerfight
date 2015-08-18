@@ -1,7 +1,7 @@
 # coding: utf-8
 
 from os import environ
-from fabric.api import env, cd, run, local
+from fabric.api import env, cd, run
 from fabric.colors import yellow, green
 
 
@@ -14,10 +14,6 @@ env.password = environ.get('PASSWORD')
 env.app_dir = '/home/speakerfight'
 env.project_name = 'speakerfight'
 env.virtualenv_dir = '/home/virtualenv'
-
-
-def _get_local_branch():
-    return local('git rev-parse --abbrev-ref HEAD', capture=True)
 
 
 def _run(command, pip='python'):
@@ -63,13 +59,9 @@ def _restart_app():
 
 
 def deploy():
-    local_branch = _get_local_branch()
-    if local_branch == BRANCH:
-        _update_app()
-        _restart_app()
-        print green('Deploy succefully done!')
-
-    print yellow('Deploy allowed just in the "{0}" branch.'.format(BRANCH))
+    _update_app()
+    _restart_app()
+    print green('Deploy succefully done!')
 
 
 def load_initial_data():
