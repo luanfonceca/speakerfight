@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block head_title %}{% trans "Delete Proposal" %}: "{{ object }}"{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <h1>{% trans "Delete Proposal" %}: "{{ object }}"</h1>
+    <p>{% trans "Are you sure you want to delete this proposal?" %}</p>
+    <p>{% trans "After deleting this proposal all votes will be lost forever." %}</p>
+    <form method="POST">
+      {% buttons %}
+        <button type="submit" class="btn-flat success text-upper">
+          <i class="icon icon-trash"></i>
+          {% trans "Delete" %}
+        </button>
+        <div class="pull-right">
+          <a href="{% url 'view_event' slug=object.event.slug %}" class="link text-upper">
+            <i class="icon-calendar"></i>
+            {% trans "event detail" %}
+          </a> |
+          <a href="{% url 'list_events' %}" class="link text-upper">
+            <i class="icon-calendar-empty"></i>
+            {% trans "event list" %}
+          </a>
+        </div>
+      {% endbuttons %}
+    </form>
+  </div>
+{% endblock content %}

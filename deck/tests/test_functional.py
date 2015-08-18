@@ -7,7 +7,6 @@ from django.core import mail
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
-from django.utils.translation import ugettext as _
 
 from datetime import datetime, timedelta
 
@@ -561,6 +560,32 @@ class ProposalTest(TestCase):
         self.assertEquals(proposal_update_url,
                           response.context_data.get('redirect_field_value'))
         self.assertEquals('Brain...', self.proposal.description)
+
+    def test_delete_proposal(self):
+        new_proposal_data = self.proposal_data.copy()
+        new_proposal_data['author_id'] = User.objects.get(username='user').id
+        new_proposal_data['description'] = 'A good candidate to be deleted.'
+        proposal = Proposal.objects.create(**new_proposal_data)
+
+        self.assertEqual(
+            Proposal.objects.filter(slug=proposal.slug).count(), 1)
+
+        response = self.client.post(
+            reverse('delete_proposal',
+                    kwargs={'event_slug': proposal.event.slug,
+                            'slug': proposal.slug}), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Proposal deleted.')
+        self.assertEqual(
+            Proposal.objects.filter(slug=proposal.slug).count(), 0)
+
+    def test_not_allowed_to_delete_proposal(self):
+        response = self.client.post(
+            reverse('delete_proposal',
+                    kwargs={'event_slug': self.proposal.event.slug,
+                            'slug': self.proposal.slug}), follow=True)
+        self.assertEqual(200, response.status_code)
+        self.assertContains(response, 'You are not allowed to see this page.')
 
     def test_rate_proposal(self):
         rate_proposal_data = {

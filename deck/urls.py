@@ -29,6 +29,10 @@ urlpatterns = patterns(
         view=views.UpdateProposal.as_view(),
         name='update_proposal'),
     url(regex=r'/events/<slug:event_slug>/'
+              r'proposals/<slug:slug>/delete/',
+        view=views.DeleteProposal.as_view(),
+        name='delete_proposal'),
+    url(regex=r'/events/<slug:event_slug>/'
               r'proposals/<slug:slug>/rate/<slug:rate>/',
         view=views.RateProposal.as_view(),
         name='rate_proposal'),
