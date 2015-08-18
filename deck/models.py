@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.db import models, transaction
 from django.core.exceptions import ValidationError
 from django.db.models.aggregates import Sum
-from django.db.models.signals import post_save
+from django.db.models.signals import post_delete, post_save
 from django.core.mail import send_mail
 from django.dispatch import receiver
 from django.conf import settings
@@ -247,3 +247,13 @@ def create_initial_jury(sender, instance, signal, created, **kwargs):
     jury.users.add(instance.author)
     instance.jury = jury
     instance.save()
+
+
+@receiver(post_delete, sender=Proposal)
+def send_proposal_deleted_mail(sender, instance, **kwargs):
+    context = {'event_title': instance.event.title,
+               'proposal_title': instance.title}
+    message = render_to_string('mailing/jury_deleted_proposal.txt', context)
+    subject = _(u'Proposal from %s just got deleted' % instance.event.title)
+    recipients = instance.event.jury.users.values_list('email', flat=True)
+    send_mail(subject, message, settings.NO_REPLY_EMAIL, recipients)
