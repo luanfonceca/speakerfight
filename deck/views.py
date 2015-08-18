@@ -16,7 +16,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
 
-from vanilla import CreateView, ListView, UpdateView, DetailView
+from vanilla import CreateView, DeleteView, DetailView, ListView, UpdateView
 from djqscsv import render_to_csv_response
 
 from .models import Event, Proposal, Vote
@@ -220,6 +220,26 @@ class UpdateProposal(BaseProposalView, UpdateView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(UpdateProposal, self).dispatch(*args, **kwargs)
+
+
+class DeleteProposal(BaseProposalView, DeleteView):
+    template_name = 'proposal/proposal_confirm_delete.html'
+
+    def post(self, request, *args, **kwargs):
+        proposal = self.get_object()
+        proposal.delete()
+        messages.success(self.request, _(u'Proposal deleted.'))
+        return HttpResponseRedirect(proposal.event.get_absolute_url())
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        proposal = self.get_object()
+        if (proposal.author != self.request.user and
+           not self.request.user.is_superuser):
+            messages.error(
+                self.request, _(u'You are not allowed to see this page.'))
+            return HttpResponseRedirect(proposal.event.get_absolute_url())
+        return super(DeleteProposal, self).dispatch(*args, **kwargs)
 
 
 class RateProposal(BaseProposalView, UpdateView):

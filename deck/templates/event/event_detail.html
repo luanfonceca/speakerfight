@@ -108,6 +108,9 @@
                     <a href="{% url 'update_proposal' event_slug=event.slug slug=proposal.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Edit the proposal.' %}">
                       <i class="icon-pencil"></i> {% trans "Edit" %}
                     </a>
+                    <a href="{% url 'delete_proposal' event_slug=event.slug slug=proposal.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Delete the proposal.' %}">
+                      <i class="icon-trash"></i> {% trans "Delete" %}
+                    </a>
                 {% endif %}
               </div>
             {% endif %}
