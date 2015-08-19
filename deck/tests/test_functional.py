@@ -10,7 +10,8 @@ from django.test import TestCase, Client
 
 from datetime import datetime, timedelta
 
-from deck.models import Event, Proposal, Vote, Jury, send_welcome_mail
+from deck.models import (Event, Proposal, Vote, Jury,
+                         send_proposal_deleted_mail, send_welcome_mail)
 from deck.tests.test_unit import (
     EVENT_DATA, PROPOSAL_DATA, ANOTHER_PROPOSAL_DATA)
 
@@ -1100,4 +1101,16 @@ class ProposalTest(TestCase):
 
         self.assertTrue('Welcome', email.subject)
         self.assertIn(fake_user.email, email.recipients())
+        self.assertIn(settings.NO_REPLY_EMAIL, email.from_email)
+
+    def test_send_proposal_deleted_mail(self):
+        user = User.objects.get(username='user')
+        self.proposal.event.jury.users.add(user)
+        send_proposal_deleted_mail(Proposal, self.proposal)
+        self.assertEqual(1, len(mail.outbox))
+        email = mail.outbox[0]
+        self.assertEqual('Proposal from RuPy just got deleted', email.subject)
+        self.assertIn('admin@speakerfight.com', email.recipients())
+        self.assertIn('user@speakerfight.com', email.recipients())
+        self.assertIn('Python For Zombies', email.body)
         self.assertIn(settings.NO_REPLY_EMAIL, email.from_email)
