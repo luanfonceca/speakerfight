@@ -7,10 +7,9 @@ script:
 - coverage run manage.py test
 after_success:
 - coveralls
-- if [[ $TRAVIS_BRANCH == 'master' ]]; then fab deploy; fi
+- if [ "$TRAVIS_BRANCH" = "master" ]; then
+    fab deploy;
+  fi
 env:
   global:
-    secure: "DBvEFZgWReQ1km33PqEodjgZlyg4arMAaNjy3w5yvuFSveo6shmKJN0/xcGet75N1G1FUYO38wSIoX/pW+FGfHdslfCDSHMSuDMDDR6cVZZ8mRnjatNe41jE11vdBxdwziDSX434uPUgKJlvDz2dzggKg9Vx5W5tdC6A+NyRNO0="
-notifications:
-  slack:
-    secure: "Qvoy/9gxY8yqAaEfQygFcBEGmsB42tezPP9KJyI416w6SDHXDEst8u0GyUaXnMFJ9SIPFIyBCNKAV9wSOwDs5EwH0VzRN6dAEWbVDX90OEU5SgGiPYqWlgPpBdfC8wFFXnKocVFtfBhRTmg02Trv1CPY8DexEiGrhjkp//hOELA="
+    secure: "MceIzjvNrUbvJSuOtA78snKqKTY23STBanM4xmj+AyKwl79iEaMBQO0URYpljgjeQmon3jcUYYhfx/rU1MoNusTtljFzOathk2+ODekE1X4tcUysq/ZfJ8N2twwHNlBCYrDUrktKZoSJPUJ9NbEB8UgJ+JPVVclQfFC3lWR25Wk="
