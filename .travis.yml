@@ -8,6 +8,3 @@ script:
 after_success:
   - coveralls
   - if [ "$TRAVIS_BRANCH" = "master" ]; then fab deploy; fi
-env:
-  global:
-    secure: "PVTRy0BrUQZ5s67IHwW+jar3lptI3kaswcBfV1BmcYwFAA1vUY5p18KV1mrYWYE/7Hn6tJsYFVGEKQuY7x7V2m5PFIxeSJa9jzu+FaM+8bMAtz9MRXaRwJoWMlNhvRsHFFBdKUshRSwzAZtTxp7ci+WAVPK6siOdDdEgQW9kXDE="
