@@ -1,15 +1,13 @@
 sudo: false
 language:
-- python
+  - python
 install:
-- pip install -r requirements.txt
+  - pip install -r requirements.txt
 script:
-- coverage run manage.py test
+  - coverage run manage.py test
 after_success:
-- coveralls
-- if [ "$TRAVIS_BRANCH" = "master" ]; then
-    fab deploy;
-  fi
+  - coveralls
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then fab deploy; fi
 env:
   global:
-    secure: "MceIzjvNrUbvJSuOtA78snKqKTY23STBanM4xmj+AyKwl79iEaMBQO0URYpljgjeQmon3jcUYYhfx/rU1MoNusTtljFzOathk2+ODekE1X4tcUysq/ZfJ8N2twwHNlBCYrDUrktKZoSJPUJ9NbEB8UgJ+JPVVclQfFC3lWR25Wk="
+    secure: "PVTRy0BrUQZ5s67IHwW+jar3lptI3kaswcBfV1BmcYwFAA1vUY5p18KV1mrYWYE/7Hn6tJsYFVGEKQuY7x7V2m5PFIxeSJa9jzu+FaM+8bMAtz9MRXaRwJoWMlNhvRsHFFBdKUshRSwzAZtTxp7ci+WAVPK6siOdDdEgQW9kXDE="
