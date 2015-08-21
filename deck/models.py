@@ -173,7 +173,8 @@ class Proposal(DeckBaseModel):
         return can_approve
 
     def get_absolute_url(self):
-        return reverse('view_event', kwargs={'slug': self.event.slug})
+        return reverse('view_event', kwargs={'slug': self.event.slug}) + \
+            '#' + self.slug
 
     def approve(self):
         if self.is_approved:
