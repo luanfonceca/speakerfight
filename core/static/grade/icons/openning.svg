@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="64px" height="64px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+<g>
+	<g id="calendar_1_">
+		<path fill="#FFFFFF" d="M58.668,11H50V7c0-1.106-0.895-2-2-2s-2,0.894-2,2v4H34V7c0-1.106-0.896-2-2-2c-1.104,0-2,0.894-2,2v4H18
+			V7c0-1.106-0.896-2-2-2s-2,0.894-2,2v4H5.334C2.388,11,0,13.386,0,16.332v37.334C0,56.611,2.388,59,5.334,59h53.334
+			C61.613,59,64,56.611,64,53.666V16.332C64,13.386,61.613,11,58.668,11z M60,53.666C60,54.402,59.402,55,58.668,55H5.334
+			C4.598,55,4,54.402,4,53.666V16.332C4,15.598,4.598,15,5.334,15H14v4c0,1.106,0.896,2,2,2s2-0.894,2-2v-4h12v4
+			c0,1.106,0.896,2,2,2c1.104,0,2-0.894,2-2v-4h12v4c0,1.106,0.895,2,2,2s2-0.894,2-2v-4h8.668C59.402,15,60,15.598,60,16.332
+			V53.666z"/>
+		<rect x="14" y="29" fill="#FFFFFF" width="8" height="6"/>
+		<rect x="14" y="39" fill="#FFFFFF" width="8" height="6"/>
+		<rect x="28" y="39" fill="#FFFFFF" width="8" height="6"/>
+		<rect x="28" y="29" fill="#FFFFFF" width="8" height="6"/>
+		<rect x="42" y="39" fill="#FFFFFF" width="8" height="6"/>
+		<rect x="42" y="29" fill="#FFFFFF" width="8" height="6"/>
+	</g>
+</g>
+</svg>
