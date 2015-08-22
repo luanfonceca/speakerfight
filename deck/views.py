@@ -169,11 +169,11 @@ class CreateEventGrade(BaseEventView, DetailView):
         # On the first time we generate a grade based on the Slots.
         if not track.activities.exists():
             top_not_approved_ones = self.object.get_not_approved_grade()
+            proposals = top_not_approved_ones[:self.object.slots]
+            proposals.update(track=track, is_approved=True)
             order = 0
-            for proposal in top_not_approved_ones[:self.object.slots]:
-                proposal.track = track
+            for proposal in proposals:
                 proposal.track_order = order
-                proposal.is_approved = True
                 proposal.save()
                 order += 1
         return super(CreateEventGrade, self).get(request, *args, **kwargs)
@@ -212,41 +212,6 @@ class CreateEventGrade(BaseEventView, DetailView):
 
 class DetailEventGrade(BaseEventView, DetailView):
     template_name = 'event/event_detail_grade.html'
-
-
-def create_activity(request, slug):
-    event = Event.objects.get(slug=slug)
-
-    activity_form = ActivityForm(request.POST or None)
-    if activity_form.is_valid():
-        activity = activity_form.save(commit=False)
-        activity.track = event.tracks.first()
-        activity.author = request.user
-        activity.save()
-    return HttpResponseRedirect(
-        reverse('create_event_grade',
-                kwargs={'slug': event.slug}),
-    )
-
-
-def update_activity_timetable(request, event_slug, slug):
-    response_content = {}
-    response_status = 200
-    event = Event.objects.get(slug=event_slug)
-    proposal = event.proposals.get(slug=slug)
-    activity_timetable_form = ActivityTimetableForm(
-        data=request.POST or None, instance=proposal)
-
-    if activity_timetable_form.is_valid():
-        proposal = activity_timetable_form.save()
-        response_content.update(
-            slug=proposal.slug,
-            timetable=proposal.timetable
-        )
-    return HttpResponse(
-        json.dumps(response_content),
-        status=response_status,
-        content_type='application/json')
 
 
 class BaseProposalView(object):

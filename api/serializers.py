@@ -1,5 +1,6 @@
 from django.contrib import auth
 
+from rest_framework.reverse import reverse
 from rest_framework import serializers
 
 from deck.models import Event, Activity, Track
@@ -28,12 +29,42 @@ class ActivitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Activity
         fields = (
-            'title', 'description', 'timetable',
-            'activity_type', 'author'
+            'title', 'slug', 'description', 'timetable',
+            'activity_type', 'author',
+            'start_timetable', 'end_timetable',
         )
 
     def get_timetable(self, activity):
         return activity.timetable
+
+
+class CreateActivitySerializer(serializers.ModelSerializer):
+    author = UserSerializer(read_only=True)
+    timetable = serializers.SerializerMethodField()
+    url_api_event_activity = serializers.SerializerMethodField()
+    activity_type_display = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Activity
+        fields = (
+            'pk', 'slug', 'title', 'description',
+            'timetable', 'activity_type', 'author',
+            'start_timetable', 'end_timetable',
+            'url_api_event_activity',
+            'activity_type_display',
+        )
+
+    def get_timetable(self, activity):
+        return activity.timetable
+
+    def get_activity_type_display(self, activity):
+        return activity.get_activity_type_display()
+
+    def get_url_api_event_activity(self, activity):
+        event = activity.track.event
+        return reverse(
+            'api_event_activity',
+            [event.slug, activity.slug])
 
 
 class TrackSerializer(serializers.HyperlinkedModelSerializer):

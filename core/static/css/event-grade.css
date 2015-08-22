@@ -27,6 +27,11 @@
 
 .proposal-item .proposal-rate {
   padding-right: 15px;
+  width: 150px;
+}
+
+.proposal-item .proposal-actions {
+  padding-left: 15px;
 }
 
 .proposal-item .proposal-rate .timetable {

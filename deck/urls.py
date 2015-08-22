@@ -24,9 +24,6 @@ urlpatterns = patterns(
     url(regex=r'/events/<slug:slug>/create_grade/',
         view=views.CreateEventGrade.as_view(),
         name='create_event_grade'),
-    url(regex=r'/events/<slug:slug>/create_grade/create_activity/',
-        view=views.create_activity,
-        name='create_event_grade_create_activity'),
     url(regex=r'/events/<slug:slug>/proposals/create/',
         view=views.CreateProposal.as_view(),
         name='create_event_proposal'),
@@ -37,10 +34,6 @@ urlpatterns = patterns(
               r'proposals/<slug:slug>/update/',
         view=views.UpdateProposal.as_view(),
         name='update_proposal'),
-    url(regex=r'/events/<slug:event_slug>/'
-              r'proposals/<slug:slug>/update/timetable/',
-        view=views.update_activity_timetable,
-        name='update_activity_timetable'),
     url(regex=r'/events/<slug:event_slug>/'
               r'proposals/<slug:slug>/rate/<slug:rate>/',
         view=views.RateProposal.as_view(),

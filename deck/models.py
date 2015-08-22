@@ -154,6 +154,9 @@ class Activity(DeckBaseModel):
 
     @property
     def timetable(self):
+        if all([self.start_timetable is None, self.end_timetable is None]):
+            return '--:--'
+
         return '{0} - {1}'.format(
             self.start_timetable.strftime('%H:%M'),
             self.end_timetable.strftime('%H:%M')
