@@ -7,4 +7,6 @@ script:
   - coverage run manage.py test
 after_success:
   - coveralls
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then fab deploy; fi
+  - if ([ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ]) &&
+        [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+        fab deploy
