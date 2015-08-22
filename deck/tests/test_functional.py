@@ -7,11 +7,11 @@ from django.core import mail
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
-from django.utils.translation import ugettext as _
 
 from datetime import datetime, timedelta
 
-from deck.models import Event, Proposal, Vote, Jury, send_welcome_mail
+from deck.models import (Event, Proposal, Vote, Jury,
+                         send_proposal_deleted_mail, send_welcome_mail)
 from deck.tests.test_unit import (
     EVENT_DATA, PROPOSAL_DATA, ANOTHER_PROPOSAL_DATA)
 
@@ -562,6 +562,32 @@ class ProposalTest(TestCase):
                           response.context_data.get('redirect_field_value'))
         self.assertEquals('Brain...', self.proposal.description)
 
+    def test_delete_proposal(self):
+        new_proposal_data = self.proposal_data.copy()
+        new_proposal_data['author_id'] = User.objects.get(username='user').id
+        new_proposal_data['description'] = 'A good candidate to be deleted.'
+        proposal = Proposal.objects.create(**new_proposal_data)
+
+        self.assertEqual(
+            Proposal.objects.filter(slug=proposal.slug).count(), 1)
+
+        response = self.client.post(
+            reverse('delete_proposal',
+                    kwargs={'event_slug': proposal.event.slug,
+                            'slug': proposal.slug}), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Proposal deleted.')
+        self.assertEqual(
+            Proposal.objects.filter(slug=proposal.slug).count(), 0)
+
+    def test_not_allowed_to_delete_proposal(self):
+        response = self.client.post(
+            reverse('delete_proposal',
+                    kwargs={'event_slug': self.proposal.event.slug,
+                            'slug': self.proposal.slug}), follow=True)
+        self.assertEqual(200, response.status_code)
+        self.assertContains(response, 'You are not allowed to see this page.')
+
     def test_rate_proposal(self):
         rate_proposal_data = {
             'event_slug': self.proposal.event.slug,
@@ -1075,4 +1101,16 @@ class ProposalTest(TestCase):
 
         self.assertTrue('Welcome', email.subject)
         self.assertIn(fake_user.email, email.recipients())
+        self.assertIn(settings.NO_REPLY_EMAIL, email.from_email)
+
+    def test_send_proposal_deleted_mail(self):
+        user = User.objects.get(username='user')
+        self.proposal.event.jury.users.add(user)
+        send_proposal_deleted_mail(Proposal, self.proposal)
+        self.assertEqual(1, len(mail.outbox))
+        email = mail.outbox[0]
+        self.assertEqual('Proposal from RuPy just got deleted', email.subject)
+        self.assertIn('admin@speakerfight.com', email.recipients())
+        self.assertIn('user@speakerfight.com', email.recipients())
+        self.assertIn('Python For Zombies', email.body)
         self.assertIn(settings.NO_REPLY_EMAIL, email.from_email)
