@@ -258,6 +258,24 @@ class EventTest(TestCase):
             )
         self.assertEquals(0, event.proposals.count())
 
+        response = self.client.get(
+            reverse('create_event_proposal', kwargs={'slug': event.slug}))
+        self.assertEqual(302, response.status_code)
+
+    def test_export_event_votes_to_csv(self):
+        event = Event.objects.create(**self.event_data)
+        response = self.client.get(
+            reverse('export_event', kwargs={'slug': event.slug}))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'text/csv')
+
+    def test_not_authorized_to_export_event_votes_to_csv(self):
+        self.client.login(username='user', password='user')
+        event = Event.objects.create(**self.event_data)
+        response = self.client.get(
+            reverse('export_event', kwargs={'slug': event.slug}))
+        self.assertEqual(302, response.status_code)
+
 
 class ProposalTest(TestCase):
     fixtures = ['user.json', 'socialapp.json']
@@ -533,6 +551,13 @@ class ProposalTest(TestCase):
 
         self.assertEquals(self.proposal_data['description'],
                           self.proposal.description)
+
+        response = self.client.get(
+            reverse('update_proposal',
+                    kwargs={'event_slug': self.event.slug,
+                            'slug': self.proposal.slug}))
+        self.assertEqual(response.context['event'], self.event)
+
         response = self.client.post(
             reverse('update_proposal',
                     kwargs={'event_slug': self.event.slug,
