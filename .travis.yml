@@ -7,4 +7,9 @@ script:
   - coverage run manage.py test
 after_success:
   - coveralls
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then fab deploy; fi
+  - if ([ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ]) &&
+        [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+        fab deploy
+env:
+  global:
+    secure: PHa93oiszqbD+hqxHnlEWipRZLL7P38WzQZqkh92AQ5u15nJu+YrR1PyEX4S8pgYayaqID3/+kOJuTbDAwNdj9KR7ubmFIZG0vlk0Mh6Q+5FFjSl6pYXKOLi6J4aQELzhE7y3cg+PWOUL1jceQur3zXxSyS2vmiLq2r0m6hbGxQ=
