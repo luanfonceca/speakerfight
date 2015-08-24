@@ -12,19 +12,12 @@ class IsJuryPermission(permissions.BasePermission):
     def has_permission(self, request, view):
         slug = view.kwargs.get('event_slug', view.kwargs.get('slug'))
         event = get_object_or_404(Event, slug=slug)
-        return event.jury.users.filter(pk=request.user.pk).exists()
-
-
-class IsSuperUser(permissions.BasePermission):
-    message = _('You are not allowed to see this page.')
-
-    def has_permission(self, request, view):
-        return self.request.user.is_superuser
+        is_in_jury = event.jury.users.filter(pk=request.user.pk).exists()
+        return is_in_jury or request.user.is_superuser
 
 
 class DeckPermissionMixing(object):
     permission_classes = (
         permissions.IsAuthenticated,
         IsJuryPermission,
-        IsSuperUser,
     )

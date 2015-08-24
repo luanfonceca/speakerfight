@@ -154,7 +154,7 @@ class CreateEventGrade(BaseEventView, DetailView):
         self.object = self.get_object()
         in_jury = self.object.jury.users.filter(
             pk=self.request.user.pk).exists()
-        if (not in_jury or not self.request.user.is_superuser):
+        if (not in_jury and not self.request.user.is_superuser):
             messages.error(
                 self.request, _(u'You are not allowed to see this page.'))
             return HttpResponseRedirect(
