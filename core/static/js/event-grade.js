@@ -44,7 +44,6 @@ $(function () {
       $(el).find('.update-activity').removeClass('hide');
       $(el).find('.author-photo').addClass('hide');
     } else {
-      debugger;
       $(el).addClass('panel-default');
       $(el).find(':checkbox').removeAttr('checked');
       $(el).find('.proposal-points').removeClass('hide');
