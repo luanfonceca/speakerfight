@@ -182,7 +182,13 @@ class Proposal(Activity):
 
     @property
     def get_rate(self):
-        return self.votes.aggregate(Sum('rate'))['rate__sum'] or 0
+        rate = None
+        try:
+            rate = self.votes__rate__sum
+        except AttributeError:
+            rate = self.votes.aggregate(Sum('rate'))['rate__sum']
+        finally:
+            return rate or 0
 
     def rate(self, user, rate):
         rate_int = [r[0] for r in Vote.VOTE_RATES if rate in r][0]
@@ -311,9 +317,7 @@ class Event(DeckBaseModel):
             .filter(models.Q(is_approved=False) |
                     models.Q(track__isnull=True))\
             .annotate(Sum('votes__rate'))\
-            .extra(select=dict(track_isnull='track_id IS NULL'))\
-            .order_by('track_isnull', 'track_order',
-                      '-votes__rate__sum')
+            .order_by('-is_approved', '-votes__rate__sum')
         return not_approved_grade
 
 

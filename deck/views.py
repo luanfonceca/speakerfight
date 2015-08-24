@@ -170,9 +170,10 @@ class CreateEventGrade(BaseEventView, DetailView):
         if not track.activities.exists():
             top_not_approved_ones = self.object.get_not_approved_grade()
             proposals = top_not_approved_ones[:self.object.slots]
-            proposals.update(track=track, is_approved=True)
             order = 0
             for proposal in proposals:
+                proposal.track = track
+                proposal.is_approved = True
                 proposal.track_order = order
                 proposal.save()
                 order += 1
