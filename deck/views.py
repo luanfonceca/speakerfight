@@ -152,13 +152,13 @@ class CreateEventGrade(BaseEventView, DetailView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         self.object = self.get_object()
-        if (self.object.author != self.request.user and
-           not self.request.user.is_superuser):
+        in_jury = self.object.jury.users.filter(
+            pk=self.request.user.pk).exists()
+        if (not in_jury or not self.request.user.is_superuser):
             messages.error(
                 self.request, _(u'You are not allowed to see this page.'))
             return HttpResponseRedirect(
-                reverse('create_event_grade',
-                        kwargs={'slug': self.object.slug}),
+                reverse('view_event', kwargs={'slug': self.object.slug}),
             )
         return super(CreateEventGrade, self).dispatch(*args, **kwargs)
 
@@ -169,9 +169,8 @@ class CreateEventGrade(BaseEventView, DetailView):
         # On the first time we generate a grade based on the Slots.
         if not track.activities.exists():
             top_not_approved_ones = self.object.get_not_approved_grade()
-            proposals = top_not_approved_ones[:self.object.slots]
             order = 0
-            for proposal in proposals:
+            for proposal in top_not_approved_ones[:self.object.slots]:
                 proposal.track = track
                 proposal.is_approved = True
                 proposal.track_order = order

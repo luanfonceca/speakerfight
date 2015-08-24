@@ -102,6 +102,9 @@ $(function () {
       $("#event-approved-proposals").prepend(activityItem);
       $(modal).modal('hide');
     }).error(function(data, status, xhr) {
+      if (data.status == 403) {
+        alert(data.responseJSON.detail)
+      };
       for (field in data.responseJSON){
         $('[name="' + field + '"]').parents('.form-group').addClass('has-error');
       }
@@ -144,6 +147,9 @@ $(function () {
       $(activityBlock).find('.proposal-timetable').removeClass('hide');
       $(modal).modal('hide');
     }).error(function(data, status, xhr) {
+      if (data.status == 403) {
+        alert(data.responseJSON.detail)
+      };
       for (field in data.responseJSON){
         $('[name="' + field + '"]').parents('.form-group').addClass('has-error');
       }
@@ -163,6 +169,10 @@ $(function () {
       success: function(result) {
         $(self).parents('.proposal-item').remove();
       }
+    }).error(function(data, status, xhr) {
+      if (data.status == 403) {
+        alert(data.responseJSON.detail)
+      };
     });
   });
 });

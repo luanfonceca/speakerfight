@@ -1,20 +1,10 @@
-from rest_framework import generics, permissions
+from rest_framework import generics
 
 from django.shortcuts import get_object_or_404
 
-from api import serializers
+from api import serializers, permissions
 from deck.models import Event, Activity
 from deck.forms import ActivityForm, ActivityTimetableForm
-
-
-class IsJuryPermission(permissions.BasePermission):
-    message = 'You are not allowed to see this page.'
-
-    def has_permission(self, request, view):
-        slug = view.kwargs.get('event_slug', view.kwargs.get('slug'))
-        event = get_object_or_404(Event, slug=slug)
-        is_jury = event.jury.users.filter(pk=request.user.pk).exists()
-        return is_jury or request.user.is_superuser
 
 
 class RetrieveEventView(generics.RetrieveAPIView):
@@ -23,13 +13,10 @@ class RetrieveEventView(generics.RetrieveAPIView):
     lookup_field = 'slug'
 
 
-class CreateActivityView(generics.CreateAPIView):
+class CreateActivityView(permissions.DeckPermissionMixing,
+                         generics.CreateAPIView):
     serializer_class = serializers.CreateActivitySerializer
     form_class = ActivityForm
-    permission_classes = (
-        permissions.IsAuthenticated,
-        IsJuryPermission,
-    )
 
     def perform_create(self, serializer):
         event = get_object_or_404(Event, slug=self.kwargs.get('slug'))
@@ -39,17 +26,14 @@ class CreateActivityView(generics.CreateAPIView):
         )
 
 
-class ActivityView(generics.RetrieveAPIView,
+class ActivityView(permissions.DeckPermissionMixing,
+                   generics.RetrieveAPIView,
                    generics.UpdateAPIView,
                    generics.DestroyAPIView):
     serializer_class = serializers.ActivitySerializer
     form_class = ActivityTimetableForm
     queryset = Activity.objects.all()
     lookup_field = 'slug'
-    permission_classes = (
-        permissions.IsAuthenticated,
-        IsJuryPermission,
-    )
 
     def get_object(self):
         queryset = self.get_queryset()
