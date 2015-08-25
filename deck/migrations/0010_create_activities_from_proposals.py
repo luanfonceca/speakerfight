@@ -16,10 +16,8 @@ def create_activities(apps, schema_editor):
             description=proposal.description,
             created_at=proposal.created_at,
             is_published=proposal.is_published,
-            track_order=proposal.track_order,
             activity_type='proposal',
             author=proposal.author,
-            track=proposal.track,
         )
 
 
@@ -32,7 +30,7 @@ def reverse_create_activities(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('deck', '0012_auto_20150811_1832'),
+        ('deck', '0009_activity'),
     ]
 
     operations = [

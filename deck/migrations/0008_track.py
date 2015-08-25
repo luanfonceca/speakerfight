@@ -2,14 +2,28 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-from django.db.models.signals import post_save
 import django_extensions.db.fields
+
+
+def create_tracks(apps, schema_editor):
+    Event = apps.get_model("deck", "Event")
+    Track = apps.get_model("deck", "Track")
+
+    for event in Event.objects.all():
+        Track.objects.create(event=event)
+
+
+def reverse_create_tracks(apps, schema_editor):
+    Event = apps.get_model("deck", "Event")
+
+    for event in Event.objects.all():
+        event.tracks.all().delete()
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('deck', '0007_auto_20150728_1434'),
+        ('deck', '0007_event_slots'),
     ]
 
     operations = [
@@ -27,20 +41,6 @@ class Migration(migrations.Migration):
             },
             bases=(models.Model,),
         ),
-        migrations.RemoveField(
-            model_name='event',
-            name='tracks',
-        ),
-        migrations.AddField(
-            model_name='event',
-            name='is_grade_published',
-            field=models.BooleanField(default=False, verbose_name='Publish grade'),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='proposal',
-            name='track',
-            field=models.ForeignKey(related_name='proposals', blank=True, to='deck.Track', null=True),
-            preserve_default=True,
-        ),
+        migrations.RunPython(code=create_tracks,
+                             reverse_code=reverse_create_tracks),
     ]

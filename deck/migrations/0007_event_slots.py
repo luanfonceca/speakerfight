@@ -17,10 +17,4 @@ class Migration(migrations.Migration):
             field=models.SmallIntegerField(default=10, verbose_name='Slots'),
             preserve_default=True,
         ),
-        migrations.AddField(
-            model_name='event',
-            name='tracks',
-            field=models.SmallIntegerField(default=1, verbose_name='Tracks'),
-            preserve_default=True,
-        ),
     ]

@@ -264,7 +264,6 @@ class Event(DeckBaseModel):
                                               default=True)
     due_date = models.DateTimeField(null=True, blank=True)
     slots = models.SmallIntegerField(_('Slots'), default=10)
-    is_grade_published = models.BooleanField(_('Publish grade'), default=False)
 
     # relations
     jury = models.OneToOneField(to='jury.Jury', related_name='event',
