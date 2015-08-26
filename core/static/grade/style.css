@@ -335,6 +335,11 @@ ol {
   display: none;
 }
 
+#speakerfight #grade .day .event-list .event.openning .short:before {
+  background: #5ba0a3 url(../grade/icons/openning.svg) no-repeat center 19px;
+  background-size: auto 40px;
+}
+
 #speakerfight #grade .day .event-list .event.coffee-break .short:before {
   background: #5ba0a3 url(../grade/icons/coffee-break.svg) no-repeat center 19px;
   background-size: auto 40px;
@@ -347,5 +352,10 @@ ol {
 
 #speakerfight #grade .day .event-list .event.lightning-talks .short:before {
   background: #5ba0a3 url(../grade/icons/lightning-talks.svg) no-repeat center 19px;
+  background-size: auto 40px;
+}
+
+#speakerfight #grade .day .event-list .event.ending .short:before {
+  background: #5ba0a3 url(../grade/icons/ending.svg) no-repeat center 19px;
   background-size: auto 40px;
 }
