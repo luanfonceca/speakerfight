@@ -31,7 +31,7 @@
               </div>
             </div>
             <div class="panel-footer proposal-actions text-center">
-              <a href="{{ proposal.get_absolute_url }}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Edit the proposal.' %}">
+              <a href="{{ proposal.get_absolute_url }}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'See the proposal in Event.' %}">
                 <i class="icon-pencil"></i> {% trans "See in Event" %}
               </a>
               <a href="{% url 'update_proposal' event_slug=proposal.event.slug slug=proposal.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Edit the proposal.' %}">
