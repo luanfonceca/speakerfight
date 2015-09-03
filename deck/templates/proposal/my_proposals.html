@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+{% load bootstrap3 %}
+{% load deck_tags %}
+
+{% block head_title %}{% trans "My Proposals" %}{% endblock %}
+
+{% block content %}
+  <div class="row header">
+    <h2><strong>{% trans "My Proposals" %}</strong></h2>
+  </div>
+  <div class="row" id="proposal-list">
+    <div class="col-md-12">
+      <div id="event-proposals">
+        {% for proposal in object_list %}
+          <div id="{{ proposal.slug }}" class="panel panel-default proposal-item">
+            <div class="panel-body">
+              <h3 class="panel-title proposal-title">
+                <a href="#{{ proposal.slug }}">
+                  {{ proposal }}
+                </a>
+              </h3>
+              <p class="proposal-metadata">
+                {% blocktrans with author=proposal.author.get_full_name|default:proposal.author.username created_at=proposal.created_at %}
+                Proposed by <strong>{{ author }}</strong> at {{ created_at }}.
+                {% endblocktrans %}
+              </p>
+              <div class="proposal-description">
+                {{ proposal.description|safe|linebreaks }}
+              </div>
+            </div>
+            <div class="panel-footer proposal-actions text-center">
+              <a href="{{ proposal.get_absolute_url }}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'See the proposal in Event.' %}">
+                <i class="icon-pencil"></i> {% trans "See in Event" %}
+              </a>
+              <a href="{% url 'update_proposal' event_slug=proposal.event.slug slug=proposal.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Edit the proposal.' %}">
+                <i class="icon-pencil"></i> {% trans "Edit" %}
+              </a>
+              <a href="{% url 'delete_proposal' event_slug=proposal.event.slug slug=proposal.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Delete the proposal.' %}">
+                <i class="icon-trash"></i> {% trans "Delete" %}
+              </a>
+            </div>
+          </div>
+        {% empty %}
+          <p class="lead">
+            {% trans "There are no proposals to show" %}
+          </p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}

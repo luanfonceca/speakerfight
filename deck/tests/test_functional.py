@@ -1173,3 +1173,20 @@ class ProposalTest(TestCase):
         self.assertIn('user@speakerfight.com', email.recipients())
         self.assertIn('Python For Zombies', email.body)
         self.assertIn(settings.NO_REPLY_EMAIL, email.from_email)
+
+    def test_my_proposals_menu_for_authenticated_users(self):
+        response = self.client.get(reverse('list_events'))
+        self.assertContains(response, 'My Proposals')
+
+    def test_my_proposals_menu_for_non_authenticated_users(self):
+        self.client.logout()
+        response = self.client.get(reverse('list_events'))
+        self.assertNotContains(response, 'My Proposals')
+
+    def test_users_should_see_their_proposals(self):
+        user = User.objects.get(username='user')
+        self.proposal.author = user
+        self.proposal.save()
+        response = self.client.get(reverse('my_proposals'))
+        self.assertQuerysetEqual(response.context['object_list'],
+                                 ['<Proposal: Python For Zombies>'])

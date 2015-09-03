@@ -6,6 +6,9 @@ import views
 
 urlpatterns = patterns(
     '',
+    url(regex=r'/my_proposals/',
+        view=views.ListMyProposals.as_view(),
+        name='my_proposals'),
     url(regex=r'/events/',
         view=views.ListEvents.as_view(),
         name='list_events'),

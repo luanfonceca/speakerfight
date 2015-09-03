@@ -198,6 +198,17 @@ class CreateProposal(BaseProposalView, CreateView):
         return super(CreateProposal, self).dispatch(*args, **kwargs)
 
 
+class ListMyProposals(BaseProposalView, ListView):
+    template_name = 'proposal/my_proposals.html'
+
+    def get_queryset(self):
+        return self.request.user.proposals.all()
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ListMyProposals, self).dispatch(*args, **kwargs)
+
+
 class UpdateProposal(BaseProposalView, UpdateView):
     template_name = 'proposal/proposal_form.html'
 
