@@ -250,6 +250,11 @@ class ProposalObjectTest(TestCase):
     def test_assert_proposal_rate(self):
         self.assertEquals(0, self.proposal.get_rate)
 
+    def test_get_absolute_url(self):
+        self.proposal.event = self.event
+        self.assertEquals('/events/rupy/#python-for-zombies',
+                          self.proposal.get_absolute_url())
+
     def test_assert_user_cannot_vote_multiple_times(self):
         self.event.save()
         self.proposal.event = self.event

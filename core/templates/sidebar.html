@@ -24,5 +24,13 @@
         <span>{% trans "Events" %}</span>
       </a>
     </li>
+    {% if request.user.is_authenticated %}
+    <li {% ifstartswith "/my_proposals/" %}class="active"{% endifstartswith %}>
+      <a href="{% url 'my_proposals' %}">
+        <i class="icon-comment"></i>
+        <span>{% trans "My Proposals" %}</span>
+      </a>
+    </li>
+    {% endif %}
   </ul>
 </div>
