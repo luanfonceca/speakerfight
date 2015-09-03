@@ -9,8 +9,6 @@ from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError, models
-from django.db.models.aggregates import Sum
-from django.db.models import Count
 from django.template.loader import render_to_string
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.decorators import method_decorator
@@ -127,11 +125,7 @@ class ExportEvent(BaseEventView, DetailView):
             'votes__rate__sum': _('Vote Rate'),
             'votes__count': _('Votes Count'),
         }
-        proposals = event.proposals.values(
-            'id', 'title', 'author__username', 'author__email'
-        ).annotate(
-            Sum('votes__rate')
-        ).annotate(Count('votes'))
+        proposals = event.get_votes_to_export()
         return render_to_csv_response(
             proposals,
             append_datestamp=True,

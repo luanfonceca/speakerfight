@@ -258,6 +258,58 @@ class EventTest(TestCase):
             )
         self.assertEquals(0, event.proposals.count())
 
+        response = self.client.get(
+            reverse('create_event_proposal', kwargs={'slug': event.slug}))
+        self.assertEqual(302, response.status_code)
+
+    def test_export_votes_to_csv_queryset(self):
+        event = Event.objects.create(**self.event_data)
+        Proposal.objects.create(event=event, **self.proposal_data)
+        proposals = event.get_votes_to_export()
+        exported_data = [{'title': u'Python For Zombies',
+                          'votes__count': 0,
+                          'author__email': u'admin@speakerfight.com',
+                          'author__username': u'admin',
+                          'votes__rate__sum': None,
+                          'id': 1}]
+        self.assertEqual(list(proposals), exported_data)
+
+    def test_export_votes_sum_rate(self):
+        event = Event.objects.create(**self.event_data)
+        proposal = Proposal.objects.create(event=event, **self.proposal_data)
+        user = User.objects.get(username='user')
+        another_user = User.objects.get(username='another')
+        Vote.objects.create(user=user, proposal=proposal, rate=2)
+        Vote.objects.create(user=another_user, proposal=proposal, rate=-1)
+        proposals = list(event.get_votes_to_export())
+        sum_rate = sum(proposal['votes__rate__sum'] for proposal in proposals)
+        self.assertEqual(1, sum_rate)
+
+    def test_export_votes_count(self):
+        event = Event.objects.create(**self.event_data)
+        proposal = Proposal.objects.create(event=event, **self.proposal_data)
+        user = User.objects.get(username='user')
+        another_user = User.objects.get(username='another')
+        Vote.objects.create(user=user, proposal=proposal, rate=1)
+        Vote.objects.create(user=another_user, proposal=proposal, rate=1)
+        proposals = list(event.get_votes_to_export())
+        total_votes = sum(proposal['votes__count'] for proposal in proposals)
+        self.assertEqual(2, total_votes)
+
+    def test_export_event_votes_to_csv(self):
+        event = Event.objects.create(**self.event_data)
+        response = self.client.get(
+            reverse('export_event', kwargs={'slug': event.slug}))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'text/csv')
+
+    def test_not_authorized_to_export_event_votes_to_csv(self):
+        self.client.login(username='user', password='user')
+        event = Event.objects.create(**self.event_data)
+        response = self.client.get(
+            reverse('export_event', kwargs={'slug': event.slug}))
+        self.assertEqual(302, response.status_code)
+
 
 class ProposalTest(TestCase):
     fixtures = ['user.json', 'socialapp.json']
@@ -533,6 +585,13 @@ class ProposalTest(TestCase):
 
         self.assertEquals(self.proposal_data['description'],
                           self.proposal.description)
+
+        response = self.client.get(
+            reverse('update_proposal',
+                    kwargs={'event_slug': self.event.slug,
+                            'slug': self.proposal.slug}))
+        self.assertEqual(response.context['event'], self.event)
+
         response = self.client.post(
             reverse('update_proposal',
                     kwargs={'event_slug': self.event.slug,

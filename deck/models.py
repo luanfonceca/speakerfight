@@ -1,15 +1,16 @@
-from django.utils.translation import ugettext as _
-from django.utils import timezone
-from django.core.urlresolvers import reverse
-from django.db import models, transaction
-from django.core.exceptions import ValidationError
-from django.db.models.aggregates import Sum
-from django.db.models.signals import post_delete, post_save
-from django.core.mail import send_mail
-from django.dispatch import receiver
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
+from django.core.exceptions import ValidationError
+from django.core.mail import send_mail
+from django.core.urlresolvers import reverse
+from django.db import models, transaction
+from django.db.models import Count
+from django.db.models.aggregates import Sum
+from django.db.models.signals import post_delete, post_save
+from django.dispatch import receiver
 from django.template.loader import render_to_string
+from django.utils.translation import ugettext as _
+from django.utils import timezone
 
 from django_extensions.db.fields import AutoSlugField
 
@@ -300,6 +301,13 @@ class Event(DeckBaseModel):
 
     def get_votes_count(self):
         return self.proposals.values_list('votes', flat=True).count()
+
+    def get_votes_to_export(self):
+        return self.proposals.values(
+            'id', 'title', 'author__username', 'author__email'
+        ).annotate(
+            Sum('votes__rate')
+        ).annotate(Count('votes'))
 
     def get_grade(self):
         grade = Activity.objects.filter(track__event=self)\
