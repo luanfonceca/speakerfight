@@ -10,4 +10,4 @@ after_success:
   - if ([ "$TRAVIS_BRANCH" == "master" ]); then fab deploy; fi
 env:
   global:
-    secure: PHa93oiszqbD+hqxHnlEWipRZLL7P38WzQZqkh92AQ5u15nJu+YrR1PyEX4S8pgYayaqID3/+kOJuTbDAwNdj9KR7ubmFIZG0vlk0Mh6Q+5FFjSl6pYXKOLi6J4aQELzhE7y3cg+PWOUL1jceQur3zXxSyS2vmiLq2r0m6hbGxQ=
+    - secure: fp6OgeBAhwSJ/xXwh2y28ODMQMwi9xuOFaon3CKNZ7Jfh9Suwm8sSrVbA3gt7OcrhZOINU8vlMSiVgXS5cIYlDtty8GOykFMA2ERasZSTSeo9JHmtL4skR/avZNqlczOd5dycteRgiDCNWiK7BGqnKHDACuksEdnzu63WDZF1h0=
