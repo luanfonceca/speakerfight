@@ -21,6 +21,12 @@ from .models import Event, Proposal, Vote
 from .forms import (EventForm, ProposalForm)
 
 
+class FormValidRedirectMixing(object):
+    def success_redirect(self, message):
+        messages.success(self.request, message)
+        return HttpResponseRedirect(self.get_success_url())
+
+
 class BaseEventView(object):
     model = Event
     form_class = EventForm
@@ -41,7 +47,7 @@ class ListEvents(BaseEventView, ListView):
         return context
 
 
-class CreateEvent(BaseEventView, CreateView):
+class CreateEvent(BaseEventView, CreateView, FormValidRedirectMixing):
     template_name = 'event/event_form.html'
 
     def form_valid(self, form):
@@ -49,8 +55,7 @@ class CreateEvent(BaseEventView, CreateView):
         self.object.author = self.request.user
         self.object.save()
         self.send_event_creation_email()
-        messages.success(self.request, _(u'Event created.'))
-        return HttpResponseRedirect(self.get_success_url())
+        return self.success_redirect(_(u'Event created.'))
 
     def send_event_creation_email(self):
         event = self.object
@@ -84,13 +89,12 @@ class DetailEvent(BaseEventView, DetailView):
         return context
 
 
-class UpdateEvent(BaseEventView, UpdateView):
+class UpdateEvent(BaseEventView, UpdateView, FormValidRedirectMixing):
     template_name = 'event/event_form.html'
 
     def form_valid(self, form):
         self.object = form.save()
-        messages.success(self.request, _(u'Event updated.'))
-        return HttpResponseRedirect(self.get_success_url())
+        return self.success_redirect(_(u'Event updated.'))
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -140,7 +144,7 @@ class BaseProposalView(object):
     lookup_field = 'slug'
 
 
-class CreateProposal(BaseProposalView, CreateView):
+class CreateProposal(BaseProposalView, CreateView, FormValidRedirectMixing):
     template_name = 'proposal/proposal_form.html'
 
     def get_context_data(self, **kwargs):
@@ -167,8 +171,7 @@ class CreateProposal(BaseProposalView, CreateView):
         self.object.save()
         self.send_new_proposal_to_jury_email()
         self.send_proposal_creation_email()
-        messages.success(self.request, _(u'Proposal created.'))
-        return HttpResponseRedirect(self.get_success_url())
+        return self.success_redirect(_(u'Proposal created.'))
 
     def send_new_proposal_to_jury_email(self):
         proposal = self.object
@@ -209,7 +212,7 @@ class ListMyProposals(BaseProposalView, ListView):
         return super(ListMyProposals, self).dispatch(*args, **kwargs)
 
 
-class UpdateProposal(BaseProposalView, UpdateView):
+class UpdateProposal(BaseProposalView, UpdateView, FormValidRedirectMixing):
     template_name = 'proposal/proposal_form.html'
 
     def get_context_data(self, **kwargs):
@@ -219,8 +222,7 @@ class UpdateProposal(BaseProposalView, UpdateView):
 
     def form_valid(self, form):
         self.object = form.save()
-        messages.success(self.request, _(u'Proposal updated.'))
-        return HttpResponseRedirect(self.get_success_url())
+        return self.success_redirect(_(u'Proposal updated.'))
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
