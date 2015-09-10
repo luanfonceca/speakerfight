@@ -17,8 +17,8 @@ from django.utils.translation import ugettext as _
 from vanilla import CreateView, DeleteView, DetailView, ListView, UpdateView
 from djqscsv import render_to_csv_response
 
-from .models import Event, Proposal, Vote
-from .forms import (EventForm, ProposalForm)
+from .models import Event, Proposal, Vote, Activity
+from .forms import EventForm, ProposalForm, ActivityForm, ActivityTimetableForm
 
 
 class FormValidRedirectMixing(object):
@@ -136,6 +136,80 @@ class ExportEvent(BaseEventView, DetailView):
             filename=filename,
             field_header_map=field_header_map
         )
+
+
+class CreateEventGrade(BaseEventView, DetailView):
+    template_name = 'event/event_create_grade.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateEventGrade, self).get_context_data(**kwargs)
+        context.update(activity_form=ActivityForm())
+        context.update(activity_timetable_form=ActivityTimetableForm())
+        return context
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        self.object = self.get_object()
+        in_jury = self.object.jury.users.filter(
+            pk=self.request.user.pk).exists()
+        if (not in_jury and not self.request.user.is_superuser):
+            messages.error(
+                self.request, _(u'You are not allowed to see this page.'))
+            return HttpResponseRedirect(
+                reverse('view_event', kwargs={'slug': self.object.slug}),
+            )
+        return super(CreateEventGrade, self).dispatch(*args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        track = self.object.tracks.first()
+
+        # On the first time we generate a grade based on the Slots.
+        if not track.activities.exists():
+            top_not_approved_ones = self.object.get_not_approved_grade()
+            order = 0
+            for proposal in top_not_approved_ones[:self.object.slots]:
+                proposal.track = track
+                proposal.is_approved = True
+                proposal.track_order = order
+                proposal.save()
+                order += 1
+        return super(CreateEventGrade, self).get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        approved_activities_pks = self.request.POST.getlist(
+            'approved_activities')
+
+        track = self.object.tracks.first()
+        track.proposals.update(is_approved=False)
+        track.activities.update(track=None, track_order=None)
+
+        if not approved_activities_pks:
+            return HttpResponseRedirect(
+                reverse('create_event_grade',
+                        kwargs={'slug': self.object.slug}),
+            )
+
+        order = 0
+        for activity_pk in approved_activities_pks:
+            activity = Activity.objects.get(pk=activity_pk)
+            activity.track = track
+            activity.track_order = order
+            activity.save()
+            if activity.activity_type == Activity.PROPOSAL:
+                activity.proposal.is_approved = True
+                activity.proposal.save()
+            order += 1
+
+        return HttpResponseRedirect(
+                reverse('create_event_grade',
+                        kwargs={'slug': self.object.slug}),
+            )
+
+
+class DetailEventGrade(BaseEventView, DetailView):
+    template_name = 'event/event_detail_grade.html'
 
 
 class BaseProposalView(object):

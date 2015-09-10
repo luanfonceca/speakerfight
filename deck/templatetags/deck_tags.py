@@ -43,3 +43,16 @@ def is_user_in_jury(event, user):
     if isinstance(user, AnonymousUser):
         return False
     return event.jury.users.filter(pk=user.pk).exists()
+
+
+@register.filter
+def event_get_embedded_code(grade_url):
+    iframe_resizer = ('https://cdn.rawgit.com/davidjbradshaw/'
+                      'iframe-resizer/master/js/iframeResizer.min.js')
+    return (
+        '<iframe src="{grade_url}" frameborder="0" width="100%" '
+        'vspace="0" hspace="0" marginheight="5" marginwidth="5" '
+        'scrolling="auto" allowtransparency="true" kwframeid="1"></iframe>'
+        '<script type="text/javascript" src="{iframe_resizer}"></script>'
+        '<script type="text/javascript">iFrameResize()</script>'
+    ).format(grade_url=grade_url, iframe_resizer=iframe_resizer)

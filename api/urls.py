@@ -1,8 +1,22 @@
-from django.conf.urls import url
+from smarturls import surl as url
 
-from api.views import RetrieveEventView
+from api import views
 
 
 urlpatterns = [
-    url(u'^events/(?P<slug>.+)/$', RetrieveEventView.as_view()),
+    url(
+        r'/events/<slug:slug>/',
+        views.RetrieveEventView.as_view(),
+        name='api_view_event_grade'
+    ),
+    url(
+        r'/events/<slug:slug>/activities/',
+        views.CreateActivityView.as_view(),
+        name='api_event_create_activity'
+    ),
+    url(
+        r'/events/<slug:event_slug>/activities/<slug:slug>/',
+        views.ActivityView.as_view(),
+        name='api_event_activity'
+    ),
 ]

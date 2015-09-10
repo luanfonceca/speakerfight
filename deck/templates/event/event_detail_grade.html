@@ -1,0 +1,59 @@
+{% load deck_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ STATIC_URL }}img/speakerfight.ico"/>
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}grade/style.css">
+    <title>Speakerfight - {{ event }}</title>
+  </head>
+  <body>
+    <div id="speakerfight">
+      <div class="grade" id="grade">
+        {% for track in event.tracks.all %}
+          <div class="day" id="day-{{ forloop.counter }}">
+            <ul class="event-list">
+              {% for activity in track.activities.cached_authors %}
+                <li class="event {{ activity.activity_type }}">
+                  <div class="short">
+                    <div class="time">{{ activity.timetable }}</div>
+                    <div class="name">
+                      {% if activity.activity_type == activity.PROPOSAL %}
+                        <figure class="face" style="background-image: url({{ activity.author|get_user_photo }})">&nbsp;</figure>
+                        <span class="title">{{ activity.title|title }}</span>
+                        <span class="person">{{ activity.author.get_full_name|default:activity.author.username }}</span>
+                      {% else %}
+                        <span class="title">{{ activity.title }}</span>
+                      {% endif %}
+                    </div>
+                  </div>
+                  {% if activity.description %}
+                    <div class="long" style="display: none;">
+                      {{ activity.description|safe|linebreaks }}
+                    </div>
+                    <div class="buttons">
+                      <a href="javascript:;" class="more-button">More</a>
+                    </div>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+      </div>
+      <div id="footer">
+        <a href="{{ 'http://'|add:request.get_host }}" target="_blank">
+          <figure class="logo" style="background-image: url({% static 'img/speakerfight.png' %})">&nbsp;</figure>
+        </a>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="{{ STATIC_URL }}grade/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}grade/main.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}grade/iframeResizer.contentWindow.min.js"></script>
+  </body>
+</html>

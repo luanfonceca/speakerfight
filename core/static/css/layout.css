@@ -665,17 +665,7 @@ html {
   font-size: 30px;
 }
 
-#event-detail .event-proposals-header {
-  margin-bottom: 10px;
-  overflow: hidden;
-}
-
-#event-detail #event-proposals .proposal-title {
-  font-size: 18px;
-  font-weight: bold
-}
-
-#event-detail #event-proposals .author-photo {
+.proposal-item .author-photo {
   width: 40px;
   height: 40px;
 }

@@ -38,7 +38,7 @@ class DeckBaseManager(models.QuerySet):
             SELECT 1
               FROM deck_vote
              WHERE deck_vote.user_id = %s AND
-                   deck_vote.proposal_id = deck_proposal.id
+                   deck_vote.proposal_id = deck_proposal.activity_ptr_id
              LIMIT 1
         """)
 
@@ -121,7 +121,50 @@ class Vote(models.Model):
         return super(Vote, self).save(*args, **kwargs)
 
 
-class Proposal(DeckBaseModel):
+class Activity(DeckBaseModel):
+    PROPOSAL = 'proposal'
+    OPENNING = 'openning'
+    COFFEEBREAK = 'coffee-break'
+    LUNCH = 'lunch'
+    LIGHTNINGTALKS = 'lightning-talks'
+    ENDING = 'ending'
+    ACTIVITY_TYPES = (
+        (PROPOSAL, _('Proposal')),
+        (OPENNING, _('Openning')),
+        (COFFEEBREAK, _('Coffee Break')),
+        (LUNCH, _('Lunch')),
+        (LIGHTNINGTALKS, _('Lightning Talks')),
+        (ENDING, _('Ending')),
+    )
+    start_timetable = models.TimeField(
+        _('Start Timetable'), null=True, blank=False)
+    end_timetable = models.TimeField(
+        _('End Timetable'), null=True, blank=False)
+    track_order = models.SmallIntegerField(_('Order'), null=True, blank=True)
+    activity_type = models.CharField(
+        _('Type'), choices=ACTIVITY_TYPES, default=PROPOSAL, max_length=50)
+
+    # relations
+    track = models.ForeignKey(to='deck.Track', related_name='activities',
+                              null=True, blank=True)
+
+    class Meta:
+        ordering = ('track_order', 'start_timetable', 'pk')
+        verbose_name = _('Activity')
+        verbose_name_plural = _('Activities')
+
+    @property
+    def timetable(self):
+        if all([self.start_timetable is None, self.end_timetable is None]):
+            return '--:--'
+
+        return '{0} - {1}'.format(
+            self.start_timetable.strftime('%H:%M'),
+            self.end_timetable.strftime('%H:%M')
+        )
+
+
+class Proposal(Activity):
     is_approved = models.BooleanField(_('Is approved'), default=False)
 
     # relations
@@ -133,14 +176,20 @@ class Proposal(DeckBaseModel):
         verbose_name_plural = _('Proposals')
 
     def save(self, *args, **kwargs):
-        if self.event.due_date_is_passed:
+        if not self.pk and self.event.due_date_is_passed:
             raise ValidationError(
                 _("This Event doesn't accept Proposals anymore."))
         return super(Proposal, self).save(*args, **kwargs)
 
     @property
     def get_rate(self):
-        return self.votes.aggregate(Sum('rate'))['rate__sum'] or 0
+        rate = None
+        try:
+            rate = self.votes__rate__sum
+        except AttributeError:
+            rate = self.votes.aggregate(Sum('rate'))['rate__sum']
+        finally:
+            return rate or 0
 
     def rate(self, user, rate):
         rate_int = [r[0] for r in Vote.VOTE_RATES if rate in r][0]
@@ -190,10 +239,33 @@ class Proposal(DeckBaseModel):
         self.save()
 
 
+class Track(models.Model):
+    title = models.CharField(_('Title'), max_length=200)
+    slug = AutoSlugField(populate_from='title', overwrite=True,
+                         max_length=200, unique=True, db_index=True)
+
+    # relations
+    event = models.ForeignKey(to='deck.Event', related_name='tracks')
+
+    class Meta:
+        verbose_name = _('Track')
+        verbose_name_plural = _('Tracks')
+
+    def __unicode__(self):
+        return 'Track for: "%s"' % self.event.title
+
+    @property
+    def proposals(self):
+        return Proposal.objects.filter(
+            pk__in=self.activities.values_list('pk', flat=True)
+        )
+
+
 class Event(DeckBaseModel):
     allow_public_voting = models.BooleanField(_('Allow Public Voting'),
                                               default=True)
     due_date = models.DateTimeField(null=True, blank=True)
+    slots = models.SmallIntegerField(_('Slots'), default=10)
 
     # relations
     jury = models.OneToOneField(to='jury.Jury', related_name='event',
@@ -238,6 +310,24 @@ class Event(DeckBaseModel):
             Sum('votes__rate')
         ).annotate(Count('votes'))
 
+    def get_grade(self):
+        grade = Activity.objects.filter(track__event=self)\
+            .cached_authors()\
+            .annotate(Sum('proposal__votes__rate'))\
+            .extra(select=dict(track_isnull='track_id IS NULL'))\
+            .order_by('track_isnull', 'track_order',
+                      '-proposal__votes__rate__sum')
+        return grade
+
+    def get_not_approved_grade(self):
+        not_approved_grade = self.proposals\
+            .cached_authors()\
+            .filter(models.Q(is_approved=False) |
+                    models.Q(track__isnull=True))\
+            .annotate(Sum('votes__rate'))\
+            .order_by('-is_approved', '-votes__rate__sum')
+        return not_approved_grade
+
 
 @receiver(user_signed_up)
 def send_welcome_mail(request, user, **kwargs):
@@ -256,6 +346,13 @@ def create_initial_jury(sender, instance, signal, created, **kwargs):
     jury.users.add(instance.author)
     instance.jury = jury
     instance.save()
+
+
+@receiver(post_save, sender=Event)
+def create_initial_track(sender, instance, signal, created, **kwargs):
+    if not created:
+        return
+    Track.objects.create(event=instance)
 
 
 @receiver(post_delete, sender=Proposal)

@@ -13,6 +13,7 @@ EVENT_DATA = {
     'description': 'A really good event.',
     'author_id': 1,
     'is_published': False,
+    'slots': 30
 }
 
 PROPOSAL_DATA = {

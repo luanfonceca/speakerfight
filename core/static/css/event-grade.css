@@ -1,0 +1,39 @@
+.event-proposals-header {
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.proposal-container {
+  min-height: 90px;
+}
+
+.proposal-item {
+  cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.proposal-item .proposal-title {
+  font-size: 18px;
+  font-weight: bold
+}
+
+.proposal-item .proposal-metadata {
+  color: #999;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.proposal-item .proposal-rate {
+  padding-right: 15px;
+  width: 150px;
+}
+
+.proposal-item .proposal-actions {
+  padding-left: 15px;
+}
+
+.proposal-item .proposal-rate .timetable {
+  font-size: 20px;
+}
