@@ -279,7 +279,7 @@ class ListMyProposals(BaseProposalView, ListView):
     template_name = 'proposal/my_proposals.html'
 
     def get_queryset(self):
-        return self.request.user.proposals.all()
+        return Proposal.objects.filter(author_id=self.request.user.id)
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
