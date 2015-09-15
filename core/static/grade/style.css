@@ -198,6 +198,7 @@ ol {
 
 #speakerfight #grade .day .event-list .event .short .name {
   position: relative;
+  min-width: 100px;
 }
 
 #speakerfight #grade .day .event-list .event .short .name figure {
