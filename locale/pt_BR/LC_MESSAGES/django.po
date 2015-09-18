@@ -10,10 +10,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: speakerfight\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-05 10:57-0300\n"
-"PO-Revision-Date: 2015-07-27 13:21+0000\n"
+"POT-Creation-Date: 2015-09-18 20:02-0300\n"
+"PO-Revision-Date: 2015-09-18 22:59+0000\n"
 "Last-Translator: Luan Fonseca de Farias <luanfonceca@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/speakerfight/"
 "speakerfight/language/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -21,17 +21,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: api/permissions.py:10 deck/views.py:105 deck/views.py:119 deck/views.py:157
+#: deck/views.py:321 deck/views.py:385 deck/views.py:452 deck/views.py:519
+msgid "You are not allowed to see this page."
+msgstr "Você não tem permissão para ver esta página."
+
 #: core/templates/404.html:4 core/templates/404.html.py:10
 msgid "Page Not Found"
-msgstr ""
+msgstr "Página Não Encontrada"
 
 #: core/templates/404.html:11
 msgid "The requested URL "
-msgstr ""
+msgstr "A URL desejada"
 
 #: core/templates/404.html:11
 msgid "was not found on this server. Click below to see all events available."
 msgstr ""
+"não foi encontrado neste servidor. Click abaixo para ver todos os eventos "
+"disponíveis."
 
 #: core/templates/404.html:14 core/templates/index.html:57
 msgid "Enter in the arena"
@@ -39,11 +46,11 @@ msgstr "Entre na arena"
 
 #: core/templates/404.html:17
 msgid "SEE ALL EVENTS"
-msgstr ""
+msgstr "VER TODOS OS EVENTOS"
 
 #: core/templates/500.html:4 core/templates/500.html.py:10
 msgid "Internal Server Error"
-msgstr ""
+msgstr "Erro Interno do Servidor"
 
 #: core/templates/500.html:11
 msgid ""
@@ -51,6 +58,9 @@ msgid ""
 "misconfiguration. The server administrator has been notified, and we "
 "apologise for any inconvenience."
 msgstr ""
+"Me desculpe, essa página está indisponível no momento, devido a um mau "
+"funcionamento do servidor. O administrador do servidor já foi notificado e "
+"nós pedimos desculpa por qualquer inconveniência."
 
 #: core/templates/account/account_inactive.html:5
 #: core/templates/account/account_inactive.html:8
@@ -306,21 +316,22 @@ msgstr "Seu endereço de e-mail principal deve ser verificado."
 
 #: core/templates/account/password_change.html:12
 #: core/templates/account/password_change.html:17
-#: core/templates/account/password_reset_from_key.html:5
 #: core/templates/account/password_reset_from_key.html:8
-#: core/templates/account/password_reset_from_key_done.html:5
-#: core/templates/account/password_reset_from_key_done.html:8
+#: core/templates/account/password_reset_from_key.html:22
+#: core/templates/account/password_reset_from_key.html:30
 msgid "Change Password"
 msgstr "Alterar Senha"
 
-#: core/templates/account/password_reset.html:7
-#: core/templates/account/password_reset.html:11
+#: core/templates/account/password_reset.html:8
+#: core/templates/account/password_reset.html:12
 #: core/templates/account/password_reset_done.html:6
-#: core/templates/account/password_reset_done.html:9
+#: core/templates/account/password_reset_done.html:10
 msgid "Password Reset"
 msgstr "Resetar Senha"
 
-#: core/templates/account/password_reset.html:16
+#: core/templates/account/password_reset.html:17
+#: core/templates/account/password_reset_from_key.html:23
+#: core/templates/account/password_set.html:13
 msgid ""
 "Forgotten your password? Enter your e-mail address below, and we'll send you "
 "an e-mail allowing you to reset it."
@@ -328,16 +339,17 @@ msgstr ""
 "Esqueceu sua senha? Informe seu endereço de e-mail abaixo, e nós lhe "
 "enviaremos um e-mail para que você a altere."
 
-#: core/templates/account/password_reset.html:21
+#: core/templates/account/password_reset.html:24
 msgid "Reset My Password"
 msgstr "Resetar Minha Senha"
 
-#: core/templates/account/password_reset.html:24
+#: core/templates/account/password_reset.html:29
+#: core/templates/account/password_reset_from_key.html:34
 msgid "Please contact us if you have any trouble resetting your password."
 msgstr ""
 "Por favor entre em contato se tive qualquer problema para alterar sua senha."
 
-#: core/templates/account/password_reset_done.html:15
+#: core/templates/account/password_reset_done.html:16
 msgid ""
 "We have sent you an e-mail. Please contact us if you do not receive it "
 "within a few minutes."
@@ -345,37 +357,37 @@ msgstr ""
 "Nós he enviamos um e-mail. Por favor entre em contato se não recebê-lo em "
 "alguns minutos."
 
-#: core/templates/account/password_reset_from_key.html:8
-msgid "Bad Token"
-msgstr "Autenticação inválida"
-
-#: core/templates/account/password_reset_from_key.html:12
+#: core/templates/account/password_reset_from_key.html:18
 #, python-format
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
-"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
+"used.\n"
+"      <br>\n"
+"      Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
 "a>."
 msgstr ""
-"O link para alterar sua senha é inválido, possivelmente porque já foi "
-"utilizado. Por favor requeira uma <a href=\"%(passwd_reset_url)s\">nova "
-"alteração de senha</a>."
+"O link de resetar a senha é inválido, provavelmente porque ele já foi "
+"usado.\n"
+"<br>\n"
+"Por favor solicite uma <a href=\"%(passwd_reset_url)s\">nova redefinição de "
+"senha</a>."
 
-#: core/templates/account/password_reset_from_key.html:18
-msgid "change password"
-msgstr "alterar senha"
-
-#: core/templates/account/password_reset_from_key.html:21
+#: core/templates/account/password_reset_from_key_done.html:5
 #: core/templates/account/password_reset_from_key_done.html:9
+msgid "Password Changed"
+msgstr "Senha Alterada"
+
+#: core/templates/account/password_reset_from_key_done.html:11
 msgid "Your password is now changed."
 msgstr "Sua senha foi alterada."
 
-#: core/templates/account/password_reset_from_key_done.html:11
+#: core/templates/account/password_reset_from_key_done.html:12
 msgid "Login"
 msgstr "Login"
 
-#: core/templates/account/password_set.html:6
-#: core/templates/account/password_set.html:9
-#: core/templates/account/password_set.html:14
+#: core/templates/account/password_set.html:8
+#: core/templates/account/password_set.html:12
+#: core/templates/account/password_set.html:20
 msgid "Set Password"
 msgstr "Informe a senha"
 
@@ -410,13 +422,13 @@ msgid "you are already logged in as %(user_display)s."
 msgstr "Você já está logado como %(user_display)s."
 
 #: core/templates/account/verification_sent.html:5
-#: core/templates/account/verification_sent.html:8
+#: core/templates/account/verification_sent.html:9
 #: core/templates/account/verified_email_required.html:6
-#: core/templates/account/verified_email_required.html:9
+#: core/templates/account/verified_email_required.html:10
 msgid "Verify Your E-mail Address"
 msgstr "Verifique seu Endereço de E-mail"
 
-#: core/templates/account/verification_sent.html:10
+#: core/templates/account/verification_sent.html:11
 msgid ""
 "We have sent an e-mail to you for verification. Follow the link provided to "
 "finalize the signup process. Please contact us if you do not receive it "
@@ -430,22 +442,22 @@ msgstr ""
 #: core/templates/account/verified_email_required.html:13
 msgid ""
 "This part of the site requires us to verify that\n"
-"you are who you claim to be. For this purpose, we require that you\n"
-"verify ownership of your e-mail address. "
+"    you are who you claim to be. For this purpose, we require that you\n"
+"    verify ownership of your e-mail address. "
 msgstr ""
-"Essa parte do site requer que verifiquemos se \n"
-"você é quem você diz que seja. Por esse motivo, nós requeremos que \n"
-"você confirme seu endereço de e-mail."
+"Esta parte do site obriga-nos a verificar se\n"
+"você é quem você diz ser. Por causa disso, é necessário que você\n"
+"verifique a autenticidade do seu endereço de e-mail."
 
 #: core/templates/account/verified_email_required.html:17
 msgid ""
 "We have sent an e-mail to you for\n"
-"verification. Please click on the link inside this e-mail. Please\n"
-"contact us if you do not receive it within a few minutes."
+"    verification. Please click on the link inside this e-mail. Please\n"
+"    contact us if you do not receive it within a few minutes."
 msgstr ""
-"Nós lhe enviamos um e-mail\n"
-"de verificação. Por favor, clique no link deste e-mail. \n"
-"Por favor, entre em contato se você não recebê-lo em alguns minutos."
+"Enviamos um e-mail para você\n"
+"verificar. Por favor, clique no link dentro deste e-mail. Por favor\n"
+"entre em contato conosco se você não recebê-lo em poucos minutos."
 
 #: core/templates/account/verified_email_required.html:21
 #, python-format
@@ -519,7 +531,7 @@ msgstr ""
 msgid "JOIN THE FIGHTERS"
 msgstr "JUNTE-SE AOS LUTADORES"
 
-#: core/templates/layout.html:81
+#: core/templates/layout.html:78
 #, python-format
 msgid ""
 "\n"
@@ -553,8 +565,8 @@ msgstr "Usando Email e Senha"
 msgid "OpenID Sign In"
 msgstr "Acesso OpenID"
 
-#: core/templates/public_layout.html:56 deck/views.py:267 deck/views.py:334
-#: deck/views.py:401
+#: core/templates/public_layout.html:56 deck/views.py:368 deck/views.py:435
+#: deck/views.py:502
 msgid "You need to be logged in to continue to the next step."
 msgstr "Você precisa estar logado para ir para o próximo passo."
 
@@ -576,12 +588,18 @@ msgstr ""
 "                %(anchor_start)spor favor nos informe%(anchor_end)s.\n"
 "              "
 
-#: core/templates/sidebar.html:24 deck/models.py:200
+#: core/templates/sidebar.html:24 deck/models.py:277
+#: deck/templates/event/event_create_grade.html:18
 #: deck/templates/event/event_detail.html:22
 #: deck/templates/event/event_list.html:6
-#: deck/templates/event/event_list.html:10 deck/tests/test_unit.py:43
+#: deck/templates/event/event_list.html:10 deck/tests/test_unit.py:44
 msgid "Events"
 msgstr "Eventos"
+
+#: core/templates/sidebar.html:31 deck/templates/proposal/my_proposals.html:7
+#: deck/templates/proposal/my_proposals.html:11
+msgid "My Proposals"
+msgstr "Minhas propostas"
 
 #: core/templates/socialaccount/authentication_error.html:5
 #: core/templates/socialaccount/authentication_error.html:8
@@ -676,11 +694,11 @@ msgstr ""
 "\n"
 "Ou tente uma outra rede social provedora"
 
-#: deck/forms.py:33 jury/forms.py:10
+#: deck/forms.py:37 jury/forms.py:10
 msgid "User email"
 msgstr "E-mail do usuário"
 
-#: deck/forms.py:45 jury/forms.py:22
+#: deck/forms.py:49 jury/forms.py:22
 #, python-format
 msgid ""
 "The \"%s\" are not a Speakerfight user. For now, we just allow already "
@@ -689,108 +707,265 @@ msgstr ""
 "O \"%s\" não são  usuários Speakerfight. Por enquanto, nós somente "
 "permitimos usuários registrados no sistema."
 
-#: deck/forms.py:49 jury/forms.py:26
+#: deck/forms.py:53 jury/forms.py:26
 #, python-format
 msgid "The \"@%s\" already is being part of this jury."
 msgstr "O \"@%s\" já faz parte deste júri."
 
-#: deck/models.py:52
+#: deck/models.py:56 deck/models.py:243
 msgid "Title"
 msgstr "Título"
 
-#: deck/models.py:55 deck/templates/event/event_form.html:38
+#: deck/models.py:59 deck/templates/event/event_form.html:38
 #: deck/templates/proposal/proposal_form.html:38
 msgid "Description"
 msgstr "Descrição"
 
-#: deck/models.py:56
+#: deck/models.py:60
 msgid "Created At"
 msgstr "Criado em"
 
-#: deck/models.py:57
+#: deck/models.py:61
 msgid "Publish"
 msgstr "Publicar"
 
-#: deck/models.py:76
+#: deck/models.py:80
 msgid "Angry"
 msgstr "Bravo"
 
-#: deck/models.py:76
+#: deck/models.py:80
 msgid "Sad"
 msgstr "Triste"
 
-#: deck/models.py:77
+#: deck/models.py:81
 msgid "Sleepy"
 msgstr "Sonolento"
 
-#: deck/models.py:77
+#: deck/models.py:81
 msgid "Happy"
 msgstr "Alegre"
 
-#: deck/models.py:78
+#: deck/models.py:82
 msgid "Laughing"
 msgstr "Rindo"
 
-#: deck/models.py:85
+#: deck/models.py:89
 msgid "Rate Index"
 msgstr "Índice de classficação"
 
-#: deck/models.py:93 deck/tests/test_unit.py:293
+#: deck/models.py:97 deck/tests/test_unit.py:299
 msgid "Vote"
 msgstr "Voto"
 
-#: deck/models.py:94 deck/tests/test_unit.py:296
+#: deck/models.py:98 deck/tests/test_unit.py:302
 msgid "Votes"
 msgstr "Votos"
 
-#: deck/models.py:108
+#: deck/models.py:112
 msgid "You cannot Rate your own proposals."
 msgstr "Você não pode Votar nas suas próprias propostas."
 
-#: deck/models.py:110
+#: deck/models.py:114
 msgid "Proposal doesn't accept Public Voting."
 msgstr "Esta Proposta não aceita Votação Pública."
 
-#: deck/models.py:112
+#: deck/models.py:116
 msgid "Proposal already Rated by you."
 msgstr "Proposta anteriormente votada por Você."
 
-#: deck/models.py:121
-msgid "Is approved"
-msgstr "Aprovada"
-
-#: deck/models.py:128 deck/tests/test_unit.py:152
+#: deck/models.py:132 deck/models.py:175
+#: deck/templates/event/event_create_grade.html:139
+#: deck/tests/test_unit.py:153
 msgid "Proposal"
 msgstr "Proposta"
 
-#: deck/models.py:129 deck/templates/event/event_detail.html:57
-#: deck/tests/test_unit.py:155
+#: deck/models.py:133
+msgid "Openning"
+msgstr "Abertura"
+
+#: deck/models.py:134
+msgid "Coffee Break"
+msgstr "Pausa para café"
+
+#: deck/models.py:135
+msgid "Lunch"
+msgstr "Almoço"
+
+#: deck/models.py:136
+msgid "Lightning Talks"
+msgstr "Palestras Relâmpago"
+
+#: deck/models.py:137
+msgid "Ending"
+msgstr "Encerramento"
+
+#: deck/models.py:140
+msgid "Start Timetable"
+msgstr "Hora de Início"
+
+#: deck/models.py:142
+msgid "End Timetable"
+msgstr "Hora de Fim"
+
+#: deck/models.py:143
+msgid "Order"
+msgstr "Ordem"
+
+#: deck/models.py:145
+msgid "Type"
+msgstr "Tipo"
+
+#: deck/models.py:153
+msgid "Activity"
+msgstr "Atividade"
+
+#: deck/models.py:154
+msgid "Activities"
+msgstr "Atividades"
+
+#: deck/models.py:168
+msgid "Is approved"
+msgstr "Aprovada"
+
+#: deck/models.py:176 deck/templates/event/event_detail.html:57
+#: deck/tests/test_unit.py:156
 msgid "Proposals"
 msgstr "Propostas"
 
-#: deck/models.py:134 deck/views.py:163
+#: deck/models.py:181 deck/views.py:235
 msgid "This Event doesn't accept Proposals anymore."
 msgstr "Este evento não aceita mais propostas."
 
-#: deck/models.py:177
+#: deck/models.py:231
 msgid "This Proposal was already approved."
 msgstr "Esta Proposta já foi aprovada."
 
-#: deck/models.py:183
+#: deck/models.py:237
 msgid "This Proposal was already disapproved."
 msgstr "Esta Proposta já foi desaprovada."
 
-#: deck/models.py:189
+#: deck/models.py:251
+msgid "Track"
+msgstr "Trilha"
+
+#: deck/models.py:252
+msgid "Tracks"
+msgstr "Trilhas"
+
+#: deck/models.py:265
 msgid "Allow Public Voting"
 msgstr "Permitir votação pública"
 
-#: deck/models.py:199 deck/tests/test_unit.py:40
+#: deck/models.py:268
+msgid "Slots"
+msgstr "Vagas"
+
+#: deck/models.py:276 deck/tests/test_unit.py:41
 msgid "Event"
 msgstr "Evento"
 
+#: deck/models.py:335
+msgid "Welcome"
+msgstr "Bem vindo"
+
+#: deck/models.py:363
+#, python-format
+msgid "Proposal from %s just got deleted"
+msgstr "Proposta de %s acabou de ser removida"
+
+#: deck/templates/event/event_create_grade.html:7
+msgid "Create the Grade"
+msgstr "Crie a Grade"
+
+#: deck/templates/event/event_create_grade.html:17
 #: deck/templates/event/event_detail.html:21
 msgid "Home"
 msgstr "Início"
+
+#: deck/templates/event/event_create_grade.html:20
+#: deck/templates/event/event_create_grade.html:29
+msgid "Grade of Talks"
+msgstr "Grade de Palestras"
+
+#: deck/templates/event/event_create_grade.html:33
+msgid "add activity"
+msgstr "adicionar atividade"
+
+#: deck/templates/event/event_create_grade.html:37
+msgid "embedded grade"
+msgstr "grade embutida"
+
+#: deck/templates/event/event_create_grade.html:41
+#: deck/templates/event/event_create_grade.html:177
+#: deck/templates/event/event_create_grade.html:201
+#: deck/templates/event/event_form.html:47
+#: deck/templates/proposal/proposal_form.html:48
+msgid "submit"
+msgstr "Enviar"
+
+#: deck/templates/event/event_create_grade.html:49
+msgid ""
+"\n"
+"            After <strong>Sort</strong>, <strong>Adding</strong> or "
+"<strong>Removing</strong> talks into the grade, you need to save your work, "
+"by clicking on the \"submit\" button.\n"
+"          "
+msgstr ""
+"\n"
+"Depois de <strong>Ordenar</strong>, <strong>Adicionar</strong> ou "
+"<strong>Remover</strong> palestras da grade, você precisa salvar seu "
+"andamento, clicando no botão \"submit\"."
+
+#: deck/templates/event/event_create_grade.html:54
+msgid "Approved talks"
+msgstr "Palestras aprovadas"
+
+#: deck/templates/event/event_create_grade.html:70
+#: deck/templates/event/event_create_grade.html:135
+msgid "Points"
+msgstr "Pontos"
+
+#: deck/templates/event/event_create_grade.html:82
+#, python-format
+msgid ""
+"\n"
+"                          Proposed by <strong>%(author)s</strong> at "
+"%(created_at)s.\n"
+"                        "
+msgstr ""
+"\n"
+"Proposto por <strong>%(author)s</strong> às %(created_at)s."
+
+#: deck/templates/event/event_create_grade.html:120
+msgid "Disapproved talks"
+msgstr "Palestras reprovadas"
+
+#: deck/templates/event/event_create_grade.html:147
+#, python-format
+msgid ""
+"\n"
+"                        Proposed by <strong>%(author)s</strong> at "
+"%(created_at)s.\n"
+"                      "
+msgstr ""
+"\n"
+"Proposto por <strong>%(author)s</strong> às %(created_at)s."
+
+#: deck/templates/event/event_create_grade.html:169
+msgid "Add activity"
+msgstr "Adicionar atividade"
+
+#: deck/templates/event/event_create_grade.html:193
+msgid "Update timetable"
+msgstr "Atualizar horário"
+
+#: deck/templates/event/event_create_grade.html:216
+msgid "Copy and Paste on your site"
+msgstr "Copie e Cola em seu site"
+
+#: deck/templates/event/event_create_grade.html:227
+msgid "Raw API"
+msgstr "API Pura"
 
 #: deck/templates/event/event_detail.html:36
 msgid ""
@@ -813,6 +988,7 @@ msgid "Send a proposal"
 msgstr "Enviar uma proposta"
 
 #: deck/templates/event/event_detail.html:71
+#: deck/templates/proposal/my_proposals.html:25
 #, python-format
 msgid ""
 "\n"
@@ -840,34 +1016,52 @@ msgstr ""
 msgid "This proposal never received a vote."
 msgstr "Essa proposta nunca recebeu um voto."
 
-#: deck/templates/event/event_detail.html:95
+#: deck/templates/event/event_detail.html:96
 msgid "Disapprove the proposal."
 msgstr "Desaprove a proposta."
 
-#: deck/templates/event/event_detail.html:97
+#: deck/templates/event/event_detail.html:98
 msgid "Disapprove"
 msgstr "Desaprovar"
 
-#: deck/templates/event/event_detail.html:100
+#: deck/templates/event/event_detail.html:101
 msgid "Approve the proposal."
 msgstr "Aprove a proposta."
 
-#: deck/templates/event/event_detail.html:102
+#: deck/templates/event/event_detail.html:103
 msgid "Approve"
 msgstr "Aprovar"
 
-#: deck/templates/event/event_detail.html:106
+#: deck/templates/event/event_detail.html:108
+#: deck/templates/proposal/my_proposals.html:37
 msgid "Edit the proposal."
 msgstr "Edite a proposta."
 
-#: deck/templates/event/event_detail.html:107
+#: deck/templates/event/event_detail.html:109
 #: deck/templates/event/snippets/event_list_item.html:51
+#: deck/templates/proposal/my_proposals.html:38
 msgid "Edit"
 msgstr "Editar"
 
-#: deck/templates/event/event_detail.html:115
+#: deck/templates/event/event_detail.html:111
+#: deck/templates/proposal/my_proposals.html:40
+msgid "Delete the proposal."
+msgstr "Remover a proposta."
+
+#: deck/templates/event/event_detail.html:112
+#: deck/templates/proposal/my_proposals.html:41
+#: deck/templates/proposal/proposal_confirm_delete.html:17
+msgid "Delete"
+msgstr "Remover"
+
+#: deck/templates/event/event_detail.html:120
+#: deck/templates/proposal/my_proposals.html:47
 msgid "There are no proposals to show"
 msgstr "Não há propostas para exibir"
+
+#: deck/templates/event/event_detail_grade.html:39
+msgid "More"
+msgstr "Mais"
 
 #: deck/templates/event/event_form.html:8
 #: deck/templates/event/event_form.html:24
@@ -881,12 +1075,8 @@ msgstr "Atualizar"
 msgid "New Event"
 msgstr "Novo Evento"
 
-#: deck/templates/event/event_form.html:47
-#: deck/templates/proposal/proposal_form.html:48
-msgid "submit"
-msgstr "Enviar"
-
 #: deck/templates/event/event_form.html:53
+#: deck/templates/proposal/proposal_confirm_delete.html:22
 #: deck/templates/proposal/proposal_form.html:53
 #: jury/templates/jury/jury_detail.html:93
 msgid "event detail"
@@ -965,9 +1155,140 @@ msgstr "Exporte um CSV com os resultados de  todas as propostas e votos."
 msgid "Export votes"
 msgstr "Exportar votos"
 
+#: deck/templates/event/snippets/event_list_item.html:59
+msgid "Create and Organize the Grade of Talks."
+msgstr "Crie e Organize a Grade de Palestras."
+
+#: deck/templates/event/snippets/event_list_item.html:60
+msgid "Create Grade"
+msgstr "Criar Grade"
+
 #: deck/templates/event/vote_block.html:12
 msgid "Use the buttons bellow to vote:"
 msgstr "Use os botões abaixo para votar:"
+
+#: deck/templates/mailing/author_proposal_created.txt:3
+#, python-format
+msgid ""
+"\n"
+"  Hi!\n"
+"\n"
+"  This email is a confirmation for the creation of your proposal "
+"\"%(proposal_title)s\" to the event \"%(event_title)s\" on SpeakerFight! "
+"Remember to share the event so you help to engaje more participants!\n"
+"\n"
+"  Good luck!\n"
+msgstr ""
+"\n"
+"Oi!\n"
+"\n"
+"Este e-mail é uma confirmação da criação de sua proposta \"%(proposal_title)s"
+"\" para o evento \"%(event_title)s\" no SpeakerFight! Lembre-se de "
+"compartilhar o evento para que você ajudar a engajar mais participantes!\n"
+"\n"
+"Boa sorte!\n"
+
+#: deck/templates/mailing/event_created.txt:3
+#, python-format
+msgid ""
+"\n"
+"  Hi!\n"
+"\n"
+"  This email is a confirmation for the creation of your event "
+"\"%(event_title)s\" on SpeakerFight! Remember to share the event so more "
+"people can submit proposals and engaje more participants!\n"
+"\n"
+"  Good luck!\n"
+msgstr ""
+"\n"
+"Oi!\n"
+"\n"
+"Este e-mail é uma confirmação da criação do seu evento \"%(event_title)s\" "
+"no SpeakerFight! Lembre-se de compartilhar o evento para que você ajudar a "
+"engajar mais participantes!\n"
+"\n"
+"Boa sorte!\n"
+
+#: deck/templates/mailing/jury_deleted_proposal.txt:3
+#, python-format
+msgid ""
+"\n"
+"  Hi!\n"
+"\n"
+"  This email is a notification that the following proposal was deleted from "
+"your event \"%(event_title)s\" on SpeakerFight: %(proposal_title)s\n"
+msgstr ""
+"\n"
+"Oi!\n"
+"\n"
+"Este email é uma notificação de que a seguinte proposta foi removida do seu "
+"evento \"%(event_title)s\" no Speakerfight: %(proposal_title)s\n"
+
+#: deck/templates/mailing/jury_new_proposal.txt:3
+#, python-format
+msgid ""
+"  \n"
+"  Hi!\n"
+"\n"
+"  The event \"%(event_title)s\" had just received a new proposal called "
+"\"%(proposal_title)s\".\n"
+"\n"
+"  Cheers!\n"
+msgstr ""
+"Oi!\n"
+"\n"
+"O evento \"%(event_title)s\" acabou de receber uma nova proposta chamada "
+"\"%(proposal_title)s\".\n"
+"\n"
+"Parabéns!\n"
+
+#: deck/templates/mailing/welcome.txt:3
+msgid ""
+"  \n"
+"  Hi!\n"
+"\n"
+"  Welcome to SpeakerFight! Here you will be able to submit proposals and "
+"evaluate talks of other possible speakers.\n"
+"\n"
+"  SpeakerFight it's an open source project that you can help to improve it. "
+"Check out: https://github.com/luanfonceca/speakerfight.\n"
+"\n"
+"  Thank you for use it.\n"
+msgstr ""
+"Oi!\n"
+"\n"
+"Bem-vindo ao SpeakerFight! Aqui você será capaz de apresentar propostas e "
+"avaliar as palestras de outros possíveis palestrantes.\n"
+"\n"
+"SpeakerFight é um projeto open source que você pode ajudar a melhorá-lo. "
+"Confira: https://github.com/luanfonceca/speakerfight.\n"
+"\n"
+"Obrigado por usá-lo.\n"
+
+#: deck/templates/proposal/my_proposals.html:34
+msgid "See the proposal in Event."
+msgstr "Veja a proposta no Evento."
+
+#: deck/templates/proposal/my_proposals.html:35
+msgid "See in Event"
+msgstr "Ver no Evento"
+
+#: deck/templates/proposal/proposal_confirm_delete.html:6
+#: deck/templates/proposal/proposal_confirm_delete.html:10
+msgid "Delete Proposal"
+msgstr "Remover Proposta"
+
+#: deck/templates/proposal/proposal_confirm_delete.html:11
+msgid "Are you sure you want to delete this proposal?"
+msgstr "Você tem certeza que deseja remover esta proposta?"
+
+#: deck/templates/proposal/proposal_confirm_delete.html:12
+msgid "After deleting this proposal all votes will be lost forever."
+msgstr "Após remover esta proposta todos os votos serão perdidos para sempre."
+
+#: deck/templates/proposal/proposal_confirm_delete.html:26
+msgid "my proposals"
+msgstr "minhas propostas"
 
 #: deck/templates/proposal/proposal_form.html:8
 #: deck/templates/proposal/proposal_form.html:23
@@ -982,68 +1303,67 @@ msgstr "Nova proposta"
 msgid "New Proposal for"
 msgstr "Nova Proposta para"
 
-#: deck/views.py:54
+#: deck/views.py:58
 msgid "Event created."
 msgstr "Evento criado"
 
-#: deck/views.py:61
+#: deck/views.py:64
 msgid "Your event is ready to receive proposals"
 msgstr "Seu evento está pronto para receber propostas"
 
-#: deck/views.py:94
+#: deck/views.py:97
 msgid "Event updated."
 msgstr "Evento Atualizado."
 
-#: deck/views.py:103 deck/views.py:117 deck/views.py:284 deck/views.py:351
-#: deck/views.py:418
-msgid "You are not allowed to see this page."
-msgstr "Você não tem permissão para ver esta página."
-
-#: deck/views.py:125
+#: deck/views.py:127
 msgid "Author"
 msgstr "Autor"
 
-#: deck/views.py:126
+#: deck/views.py:128
 msgid "Author E-Mail"
 msgstr "Email do Autor"
 
-#: deck/views.py:127
+#: deck/views.py:129
 msgid "Vote Rate"
 msgstr "Índice de Votos"
 
-#: deck/views.py:128
+#: deck/views.py:130
 msgid "Votes Count"
 msgstr "Quantidade de Votos"
 
-#: deck/views.py:176
+#: deck/views.py:248
 msgid "Proposal created."
 msgstr "Proposta criada."
 
-#: deck/views.py:186
+#: deck/views.py:257
 msgid "Your event has new proposals"
 msgstr "Seu evento recebeu novas propostas"
 
-#: deck/views.py:198
+#: deck/views.py:269
 msgid "Your proposal was submitted"
 msgstr "Sua proposta foi submetida"
 
-#: deck/views.py:217
+#: deck/views.py:299
 msgid "Proposal updated."
 msgstr "Proposta Atualizada."
 
-#: deck/views.py:235 deck/views.py:254
+#: deck/views.py:312
+msgid "Proposal deleted."
+msgstr "Proposta removida."
+
+#: deck/views.py:336 deck/views.py:355
 msgid "Rate Index not found."
 msgstr "Índice de classificação não encontrado."
 
-#: deck/views.py:241 deck/views.py:258
+#: deck/views.py:342 deck/views.py:359
 msgid "Proposal rated."
 msgstr "Proposta classificada."
 
-#: deck/views.py:311 deck/views.py:325
+#: deck/views.py:412 deck/views.py:426
 msgid "Proposal approved."
 msgstr "Proposta aprovada."
 
-#: deck/views.py:378 deck/views.py:392
+#: deck/views.py:479 deck/views.py:493
 msgid "Proposal disapproved."
 msgstr "Proposta desaprovada."
 
