@@ -18,6 +18,17 @@
 {% endblock head %}
 
 {% block content %}
+  <ol class="breadcrumb">
+    <li><a href="{% url 'index_page' %}">{% trans "Home" %}</a></li>
+    <li><a href="{% url 'list_events' %}">{% trans "Events" %}</a></li>
+    {% if form.instance.pk %}
+    <li><a href="{% url 'view_event' slug=event.slug %}">{{ event.title }}</a></li>
+    <li class="active">Update</li>
+    {% else %}
+    <li class="active">New Event</li>
+    {% endif %}
+  </ol>
+
   <div class="row header">
     <h2>
       {% if form.instance.pk %}

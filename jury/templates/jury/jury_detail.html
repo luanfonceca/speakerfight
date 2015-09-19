@@ -40,6 +40,17 @@
 {% endblock head %}
 
 {% block content %}
+  <ol class="breadcrumb">
+    <li><a href="{% url 'index_page' %}">{% trans "Home" %}</a></li>
+    <li><a href="{% url 'list_events' %}">{% trans "Events" %}</a></li>
+    <li><a href="{% url 'view_event' slug=jury.event.slug %}">{{ jury.event.title }}</a></li>
+    {% if form.instance.pk %}
+    <li class="active">Update Jury</li>
+    {% else %}
+    <li class="active">New Jury</li>
+    {% endif %}
+  </ol>
+
   <div class="row header">
     <h2>{% trans "Update" %} "{{ jury.event }}" {% trans "jury" %}</h2>
   </div>
@@ -68,7 +79,7 @@
             <td>
               <form role="form" method="POST" action="{% url 'event_invite_to_jury' slug=jury.event.slug %}">
                 {% csrf_token %}
-                
+
                 <div id="add-user" class="input-group col-md-12 col-sm-12 col-xs-12">
                   <input type="email" placeholder="E-mail address" name="email" class="form-control inline-input" required="required">
                   <button type="submit" class="close pull-right">
