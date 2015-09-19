@@ -1,44 +1,83 @@
 [
 {
-    "pk": 1,
-    "model": "deck.proposal",
     "fields": {
-        "description": "The <strong>Generate XML documentation</strong> file property determines whether an XML file will be generated during compilation. You set this property on the Compile page (for Visual Basic) or Build page (for Visual C#) of the Project Designer. When this option is selected, XML documentation is automatically emitted into an XML file, which will have the same name as your project and the .xml extension.",
+        "description": "<p>The <strong>Generate XML documentation</strong>&nbsp;file property determines whether an XML file will be generated during compilation. You set this property on the Compile page (for Visual Basic) or Build page (for Visual C#) of the Project Designer. When this option is selected, XML documentation is automatically emitted into an XML file, which will have the same name as your project and the .xml extension.</p>",
         "author": [
             "admin"
         ],
-        "created_at": "2014-06-09T06:12:04.700Z",
+        "track": null,
+        "created_at": "2015-09-19T17:46:30.974Z",
         "title": "Generating code documentation in Python",
+        "end_timetable": null,
+        "start_timetable": null,
+        "activity_type": "proposal",
+        "track_order": null,
         "slug": "generating-code-documentation-in-python",
-        "event": 1
-    }
+        "is_published": true
+    },
+    "model": "deck.activity",
+    "pk": 1
 },
 {
-    "pk": 2,
-    "model": "deck.proposal",
     "fields": {
-        "description": "Flask is a microframework for Python based on Werkzeug, Jinja 2 and good intentions. And before you ask: It's BSD licensed!",
+        "description": "<p>Flask is a microframework for Python based on Werkzeug, Jinja 2 and good intentions. And before you ask: It's BSD licensed!</p>",
         "author": [
             "admin"
         ],
-        "created_at": "2014-06-09T06:14:35.629Z",
+        "track": null,
+        "created_at": "2015-09-19T17:46:53.813Z",
         "title": "Flask is Fun",
+        "end_timetable": null,
+        "start_timetable": null,
+        "activity_type": "proposal",
+        "track_order": null,
         "slug": "flask-is-fun",
-        "event": 1
-    }
+        "is_published": true
+    },
+    "model": "deck.activity",
+    "pk": 2
 },
 {
-    "pk": 3,
-    "model": "deck.proposal",
     "fields": {
-        "description": "Django's generic class-based view implementation is unneccesarily complicated.\r\nDjango vanilla views gives you <strong>exactly the same functionality</strong>, in a vastly simplified, easier-to-use package, including:\r\n* No mixin classes.\r\n* No calls to super().\r\n* A sane class hierarchy.\r\n* A stripped down API.\r\n* Simpler method implementations, with less magical behavior.\r\n",
+        "description": "<p>Django's generic class-based view implementation is unneccesarily complicated.\\r\\nDjango vanilla views gives you <strong>exactly the same functionality</strong>, in a vastly simplified, easier-to-use package, including:</p>\r\n<p>* No mixin classes.</p>\r\n<p>* No calls to super().</p>\r\n<p>* A sane class hierarchy.</p>\r\n<p>* A stripped down API.</p>\r\n<p>* Simpler method implementations, with less magical behavior.</p>",
         "author": [
             "admin"
         ],
-        "created_at": "2014-06-09T06:16:00.504Z",
+        "track": null,
+        "created_at": "2015-09-19T17:47:32.466Z",
         "title": "Django Vanilla Views",
+        "end_timetable": null,
+        "start_timetable": null,
+        "activity_type": "proposal",
+        "track_order": null,
         "slug": "django-vanilla-views",
+        "is_published": true
+    },
+    "model": "deck.activity",
+    "pk": 3
+},
+{
+    "fields": {
+        "is_approved": false,
         "event": 1
-    }
+    },
+    "model": "deck.proposal",
+    "pk": 1
+},
+{
+    "fields": {
+        "is_approved": false,
+        "event": 1
+    },
+    "model": "deck.proposal",
+    "pk": 2
+},
+{
+    "fields": {
+        "is_approved": false,
+        "event": 1
+    },
+    "model": "deck.proposal",
+    "pk": 3
 }
 ]
