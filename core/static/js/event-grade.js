@@ -159,6 +159,11 @@ $(function () {
     e.preventDefault();
     var self = this;
 
+    var message = gettext('Are you sure you want to remove this activity?');
+    if (!confirm(message)) {
+      return false;
+    }
+
     $.ajax({
       url: $(this).parents('.panel').attr('data-href'),
       type: 'DELETE',
