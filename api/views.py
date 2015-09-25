@@ -7,7 +7,7 @@ from deck.models import Event, Activity
 from deck.forms import ActivityForm, ActivityTimetableForm
 
 
-class RetrieveEventView(generics.RetrieveAPIView):
+class RetrieveEventScheduleView(generics.RetrieveAPIView):
     serializer_class = serializers.EventSerializer
     queryset = Event.objects.all()
     lookup_field = 'slug'

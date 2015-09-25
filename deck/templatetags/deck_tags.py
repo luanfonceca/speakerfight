@@ -46,13 +46,13 @@ def is_user_in_jury(event, user):
 
 
 @register.filter
-def event_get_embedded_code(grade_url):
+def event_get_embedded_code(schedule_url):
     iframe_resizer = ('https://cdn.rawgit.com/davidjbradshaw/'
                       'iframe-resizer/master/js/iframeResizer.min.js')
     return (
-        '<iframe src="{grade_url}" frameborder="0" width="100%" '
+        '<iframe src="{schedule_url}" frameborder="0" width="100%" '
         'vspace="0" hspace="0" marginheight="5" marginwidth="5" '
         'scrolling="auto" allowtransparency="true" kwframeid="1"></iframe>'
         '<script type="text/javascript" src="{iframe_resizer}"></script>'
         '<script type="text/javascript">iFrameResize()</script>'
-    ).format(grade_url=grade_url, iframe_resizer=iframe_resizer)
+    ).format(schedule_url=schedule_url, iframe_resizer=iframe_resizer)

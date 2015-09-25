@@ -138,11 +138,11 @@ class ExportEvent(BaseEventView, DetailView):
         )
 
 
-class CreateEventGrade(BaseEventView, DetailView):
-    template_name = 'event/event_create_grade.html'
+class CreateEventSchedule(BaseEventView, DetailView):
+    template_name = 'event/event_create_schedule.html'
 
     def get_context_data(self, **kwargs):
-        context = super(CreateEventGrade, self).get_context_data(**kwargs)
+        context = super(CreateEventSchedule, self).get_context_data(**kwargs)
         context.update(activity_form=ActivityForm())
         context.update(activity_timetable_form=ActivityTimetableForm())
         return context
@@ -158,15 +158,15 @@ class CreateEventGrade(BaseEventView, DetailView):
             return HttpResponseRedirect(
                 reverse('view_event', kwargs={'slug': self.object.slug}),
             )
-        return super(CreateEventGrade, self).dispatch(*args, **kwargs)
+        return super(CreateEventSchedule, self).dispatch(*args, **kwargs)
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         track = self.object.tracks.first()
 
-        # On the first time we generate a grade based on the Slots.
+        # On the first time we generate a schedule based on the Slots.
         if not track.activities.exists():
-            top_not_approved_ones = self.object.get_not_approved_grade()
+            top_not_approved_ones = self.object.get_not_approved_schedule()
             order = 0
             for proposal in top_not_approved_ones[:self.object.slots]:
                 proposal.track = track
@@ -174,7 +174,7 @@ class CreateEventGrade(BaseEventView, DetailView):
                 proposal.track_order = order
                 proposal.save()
                 order += 1
-        return super(CreateEventGrade, self).get(request, *args, **kwargs)
+        return super(CreateEventSchedule, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -187,7 +187,7 @@ class CreateEventGrade(BaseEventView, DetailView):
 
         if not approved_activities_pks:
             return HttpResponseRedirect(
-                reverse('create_event_grade',
+                reverse('create_event_schedule',
                         kwargs={'slug': self.object.slug}),
             )
 
@@ -203,13 +203,13 @@ class CreateEventGrade(BaseEventView, DetailView):
             order += 1
 
         return HttpResponseRedirect(
-                reverse('create_event_grade',
+                reverse('create_event_schedule',
                         kwargs={'slug': self.object.slug}),
             )
 
 
-class DetailEventGrade(BaseEventView, DetailView):
-    template_name = 'event/event_detail_grade.html'
+class DetailEventSchedule(BaseEventView, DetailView):
+    template_name = 'event/event_detail_schedule.html'
 
 
 class BaseProposalView(object):

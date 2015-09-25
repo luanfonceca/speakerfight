@@ -56,8 +56,8 @@
       <a href="{% url 'export_event' slug=event.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Export CSV with all proposals and vote results.' %}">
         <i class="icon-cloud-download"></i> {% trans "Export votes" %}
       </a>
-      <a href="{% url 'create_event_grade' slug=event.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Create and Organize the Grade of Talks.' %}">
-        <i class="icon-calendar"></i> {% trans "Create Grade" %}
+      <a href="{% url 'create_event_schedule' slug=event.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Create and Organize the Schedule of Talks.' %}">
+        <i class="icon-calendar"></i> {% trans "Create Schedule" %}
       </a>
     </div>
   {% endif %}

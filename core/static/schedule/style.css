@@ -110,11 +110,11 @@ ol {
   background-repeat: no-repeat;
 }
 
-#speakerfight #grade {
+#speakerfight #schedule {
   position: relative;
 }
 
-#speakerfight #grade #grade-nav {
+#speakerfight #schedule #schedule-nav {
   display: none;
   top: 0;
   margin-bottom: 20px;
@@ -124,18 +124,18 @@ ol {
   width: 1200px;
 }
 
-#speakerfight #grade #grade-nav::after {
+#speakerfight #schedule #schedule-nav::after {
   clear: both;
   content: "";
   display: table;
 }
 
-#speakerfight #grade #grade-nav.skrollable-between,
-#speakerfight #grade #grade-nav.skrollable-after {
+#speakerfight #schedule #schedule-nav.skrollable-between,
+#speakerfight #schedule #schedule-nav.skrollable-after {
   position: fixed;
 }
 
-#speakerfight #grade #grade-nav li {
+#speakerfight #schedule #schedule-nav li {
   height: 64px;
   line-height: 64px;
   width: 33.3333%;
@@ -145,42 +145,42 @@ ol {
   cursor: pointer;
 }
 
-#speakerfight #grade #grade-nav li label,
-#speakerfight #grade #grade-nav li h3 {
+#speakerfight #schedule #schedule-nav li label,
+#speakerfight #schedule #schedule-nav li h3 {
   display: inline-block;
   color: #fff;
   font-size: 1.25em;
 }
 
-#speakerfight #grade #grade-nav li label {
+#speakerfight #schedule #schedule-nav li label {
   margin-right: 1ex;
   color: #5ba0a3;
 }
 
-#speakerfight #grade .day h2 {
+#speakerfight #schedule .day h2 {
   margin: 0 0 30px;
   text-align: center;
 }
 
-#speakerfight #grade .day .event-list .event {
+#speakerfight #schedule .day .event-list .event {
   border: 3px solid #f7f7f7;
   border-bottom: none;
   position: relative;
 }
 
-#speakerfight #grade .day .event-list .event .short {
+#speakerfight #schedule .day .event-list .event .short {
   padding: 20px 80px 20px 240px;
   display: inline-block;
   position: relative;
 }
 
 @media screen and (max-width: 40em) {
-  #speakerfight #grade .day .event-list .event .short {
+  #speakerfight #schedule .day .event-list .event .short {
     padding: 50px 10px 10px 80px;
   }
 }
 
-#speakerfight #grade .day .event-list .event .short .time {
+#speakerfight #schedule .day .event-list .event .short .time {
   position: absolute;
   left: 80px;
   top: 20px;
@@ -190,18 +190,18 @@ ol {
 }
 
 @media screen and (max-width: 40em) {
-  #speakerfight #grade .day .event-list .event .short .time {
+  #speakerfight #schedule .day .event-list .event .short .time {
     font-size: 1.125em;
     top: 15px;
   }
 }
 
-#speakerfight #grade .day .event-list .event .short .name {
+#speakerfight #schedule .day .event-list .event .short .name {
   position: relative;
   min-width: 100px;
 }
 
-#speakerfight #grade .day .event-list .event .short .name figure {
+#speakerfight #schedule .day .event-list .event .short .name figure {
   margin: 0 20px 20px;
   width: 120px;
   height: 120px;
@@ -213,26 +213,26 @@ ol {
 }
 
 @media screen and (max-width: 40em) {
-  #speakerfight #grade .day .event-list .event .short .name figure {
+  #speakerfight #schedule .day .event-list .event .short .name figure {
     float: inherit;
   }
 }
 
-#speakerfight #grade .day .event-list .event .short .name .title {
+#speakerfight #schedule .day .event-list .event .short .name .title {
   font-size: 1.25em;
   font-weight: 700;
   display: flex;
 }
 
 @media screen and (max-width: 40em) {
-  #speakerfight #grade .day .event-list .event .short .name .title {
+  #speakerfight #schedule .day .event-list .event .short .name .title {
     font-size: 1.125em;
     line-height: 1.1em;
     margin-bottom: 1ex;
   }
 }
 
-#speakerfight #grade .day .event-list .event .short .name .person {
+#speakerfight #schedule .day .event-list .event .short .name .person {
   font-size: 1.125em;
   font-weight: 700;
   display: block;
@@ -240,13 +240,13 @@ ol {
 }
 
 @media screen and (max-width: 40em) {
-  #speakerfight #grade .day .event-list .event .short .name .person {
+  #speakerfight #schedule .day .event-list .event .short .name .person {
     font-size: 1em;
     line-height: 1.1em;
   }
 }
 
-#speakerfight #grade .day .event-list .event .short:before {
+#speakerfight #schedule .day .event-list .event .short:before {
   content: "";
   display: block;
   width: 60px;
@@ -257,30 +257,30 @@ ol {
   bottom: 0px;
 }
 
-#speakerfight #grade .day .event-list .event .long {
+#speakerfight #schedule .day .event-list .event .long {
   padding: 20px 80px 20px 240px;
   background: #f7f7f7;
   position: relative;
 }
 
 @media screen and (max-width: 40em) {
-  #speakerfight #grade .day .event-list .event .long {
+  #speakerfight #schedule .day .event-list .event .long {
     padding: 20px;
   }
 }
 
-#speakerfight #grade .day .event-list .event .long p {
+#speakerfight #schedule .day .event-list .event .long p {
   margin: 0;
   line-height: 1.25em;
 }
 
-#speakerfight #grade .day .event-list .event .buttons {
+#speakerfight #schedule .day .event-list .event .buttons {
   position: absolute;
   top: 20px;
   right: 20px;
 }
 
-#speakerfight #grade .day .event-list .event .buttons .more-button {
+#speakerfight #schedule .day .event-list .event .buttons .more-button {
   display: inline-block;
   background: #6c7173;
   padding: 4px 8px;
@@ -295,7 +295,7 @@ ol {
   cursor: pointer;
 }
 
-#speakerfight #grade .day .event-list .event.lightning .short .name:before {
+#speakerfight #schedule .day .event-list .event.lightning .short .name:before {
   font-weight: 700;
   padding: 0 10px;
   line-height: 30px;
@@ -313,12 +313,12 @@ ol {
   display: none;
 }
 
-#speakerfight #grade .day .event-list .event.proposal .short:before {
-  background: #2c3742 url(../grade/icons/proposal.svg) no-repeat center 19px;
+#speakerfight #schedule .day .event-list .event.proposal .short:before {
+  background: #2c3742 url(../schedule/icons/proposal.svg) no-repeat center 19px;
   background-size: auto 40px;
 }
 
-#speakerfight #grade .day .event-list .event.proposal .short .name:after {
+#speakerfight #schedule .day .event-list .event.proposal .short .name:after {
   font-weight: 700;
   padding: 0 10px;
   line-height: 30px;
@@ -336,27 +336,27 @@ ol {
   display: none;
 }
 
-#speakerfight #grade .day .event-list .event.openning .short:before {
-  background: #5ba0a3 url(../grade/icons/openning.svg) no-repeat center 19px;
+#speakerfight #schedule .day .event-list .event.openning .short:before {
+  background: #5ba0a3 url(../schedule/icons/openning.svg) no-repeat center 19px;
   background-size: auto 40px;
 }
 
-#speakerfight #grade .day .event-list .event.coffee-break .short:before {
-  background: #5ba0a3 url(../grade/icons/coffee-break.svg) no-repeat center 19px;
+#speakerfight #schedule .day .event-list .event.coffee-break .short:before {
+  background: #5ba0a3 url(../schedule/icons/coffee-break.svg) no-repeat center 19px;
   background-size: auto 40px;
 }
 
-#speakerfight #grade .day .event-list .event.lunch .short:before {
-  background: #5ba0a3 url(../grade/icons/lunch.svg) no-repeat center 19px;
+#speakerfight #schedule .day .event-list .event.lunch .short:before {
+  background: #5ba0a3 url(../schedule/icons/lunch.svg) no-repeat center 19px;
   background-size: auto 40px;
 }
 
-#speakerfight #grade .day .event-list .event.lightning-talks .short:before {
-  background: #5ba0a3 url(../grade/icons/lightning-talks.svg) no-repeat center 19px;
+#speakerfight #schedule .day .event-list .event.lightning-talks .short:before {
+  background: #5ba0a3 url(../schedule/icons/lightning-talks.svg) no-repeat center 19px;
   background-size: auto 40px;
 }
 
-#speakerfight #grade .day .event-list .event.ending .short:before {
-  background: #5ba0a3 url(../grade/icons/ending.svg) no-repeat center 19px;
+#speakerfight #schedule .day .event-list .event.ending .short:before {
+  background: #5ba0a3 url(../schedule/icons/ending.svg) no-repeat center 19px;
   background-size: auto 40px;
 }

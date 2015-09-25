@@ -4,12 +4,12 @@
 {% load bootstrap3 %}
 {% load deck_tags %}
 
-{% block head_title %}{% trans "Create the Grade" %}: "{{ event }}"{% endblock %}
+{% block head_title %}{% trans "Create the Schedule" %}: "{{ event }}"{% endblock %}
 
 {% block head %}
   <link href="{{ STATIC_URL }}css/libs/dragula.min.css" rel="stylesheet" />  
 
-  <link href="{{ STATIC_URL }}css/event-grade.css" rel="stylesheet" />  
+  <link href="{{ STATIC_URL }}css/event-schedule.css" rel="stylesheet" />  
 {% endblock head %}
 
 {% block content %}
@@ -17,24 +17,24 @@
     <li><a href="{% url 'index_page' %}">{% trans "Home" %}</a></li>
     <li><a href="{% url 'list_events' %}">{% trans "Events" %}</a></li>
     <li><a href="{% url 'view_event' event.slug %}">{{ event.title }}</a></li>
-    <li class="active">{% trans "Grade of Talks" %}</li>
+    <li class="active">{% trans "Schedule of Talks" %}</li>
   </ol>
 
   <!-- header -->
-  <div id="event-grade" class="col-md-12" data-event-slug="{{ event.slug }}">
+  <div id="event-schedule" class="col-md-12" data-event-slug="{{ event.slug }}">
     <form method="POST" novalidate>
       {% csrf_token %}
 
       <div class="row header" style="margin-bottom: 30px;">
-        <h3>{% trans "Grade of Talks" %}</h3>
+        <h3>{% trans "Schedule of Talks" %}</h3>
         <div class="pull-right">
           <a href="#add-activity-modal" data-toggle="modal" class="btn-flat gray text-upper">
             <i class="icon-plus"></i>
             {% trans "add activity" %}
           </a>
-          <a href="#get-embedded-grade-modal" data-toggle="modal" class="btn-flat gray text-upper">
+          <a href="#get-embedded-schedule-modal" data-toggle="modal" class="btn-flat gray text-upper">
             <i class="icon-code"></i>
-            {% trans "embedded grade" %}
+            {% trans "embedded schedule" %}
           </a>
           <button type="submit" class="btn-flat success text-upper">
             <i class="icon icon-edit"></i>
@@ -47,13 +47,13 @@
         <div class="alert alert-info">
           <i class="icon-info-sign"></i>
           {% blocktrans %}
-            After <strong>Sort</strong>, <strong>Adding</strong> or <strong>Removing</strong> talks into the grade, you need to save your work, by clicking on the "submit" button.
+            After <strong>Sort</strong>, <strong>Adding</strong> or <strong>Removing</strong> talks into the schedule, you need to save your work, by clicking on the "submit" button.
           {% endblocktrans %}
         </div>
 
         <p class="text-center text-muted">{% trans "Approved talks" %}</p>
         <div id="event-approved-proposals" class="proposal-container">
-          {% for activity in event.get_grade %}
+          {% for activity in event.get_schedule %}
             {% if activity.activity_type == 'proposal' %}
               <div id="{{ activity.slug }}"  data-href="{% url 'api_event_activity' event_slug=event.slug slug=activity.slug %}" class="panel proposal-item panel-success">
                 <div class="panel-body">
@@ -119,7 +119,7 @@
 
         <p class="text-center text-muted">{% trans "Disapproved talks" %}</p>
         <div id="event-not-approved-proposals" class="proposal-container">
-          {% for proposal in event.get_not_approved_grade %}
+          {% for proposal in event.get_not_approved_schedule %}
             <div id="{{ proposal.slug }}"  data-href="{% url 'api_event_activity' event_slug=event.slug slug=proposal.slug %}" class="panel proposal-item panel-default">
               <div class="panel-body">
                 <input name="approved_activities" value="{{ proposal.pk }}" class="hide" type="checkbox" />
@@ -206,7 +206,7 @@
     </div>
   </div>
 
-  <div class="modal fade" id="get-embedded-grade-modal" data-href="">
+  <div class="modal fade" id="get-embedded-schedule-modal" data-href="">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -216,13 +216,13 @@
           <h4 class="modal-title">{% trans "Copy and Paste on your site" %}</h4>
         </div>
         <div class="modal-body">
-          {% url 'view_event_grade' event.slug as view_event_grade %}
-          {% with 'http://'|add:request.get_host|add:view_event_grade as grade_url %}
-            <textarea onclick="this.focus();this.select()" class="form-control" id="id_embedded_grade" name="embedded_grade" rows="10">{{ grade_url|event_get_embedded_code }}</textarea>
+          {% url 'view_event_schedule' event.slug as view_event_schedule %}
+          {% with 'http://'|add:request.get_host|add:view_event_schedule as schedule_url %}
+            <textarea onclick="this.focus();this.select()" class="form-control" id="id_embedded_schedule" name="embedded_schedule" rows="10">{{ schedule_url|event_get_embedded_code }}</textarea>
           {% endwith %}
         </div>
         <div class="modal-footer">
-          <a href="{% url 'api_view_event_grade' event.slug %}" target="_blank" class="btn-flat gray text-upper">
+          <a href="{% url 'api_view_event_schedule' event.slug %}" target="_blank" class="btn-flat gray text-upper">
             <i class="icon icon-cloud"></i>
             {% trans "Raw API" %}
           </a>
@@ -236,5 +236,5 @@
 {% block scripts %}
   <script src="{{ STATIC_URL }}js/libs/dragula.min.js"></script>
 
-  <script src="{{ STATIC_URL }}js/event-grade.js"></script>
+  <script src="{{ STATIC_URL }}js/event-schedule.js"></script>
 {% endblock scripts %}

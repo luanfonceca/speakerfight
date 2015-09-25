@@ -500,7 +500,7 @@ msgid ""
 msgstr ""
 
 #: core/templates/sidebar.html:24 deck/models.py:277
-#: deck/templates/event/event_create_grade.html:18
+#: deck/templates/event/event_create_schedule.html:18
 #: deck/templates/event/event_detail.html:22
 #: deck/templates/event/event_list.html:6
 #: deck/templates/event/event_list.html:10 deck/tests/test_unit.py:44
@@ -672,7 +672,7 @@ msgid "Proposal already Rated by you."
 msgstr ""
 
 #: deck/models.py:132 deck/models.py:175
-#: deck/templates/event/event_create_grade.html:139
+#: deck/templates/event/event_create_schedule.html:139
 #: deck/tests/test_unit.py:153
 msgid "Proposal"
 msgstr ""
@@ -771,37 +771,37 @@ msgstr ""
 msgid "Proposal from %s just got deleted"
 msgstr ""
 
-#: deck/templates/event/event_create_grade.html:7
-msgid "Create the Grade"
+#: deck/templates/event/event_create_schedule.html:7
+msgid "Create the Schedule"
 msgstr ""
 
-#: deck/templates/event/event_create_grade.html:17
+#: deck/templates/event/event_create_schedule.html:17
 #: deck/templates/event/event_detail.html:21
 msgid "Home"
 msgstr ""
 
-#: deck/templates/event/event_create_grade.html:20
-#: deck/templates/event/event_create_grade.html:29
-msgid "Grade of Talks"
+#: deck/templates/event/event_create_schedule.html:20
+#: deck/templates/event/event_create_schedule.html:29
+msgid "Schedule of Talks"
 msgstr ""
 
-#: deck/templates/event/event_create_grade.html:33
+#: deck/templates/event/event_create_schedule.html:33
 msgid "add activity"
 msgstr ""
 
-#: deck/templates/event/event_create_grade.html:37
+#: deck/templates/event/event_create_schedule.html:37
 msgid "embedded grade"
 msgstr ""
 
-#: deck/templates/event/event_create_grade.html:41
-#: deck/templates/event/event_create_grade.html:177
-#: deck/templates/event/event_create_grade.html:201
+#: deck/templates/event/event_create_schedule.html:41
+#: deck/templates/event/event_create_schedule.html:177
+#: deck/templates/event/event_create_schedule.html:201
 #: deck/templates/event/event_form.html:47
 #: deck/templates/proposal/proposal_form.html:48
 msgid "submit"
 msgstr ""
 
-#: deck/templates/event/event_create_grade.html:49
+#: deck/templates/event/event_create_schedule.html:49
 msgid ""
 "\n"
 "            After <strong>Sort</strong>, <strong>Adding</strong> or "
@@ -810,16 +810,16 @@ msgid ""
 "          "
 msgstr ""
 
-#: deck/templates/event/event_create_grade.html:54
+#: deck/templates/event/event_create_schedule.html:54
 msgid "Approved talks"
 msgstr ""
 
-#: deck/templates/event/event_create_grade.html:70
-#: deck/templates/event/event_create_grade.html:135
+#: deck/templates/event/event_create_schedule.html:70
+#: deck/templates/event/event_create_schedule.html:135
 msgid "Points"
 msgstr ""
 
-#: deck/templates/event/event_create_grade.html:82
+#: deck/templates/event/event_create_schedule.html:82
 #, python-format
 msgid ""
 "\n"
@@ -828,11 +828,11 @@ msgid ""
 "                        "
 msgstr ""
 
-#: deck/templates/event/event_create_grade.html:120
+#: deck/templates/event/event_create_schedule.html:120
 msgid "Disapproved talks"
 msgstr ""
 
-#: deck/templates/event/event_create_grade.html:147
+#: deck/templates/event/event_create_schedule.html:147
 #, python-format
 msgid ""
 "\n"
@@ -841,19 +841,19 @@ msgid ""
 "                      "
 msgstr ""
 
-#: deck/templates/event/event_create_grade.html:169
+#: deck/templates/event/event_create_schedule.html:169
 msgid "Add activity"
 msgstr ""
 
-#: deck/templates/event/event_create_grade.html:193
+#: deck/templates/event/event_create_schedule.html:193
 msgid "Update timetable"
 msgstr ""
 
-#: deck/templates/event/event_create_grade.html:216
+#: deck/templates/event/event_create_schedule.html:216
 msgid "Copy and Paste on your site"
 msgstr ""
 
-#: deck/templates/event/event_create_grade.html:227
+#: deck/templates/event/event_create_schedule.html:227
 msgid "Raw API"
 msgstr ""
 
@@ -938,7 +938,7 @@ msgstr ""
 msgid "There are no proposals to show"
 msgstr ""
 
-#: deck/templates/event/event_detail_grade.html:39
+#: deck/templates/event/event_detail_schedule.html:39
 msgid "More"
 msgstr ""
 
@@ -1026,11 +1026,11 @@ msgid "Export votes"
 msgstr ""
 
 #: deck/templates/event/snippets/event_list_item.html:59
-msgid "Create and Organize the Grade of Talks."
+msgid "Create and Organize the Schedule of Talks."
 msgstr ""
 
 #: deck/templates/event/snippets/event_list_item.html:60
-msgid "Create Grade"
+msgid "Create Schedule"
 msgstr ""
 
 #: deck/templates/event/vote_block.html:12

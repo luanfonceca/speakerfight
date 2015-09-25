@@ -310,23 +310,23 @@ class Event(DeckBaseModel):
             Sum('votes__rate')
         ).annotate(Count('votes'))
 
-    def get_grade(self):
-        grade = Activity.objects.filter(track__event=self)\
+    def get_schedule(self):
+        schedule = Activity.objects.filter(track__event=self)\
             .cached_authors()\
             .annotate(Sum('proposal__votes__rate'))\
             .extra(select=dict(track_isnull='track_id IS NULL'))\
             .order_by('track_isnull', 'track_order',
                       '-proposal__votes__rate__sum')
-        return grade
+        return schedule
 
-    def get_not_approved_grade(self):
-        not_approved_grade = self.proposals\
+    def get_not_approved_schedule(self):
+        not_approved_schedule = self.proposals\
             .cached_authors()\
             .filter(models.Q(is_approved=False) |
                     models.Q(track__isnull=True))\
             .annotate(Sum('votes__rate'))\
             .order_by('-is_approved', '-votes__rate__sum')
-        return not_approved_grade
+        return not_approved_schedule
 
 
 @receiver(user_signed_up)

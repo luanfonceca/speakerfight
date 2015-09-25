@@ -5,9 +5,9 @@ from api import views
 
 urlpatterns = [
     url(
-        r'/events/<slug:slug>/',
-        views.RetrieveEventView.as_view(),
-        name='api_view_event_grade'
+        r'/events/<slug:slug>/schedule/',
+        views.RetrieveEventScheduleView.as_view(),
+        name='api_view_event_schedule'
     ),
     url(
         r'/events/<slug:slug>/activities/',

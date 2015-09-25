@@ -9,12 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{{ STATIC_URL }}img/speakerfight.ico"/>
 
-    <link rel="stylesheet" href="{{ STATIC_URL }}grade/style.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}schedule/style.css">
     <title>Speakerfight - {{ event }}</title>
   </head>
   <body>
     <div id="speakerfight">
-      <div class="grade" id="grade">
+      <div class="schedule" id="schedule">
         {% for track in event.tracks.all %}
           <div class="day" id="day-{{ forloop.counter }}">
             <ul class="event-list">
@@ -53,8 +53,8 @@
       </div>
     </div>
 
-    <script type="text/javascript" src="{{ STATIC_URL }}grade/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}grade/main.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}grade/iframeResizer.contentWindow.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}schedule/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}schedule/main.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}schedule/iframeResizer.contentWindow.min.js"></script>
   </body>
 </html>
