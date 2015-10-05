@@ -19,6 +19,18 @@
       <a href="{% url 'list_events' %}" class="btn-flat info big-button text-center">{% trans "GET STARTED" %}</a>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      {% blocktrans with events=events events_plural=events|pluralize proposals=proposals proposals_plural=proposals|pluralize users=users users_plural=users|pluralize%}
+        <h2>
+          Right now we have <strong>{{ events }} event{{ events_plural }}</strong>,
+          <br>
+          <strong>{{ proposals }} proposal{{ proposals_plural }}</strong> and
+          <strong>{{ users }} user{{ users_plural }}</strong> at Speakerfight.
+        </h2>
+      {% endblocktrans %}
+    </div>
+  </div>
 
   <hr>
 
