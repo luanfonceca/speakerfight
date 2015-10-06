@@ -26,6 +26,7 @@ $ python manage.py runserver
 ```
 
 #### Using Docker
+
 ```sh
 $ git clone git@github.com:luanfonceca/speakerfight.git
 $ cd speakerfight
