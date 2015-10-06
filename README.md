@@ -22,3 +22,21 @@ $ python manage.py loaddata deck/fixtures/proposal.json
 $ python manage.py loaddata deck/fixtures/socialapp.json
 $ python manage.py runserver
 ```
+### Install and Run with Docker
+```sh
+$ git clone git@github.com:luanfonceca/speakerfight.git
+$ cd speakerfight
+$ docker-compose build
+$ docker-compose up
+$ docker-compose run web python manage.py migrate --settings=speakerfight.settings_local # we have a fixture for the users...
+$ docker-compose run web python manage.py loaddata deck/fixtures/user.json --settings=speakerfight.settings_local
+# username: admin, password: admin;
+# username: user, password: user
+$ docker-compose run web python manage.py loaddata deck/fixtures/event.json --settings=speakerfight.settings_local
+$ docker-compose run web python manage.py loaddata deck/fixtures/proposal.json --settings=speakerfight.settings_local
+$ docker-compose run web python manage.py loaddata deck/fixtures/socialapp.json --settings=speakerfight.settings_local
+$ docker-compose up
+```
+#### Dependencies
+- [docker](https://www.docker.com/)
+- [docker-compose](https://docs.docker.com/compose/)
