@@ -26,6 +26,9 @@ $ python manage.py runserver
 ```
 
 #### Using Docker
+Dependecies
+- [docker](https://www.docker.com/)
+- [docker-compose](https://docs.docker.com/compose/)
 
 ```sh
 $ git clone git@github.com:luanfonceca/speakerfight.git
@@ -40,6 +43,3 @@ $ docker-compose run web python manage.py loaddata deck/fixtures/proposal.json
 $ docker-compose run web python manage.py loaddata deck/fixtures/socialapp.json
 $ docker-compose up
 ```
-#### Dependencies
-- [docker](https://www.docker.com/)
-- [docker-compose](https://docs.docker.com/compose/)
