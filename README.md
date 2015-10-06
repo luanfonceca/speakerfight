@@ -8,7 +8,9 @@ Speakerfight is an arena where speakers can fight ~against~ each other and peopl
 [![Code Health](https://landscape.io/github/luanfonceca/speakerfight/master/landscape.svg?style=flat)](https://landscape.io/github/luanfonceca/speakerfight/master) [![Github Issues](http://img.shields.io/github/issues/luanfonceca/speakerfight.svg?style=flat)](https://github.com/luanfonceca/speakerfight/issues?sort=updated&state=open) [![Stories in Ready](http://waffle2shields.herokuapp.com/waffle/?user=luanfonceca&repo=speakerfight&label=ready&style=flat)](https://waffle.io/luanfonceca/speakerfight) [![Build Status](http://img.shields.io/travis/luanfonceca/speakerfight.svg?branch=master&style=flat)](https://travis-ci.org/luanfonceca/speakerfight) [![Coverage Status](http://img.shields.io/coveralls/luanfonceca/speakerfight.svg?branch=master&style=flat)](https://coveralls.io/r/luanfonceca/speakerfight?branch=master)
 
 ============
-### Install and Run
+### Install
+
+#### Normal installation
 ```sh
 $ git clone git@github.com:luanfonceca/speakerfight.git
 $ cd speakerfight
@@ -22,19 +24,19 @@ $ python manage.py loaddata deck/fixtures/proposal.json
 $ python manage.py loaddata deck/fixtures/socialapp.json
 $ python manage.py runserver
 ```
-### Install and Run with Docker
+
+#### Using Docker
 ```sh
 $ git clone git@github.com:luanfonceca/speakerfight.git
 $ cd speakerfight
 $ docker-compose build
-$ docker-compose up
-$ docker-compose run web python manage.py migrate --settings=speakerfight.settings_local # we have a fixture for the users...
-$ docker-compose run web python manage.py loaddata deck/fixtures/user.json --settings=speakerfight.settings_local
+$ docker-compose run web python manage.py migrate # we have a fixture for the users...
+$ docker-compose run web python manage.py loaddata deck/fixtures/user.json
 # username: admin, password: admin;
 # username: user, password: user
-$ docker-compose run web python manage.py loaddata deck/fixtures/event.json --settings=speakerfight.settings_local
-$ docker-compose run web python manage.py loaddata deck/fixtures/proposal.json --settings=speakerfight.settings_local
-$ docker-compose run web python manage.py loaddata deck/fixtures/socialapp.json --settings=speakerfight.settings_local
+$ docker-compose run web python manage.py loaddata deck/fixtures/event.json
+$ docker-compose run web python manage.py loaddata deck/fixtures/proposal.json
+$ docker-compose run web python manage.py loaddata deck/fixtures/socialapp.json
 $ docker-compose up
 ```
 #### Dependencies
