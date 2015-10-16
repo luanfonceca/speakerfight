@@ -550,7 +550,7 @@ msgid ""
 "The event jury restricts the vote to a group of users. Anyone outside of "
 "that group will just see the proposals and they cannot vote."
 msgstr ""
-"O juri de evento restringe os votos a um grupo de usuários. Qualquer pessoa fora "
+"O juri do evento restringe os votos a um grupo de usuários. Qualquer pessoa fora "
 "deste grupo somente verá as propostas e não poderá votar."
 
 #: core/templates/index.html:84
