@@ -34,7 +34,7 @@ def get_user_photo(user):
     if social:
         return social.get_avatar_url()
 
-    return 'http://www.gravatar.com/avatar/{}'.format(
+    return 'http://www.gravatar.com/avatar/{}?s=40&d=mm'.format(
         hashlib.md5(user.email).hexdigest())
 
 
