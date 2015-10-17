@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-18 20:02-0300\n"
+"POT-Creation-Date: 2015-10-15 23:53-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgstr ""
 msgid "was not found on this server. Click below to see all events available."
 msgstr ""
 
-#: core/templates/404.html:14 core/templates/index.html:57
+#: core/templates/404.html:14 core/templates/index.html:81
 msgid "Enter in the arena"
 msgstr ""
 
@@ -416,43 +416,67 @@ msgstr ""
 msgid "GET STARTED"
 msgstr ""
 
-#: core/templates/index.html:25
+#: core/templates/index.html:24
+#, python-format
+msgid ""
+"\n"
+"        <h2>\n"
+"          Right now we have <strong>%(events)s event%(events_plural)s</"
+"strong>,\n"
+"          <br>\n"
+"          <strong>%(proposals)s proposal%(proposals_plural)s</strong> and\n"
+"          <strong>%(users)s user%(users_plural)s</strong> at Speakerfight.\n"
+"        </h2>\n"
+"      "
+msgstr ""
+
+#: core/templates/index.html:37
 msgid "Some features"
 msgstr ""
 
-#: core/templates/index.html:31
+#: core/templates/index.html:43
 msgid "Event list"
 msgstr ""
 
-#: core/templates/index.html:32
+#: core/templates/index.html:44
 msgid "The event list show all public events to let you join to the vote."
 msgstr ""
 
-#: core/templates/index.html:33
+#: core/templates/index.html:45
 msgid ""
 "You can create new events and receive proposals from anyone in the world. "
 "All the events can be either public or private."
 msgstr ""
 
-#: core/templates/index.html:36
+#: core/templates/index.html:48
 msgid "Event List"
 msgstr ""
 
-#: core/templates/index.html:44 core/templates/index.html.py:47
+#: core/templates/index.html:56 core/templates/index.html.py:59
 msgid "Event details"
 msgstr ""
 
-#: core/templates/index.html:48
+#: core/templates/index.html:60
 msgid ""
 "Every event can be configured to receive votes from everyone, only logged "
 "users or only the people you choose."
 msgstr ""
 
-#: core/templates/index.html:49
+#: core/templates/index.html:61
 msgid "All the events have an URL that can be shared as you like."
 msgstr ""
 
-#: core/templates/index.html:60
+#: core/templates/index.html:69 core/templates/index.html.py:73
+msgid "Event Jury"
+msgstr ""
+
+#: core/templates/index.html:70
+msgid ""
+"The event jury restricts the vote to a group of users. Anyone outside of "
+"that group will just see the proposals and they cannot vote."
+msgstr ""
+
+#: core/templates/index.html:84
 msgid "JOIN THE FIGHTERS"
 msgstr ""
 
@@ -502,8 +526,11 @@ msgstr ""
 #: core/templates/sidebar.html:24 deck/models.py:277
 #: deck/templates/event/event_create_schedule.html:18
 #: deck/templates/event/event_detail.html:22
+#: deck/templates/event/event_form.html:23
 #: deck/templates/event/event_list.html:6
-#: deck/templates/event/event_list.html:10 deck/tests/test_unit.py:44
+#: deck/templates/event/event_list.html:10
+#: deck/templates/proposal/proposal_form.html:22 deck/tests/test_unit.py:44
+#: jury/templates/jury/jury_detail.html:45
 msgid "Events"
 msgstr ""
 
@@ -614,8 +641,8 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: deck/models.py:59 deck/templates/event/event_form.html:38
-#: deck/templates/proposal/proposal_form.html:38
+#: deck/models.py:59 deck/templates/event/event_form.html:49
+#: deck/templates/proposal/proposal_form.html:49
 msgid "Description"
 msgstr ""
 
@@ -777,6 +804,9 @@ msgstr ""
 
 #: deck/templates/event/event_create_schedule.html:17
 #: deck/templates/event/event_detail.html:21
+#: deck/templates/event/event_form.html:22
+#: deck/templates/proposal/proposal_form.html:21
+#: jury/templates/jury/jury_detail.html:44
 msgid "Home"
 msgstr ""
 
@@ -790,14 +820,14 @@ msgid "add activity"
 msgstr ""
 
 #: deck/templates/event/event_create_schedule.html:37
-msgid "embedded grade"
+msgid "embedded schedule"
 msgstr ""
 
 #: deck/templates/event/event_create_schedule.html:41
 #: deck/templates/event/event_create_schedule.html:177
 #: deck/templates/event/event_create_schedule.html:201
-#: deck/templates/event/event_form.html:47
-#: deck/templates/proposal/proposal_form.html:48
+#: deck/templates/event/event_form.html:58
+#: deck/templates/proposal/proposal_form.html:59
 msgid "submit"
 msgstr ""
 
@@ -805,8 +835,8 @@ msgstr ""
 msgid ""
 "\n"
 "            After <strong>Sort</strong>, <strong>Adding</strong> or "
-"<strong>Removing</strong> talks into the grade, you need to save your work, "
-"by clicking on the \"submit\" button.\n"
+"<strong>Removing</strong> talks into the schedule, you need to save your "
+"work, by clicking on the \"submit\" button.\n"
 "          "
 msgstr ""
 
@@ -938,31 +968,31 @@ msgstr ""
 msgid "There are no proposals to show"
 msgstr ""
 
-#: deck/templates/event/event_detail_schedule.html:39
+#: deck/templates/event/event_detail_schedule.html:40
 msgid "More"
 msgstr ""
 
 #: deck/templates/event/event_form.html:8
-#: deck/templates/event/event_form.html:24
+#: deck/templates/event/event_form.html:35
 #: jury/templates/jury/jury_detail.html:7
-#: jury/templates/jury/jury_detail.html:44
+#: jury/templates/jury/jury_detail.html:55
 msgid "Update"
 msgstr ""
 
 #: deck/templates/event/event_form.html:10
-#: deck/templates/event/event_form.html:26
+#: deck/templates/event/event_form.html:37
 msgid "New Event"
 msgstr ""
 
-#: deck/templates/event/event_form.html:53
+#: deck/templates/event/event_form.html:64
 #: deck/templates/proposal/proposal_confirm_delete.html:22
-#: deck/templates/proposal/proposal_form.html:53
-#: jury/templates/jury/jury_detail.html:93
+#: deck/templates/proposal/proposal_form.html:64
+#: jury/templates/jury/jury_detail.html:104
 msgid "event detail"
 msgstr ""
 
-#: deck/templates/event/event_form.html:58
-#: jury/templates/jury/jury_detail.html:98
+#: deck/templates/event/event_form.html:69
+#: jury/templates/jury/jury_detail.html:109
 msgid "event list"
 msgstr ""
 
@@ -1125,7 +1155,7 @@ msgid "my proposals"
 msgstr ""
 
 #: deck/templates/proposal/proposal_form.html:8
-#: deck/templates/proposal/proposal_form.html:23
+#: deck/templates/proposal/proposal_form.html:34
 msgid "Update Proposal"
 msgstr ""
 
@@ -1133,7 +1163,7 @@ msgstr ""
 msgid "New Proposal"
 msgstr ""
 
-#: deck/templates/proposal/proposal_form.html:25
+#: deck/templates/proposal/proposal_form.html:36
 msgid "New Proposal for"
 msgstr ""
 
@@ -1210,15 +1240,15 @@ msgid "Juries"
 msgstr ""
 
 #: jury/templates/jury/jury_detail.html:7
-#: jury/templates/jury/jury_detail.html:44
+#: jury/templates/jury/jury_detail.html:55
 msgid "jury"
 msgstr ""
 
-#: jury/templates/jury/jury_detail.html:49
+#: jury/templates/jury/jury_detail.html:60
 msgid "Manage users"
 msgstr ""
 
-#: jury/templates/jury/jury_detail.html:50
+#: jury/templates/jury/jury_detail.html:61
 msgid "Here you can add or remove people from Jury."
 msgstr ""
 
