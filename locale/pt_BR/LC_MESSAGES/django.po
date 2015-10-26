@@ -423,7 +423,7 @@ msgid ""
 "          <strong>%(users)s user%(users_plural)s</strong> at Speakerfight.\n"
 "        </h2>\n"
 "      "
-msgstr "\n<h2>\nAtualmente nós temos <strong>%(events)s evento%(events_plural)s</strong>,\n<br>\n<strong>%(proposals)s proposta%(proposals_plural)s</strong> and\n<strong>%(users)s usuário%(users_plural)s</strong> no Speakerfight.\n</h2>"
+msgstr "\n<h2>\nAtualmente nós temos <strong>%(events)s evento%(events_plural)s</strong>,\n<br>\n<strong>%(proposals)s proposta%(proposals_plural)s</strong> e\n<strong>%(users)s usuário%(users_plural)s</strong> no Speakerfight.\n</h2>"
 
 #: core/templates/index.html:37
 msgid "Some features"
