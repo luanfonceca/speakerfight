@@ -26,10 +26,10 @@ class FormValidRedirectMixing(object):
         messages.success(self.request, message)
         return HttpResponseRedirect(self.get_success_url())
 
-class LoginRequiredMixing(object):
+class LoginRequiredMixin(object):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(LoginRequiredMixing, self).dispatch(*args, **kwargs)
+        return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
 
 class BaseEventView(object):
     model = Event
@@ -51,7 +51,7 @@ class ListEvents(BaseEventView, ListView):
         return context
 
 
-class CreateEvent(LoginRequiredMixing, 
+class CreateEvent(LoginRequiredMixin, 
                   BaseEventView, 
                   CreateView, 
                   FormValidRedirectMixing):
@@ -112,7 +112,6 @@ class UpdateEvent(BaseEventView, UpdateView, FormValidRedirectMixing):
 
 
 class ExportEvent(BaseEventView, DetailView):
-    
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         event = self.get_object()
@@ -221,7 +220,7 @@ class BaseProposalView(object):
     lookup_field = 'slug'
 
 
-class CreateProposal(LoginRequiredMixing,
+class CreateProposal(LoginRequiredMixin,
                      BaseProposalView, 
                      CreateView, 
                      FormValidRedirectMixing):
@@ -276,13 +275,13 @@ class CreateProposal(LoginRequiredMixing,
         recipients = [proposal.author.email]
         send_mail(subject, message, settings.NO_REPLY_EMAIL, recipients)
 
-class ListMyProposals(LoginRequiredMixing, BaseProposalView, ListView):
+class ListMyProposals(LoginRequiredMixin, BaseProposalView, ListView):
     template_name = 'proposal/my_proposals.html'
 
     def get_queryset(self):
         return Proposal.objects.filter(author_id=self.request.user.id)
 
-class UpdateProposal(LoginRequiredMixing, 
+class UpdateProposal(LoginRequiredMixin, 
                      BaseProposalView, 
                      UpdateView, 
                      FormValidRedirectMixing):
