@@ -51,7 +51,10 @@ class ListEvents(BaseEventView, ListView):
         return context
 
 
-class CreateEvent(LoginRequiredMixing, BaseEventView, CreateView, FormValidRedirectMixing):
+class CreateEvent(LoginRequiredMixing, 
+                  BaseEventView, 
+                  CreateView, 
+                  FormValidRedirectMixing):
     template_name = 'event/event_form.html'
 
     def form_valid(self, form):
@@ -109,6 +112,7 @@ class UpdateEvent(BaseEventView, UpdateView, FormValidRedirectMixing):
 
 
 class ExportEvent(BaseEventView, DetailView):
+    
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         event = self.get_object()
@@ -217,7 +221,10 @@ class BaseProposalView(object):
     lookup_field = 'slug'
 
 
-class CreateProposal(LoginRequiredMixing, BaseProposalView, CreateView, FormValidRedirectMixing):
+class CreateProposal(LoginRequiredMixing,
+                     BaseProposalView, 
+                     CreateView, 
+                     FormValidRedirectMixing):
     template_name = 'proposal/proposal_form.html'
 
     def get_context_data(self, **kwargs):
@@ -275,7 +282,10 @@ class ListMyProposals(LoginRequiredMixing, BaseProposalView, ListView):
     def get_queryset(self):
         return Proposal.objects.filter(author_id=self.request.user.id)
 
-class UpdateProposal(LoginRequiredMixing, BaseProposalView, UpdateView, FormValidRedirectMixing):
+class UpdateProposal(LoginRequiredMixing, 
+                     BaseProposalView, 
+                     UpdateView, 
+                     FormValidRedirectMixing):
     template_name = 'proposal/proposal_form.html'
 
     def get_context_data(self, **kwargs):
