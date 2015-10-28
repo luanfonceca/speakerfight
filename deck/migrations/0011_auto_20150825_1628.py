@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='proposal',
             name='activity_ptr',
-            field=models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, default=None, serialize=False, to='deck.Activity'),
+            field=models.OneToOneField(null=True, parent_link=True, auto_created=True, primary_key=True, default=None, serialize=False, to='deck.Activity'),
             preserve_default=False,
         ),
     ]
