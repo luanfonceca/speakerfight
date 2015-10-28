@@ -26,6 +26,10 @@ class FormValidRedirectMixing(object):
         messages.success(self.request, message)
         return HttpResponseRedirect(self.get_success_url())
 
+class LoginRequiredMixin(object):
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
 
 class BaseEventView(object):
     model = Event
@@ -47,7 +51,10 @@ class ListEvents(BaseEventView, ListView):
         return context
 
 
-class CreateEvent(BaseEventView, CreateView, FormValidRedirectMixing):
+class CreateEvent(LoginRequiredMixin, 
+                  BaseEventView, 
+                  CreateView, 
+                  FormValidRedirectMixing):
     template_name = 'event/event_form.html'
 
     def form_valid(self, form):
@@ -64,11 +71,6 @@ class CreateEvent(BaseEventView, CreateView, FormValidRedirectMixing):
         subject = _(u'Your event is ready to receive proposals')
         send_mail(subject, message,
                   settings.NO_REPLY_EMAIL, [event.author.email])
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(CreateEvent, self).dispatch(*args, **kwargs)
-
 
 class DetailEvent(BaseEventView, DetailView):
     template_name = 'event/event_detail.html'
@@ -218,7 +220,10 @@ class BaseProposalView(object):
     lookup_field = 'slug'
 
 
-class CreateProposal(BaseProposalView, CreateView, FormValidRedirectMixing):
+class CreateProposal(LoginRequiredMixin,
+                     BaseProposalView, 
+                     CreateView, 
+                     FormValidRedirectMixing):
     template_name = 'proposal/proposal_form.html'
 
     def get_context_data(self, **kwargs):
@@ -270,23 +275,16 @@ class CreateProposal(BaseProposalView, CreateView, FormValidRedirectMixing):
         recipients = [proposal.author.email]
         send_mail(subject, message, settings.NO_REPLY_EMAIL, recipients)
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(CreateProposal, self).dispatch(*args, **kwargs)
-
-
-class ListMyProposals(BaseProposalView, ListView):
+class ListMyProposals(LoginRequiredMixin, BaseProposalView, ListView):
     template_name = 'proposal/my_proposals.html'
 
     def get_queryset(self):
         return Proposal.objects.filter(author_id=self.request.user.id)
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(ListMyProposals, self).dispatch(*args, **kwargs)
-
-
-class UpdateProposal(BaseProposalView, UpdateView, FormValidRedirectMixing):
+class UpdateProposal(LoginRequiredMixin, 
+                     BaseProposalView, 
+                     UpdateView, 
+                     FormValidRedirectMixing):
     template_name = 'proposal/proposal_form.html'
 
     def get_context_data(self, **kwargs):
@@ -297,11 +295,6 @@ class UpdateProposal(BaseProposalView, UpdateView, FormValidRedirectMixing):
     def form_valid(self, form):
         self.object = form.save()
         return self.success_redirect(_(u'Proposal updated.'))
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(UpdateProposal, self).dispatch(*args, **kwargs)
-
 
 class DeleteProposal(BaseProposalView, DeleteView):
     template_name = 'proposal/proposal_confirm_delete.html'
