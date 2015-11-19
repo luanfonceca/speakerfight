@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+{% load bootstrap3 %}
+{% load deck_tags %}
+
+{% block head_title %}{% trans "My Events" %}{% endblock %}
+
+{% block content %}
+  <div class="row header">
+    <h2><strong>{% trans "My Events" %}</strong></h2>
+    <a href="{% url 'create_event' %}" class="btn-flat success pull-right text-upper">
+      <i class="icon-plus"></i>
+      {% trans "new event" %}
+    </a>
+  </div>
+  <div class="row" id="event-list">
+    <div class="col-md-12">
+      <div id="event-proposals">
+        {% for event in object_list %}
+          {% include "event/snippets/event_list_item.html" %}
+        {% empty %}
+          <p class="lead">
+            {% trans "There are no events to show to you :(" %}
+          </p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block scripts %}
+  <script src="{{ STATIC_URL }}js/libs/jquery.linkable.js"></script>
+
+  <script type="text/javascript">
+    $(function () {
+      $(".linkable").linkable();
+    });
+  </script>
+{% endblock scripts %}

@@ -31,6 +31,12 @@
         <span>{% trans "My Proposals" %}</span>
       </a>
     </li>
+    <li {% ifstartswith "/my_events/" %}class="active"{% endifstartswith %}>
+      <a href="{% url 'my_events' %}">
+        <i class="icon-check"></i>
+        <span>{% trans "My Events" %}</span>
+      </a>
+    </li>
     {% endif %}
   </ul>
 </div>
