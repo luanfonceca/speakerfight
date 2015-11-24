@@ -94,6 +94,13 @@ class DetailEvent(BaseEventView, DetailView):
         return context
 
 
+class ListMyEvents(LoginRequiredMixin, BaseEventView, ListView):
+    template_name = 'event/my_events.html'
+
+    def get_queryset(self):
+        return Event.objects.filter(author_id=self.request.user.id)
+
+
 class UpdateEvent(BaseEventView, UpdateView, FormValidRedirectMixing):
     template_name = 'event/event_form.html'
 
