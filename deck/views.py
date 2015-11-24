@@ -26,10 +26,12 @@ class FormValidRedirectMixing(object):
         messages.success(self.request, message)
         return HttpResponseRedirect(self.get_success_url())
 
+
 class LoginRequiredMixin(object):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
+
 
 class BaseEventView(object):
     model = Event
@@ -51,9 +53,9 @@ class ListEvents(BaseEventView, ListView):
         return context
 
 
-class CreateEvent(LoginRequiredMixin, 
-                  BaseEventView, 
-                  CreateView, 
+class CreateEvent(LoginRequiredMixin,
+                  BaseEventView,
+                  CreateView,
                   FormValidRedirectMixing):
     template_name = 'event/event_form.html'
 
@@ -71,6 +73,7 @@ class CreateEvent(LoginRequiredMixin,
         subject = _(u'Your event is ready to receive proposals')
         send_mail(subject, message,
                   settings.NO_REPLY_EMAIL, [event.author.email])
+
 
 class DetailEvent(BaseEventView, DetailView):
     template_name = 'event/event_detail.html'
@@ -221,8 +224,8 @@ class BaseProposalView(object):
 
 
 class CreateProposal(LoginRequiredMixin,
-                     BaseProposalView, 
-                     CreateView, 
+                     BaseProposalView,
+                     CreateView,
                      FormValidRedirectMixing):
     template_name = 'proposal/proposal_form.html'
 
@@ -275,15 +278,17 @@ class CreateProposal(LoginRequiredMixin,
         recipients = [proposal.author.email]
         send_mail(subject, message, settings.NO_REPLY_EMAIL, recipients)
 
+
 class ListMyProposals(LoginRequiredMixin, BaseProposalView, ListView):
     template_name = 'proposal/my_proposals.html'
 
     def get_queryset(self):
         return Proposal.objects.filter(author_id=self.request.user.id)
 
-class UpdateProposal(LoginRequiredMixin, 
-                     BaseProposalView, 
-                     UpdateView, 
+
+class UpdateProposal(LoginRequiredMixin,
+                     BaseProposalView,
+                     UpdateView,
                      FormValidRedirectMixing):
     template_name = 'proposal/proposal_form.html'
 
@@ -295,6 +300,7 @@ class UpdateProposal(LoginRequiredMixin,
     def form_valid(self, form):
         self.object = form.save()
         return self.success_redirect(_(u'Proposal updated.'))
+
 
 class DeleteProposal(BaseProposalView, DeleteView):
     template_name = 'proposal/proposal_confirm_delete.html'
