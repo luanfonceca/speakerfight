@@ -55,6 +55,8 @@ class InviteForm(forms.ModelForm):
 
 
 class ProposalForm(forms.ModelForm):
+    description = forms.CharField(required=True, widget=forms.Textarea())
+
     class Meta:
         model = Proposal
         exclude = [

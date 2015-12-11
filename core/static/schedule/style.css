@@ -336,6 +336,11 @@ ol {
   display: none;
 }
 
+#speakerfight #schedule .day .event-list .event.workshop .short:before {
+  background: #5ba0a3 url(../schedule/icons/workshop.svg) no-repeat center 19px;
+  background-size: auto 40px;
+}
+
 #speakerfight #schedule .day .event-list .event.openning .short:before {
   background: #5ba0a3 url(../schedule/icons/openning.svg) no-repeat center 19px;
   background-size: auto 40px;

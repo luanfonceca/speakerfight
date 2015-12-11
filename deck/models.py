@@ -56,7 +56,8 @@ class DeckBaseModel(models.Model):
     title = models.CharField(_('Title'), max_length=200)
     slug = AutoSlugField(populate_from='title', overwrite=True,
                          max_length=200, unique=True, db_index=True)
-    description = models.TextField(_('Description'), max_length=10000)
+    description = models.TextField(
+        _('Description'), max_length=10000, blank=True)
     created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
     is_published = models.BooleanField(_('Publish'), default=True)
 
@@ -123,6 +124,7 @@ class Vote(models.Model):
 
 class Activity(DeckBaseModel):
     PROPOSAL = 'proposal'
+    WORKSHOP = 'workshop'
     OPENNING = 'openning'
     COFFEEBREAK = 'coffee-break'
     LUNCH = 'lunch'
@@ -130,6 +132,7 @@ class Activity(DeckBaseModel):
     ENDING = 'ending'
     ACTIVITY_TYPES = (
         (PROPOSAL, _('Proposal')),
+        (WORKSHOP, _('Workshop')),
         (OPENNING, _('Openning')),
         (COFFEEBREAK, _('Coffee Break')),
         (LUNCH, _('Lunch')),

@@ -23,7 +23,7 @@
                   <div class="short">
                     <div class="time">{{ activity.timetable }}</div>
                     <div class="name">
-                      {% if activity.activity_type == activity.PROPOSAL %}
+                      {% if activity.activity_type == activity.PROPOSAL or activity.activity_type == activity.WORKSHOP %}
                         <figure class="face" style="background-image: url({{ activity.author|get_user_photo }})">&nbsp;</figure>
                         <span class="title">{{ activity.title|title }}</span>
                         <span class="person">{{ activity.author.get_full_name|default:activity.author.username }}</span>

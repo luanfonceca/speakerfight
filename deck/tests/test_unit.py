@@ -62,9 +62,9 @@ class EventModelIntegrityTest(TestCase):
     def test_assert_event_description_should_be_a_TextField(self):
         self.assertIsInstance(self.fields['description'], TextField)
 
-    def test_assert_event_description_should_be_required(self):
+    def test_assert_event_description_should_be_nullable_but_needs_to_be_blank(self):
         self.assertEquals(False, self.fields['description'].null)
-        self.assertEquals(False, self.fields['description'].blank)
+        self.assertEquals(True, self.fields['description'].blank)
 
     def test_assert_event_description_should_have_at_most_10000_characters(self):
         self.assertEquals(10000, self.fields['description'].max_length)
@@ -174,9 +174,9 @@ class ProposalModelIntegrityTest(TestCase):
     def test_assert_proposal_description_should_be_a_TextField(self):
         self.assertIsInstance(self.fields['description'], TextField)
 
-    def test_assert_proposal_description_should_be_required(self):
+    def test_assert_proposal_description_should_be_nullable_but_needs_to_be_blank(self):
         self.assertEquals(False, self.fields['description'].null)
-        self.assertEquals(False, self.fields['description'].blank)
+        self.assertEquals(True, self.fields['description'].blank)
 
     def test_assert_proposal_description_should_have_10000_characters(self):
         self.assertEquals(10000, self.fields['description'].max_length)
