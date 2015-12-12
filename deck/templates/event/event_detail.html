@@ -73,6 +73,10 @@
                 {% endblocktrans %}
                 {% if event.author_id == request.user.id or event|is_user_in_jury:request.user or request.user.is_superuser %}
                   <br>
+                  <blockquote>
+                    {{ '* '|add:proposal.more_information|safe|linebreaks }}
+                  </blockquote>
+                  <br>
                   {% with votes_count=proposal.votes.count %}
                     {% if votes_count > 0 %}
                       {% blocktrans with votes_count=votes_count vote_pluralize=votes_count|pluralize %}

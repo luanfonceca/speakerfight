@@ -169,6 +169,8 @@ class Activity(DeckBaseModel):
 
 class Proposal(Activity):
     is_approved = models.BooleanField(_('Is approved'), default=False)
+    more_information = models.TextField(
+        _('More information'), max_length=10000, null=True, blank=True)
 
     # relations
     event = models.ForeignKey(to='deck.Event', related_name='proposals')
