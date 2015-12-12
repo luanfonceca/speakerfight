@@ -7,7 +7,7 @@ script:
   - coverage run manage.py test
 after_success:
   - coveralls
-  - fab deploy
+  # - fab deploy
 env:
   global:
     - secure: JFAH2i22AtBYLTpgzecYdv4aDuR5SIDAqgmZ6Vc5hx9GrvXs2W//NeMXPG6rTJhQoFfFUrko3Zjnasefm+CX+hJ/ZtwsgMgZlydqcEsVsPZrT6MQY6a0XIkgOKBsuZAbzztC/B8hiTnIiCSM00BKywprT/rM56u3AEGh4oJhMR0=
