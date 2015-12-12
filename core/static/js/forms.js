@@ -1,6 +1,6 @@
 $(function () {
   tinymce.init({
-    selector: "textarea",
+    selector: "#id_description",
     menubar: false,
     skin: 'light',
     plugins: 'link paste preview textcolor',
