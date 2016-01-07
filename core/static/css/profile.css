@@ -1,0 +1,73 @@
+#profile-detail #profile-photo {
+  float: left;
+}
+
+#profile-detail .thumbnail {
+  width: 210px;
+}
+
+#profile-detail #profile-info {
+  margin-left: 225px;
+}
+
+#profile-detail #profile-info #profile-links {
+  float: right;
+}
+
+#profile-detail #profile-info .btn {
+  width: 40px;
+}
+
+#profile-detail #profile-info .btn i {
+  font-size: 20px;
+}
+
+#profile-detail #profile-info .name small {
+  margin-left: 0;
+  font-style: normal;
+}
+
+/* Landscape tablet and desktop */
+@media (max-width: 1024px) {
+  #profile-detail #profile-info #profile-links {
+    float: none;
+  }
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+  .profile img {
+    width:75px;
+  }
+  .profile h2 {
+    font-size:1.7em;
+  }
+  .stats span {
+    font-size: 2em;
+  }
+
+  #profile-detail #profile-info #profile-links {
+    float: none;
+  }
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+  .clearfix-on-small {
+    clear: both;
+  }
+
+  #profile-detail #profile-photo {
+    width: 100%;
+  }
+
+  #profile-detail #profile-photo .thumbnail,
+  #profile-detail #profile-photo .avatar img {
+    width: 100%;
+  }
+
+  #profile-detail #profile-info {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}

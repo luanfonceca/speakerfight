@@ -68,8 +68,8 @@
                 </a>
               </h3>
               <p class="proposal-metadata">
-                {% blocktrans with author=proposal.author.get_full_name|default:proposal.author.username created_at=proposal.created_at %}
-                Proposed by <strong>{{ author }}</strong> at {{ created_at }}.
+                {% blocktrans with profile_url=proposal.author.profile.get_absolute_url author=proposal.author.get_full_name|default:proposal.author.username created_at=proposal.created_at %}
+                Proposed by <strong><a href="{{ profile_url }}">{{ author }}</a></strong> at {{ created_at }}.
                 {% endblocktrans %}
                 {% if event.author_id == request.user.id or event|is_user_in_jury:request.user or request.user.is_superuser %}
                   <br>

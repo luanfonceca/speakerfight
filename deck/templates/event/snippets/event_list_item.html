@@ -9,15 +9,15 @@
   <div class="panel-body">
     <h3 class="panel-title event-title">{{ event.title }}</h3>
     <p class="event-metadata">
-      {% blocktrans with author=event.author.get_full_name|default:event.author.username created_at=event.created_at %}
-      Created by <strong>{{ author }}</strong> at {{ created_at }}.
+      {% blocktrans with profile_url=event.author.profile.get_absolute_url author=event.author.get_full_name|default:event.author.username created_at=event.created_at %}
+      Created by <strong><a href="{{ profile_url }}">{{ author }}</a></strong> at {{ created_at }}.
       {% endblocktrans %}
       {% if event.due_date %}
         <br/>
         {% if event.due_date_is_passed %}
           <span class="text-danger">
             <i class="icon-exclamation-sign"></i>
-            {% trans "Due date pasted" %} {{ event.due_date|timesince }}
+            {% trans "Due date pasted since the day" %} {{ event.due_date }}
           </span>
         {% else %}
           {% trans "Due date in" %} {{ event.due_date|timeuntil }}

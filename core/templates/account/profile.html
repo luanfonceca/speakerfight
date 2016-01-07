@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+{% load bootstrap3 %}
+{% load account %}
+
+{% load deck_tags %}
+
+{% block head_title %}
+  {% trans "Profile" %}
+{% endblock %}
+
+{% block head %}
+  <!-- libraries for this page -->
+  <link href="{{ STATIC_URL }}css/profile.css" type="text/css" rel="stylesheet" />
+  {{ form.media }}
+{% endblock head %}
+
+{% block content %}
+  <div class="row header">
+    <h2>{% trans "Profile" %}</h2>
+  </div>
+  <div class="row form-wrapper">
+    <!-- left column -->
+    <div class="column">
+      <div class="row" id="profile-detail">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div id="profile-photo">
+                <div class="thumbnail">
+                  <div class="avatar">
+                    <img src="{{ object.user|get_user_photo:200 }}">
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix-on-small"></div>
+              <div id="profile-info">
+                <div class="name">
+                  <h3>
+                    {{ object.user.get_full_name|default:object.user.username }}
+                    <small>@{{ object.user.username }}</small>
+                    <div id="profile-links">
+                      <a href="{{ object.get_github_url|default:'javascript:;' }}" class="btn btn-default btn-sm {% if not object.github %}disabled{% endif %}" target="_blank">
+                        <i class="icon-github"></i>
+                      </a>
+                      <a href="{{ object.get_facebook_url|default:'javascript:;' }}" class="btn btn-default btn-sm {% if not object.facebook %}disabled{% endif %}" target="_blank">
+                        <i class="icon-facebook"></i>
+                      </a>
+                      <a href="{{ object.get_site_url|default:'javascript:;' }}" class="btn btn-default btn-sm {% if not object.site %}disabled{% endif %}" target="_blank">
+                        <i class="icon-globe"></i>
+                      </a>
+                      <a href="mailto:{{ object.user.email }}" class="btn btn-default btn-sm" target="_blank">
+                        <i class="icon-envelope"></i>
+                      </a>
+                    </div>
+                  </h3>
+                </div>
+                <hr>
+                <div class="about">
+                  <h4>{% trans "About Me" %}</h4>
+                  <p>
+                    {{ object.about_me|default:_('-')|linebreaks }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            {% if object.user.id == request.user.id or request.user.is_superuser %}
+              <div class="panel-footer event-actions text-center">
+                <a href="javascript:;" data-toggle="modal" data-target="#update-profile-modal" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Edit profile.' %}">
+                  <i class="icon-pencil"></i> {% trans "Edit" %}
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if object.user.id == request.user.id or request.user.is_superuser %}
+    <div class="modal fade" id="update-profile-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form id="update-profile-form" method="POST" action="{% url 'update_profile' object.user.username %}">
+            {% csrf_token %}
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title">{% trans "Update profile" %}</h4>
+            </div>
+            <div class="modal-body">
+              {% bootstrap_form profile_form layout='inline' %}
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn-flat success text-upper">
+                <i class="icon icon-pencil"></i>
+                {% trans "submit" %}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock content %}

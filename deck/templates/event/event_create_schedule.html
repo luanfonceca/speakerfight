@@ -79,8 +79,8 @@
                     <h3 class="panel-title proposal-title">
                       <a href="#{{ activity.slug }}">{{ activity }}</a>
                       <p class="proposal-metadata">
-                        {% blocktrans with author=activity.author.get_full_name|default:activity.author.username created_at=activity.created_at %}
-                          Proposed by <strong>{{ author }}</strong> at {{ created_at }}.
+                        {% blocktrans with profile_url=activity.author.profile.get_absolute_url author=activity.author.get_full_name|default:activity.author.username created_at=activity.created_at %}
+                          Proposed by <strong><a href="{{ profile_url }}">{{ author }}</a></strong> at {{ created_at }}.
                         {% endblocktrans %}
                       </p>
                     </h3>
@@ -144,8 +144,8 @@
                   <h3 class="panel-title proposal-title">
                     <a href="#{{ proposal.slug }}">{{ proposal }}</a>
                     <p class="proposal-metadata">
-                      {% blocktrans with author=proposal.author.get_full_name|default:proposal.author.username created_at=proposal.created_at %}
-                        Proposed by <strong>{{ author }}</strong> at {{ created_at }}.
+                      {% blocktrans with profile_url=proposal.author.profile.get_absolute_url author=proposal.author.get_full_name|default:proposal.author.username created_at=proposal.created_at %}
+                        Proposed by <strong><a href="{{ profile_url }}">{{ author }}</a></strong> at {{ created_at }}.
                       {% endblocktrans %}
                     </p>
                   </h3>

@@ -19,18 +19,7 @@ from djqscsv import render_to_csv_response
 
 from .models import Event, Proposal, Vote, Activity
 from .forms import EventForm, ProposalForm, ActivityForm, ActivityTimetableForm
-
-
-class FormValidRedirectMixing(object):
-    def success_redirect(self, message):
-        messages.success(self.request, message)
-        return HttpResponseRedirect(self.get_success_url())
-
-
-class LoginRequiredMixin(object):
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
+from core.mixins import LoginRequiredMixin, FormValidRedirectMixing
 
 
 class BaseEventView(object):

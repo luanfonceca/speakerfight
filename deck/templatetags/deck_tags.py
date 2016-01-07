@@ -28,14 +28,14 @@ def get_rate_title(rate):
 
 
 @register.filter
-def get_user_photo(user):
+def get_user_photo(user, size=40):
     social = user.socialaccount_set.first()
 
     if social:
         return social.get_avatar_url()
 
-    return 'http://www.gravatar.com/avatar/{}?s=40&d=mm'.format(
-        hashlib.md5(user.email).hexdigest())
+    return 'http://www.gravatar.com/avatar/{}?s={}&d=mm'.format(
+        hashlib.md5(user.email).hexdigest(), size)
 
 
 @register.filter

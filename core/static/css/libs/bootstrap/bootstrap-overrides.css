@@ -208,7 +208,8 @@ textarea::-webkit-input-placeholder {
 /* menu toggler */
 .navbar-inverse .navbar-toggle {
 	float: left;
-	margin-top: 10px;
+	margin-top: 5px;
+	margin-bottom: 0;
 	margin-left: 15px;
 }
 /* navbar brand*/
@@ -340,5 +341,11 @@ table th span.line{
 @media (max-width: 768px) {
   .navbar-toggle {
     display: block !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-nav .dropdown-toggle span {
+    display: none;
   }
 }
