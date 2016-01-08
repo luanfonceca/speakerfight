@@ -1,7 +1,5 @@
-from django.conf.urls import patterns
+from django.conf.urls import patterns, url
 from django.views.i18n import javascript_catalog
-
-from smarturls import surl as url
 
 from core import views
 
@@ -12,10 +10,10 @@ urlpatterns = patterns(
     url(regex=r'/profile/',
         view=views.ProfileView.as_view(),
         name='profile'),
-    url(regex=r'/profile/<slug:user__username>/',
+    url(regex=r'/profile/(?P<user__username>[\w+-_]+)/',
         view=views.ProfileView.as_view(),
         name='profile'),
-    url(regex=r'/profile/<slug:user__username>/update/',
+    url(regex=r'/profile/(?P<user__username>[\w+-_]+)/update/',
         view=views.ProfileUpdateView.as_view(),
         name='update_profile'),
     url(r'^jsi18n/$', javascript_catalog, name='javascript_catalog'),
