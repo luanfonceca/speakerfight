@@ -183,6 +183,11 @@ SOCIALACCOUNT_QUERY_EMAIL = True
 # Django Debug Toolbar
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
+# Smart urls
+SURL_REGEXERS = {
+    'username': '[\w@.-]+' 
+}
+
 
 try:
     from local_settings import *
