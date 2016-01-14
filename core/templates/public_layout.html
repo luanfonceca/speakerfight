@@ -67,7 +67,30 @@
 
     <div id="footer">
       <div class="row">
-        <div class="content-wrap col-md-offset-4 col-md-4 text-center">
+        <div class="content-wrap col-md-4 col-md-4">
+          <p>
+            {% blocktrans %}
+              <p class="text-center">
+                <strong>Proudly made with open source technologies </strong> <img src="{{ STATIC_URL }}img/heart.png" alt="Heart" width="3%" height="3%" />
+              </p>
+              <div class="text-center footer-icons">
+                <a href="http://www.python.org"><img src="{{ STATIC_URL }}img/python-powered.svg" alt="Python powered" width="18%" height="18%" /> </a>
+                <a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django." title="Powered by Django." width="17%" height="17%" /></a>
+              </div>
+            {% endblocktrans %}
+          </p>
+        </div>
+        <div class="content-wrap col-md-4 col-md-4">
+          <p>
+            {% blocktrans %}
+              <p class="text-center">This project believes that small acts can change the world throught<strong>Small Acts Manifesto:</strong></p>
+              <div class="text-center footer-icons">
+                <a href="http://smallactsmanifesto.org" title="Small Acts Manifesto"><img src="http://smallactsmanifesto.org/static/images/smallacts-badge-88x31-blue.png" style="border: none;" alt="Small Acts Manifesto" /></a>
+              </div>
+            {% endblocktrans %}
+          </p>
+        </div>
+        <div class="content-wrap col-md-4 col-md-4">
           <p>
             {% with anchor_start='<a href="https://github.com/luanfonceca/speakerfight/issues">' anchor_end='</a>' %}
               {% blocktrans %}
