@@ -133,25 +133,25 @@ STATIC_URL = '/static/'
 SITE_ID = 1
 
 # All Auth Confs
-TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + [
     'django.core.context_processors.request',
 
     # allauth specific context processors
     'allauth.account.context_processors.account',
     'allauth.socialaccount.context_processors.socialaccount',
-)
+]
 
-AUTHENTICATION_BACKENDS = global_settings.AUTHENTICATION_BACKENDS + (
+AUTHENTICATION_BACKENDS = global_settings.AUTHENTICATION_BACKENDS + [
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
-)
+]
 
-MIDDLEWARE_CLASSES = global_settings.AUTHENTICATION_BACKENDS + (
+MIDDLEWARE_CLASSES = global_settings.AUTHENTICATION_BACKENDS + [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware'
-)
+]
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -185,7 +185,7 @@ DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 # Smart urls
 SURL_REGEXERS = {
-    'username': '[\w@.-]+' 
+    'username': '[\w@.-]+'
 }
 
 
