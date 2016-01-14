@@ -1,0 +1,68 @@
+{% extends "public_layout.html" %}
+
+{% load i18n %}
+
+{% block head_title %}About page{% endblock head_title %}
+
+{% block content %}
+    <div class="row text-center">
+    {% blocktrans %}
+        <div>
+            <h3>What is SpeakerFight?</h3>
+            <p>Speakerfight is an arena where speakers can fight ~against~ each other and people choose who wins.</p>
+        </div>
+
+        <hr />
+        
+        <div>
+            <p><h3>How works the voting system?</h3></p>
+            <p>The system is composed by 5 options of vote:</p>
+            <div>
+                <p><h4>Angry:</h4></p>
+                <p><img src="{{STATIC_URL}}/img/angry.png"></p>
+                <p>If you are not satisfied with the propose's talk and don't want this in your event, select this option. This option contains the value <strong>-1</strong>, causing down vote to the fighter.</p>
+                <hr />
+            </div>
+
+            <div>
+                <p><h4>Sad:</h4></p>
+                <p><img src="{{STATIC_URL}}/img/sad.png"></p>
+                <p>If you are sad with this propose's talk, but you don't mind if the talk will be approved, select this option. This option contains the value <strong>0</strong>, not changing the score.</p>
+                <hr />
+            </div>
+            
+            <div>
+                <p><h4>Sleepy:</h4></p>
+                <p><img src="{{STATIC_URL}}/img/sleepy.png"></p>
+                <p>If the level of the topic's talk is warm, select this option. This option contains the value <strong>1</strong>, adding one point to the fighter.</p>
+                <hr />
+            </div>
+            
+            <div>
+                <p><h4>Happy:</h4></p>
+                <p><img src="{{STATIC_URL}}/img/happy.png"></p>
+                <p>If you are glad with the topic of the talk, and you want this fighter speak in your event, select this option. This option contains the value <strong>2</strong>, adding two points to the fighter.</p>
+                <hr />
+            </div>
+            
+            <div>
+                <p><h4>Laughing:</h4></p>
+                <p><img src="{{STATIC_URL}}/img/laughing.png"></p>
+                <p>If your are laughing's happy about the topic of the talk, and want very much this in your event, select this option. This option contains the value <strong>3</strong>, adding three points to the fighter.</p>
+                <hr />
+            </div>
+        </div>
+        <div>
+            <h3>How to measure which fighter should be approved?</h3>
+            <p>Those fighters that have more points wins the battle.</p>
+            <hr />
+        </div>
+        <div>
+            <p>
+                <span class="label label-warning">Warning:</span> <strong>Usually the first fighters who submit a talk have more chances to win the battle. So, don't let be the one of the last and hurry up :) </strong>
+            </p>
+        </div>
+
+    </div>
+    {% endblocktrans %}
+{% endblock content %}

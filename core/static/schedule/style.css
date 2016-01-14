@@ -99,6 +99,12 @@ ol {
   list-style-type: none;
 }
 
+.about {
+  font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+  font-size: 18px;
+
+}
+
 #speakerfight #footer {
   background: #2c3742;
   height: 70px;
