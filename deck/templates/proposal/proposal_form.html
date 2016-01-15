@@ -51,6 +51,15 @@
           </div>
         {% endif %}
 
+        {% if not form.instance.pk or not form.instance.more_information %}
+          <div class="alert alert-info alert-di " role="alert">
+            <p>
+              <strong>{% trans 'More information:' %}</strong>
+              {% trans 'Add anything you think it will be valuable for the people who are choosing the talks, only They can see it.' %}
+            </p>
+          </div>
+        {% endif %}
+
         {% bootstrap_form form layout="inline" %}
 
         {% buttons %}

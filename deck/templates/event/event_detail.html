@@ -72,10 +72,10 @@
                 Proposed by <strong><a href="{{ profile_url }}">{{ author }}</a></strong> at {{ created_at }}.
                 {% endblocktrans %}
                 {% if event.author_id == request.user.id or event|is_user_in_jury:request.user or request.user.is_superuser %}
-                  <br>
-                  <blockquote>
-                    {{ '* '|add:proposal.more_information|safe|linebreaks }}
-                  </blockquote>
+                  {% if proposal.more_information %}
+                    <br>
+                    <blockquote>{{ '* '|add:proposal.more_information|safe|linebreaks }}</blockquote>
+                  {% endif %}
                   <br>
                   {% with votes_count=proposal.votes.count %}
                     {% if votes_count > 0 %}
