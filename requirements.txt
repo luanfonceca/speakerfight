@@ -13,7 +13,7 @@ django-coverage==1.2.4
 django-datetime-widget==0.6
 django-debug-toolbar==1.4
 django-extensions==1.6.1
-django-vanilla-views==1.0.2
+django-vanilla-views==1.0.4
 
 git+https://github.com/azavea/django-queryset-csv.git@topic/support_django_1_9
 
