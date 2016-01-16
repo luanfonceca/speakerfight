@@ -3,7 +3,7 @@
 {% blocktrans %}
   Hi!
 
-  This email is a confirmation for the creation of your event "{{ event_title }}" on SpeakerFight! Remember to share the event so more people can submit proposals and engaje more participants!
+  This email is a confirmation for the creation of your event "{{ event_title }}" on Speakerfight! Remember to share the event so more people can submit proposals and engaje more participants!
 
   Good luck!
 {% endblocktrans %}

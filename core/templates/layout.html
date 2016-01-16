@@ -70,27 +70,7 @@
     </div>
     <!-- end main container -->
 
-    <div id="footer">
-      <div class="row">
-        <div class="content-wrap col-md-offset-4 col-md-4 text-center">
-          <p>
-            {% with anchor_start='<a href="https://github.com/luanfonceca/speakerfight/issues">' anchor_end='</a>' %}
-              {% blocktrans %}
-                <strong>SpeakerFight</strong> is proudly an open-source
-                project and is always being enhanced. If the software
-                has any odd behavior
-                {{ anchor_start }}please let us know{{ anchor_end }}.
-              {% endblocktrans %}
-            {% endwith %}
-          </p>
-          <div class="text-center footer-icons">
-            <a href="https://github.com/luanfonceca/speakerfight" target="_blank">
-              <i class="icon-github-sign"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+    {% include "footer.html" %}
 
     <script>
       ((window.gitter = {}).chat = {}).options = {

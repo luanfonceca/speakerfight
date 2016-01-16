@@ -24,6 +24,10 @@ class IndexView(TemplateView):
         return context
 
 
+class AboutView(TemplateView):
+    template_name = 'about.html'
+
+
 class ProfileView(DetailView):
     template_name = 'account/profile.html'
     model = Profile

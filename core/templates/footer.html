@@ -1,0 +1,56 @@
+{% load i18n %}
+
+<div id="footer">
+  <div class="row">
+    <div class="content-wrap col-md-4 col-md-4">
+      <p>
+        <p class="text-center">
+          {% blocktrans %}
+            Proudly made with <strong>Open Source</strong> technologies and a great group of people motivated to <strong>give back to the community</strong>
+          {% endblocktrans %}
+          <i style="color: red; margin-left: 2px;" class="icon-heart"></i>
+        </p>
+        <div class="text-center">
+          <a href="http://www.python.org" target="_blank">
+            <img src="{{ STATIC_URL }}img/python-powered.svg" alt="{% trans 'Python powered' %}" width="18%" height="18%" />
+          </a>
+          <a href="http://www.djangoproject.com/" target="_blank">
+            <img src="https://www.djangoproject.com/m/img/badges/djangopowered126x54.gif" border="0" alt="{% trans 'Powered by Django.' %}" title="Powered by Django." width="17%" height="17%" />
+          </a>
+        </div>
+      </p>
+    </div>
+
+    <div class="content-wrap col-md-4 col-md-4">
+      <p>
+        <p class="text-center">
+          {% with anchor_start='<a target="_blank" href="https://github.com/luanfonceca/speakerfight/issues">' anchor_end='</a>' %}
+            {% blocktrans %}
+              <strong>Speakerfight</strong> is proudly an open-source
+              project and is always being enhanced. If the software
+              has any odd behavior {{ anchor_start }}please let us know{{ anchor_end }}
+            {% endblocktrans %}
+          {% endwith %}
+        </p>
+        <div class="text-center">
+          <iframe src="https://ghbtns.com/github-btn.html?user=luanfonceca&repo=speakerfight&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px" style="left: 20px;position: relative;"></iframe>
+        </div>
+      </p>
+    </div>
+
+    <div class="content-wrap col-md-4 col-md-4">
+      <p>
+        <p class="text-center">
+          {% trans 'This project believes that small acts can change the world through' %}
+          <br>
+          <strong>{% trans 'Small Acts Manifesto' %}</strong>
+        </p>
+        <div class="text-center">
+          <a href="http://smallactsmanifesto.org" title="{% trans 'Small Acts Manifesto' %}" target="_blank">
+            <img src="http://smallactsmanifesto.org/static/images/smallacts-badge-88x31-blue.png" style="border: none;" alt="{% trans 'Small Acts Manifesto' %}" />
+          </a>
+        </div>
+      </p>
+    </div>
+  </div>
+</div>

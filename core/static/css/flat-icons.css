@@ -1,4 +1,4 @@
-.flat-icon {
+.flat-icon:not(.no-hover) {
   opacity: 0.6;
   text-decoration: none;
 }
