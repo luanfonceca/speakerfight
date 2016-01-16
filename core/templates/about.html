@@ -2,67 +2,122 @@
 
 {% load i18n %}
 
-{% block head_title %}About page{% endblock head_title %}
+{% block head_title %}{% trans 'About page' %}{% endblock head_title %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/flat-icons.css" type="text/css" media="screen" />
+{% endblock head %}
 
 {% block content %}
-    <div class="row text-center">
-    {% blocktrans %}
-        <div>
-            <h3>What is SpeakerFight?</h3>
-            <p>Speakerfight is an arena where speakers can fight ~against~ each other and people choose who wins.</p>
-        </div>
-
-        <hr />
-        
-        <div>
-            <p><h3>How works the voting system?</h3></p>
-            <p>The system is composed by 5 options of vote:</p>
-            <div>
-                <p><h4>Angry:</h4></p>
-                <p><img src="{{STATIC_URL}}/img/angry.png"></p>
-                <p>If you are not satisfied with the propose's talk and don't want this in your event, select this option. This option contains the value <strong>-1</strong>, causing down vote to the fighter.</p>
-                <hr />
-            </div>
-
-            <div>
-                <p><h4>Sad:</h4></p>
-                <p><img src="{{STATIC_URL}}/img/sad.png"></p>
-                <p>If you are sad with this propose's talk, but you don't mind if the talk will be approved, select this option. This option contains the value <strong>0</strong>, not changing the score.</p>
-                <hr />
-            </div>
-            
-            <div>
-                <p><h4>Sleepy:</h4></p>
-                <p><img src="{{STATIC_URL}}/img/sleepy.png"></p>
-                <p>If the level of the topic's talk is warm, select this option. This option contains the value <strong>1</strong>, adding one point to the fighter.</p>
-                <hr />
-            </div>
-            
-            <div>
-                <p><h4>Happy:</h4></p>
-                <p><img src="{{STATIC_URL}}/img/happy.png"></p>
-                <p>If you are glad with the topic of the talk, and you want this fighter speak in your event, select this option. This option contains the value <strong>2</strong>, adding two points to the fighter.</p>
-                <hr />
-            </div>
-            
-            <div>
-                <p><h4>Laughing:</h4></p>
-                <p><img src="{{STATIC_URL}}/img/laughing.png"></p>
-                <p>If your are laughing's happy about the topic of the talk, and want very much this in your event, select this option. This option contains the value <strong>3</strong>, adding three points to the fighter.</p>
-                <hr />
-            </div>
-        </div>
-        <div>
-            <h3>How to measure which fighter should be approved?</h3>
-            <p>Those fighters that have more points wins the battle.</p>
-            <hr />
-        </div>
-        <div>
-            <p>
-                <span class="label label-warning">Warning:</span> <strong>Usually the first fighters who submit a talk have more chances to win the battle. So, don't let be the one of the last and hurry up :) </strong>
-            </p>
-        </div>
-
+  <div class="row text-center">
+    <div id="what-is-speakerfight">
+      <a href="#what-is-speakerfight">
+        <h2>{% trans 'What is Speakerfight?' %}</h2>
+      </a>
+      <h5>
+        {% blocktrans %}
+          <strong>Speakerfight</strong> is an arena where the speakers can
+          fight each other and the people choose who wins.
+        {% endblocktrans %}
+      </h5>
     </div>
-    {% endblocktrans %}
+    <hr />
+
+    <div id="why-the-Speakerfight-was-created">
+      <a href="#why-the-Speakerfight-was-created">
+        <h2>{% trans 'Why the Speakerfight was created?' %}</h2>
+      </a>
+      <h5>
+        {% blocktrans %}
+          When the people from Grupy-RN was making a regional edition of the RuPy, in 2014, we were tired of using Google forms or Call4Paperz to manage that, so  <a target="_blank" href="http://github.com/luanfonceca">Luan Fonseca</a> took some time and build an MVP version to make the RuPy call for papers happen in the Speakerfight.
+        {% endblocktrans %}
+      </h5>
+    </div>
+    <hr />
+
+    <div id="how-the-Speakerfight-is-made">
+      <a href="#how-the-Speakerfight-is-made">
+        <h2>{% trans 'How the Speakerfight is made?' %}</h2>
+      </a>
+      <h5>
+        {% blocktrans %}
+          We have a repository on the <a target="_blank" href="http://github.com/luanfonceca/speakerfight">Github</a> with some open issues labeled with different levels of dificulty, besides we are open enough to accept any kind of contribution, We also have an Chat in <a target="_blank" href="http://gitter.im/luanfonceca/speakerfight">Gitter</a>, anyone can reach us out in there and talk freely about almost anything. Read our <a target="_blank" href="https://github.com/luanfonceca/speakerfight/blob/master/CONTRIBUTING.md">Contributing section on the Github</a> to know more details.
+        {% endblocktrans %}
+      </h5>
+    </div>
+    <hr />
+
+    <div id="how-works-the-voting-system">
+      <a href="#how-works-the-voting-system">
+        <h2>{% trans 'How works the voting system?' %}</h2>
+      </a>
+      <h5>{% trans 'The system is composed by 5 options of vote:' %}</h5>
+
+      <br />
+      <div class="row">
+        <div class="col-sm-6 col-md-4">
+          <h4>{% trans 'Angry' %}</h4>
+          <span class="flat-icon no-hover"><i class="angry black"></i></span>
+          <p>
+            {% blocktrans %}
+              If you are not satisfied with the propose's talk and don't want this in your event, select this option. This option contains the value <strong>-1</strong>, causing down vote to the fighter.
+            {% endblocktrans %}
+          </p>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <h4>{% trans 'Sad' %}</h4>
+          <span class="flat-icon no-hover"><i class="sad black"></i></span>
+          <p>
+            {% blocktrans %}
+              If you are sad with this propose's talk, but you don't mind if the talk will be approved, select this option. This option contains the value <strong>0</strong>, not changing the score.
+            {% endblocktrans %}
+          </p>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <h4>{% trans 'Sleepy' %}</h4>
+          <span class="flat-icon no-hover"><i class="sleepy black"></i></span>
+          <p>
+            {% blocktrans %}
+              If the level of the topic's talk is warm, select this option. This option contains the value <strong>1</strong>, adding one point to the fighter.
+            {% endblocktrans %}
+          </p>
+        </div>
+        <br />
+        <div class="col-md-6">
+          <h4>{% trans 'Happy' %}</h4>
+          <span class="flat-icon no-hover"><i class="happy black"></i></span>
+          <p>
+            {% blocktrans %}
+              If you are glad with the topic of the talk, and you want this fighter speak in your event, select this option. This option contains the value <strong>2</strong>, adding two points to the fighter.
+            {% endblocktrans %}
+          </p>
+        </div>
+        <div class="col-md-6">
+          <h4>{% trans 'Laughing' %}</h4>
+          <span class="flat-icon no-hover"><i class="laughing black"></i></span>
+          <p>
+            {% blocktrans %}
+              If your are laughing's happy about the topic of the talk, and want very much this in your event, select this option. This option contains the value <strong>3</strong>, adding three points to the fighter.
+            {% endblocktrans %}
+          </p>
+        </div>
+      </div>
+    </div>
+    <hr />
+
+    <div id="how-to-measure-which-fighter-should-be-approved">
+      <a href="#how-to-measure-which-fighter-should-be-approved">
+        <h2>{% trans 'How to measure which fighter should be approved?' %}</h2>
+      </a>
+      <h5>{% trans 'Those fighters that have more points wins the battle.' %}</h5>
+      <br />
+      <h5>
+        <span class="label label-info">{% trans 'Speaker Tip' %}</span>
+        <br />
+        {% blocktrans %}
+          Usually the first fighters who submit a talk have more chances to win the battle. So, don't let be the one of the last and hurry up :)
+        {% endblocktrans %}
+      </h5>
+    </div>
+  </div>
 {% endblock content %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-07 09:54-0200\n"
+"POT-Creation-Date: 2016-01-16 10:22-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,7 +55,7 @@ msgstr ""
 msgid "was not found on this server. Click below to see all events available."
 msgstr ""
 
-#: core/templates/404.html:14 core/templates/index.html:81
+#: core/templates/404.html:14 core/templates/index.html:94
 msgid "Enter in the arena"
 msgstr ""
 
@@ -72,6 +72,149 @@ msgid ""
 "I'm sorry, that page is currently unavailable due to a server "
 "misconfiguration. The server administrator has been notified, and we "
 "apologise for any inconvenience."
+msgstr ""
+
+#: core/templates/about.html:5
+msgid "About page"
+msgstr ""
+
+#: core/templates/about.html:15
+msgid "What is Speakerfight?"
+msgstr ""
+
+#: core/templates/about.html:18 core/templates/index.html:12
+msgid ""
+"\n"
+"          <strong>Speakerfight</strong> is an arena where the speakers can\n"
+"          fight each other and the people choose who wins.\n"
+"        "
+msgstr ""
+
+#: core/templates/about.html:28
+msgid "Why the Speakerfight was created?"
+msgstr ""
+
+#: core/templates/about.html:31
+msgid ""
+"\n"
+"          When the people from Grupy-RN was making a regional edition of the "
+"RuPy, in 2014, we were tired of using Google forms or Call4Paperz to manage "
+"that, so  <a target=\"_blank\" href=\"http://github.com/luanfonceca\">Luan "
+"Fonseca</a> took some time and build an MVP version to make the RuPy call "
+"for papers happen in the Speakerfight.\n"
+"        "
+msgstr ""
+
+#: core/templates/about.html:40
+msgid "How the Speakerfight is made?"
+msgstr ""
+
+#: core/templates/about.html:43
+msgid ""
+"\n"
+"          We have a repository on the <a target=\"_blank\" href=\"http://"
+"github.com/luanfonceca/speakerfight\">Github</a> with some open issues "
+"labeled with different levels of dificulty, besides we are open enough to "
+"accept any kind of contribution, We also have an Chat in <a target=\"_blank"
+"\" href=\"http://gitter.im/luanfonceca/speakerfight\">Gitter</a>, anyone can "
+"reach us out in there and talk freely about almost anything. Read our <a "
+"target=\"_blank\" href=\"https://github.com/luanfonceca/speakerfight/blob/"
+"master/CONTRIBUTING.md\">Contributing section on the Github</a> to know more "
+"details.\n"
+"        "
+msgstr ""
+
+#: core/templates/about.html:52
+msgid "How works the voting system?"
+msgstr ""
+
+#: core/templates/about.html:54
+msgid "The system is composed by 5 options of vote:"
+msgstr ""
+
+#: core/templates/about.html:59 deck/models.py:81
+msgid "Angry"
+msgstr ""
+
+#: core/templates/about.html:62
+msgid ""
+"\n"
+"              If you are not satisfied with the propose's talk and don't "
+"want this in your event, select this option. This option contains the value "
+"<strong>-1</strong>, causing down vote to the fighter.\n"
+"            "
+msgstr ""
+
+#: core/templates/about.html:68 deck/models.py:81
+msgid "Sad"
+msgstr ""
+
+#: core/templates/about.html:71
+msgid ""
+"\n"
+"              If you are sad with this propose's talk, but you don't mind if "
+"the talk will be approved, select this option. This option contains the "
+"value <strong>0</strong>, not changing the score.\n"
+"            "
+msgstr ""
+
+#: core/templates/about.html:77 deck/models.py:82
+msgid "Sleepy"
+msgstr ""
+
+#: core/templates/about.html:80
+msgid ""
+"\n"
+"              If the level of the topic's talk is warm, select this option. "
+"This option contains the value <strong>1</strong>, adding one point to the "
+"fighter.\n"
+"            "
+msgstr ""
+
+#: core/templates/about.html:87 deck/models.py:82
+msgid "Happy"
+msgstr ""
+
+#: core/templates/about.html:90
+msgid ""
+"\n"
+"              If you are glad with the topic of the talk, and you want this "
+"fighter speak in your event, select this option. This option contains the "
+"value <strong>2</strong>, adding two points to the fighter.\n"
+"            "
+msgstr ""
+
+#: core/templates/about.html:96 deck/models.py:83
+msgid "Laughing"
+msgstr ""
+
+#: core/templates/about.html:99
+msgid ""
+"\n"
+"              If your are laughing's happy about the topic of the talk, and "
+"want very much this in your event, select this option. This option contains "
+"the value <strong>3</strong>, adding three points to the fighter.\n"
+"            "
+msgstr ""
+
+#: core/templates/about.html:110
+msgid "How to measure which fighter should be approved?"
+msgstr ""
+
+#: core/templates/about.html:112
+msgid "Those fighters that have more points wins the battle."
+msgstr ""
+
+#: core/templates/about.html:115
+msgid "Speaker Tip"
+msgstr ""
+
+#: core/templates/about.html:117
+msgid ""
+"\n"
+"          Usually the first fighters who submit a talk have more chances to "
+"win the battle. So, don't let be the one of the last and hurry up :)\n"
+"        "
 msgstr ""
 
 #: core/templates/account/account_inactive.html:5
@@ -457,12 +600,41 @@ msgid ""
 "mail address</a>."
 msgstr ""
 
-#: core/templates/index.html:12
+#: core/templates/footer.html:8
 msgid ""
 "\n"
-"          <strong>Speakerfight</strong> is an arena where the speakers can\n"
-"          fight each other and the people choose who wins.\n"
-"        "
+"            Proudly made with <strong>Open Source</strong> technologies and "
+"a great group of people motivated to <strong>give back to the community</"
+"strong>\n"
+"          "
+msgstr ""
+
+#: core/templates/footer.html:15
+msgid "Python powered"
+msgstr ""
+
+#: core/templates/footer.html:18
+msgid "Powered by Django."
+msgstr ""
+
+#: core/templates/footer.html:28
+#, python-format
+msgid ""
+"\n"
+"              <strong>Speakerfight</strong> is proudly an open-source\n"
+"              project and is always being enhanced. If the software\n"
+"              has any odd behavior %(anchor_start)splease let us know"
+"%(anchor_end)s\n"
+"            "
+msgstr ""
+
+#: core/templates/footer.html:44
+msgid "This project believes that small acts can change the world through"
+msgstr ""
+
+#: core/templates/footer.html:46 core/templates/footer.html.py:49
+#: core/templates/footer.html:50
+msgid "Small Acts Manifesto"
 msgstr ""
 
 #: core/templates/index.html:19
@@ -483,65 +655,62 @@ msgid ""
 "      "
 msgstr ""
 
-#: core/templates/index.html:37
+#: core/templates/index.html:39
+msgid "How it works?"
+msgstr ""
+
+#: core/templates/index.html:42
+msgid "TELL ME ABOUT SPEAKERFIGHT"
+msgstr ""
+
+#: core/templates/index.html:50
 msgid "Some features"
 msgstr ""
 
-#: core/templates/index.html:43
+#: core/templates/index.html:56
 msgid "Event list"
 msgstr ""
 
-#: core/templates/index.html:44
+#: core/templates/index.html:57
 msgid "The event list show all public events to let you join to the vote."
 msgstr ""
 
-#: core/templates/index.html:45
+#: core/templates/index.html:58
 msgid ""
 "You can create new events and receive proposals from anyone in the world. "
 "All the events can be either public or private."
 msgstr ""
 
-#: core/templates/index.html:48
+#: core/templates/index.html:61
 msgid "Event List"
 msgstr ""
 
-#: core/templates/index.html:56 core/templates/index.html.py:59
+#: core/templates/index.html:69 core/templates/index.html.py:72
 msgid "Event details"
 msgstr ""
 
-#: core/templates/index.html:60
+#: core/templates/index.html:73
 msgid ""
 "Every event can be configured to receive votes from everyone, only logged "
 "users or only the people you choose."
 msgstr ""
 
-#: core/templates/index.html:61
+#: core/templates/index.html:74
 msgid "All the events have an URL that can be shared as you like."
 msgstr ""
 
-#: core/templates/index.html:69 core/templates/index.html.py:73
+#: core/templates/index.html:82 core/templates/index.html.py:86
 msgid "Event Jury"
 msgstr ""
 
-#: core/templates/index.html:70
+#: core/templates/index.html:83
 msgid ""
 "The event jury restricts the vote to a group of users. Anyone outside of "
 "that group will just see the proposals and they cannot vote."
 msgstr ""
 
-#: core/templates/index.html:84
+#: core/templates/index.html:97
 msgid "JOIN THE FIGHTERS"
-msgstr ""
-
-#: core/templates/layout.html:78
-#, python-format
-msgid ""
-"\n"
-"                <strong>SpeakerFight</strong> is proudly an open-source\n"
-"                project and is always being enhanced. If the software\n"
-"                has any odd behavior\n"
-"                %(anchor_start)splease let us know%(anchor_end)s.\n"
-"              "
 msgstr ""
 
 #: core/templates/navbar.html:28
@@ -560,20 +729,9 @@ msgstr ""
 msgid "OpenID Sign In"
 msgstr ""
 
-#: core/templates/public_layout.html:56 deck/views.py:363 deck/views.py:430
+#: core/templates/public_layout.html:58 deck/views.py:363 deck/views.py:430
 #: deck/views.py:497
 msgid "You need to be logged in to continue to the next step."
-msgstr ""
-
-#: core/templates/public_layout.html:74
-#, python-format
-msgid ""
-"\n"
-"                <strong>Speakerfight</strong> is proudly an open-source\n"
-"                project and is always being enhanced. If the software\n"
-"                has any odd behavior\n"
-"                %(anchor_start)splease let us know%(anchor_end)s.\n"
-"              "
 msgstr ""
 
 #: core/templates/sidebar.html:24 deck/models.py:282
@@ -679,7 +837,7 @@ msgid ""
 "        "
 msgstr ""
 
-#: core/views.py:69
+#: core/views.py:73
 msgid "Profile updated."
 msgstr ""
 
@@ -714,26 +872,6 @@ msgstr ""
 
 #: deck/models.py:62
 msgid "Publish"
-msgstr ""
-
-#: deck/models.py:81
-msgid "Angry"
-msgstr ""
-
-#: deck/models.py:81
-msgid "Sad"
-msgstr ""
-
-#: deck/models.py:82
-msgid "Sleepy"
-msgstr ""
-
-#: deck/models.py:82
-msgid "Happy"
-msgstr ""
-
-#: deck/models.py:83
-msgid "Laughing"
 msgstr ""
 
 #: deck/models.py:90
@@ -1133,7 +1271,7 @@ msgid ""
 "  Hi!\n"
 "\n"
 "  This email is a confirmation for the creation of your proposal "
-"\"%(proposal_title)s\" to the event \"%(event_title)s\" on SpeakerFight! "
+"\"%(proposal_title)s\" to the event \"%(event_title)s\" on Speakerfight! "
 "Remember to share the event so you help to engaje more participants!\n"
 "\n"
 "  Good luck!\n"
@@ -1146,7 +1284,7 @@ msgid ""
 "  Hi!\n"
 "\n"
 "  This email is a confirmation for the creation of your event "
-"\"%(event_title)s\" on SpeakerFight! Remember to share the event so more "
+"\"%(event_title)s\" on Speakerfight! Remember to share the event so more "
 "people can submit proposals and engaje more participants!\n"
 "\n"
 "  Good luck!\n"
@@ -1159,7 +1297,7 @@ msgid ""
 "  Hi!\n"
 "\n"
 "  This email is a notification that the following proposal was deleted from "
-"your event \"%(event_title)s\" on SpeakerFight: %(proposal_title)s\n"
+"your event \"%(event_title)s\" on Speakerfight: %(proposal_title)s\n"
 msgstr ""
 
 #: deck/templates/mailing/jury_new_proposal.txt:3
@@ -1179,10 +1317,10 @@ msgid ""
 "  \n"
 "  Hi!\n"
 "\n"
-"  Welcome to SpeakerFight! Here you will be able to submit proposals and "
+"  Welcome to Speakerfight! Here you will be able to submit proposals and "
 "evaluate talks of other possible speakers.\n"
 "\n"
-"  SpeakerFight it's an open source project that you can help to improve it. "
+"  Speakerfight it's an open source project that you can help to improve it. "
 "Check out: https://github.com/luanfonceca/speakerfight.\n"
 "\n"
 "  Thank you for use it.\n"

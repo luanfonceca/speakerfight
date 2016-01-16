@@ -632,14 +632,6 @@ html {
   margin: 0;
 }
 
-#footer .footer-icons {
-  font-size: 38px;
-}
-
-#footer .footer-icons a:hover {
-  text-decoration: none;
-}
-
 .event-item {
   /* nothing. */
 }

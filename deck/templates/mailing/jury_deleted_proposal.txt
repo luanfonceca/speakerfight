@@ -3,5 +3,5 @@
 {% blocktrans %}
   Hi!
 
-  This email is a notification that the following proposal was deleted from your event "{{ event_title }}" on SpeakerFight: {{ proposal_title }}
+  This email is a notification that the following proposal was deleted from your event "{{ event_title }}" on Speakerfight: {{ proposal_title }}
 {% endblocktrans %}
