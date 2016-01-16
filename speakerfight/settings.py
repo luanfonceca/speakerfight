@@ -69,7 +69,7 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.facebook',
-    'debug_toolbar',
+    #'debug_toolbar',
     'datetimewidget',
     'raven.contrib.django.raven_compat',
     'rest_framework',
@@ -132,18 +132,24 @@ STATIC_URL = '/static/'
 
 SITE_ID = 1
 
-# All Auth Confs
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + [
-    'django.core.context_processors.request',
-
-    # allauth specific context processors
-    'allauth.account.context_processors.account',
-    'allauth.socialaccount.context_processors.socialaccount',
+    'django.template.context_processors.request',
 ]
 
 AUTHENTICATION_BACKENDS = global_settings.AUTHENTICATION_BACKENDS + [
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': TEMPLATE_CONTEXT_PROCESSORS
+        }
+    }
 ]
 
 MIDDLEWARE_CLASSES = global_settings.AUTHENTICATION_BACKENDS + [
