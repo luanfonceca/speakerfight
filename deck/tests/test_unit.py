@@ -20,7 +20,7 @@ PROPOSAL_DATA = {
     'title': 'Python For Zombies',
     'slug': 'python-for-zombies',
     'description': 'Brain...',
-    'author_id': 1
+    'author_id': 1,
 }
 
 ANOTHER_PROPOSAL_DATA = {
@@ -287,6 +287,34 @@ class ProposalObjectTest(TestCase):
         self.assertEquals(True, self.proposal.is_approved)
         self.proposal.disapprove()
         self.assertEquals(False, self.proposal.is_approved)
+
+    def test_assert_proposal_get_authors_email(self):
+        self.event.save()
+        self.proposal.event = self.event
+        self.proposal.save()
+        emails = self.proposal.get_authors_email()
+        self.assertEquals(emails, [self.proposal.author.email])
+
+    def test_assert_proposal_get_all_authors_email(self):
+        self.event.save()
+        self.proposal.event = self.event
+        self.proposal.save()
+        user = User.objects.get(id=2)
+        self.proposal.coauthors.add(user.id)
+        emails = self.proposal.get_authors_email()
+        self.assertEquals(emails, [self.proposal.author.email, user.email])
+
+    def test_assert_proposal_should_have_coauthors_names(self):
+        self.event.save()
+        self.proposal.event = self.event
+        self.proposal.save()
+        coauthors_names = self.proposal.coauthors_names
+        self.assertEquals(coauthors_names, "None")
+        self.proposal.coauthors.add(2)
+        self.proposal.coauthors.add(3)
+        coauthors_names = self.proposal.coauthors_names
+        self.assertEquals(coauthors_names, "user, another")
+        
 
 
 class VoteModelIntegrityTest(TestCase):
