@@ -218,6 +218,18 @@ class EventTest(TestCase):
         self.assertEquals('Python For Zombies', python_for_zombies.title)
         self.assertEquals('Brain...', python_for_zombies.description)
 
+    def test_event_create_event_proposal_with_coauthor(self):
+        event = Event.objects.create(**self.event_data)
+        coauthor = {"coauthors": 2}
+        self.proposal_data.update(coauthor)
+        response = self.client.post(
+            reverse('create_event_proposal', kwargs={'slug': event.slug}),
+            self.proposal_data, follow=True
+        )
+        self.assertEquals(200, response.status_code)
+        proposal = event.proposals.get()
+        self.assertIn(User.objects.get(id=2), proposal.coauthors.all())
+
     def test_notify_event_jury_and_proposal_author_on_new_proposal(self):
         if not settings.SEND_NOTIFICATIONS:
             return
@@ -238,6 +250,21 @@ class EventTest(TestCase):
         author_email = mail.outbox[0]
         self.assertIn(proposal.author.email, author_email.recipients())
         self.assertIn(settings.NO_REPLY_EMAIL, author_email.from_email)
+
+    def test_notify_proposal_author_and_coauthors_on_new_proposal(self):
+        event = Event.objects.create(**self.event_data)
+        coauthor = {"coauthors": 2}
+        self.proposal_data.update(coauthor)
+        self.client.post(
+            reverse('create_event_proposal', kwargs={'slug': event.slug}),
+            self.proposal_data, follow=True
+        )
+        proposal = event.proposals.get()
+
+        authors_emails = mail.outbox[1]
+        coauthor_email = User.objects.get(id=2)
+        self.assertIn(proposal.author.email, authors_emails.recipients())
+        self.assertIn(coauthor_email.email, authors_emails.recipients())
 
     def test_anonymous_user_create_event_proposal(self):
         event = Event.objects.create(**self.event_data)

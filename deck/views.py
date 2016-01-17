@@ -250,11 +250,11 @@ class CreateProposal(LoginRequiredMixin,
         self.object.author = self.request.user
         self.object.event = Event.objects.get(slug=self.kwargs['slug'])
         self.object.save()
-
+        for coauthor in form.data.get("coauthors", []):
+            self.object.coauthors.add(coauthor)
         if settings.SEND_NOTIFICATIONS:
             self.send_new_proposal_to_jury_email()
             self.send_proposal_creation_email()
-
         return self.success_redirect(_(u'Proposal created.'))
 
     def send_new_proposal_to_jury_email(self):
@@ -277,7 +277,7 @@ class CreateProposal(LoginRequiredMixin,
         message = render_to_string(
             'mailing/author_proposal_created.txt', context)
         subject = _(u'Your proposal was submitted')
-        recipients = [proposal.author.email]
+        recipients = proposal.get_authors_email()
         send_mail(subject, message, settings.NO_REPLY_EMAIL, recipients)
 
 
