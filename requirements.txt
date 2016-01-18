@@ -8,7 +8,9 @@ coverage==3.7.1
 git+https://github.com/mauricioabreu/django-activelink.git@add-django-19-support
 
 django-allauth==0.24.1
-django-bootstrap3==3.3.0
+
+git+https://github.com/dyve/django-bootstrap3.git@develop
+
 django-coverage==1.2.4
 django-datetime-widget==0.6
 django-debug-toolbar==1.4
