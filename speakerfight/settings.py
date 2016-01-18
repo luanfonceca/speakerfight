@@ -27,14 +27,6 @@ SECRET_KEY = 'hchgjid4s$nhe_@3*ildx480lpld*t$cs*#qvg((j_+g4zr++8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
-# Template
-TEMPLATE_DIRS = [
-    # hardcoded for override the external app's template
-    os.path.join(BASE_DIR, *'speakerfight core templates'.split()),
-]
-
 # Absolute path to the directory static files should be collected to.
 STATICFILES_DIRS = []
 
@@ -69,7 +61,7 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.facebook',
-    #'debug_toolbar',
+    'debug_toolbar',
     'datetimewidget',
     'raven.contrib.django.raven_compat',
     'rest_framework',
@@ -132,7 +124,7 @@ STATIC_URL = '/static/'
 
 SITE_ID = 1
 
-TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + [
+CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + [
     'django.template.context_processors.request',
 ]
 
@@ -147,7 +139,8 @@ TEMPLATES = [
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
-            'context_processors': TEMPLATE_CONTEXT_PROCESSORS
+            'debug': True,
+            'context_processors': CONTEXT_PROCESSORS
         }
     }
 ]
