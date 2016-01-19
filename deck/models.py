@@ -251,11 +251,9 @@ class Proposal(Activity):
             return _("None")
         return ", ".join(coauthors)
 
-    def get_authors_email(self):
-        emails = [self.author.email]
-        for coauthor in self.coauthors.all():
-            emails.append(coauthor.email)
-        return emails
+    @property
+    def authors_emails(self):
+        return [self.author.email] + list(self.coauthors.values_list('email', flat=True))
 
 
 class Track(models.Model):

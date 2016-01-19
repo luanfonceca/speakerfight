@@ -292,8 +292,7 @@ class ProposalObjectTest(TestCase):
         self.event.save()
         self.proposal.event = self.event
         self.proposal.save()
-        emails = self.proposal.get_authors_email()
-        self.assertEquals(emails, [self.proposal.author.email])
+        self.assertEquals(self.proposal.authors_emails, [self.proposal.author.email])
 
     def test_assert_proposal_get_all_authors_email(self):
         self.event.save()
@@ -301,8 +300,7 @@ class ProposalObjectTest(TestCase):
         self.proposal.save()
         user = User.objects.get(id=2)
         self.proposal.coauthors.add(user.id)
-        emails = self.proposal.get_authors_email()
-        self.assertEquals(emails, [self.proposal.author.email, user.email])
+        self.assertEquals(self.proposal.authors_emails, [self.proposal.author.email, user.email])
 
     def test_assert_proposal_should_have_coauthors_names(self):
         self.event.save()

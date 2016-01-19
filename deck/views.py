@@ -277,7 +277,7 @@ class CreateProposal(LoginRequiredMixin,
         message = render_to_string(
             'mailing/author_proposal_created.txt', context)
         subject = _(u'Your proposal was submitted')
-        recipients = proposal.get_authors_email()
+        recipients = proposal.authors_emails
         send_mail(subject, message, settings.NO_REPLY_EMAIL, recipients)
 
 
