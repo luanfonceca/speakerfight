@@ -220,8 +220,7 @@ class EventTest(TestCase):
 
     def test_event_create_event_proposal_with_coauthor(self):
         event = Event.objects.create(**self.event_data)
-        coauthor = {"coauthors": 2}
-        self.proposal_data.update(coauthor)
+        self.proposal_data.update({"coauthors": 2})
         response = self.client.post(
             reverse('create_event_proposal', kwargs={'slug': event.slug}),
             self.proposal_data, follow=True
@@ -253,8 +252,7 @@ class EventTest(TestCase):
 
     def test_notify_proposal_author_and_coauthors_on_new_proposal(self):
         event = Event.objects.create(**self.event_data)
-        coauthor = {"coauthors": 2}
-        self.proposal_data.update(coauthor)
+        self.proposal_data.update({"coauthors": 2})
         self.client.post(
             reverse('create_event_proposal', kwargs={'slug': event.slug}),
             self.proposal_data, follow=True
