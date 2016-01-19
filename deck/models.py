@@ -246,10 +246,10 @@ class Proposal(Activity):
 
     @property
     def coauthors_names(self):
-        coauthors = self.coauthors.all().values('username')
+        coauthors = self.coauthors.values_list('username', flat=True)
         if not coauthors:
             return _("None")
-        return ", ".join(map(lambda x: x['username'], coauthors))
+        return ", ".join(coauthors)
 
     def get_authors_email(self):
         emails = [self.author.email]
