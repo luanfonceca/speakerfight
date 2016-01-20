@@ -631,7 +631,7 @@ msgstr "Editar perfil."
 #: core/templates/account/profile.html:71
 #: deck/templates/event/event_detail.html:133
 #: deck/templates/event/snippets/event_list_item.html:51
-#: deck/templates/proposal/my_proposals.html:38
+#: deck/templates/proposal/my_proposals.html:39
 msgid "Edit"
 msgstr "Editar"
 
@@ -1019,7 +1019,7 @@ msgstr ""
 msgid "The \"@%s\" already is being part of this jury."
 msgstr "O \"@%s\" já faz parte deste júri."
 
-#: deck/models.py:56 deck/models.py:248
+#: deck/models.py:56 deck/models.py:260
 msgid "Title"
 msgstr "Título"
 
@@ -1040,11 +1040,11 @@ msgstr "Publicar"
 msgid "Rate Index"
 msgstr "Índice de classficação"
 
-#: deck/models.py:98 deck/tests/test_unit.py:299
+#: deck/models.py:98 deck/tests/test_unit.py:325
 msgid "Vote"
 msgstr "Voto"
 
-#: deck/models.py:99 deck/tests/test_unit.py:302
+#: deck/models.py:99 deck/tests/test_unit.py:328
 msgid "Votes"
 msgstr "Votos"
 
@@ -1060,7 +1060,7 @@ msgstr "Esta Proposta não aceita Votação Pública."
 msgid "Proposal already Rated by you."
 msgstr "Proposta anteriormente votada por Você."
 
-#: deck/models.py:134 deck/models.py:180
+#: deck/models.py:134 deck/models.py:181
 #: deck/templates/event/event_create_schedule.html:139
 #: deck/tests/test_unit.py:153
 msgid "Proposal"
@@ -1131,27 +1131,31 @@ msgstr "Propostas"
 msgid "This Event doesn't accept Proposals anymore."
 msgstr "Este evento não aceita mais propostas."
 
-#: deck/models.py:236
+#: deck/models.py:237
 msgid "This Proposal was already approved."
 msgstr "Esta Proposta já foi aprovada."
 
-#: deck/models.py:242
+#: deck/models.py:243
 msgid "This Proposal was already disapproved."
 msgstr "Esta Proposta já foi desaprovada."
 
-#: deck/models.py:256
+#: deck/models.py:251
+msgid "None"
+msgstr "Nenhum"
+
+#: deck/models.py:268
 msgid "Track"
 msgstr "Trilha"
 
-#: deck/models.py:257
+#: deck/models.py:269
 msgid "Tracks"
 msgstr "Trilhas"
 
-#: deck/models.py:270
+#: deck/models.py:282
 msgid "Allow Public Voting"
 msgstr "Permitir votação pública"
 
-#: deck/models.py:273
+#: deck/models.py:285
 msgid "Slots"
 msgstr "Vagas"
 
@@ -1587,23 +1591,30 @@ msgstr ""
 "Obrigado por usá-lo.\n"
 
 #: deck/templates/proposal/my_proposals.html:25
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                  Created by <strong><a href=\"%(profile_url)s\">"
+#| "%(author)s</a></strong> at %(created_at)s.\n"
+#| "                "
 msgid ""
 "\n"
 "                  Created by <strong><a href=\"%(profile_url)s\">%(author)s</"
 "a></strong> at %(created_at)s.\n"
+"                  Co-authors: %(coauthors_names)s\n"
 "                "
 msgstr ""
 "\n"
 "                  Criado por <strong><a href=\"%(profile_url)s\">%(author)s</"
 "a></strong> em %(created_at)s.\n"
+"                  Co-autores: %(coauthors_names)s\n"
 "                "
 
-#: deck/templates/proposal/my_proposals.html:34
+#: deck/templates/proposal/my_proposals.html:35
 msgid "See the proposal in Event."
 msgstr "Veja a proposta no Evento."
 
-#: deck/templates/proposal/my_proposals.html:35
+#: deck/templates/proposal/my_proposals.html:36
 msgid "See in Event"
 msgstr "Ver no Evento"
 
