@@ -27,14 +27,7 @@ Building the environment:
 ```
 $ git clone git@github.com:luanfonceca/speakerfight.git
 $ cd speakerfight
-$ pip install -r requirements.txt
-$ python manage.py migrate # we have a fixture for the users...
-$ python manage.py loaddata deck/fixtures/user.json
-# username: admin, password: admin;
-# username: user, password: user
-$ python manage.py loaddata deck/fixtures/event.json
-$ python manage.py loaddata deck/fixtures/proposal.json
-$ python manage.py loaddata deck/fixtures/socialapp.json
+$ make setup
 $ python manage.py runserver
 ```
 
