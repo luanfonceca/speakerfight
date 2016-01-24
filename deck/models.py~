@@ -20,18 +20,16 @@ from textwrap import dedent
 
 from jury.models import Jury
 
-from datetime import datetime
-
 
 class DeckBaseManager(models.QuerySet):
     def cached_authors(self):
         return super(DeckBaseManager, self).select_related('author')
 
     def published_ones(self):
-        return self.cached_authors().filter(is_published=True)
+        return self.filter(date_duo__range=["2011-01-01"])
 
-    def not_displayed(self):
-        return self.filter(due_date__gte=datetime.now())
+	def not_displayed(self):
+		pass
 
     def order_by_never_voted(self, user_id):
         if self.model != Proposal:

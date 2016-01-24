@@ -30,7 +30,7 @@ class BaseEventView(object):
 
 class ListEvents(BaseEventView, ListView):
     template_name = 'event/event_list.html'
-    queryset = Event.objects.not_displayed()
+    queryset = Event.objects.published_ones()
 
     def get_context_data(self, **kwargs):
         context = super(ListEvents, self).get_context_data(**kwargs)
