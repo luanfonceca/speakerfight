@@ -58,3 +58,9 @@ docs/_build/
 
 # Development database
 db.sqlite3
+
+# PyCharm files
+.idea/
+
+# files with ~ at the end
+*.*~
