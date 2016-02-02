@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Carlos Leite <caduado@gmail.com>, 2015
 # Hugo Almeida <hugohbalmeida@gmail.com>, 2015
@@ -600,7 +600,7 @@ msgstr "\n<strong>Speakerfight</strong> é orgulhosamente um projeto open-source
 
 #: core/templates/footer.html:44
 msgid "This project believes that small acts can change the world through"
-msgstr "Esse projeto acredita que pequenos atos podem mudar o através do"
+msgstr "Esse projeto acredita que pequenos atos podem mudar o mundo através do"
 
 #: core/templates/footer.html:46 core/templates/footer.html.py:49
 #: core/templates/footer.html:50
