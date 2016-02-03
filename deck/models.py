@@ -30,7 +30,7 @@ class DeckBaseManager(models.QuerySet):
     def published_ones(self):
         return self.cached_authors().filter(is_published=True)
 
-    def not_displayed(self):
+    def upcoming(self):
         return self.filter(due_date__gte=datetime.now())
 
     def order_by_never_voted(self, user_id):
