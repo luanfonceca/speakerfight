@@ -27,14 +27,6 @@ SECRET_KEY = 'hchgjid4s$nhe_@3*ildx480lpld*t$cs*#qvg((j_+g4zr++8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
-# Template
-TEMPLATE_DIRS = [
-    # hardcoded for override the external app's template
-    os.path.join(BASE_DIR, *'speakerfight core templates'.split()),
-]
-
 # Absolute path to the directory static files should be collected to.
 STATICFILES_DIRS = []
 
@@ -132,26 +124,33 @@ STATIC_URL = '/static/'
 
 SITE_ID = 1
 
-# All Auth Confs
-TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
-    'django.core.context_processors.request',
+CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + [
+    'django.template.context_processors.request',
+]
 
-    # allauth specific context processors
-    'allauth.account.context_processors.account',
-    'allauth.socialaccount.context_processors.socialaccount',
-)
-
-AUTHENTICATION_BACKENDS = global_settings.AUTHENTICATION_BACKENDS + (
+AUTHENTICATION_BACKENDS = global_settings.AUTHENTICATION_BACKENDS + [
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
-)
+]
 
-MIDDLEWARE_CLASSES = global_settings.AUTHENTICATION_BACKENDS + (
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'debug': True,
+            'context_processors': CONTEXT_PROCESSORS
+        }
+    }
+]
+
+MIDDLEWARE_CLASSES = global_settings.AUTHENTICATION_BACKENDS + [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware'
-)
+]
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -185,7 +184,7 @@ DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 # Smart urls
 SURL_REGEXERS = {
-    'username': '[\w@.-]+' 
+    'username': '[\w@.-]+'
 }
 
 
