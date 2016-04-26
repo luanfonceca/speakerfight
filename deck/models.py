@@ -336,6 +336,8 @@ class Event(DeckBaseModel):
 
 @receiver(user_signed_up)
 def send_welcome_mail(request, user, **kwargs):
+    if not settings.SEND_NOTIFICATIONS:
+        return
     message = render_to_string('mailing/welcome.txt')
     subject = _(u'Welcome')
     recipients = [user.email]
@@ -362,6 +364,8 @@ def create_initial_track(sender, instance, signal, created, **kwargs):
 
 @receiver(post_delete, sender=Proposal)
 def send_proposal_deleted_mail(sender, instance, **kwargs):
+    if not settings.SEND_NOTIFICATIONS:
+        return
     context = {'event_title': instance.event.title,
                'proposal_title': instance.title}
     message = render_to_string('mailing/jury_deleted_proposal.txt', context)

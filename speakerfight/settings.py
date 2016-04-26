@@ -189,6 +189,8 @@ SURL_REGEXERS = {
 }
 
 
+SEND_NOTIFICATIONS = True
+
 try:
     from local_settings import *
 except ImportError:
