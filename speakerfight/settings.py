@@ -73,6 +73,7 @@ THIRD_PARTY_APPS = [
     'datetimewidget',
     'raven.contrib.django.raven_compat',
     'rest_framework',
+    'anymail',
 ]
 
 LOCAL_APPS = [
