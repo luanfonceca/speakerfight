@@ -6,6 +6,7 @@ Werkzeug==0.9.4
 coverage==3.7.1
 django-activelink==0.4
 django-allauth==0.19.1
+django-anymail==0.1
 django-bootstrap3==3.3.0
 django-coverage==1.2.4
 django-datetime-widget==0.6

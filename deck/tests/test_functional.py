@@ -41,6 +41,9 @@ class EventTest(TestCase):
         self.assertEquals(False, event.is_published)
 
     def test_notify_event_creator_after_creation(self):
+        if not settings.SEND_NOTIFICATIONS:
+            return
+
         self.client.post(reverse('create_event'), self.event_data)
         event = Event.objects.get()
 
@@ -216,6 +219,9 @@ class EventTest(TestCase):
         self.assertEquals('Brain...', python_for_zombies.description)
 
     def test_notify_event_jury_and_proposal_author_on_new_proposal(self):
+        if not settings.SEND_NOTIFICATIONS:
+            return
+
         event = Event.objects.create(**self.event_data)
         self.client.post(
             reverse('create_event_proposal', kwargs={'slug': event.slug}),
@@ -1151,6 +1157,9 @@ class ProposalTest(TestCase):
         self.assertEquals(False, self.proposal.is_approved)
 
     def test_send_welcome_mail(self):
+        if not settings.SEND_NOTIFICATIONS:
+            return
+
         User = namedtuple('User', 'email')
         fake_user = User('fake@mail.com')
         send_welcome_mail(None, fake_user)
@@ -1163,6 +1172,9 @@ class ProposalTest(TestCase):
         self.assertIn(settings.NO_REPLY_EMAIL, email.from_email)
 
     def test_send_proposal_deleted_mail(self):
+        if not settings.SEND_NOTIFICATIONS:
+            return
+
         user = User.objects.get(username='user')
         self.proposal.event.jury.users.add(user)
         send_proposal_deleted_mail(Proposal, self.proposal)

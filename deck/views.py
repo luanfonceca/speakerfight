@@ -52,7 +52,10 @@ class CreateEvent(LoginRequiredMixin,
         self.object = form.save(commit=False)
         self.object.author = self.request.user
         self.object.save()
-        self.send_event_creation_email()
+
+        if settings.SEND_NOTIFICATIONS:
+            self.send_event_creation_email()
+
         return self.success_redirect(_(u'Event created.'))
 
     def send_event_creation_email(self):
@@ -204,9 +207,9 @@ class CreateEventSchedule(BaseEventView, DetailView):
             order += 1
 
         return HttpResponseRedirect(
-                reverse('create_event_schedule',
-                        kwargs={'slug': self.object.slug}),
-            )
+            reverse('create_event_schedule',
+                    kwargs={'slug': self.object.slug}),
+        )
 
 
 class DetailEventSchedule(BaseEventView, DetailView):
@@ -247,8 +250,11 @@ class CreateProposal(LoginRequiredMixin,
         self.object.author = self.request.user
         self.object.event = Event.objects.get(slug=self.kwargs['slug'])
         self.object.save()
-        self.send_new_proposal_to_jury_email()
-        self.send_proposal_creation_email()
+
+        if settings.SEND_NOTIFICATIONS:
+            self.send_new_proposal_to_jury_email()
+            self.send_proposal_creation_email()
+
         return self.success_redirect(_(u'Proposal created.'))
 
     def send_new_proposal_to_jury_email(self):

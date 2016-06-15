@@ -73,6 +73,7 @@ THIRD_PARTY_APPS = [
     'datetimewidget',
     'raven.contrib.django.raven_compat',
     'rest_framework',
+    'anymail',
 ]
 
 LOCAL_APPS = [
@@ -188,6 +189,8 @@ SURL_REGEXERS = {
     'username': '[\w@.-]+' 
 }
 
+
+SEND_NOTIFICATIONS = True
 
 try:
     from local_settings import *
