@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import ValidationError
@@ -19,8 +20,6 @@ from allauth.account.signals import user_signed_up
 from textwrap import dedent
 
 from jury.models import Jury
-
-from datetime import datetime
 
 
 class DeckBaseManager(models.QuerySet):
