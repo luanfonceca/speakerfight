@@ -9,9 +9,11 @@
 
 .flat-icon i {
   display: inline-block;
-  background: url("../img/flat-icons.png") no-repeat;
-  width: 70px;
-  height: 70px;
+  background: url("../img/flat-icons.svg") no-repeat;
+  width: 80px;
+  height: 80px;
+  zoom: 75%;
+  margin: 10px 0;
 }
 
 .flat-icon i.detail{
@@ -55,24 +57,28 @@
   background-position: -570px -4px;
 }
 
+.flat-icon i.angry.black, .flat-icon i.sad.black{
+  width: 70px;
+}
+
 .flat-icon i.angry.black{
-  background-position: -5px -85px;
+  background-position: -19px -127px;
 }
 
 .flat-icon i.sleepy.black{
-  background-position: -90px -87px;
+  background-position: -126px -125px;
 }
 
 .flat-icon i.sad.black{
-  background-position: -173px -87px;
+  background-position: -239px -126px;
 }
 
 .flat-icon i.happy.black{
-  background-position: -253px -85px;
+  background-position: -344px -125px;
 }
 
 .flat-icon i.laughing.black{
-  background-position: -338px -85px;
+  background-position: -460px -122px;
 }
 
 .flat-icon i.jury.black{
