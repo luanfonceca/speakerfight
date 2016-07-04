@@ -1,0 +1,7 @@
+.vote-buttons {
+  display: flex;
+  max-width: 365px;
+  margin: auto;
+  justify-content: space-around;
+  flex-flow: wrap;
+}
