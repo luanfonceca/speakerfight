@@ -4,9 +4,11 @@
 <div class="text-center proposal-votes">
   {% if request.user|already_voted:proposal %}
     {% with request.user|get_rate_display:proposal as rate %}
-      <a class="flat-icon" title="{{ rate|get_rate_title }}">
-        <i class="{{ rate }} black" title="{{ rate|get_rate_title }}" data-toggle="tooltip"></i>
-      </a>
+      <div class="vote-buttons">
+        <a class="flat-icon" title="{{ rate|get_rate_title }}" title="{{ rate|get_rate_title }}" data-toggle="tooltip">
+          <i class="{{ rate }} black"></i>
+        </a>
+      </div>
     {% endwith %}
   {% elif request.user|allowed_to_vote:proposal %}
     <p>{{ _('Use the buttons bellow to vote:') }}</p>
