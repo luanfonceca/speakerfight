@@ -17,7 +17,7 @@ $(function () {
                              data.message +
                            '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
                          '</div>';
-      self.parent('.proposal-votes').append(successAlert);
+      self.parent('.proposal-votes').parent('.panel-body').append(successAlert);
       window.setTimeout(function() {
         $("#succes-vote-alert").alert('close');
       }, 3000);
@@ -26,12 +26,12 @@ $(function () {
         if (xhr.responseJSON.redirectUrl) {
           window.location.href = xhr.responseJSON.redirectUrl;
         } else if (xhr.responseJSON.message) {
-          var errorAlert = '<div class="alert alert-danger alert-dismissable text-left">' +
+          var errorAlert = '<div class="alert alert-danger alert-dismissable text-left id="error-vote-alert"">' +
                              '<i class="icon-exclamation-sign"></i>' +
                                xhr.responseJSON.message +
                              '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
                            '</div>';
-          self.parent('.proposal-votes').append(errorAlert);
+          self.parent('.proposal-votes').parent('.panel-body')append(errorAlert);
         }
       }
     });

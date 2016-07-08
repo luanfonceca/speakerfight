@@ -5,3 +5,7 @@
   justify-content: space-around;
   flex-flow: wrap;
 }
+
+.vote-buttons p, #succes-vote-alert, #error-vote-alert{
+  flex-basis: 100%;
+}
