@@ -1,4 +1,3 @@
-from datetime import datetime
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import ValidationError
@@ -29,8 +28,8 @@ class DeckBaseManager(models.QuerySet):
     def published_ones(self):
         return self.cached_authors().filter(is_published=True)
 
-    def upcoming(self):
-        return self.filter(due_date__gte=datetime.now())
+    def upcoming(self, published_only=True):
+        return self.filter(due_date__gte=timezone.now(), is_published=published_only)
 
     def order_by_never_voted(self, user_id):
         if self.model != Proposal:
