@@ -39,7 +39,7 @@ TEMPLATE_DIRS = [
 STATICFILES_DIRS = []
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-DEFAULT_FROM_EMAIL = NO_REPLY_EMAIL = 'noreply@speakerfight.com'
+DEFAULT_FROM_EMAIL = NO_REPLY_EMAIL = 'Speakerfight <noreply@speakerfight.com>'
 
 ALLOWED_HOSTS = [
     "speakerfight.com",
@@ -186,7 +186,7 @@ DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 # Smart urls
 SURL_REGEXERS = {
-    'username': '[\w@.-]+' 
+    'username': '[\w@.-]+'
 }
 
 
