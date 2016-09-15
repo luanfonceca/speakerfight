@@ -31,7 +31,7 @@ $(function () {
                                xhr.responseJSON.message +
                              '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
                            '</div>';
-          self.parent('.proposal-votes').parent('.panel-body')append(errorAlert);
+          self.parent('.proposal-votes').parent('.panel-body').append(errorAlert);
         }
       }
     });

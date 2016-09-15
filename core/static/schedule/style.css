@@ -99,6 +99,17 @@ ol {
   list-style-type: none;
 }
 
+.event-header {
+  padding: 20px 0px;
+  color: #ffffff;
+  text-align: center;
+  background: #2c3742;
+}
+
+.schedule {
+  background: #FFFFFF;
+}
+
 #speakerfight #footer {
   background: #2c3742;
   height: 70px;
