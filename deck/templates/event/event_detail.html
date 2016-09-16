@@ -41,6 +41,17 @@
     </div>
     {% endif %}
 
+    {% if not event.anonymous_voting %}
+    <div class="col-md-12">
+      <div class="alert alert-warning">
+        <i class="icon-eye-close"></i>
+        {% blocktrans %}
+          This event is in the <strong>Anonymous Voting</strong> mode, all the speakers are hidden for voting, you should base your vote just in the content of the proposals.
+        {% endblocktrans %}
+      </div>
+    </div>
+    {% endif %}
+
     <div class="col-md-10 col-md-offset-1">
       <div class="event-proposals-header">
         {% if event.due_date_is_passed %}
