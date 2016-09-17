@@ -278,6 +278,7 @@ class Event(DeckBaseModel):
     # relations
     jury = models.OneToOneField(to='jury.Jury', related_name='event',
                                 null=True, blank=True)
+    anonymous_voting = models.BooleanField(_('Anonymous Voting?'), default=False)
 
     class Meta:
         ordering = ['-due_date', '-created_at']
