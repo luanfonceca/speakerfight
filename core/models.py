@@ -27,7 +27,7 @@ class Profile(models.Model):
 
     def get_absolute_url(self):
         return reverse_lazy(
-            'profile', kwargs={'user__username': self.user.username})
+            'user_profile', kwargs={'user__username': self.user.username})
 
     def get_github_url(self):
         if self.github:

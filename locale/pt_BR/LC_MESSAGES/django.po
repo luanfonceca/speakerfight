@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: speakerfight\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-16 17:48-0300\n"
-"PO-Revision-Date: 2016-09-16 17:51-0300\n"
+"POT-Creation-Date: 2016-09-18 14:34-0300\n"
+"PO-Revision-Date: 2016-09-18 14:36-0300\n"
 "Last-Translator: Luan Fonseca de Farias <luanfonceca@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/speakerfight/"
 "speakerfight/language/pt_BR/)\n"
@@ -26,6 +26,23 @@ msgstr ""
 #: deck/views.py:322 deck/views.py:386 deck/views.py:453 deck/views.py:520
 msgid "You are not allowed to see this page."
 msgstr "Você não tem permissão para ver esta página."
+
+#: core/forms.py:13
+msgid "Username"
+msgstr "Nome de usuário"
+
+#: core/forms.py:14
+msgid "Name"
+msgstr "Nome"
+
+#: core/forms.py:15
+msgid "Email"
+msgstr "E-mail"
+
+#: core/forms.py:38
+#, python-format
+msgid "The \"%s\" username are already being used by someone."
+msgstr "O nome de usuário: \"%s\" já está sendo usado por alguém."
 
 #: core/models.py:11
 msgid "About me"
@@ -980,7 +997,7 @@ msgstr ""
 "\n"
 "Ou tente uma outra rede social provedora"
 
-#: core/views.py:73
+#: core/views.py:74
 msgid "Profile updated."
 msgstr "Perfil Atualizado."
 
@@ -1359,7 +1376,7 @@ msgstr "Remover"
 msgid "There are no proposals to show"
 msgstr "Não há propostas para exibir"
 
-#: deck/templates/event/event_detail_schedule.html:40
+#: deck/templates/event/event_detail_schedule.html:47
 msgid "More"
 msgstr "Mais"
 

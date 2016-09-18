@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
+from django.contrib import messages
 from django.shortcuts import get_object_or_404
 
 from vanilla import TemplateView, DetailView, UpdateView
@@ -71,3 +72,16 @@ class ProfileUpdateView(LoginRequiredMixin,
     def form_valid(self, form):
         self.object = form.save()
         return self.success_redirect(_(u'Profile updated.'))
+
+    def get(self, *args, **kwargs):
+        self.object = self.get_object()
+
+        return HttpResponseRedirect(
+            self.object.get_absolute_url()
+        )
+
+    def form_invalid(self, form):
+        for error in form.errors.itervalues():
+            messages.error(self.request, error.as_data()[0].message)
+
+        return self.get()

@@ -22,8 +22,8 @@
     "model": "auth.user",
     "fields": {
         "username": "user",
-        "first_name": "",
-        "last_name": "",
+        "first_name": "Speakerfight",
+        "last_name": "User",
         "is_active": true,
         "is_superuser": false,
         "is_staff": false,
