@@ -33,7 +33,7 @@
                       {% if activity.activity_type == activity.PROPOSAL or activity.activity_type == activity.WORKSHOP %}
                         <figure class="face" style="background-image: url({{ activity.author|get_user_photo }})">&nbsp;</figure>
                         <span class="title">{{ activity.title|title }}</span>
-                        <a class="person" target="_blank" href="{% url 'profile' activity.author.username %}">{{ activity.author.get_full_name|default:activity.author.username }}</a>
+                        <a class="person" target="_blank" href="{% url 'user_profile' activity.author.username %}">{{ activity.author.get_full_name|default:activity.author.username }}</a>
                       {% else %}
                         <span class="title">{{ activity.title }}</span>
                       {% endif %}
