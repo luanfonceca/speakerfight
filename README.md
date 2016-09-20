@@ -15,13 +15,9 @@ Speakerfight is an arena where speakers can fight ~against~ each other and peopl
 $ git clone git@github.com:luanfonceca/speakerfight.git
 $ cd speakerfight
 $ pip install -r requirements.txt
-$ python manage.py migrate # we have a fixture for the users...
-$ python manage.py loaddata deck/fixtures/user.json
+$ make setup # we have a fixture for the users...
 # username: admin, password: admin;
 # username: user, password: user
-$ python manage.py loaddata deck/fixtures/event.json
-$ python manage.py loaddata deck/fixtures/proposal.json
-$ python manage.py loaddata deck/fixtures/socialapp.json
 $ python manage.py runserver
 ```
 
@@ -34,12 +30,8 @@ Dependecies
 $ git clone git@github.com:luanfonceca/speakerfight.git
 $ cd speakerfight
 $ docker-compose build
-$ docker-compose run web python manage.py migrate # we have a fixture for the users...
-$ docker-compose run web python manage.py loaddata deck/fixtures/user.json
+$ docker-compose run web make setup # we have a fixture for the users...
 # username: admin, password: admin;
 # username: user, password: user
-$ docker-compose run web python manage.py loaddata deck/fixtures/event.json
-$ docker-compose run web python manage.py loaddata deck/fixtures/proposal.json
-$ docker-compose run web python manage.py loaddata deck/fixtures/socialapp.json
 $ docker-compose up
 ```
