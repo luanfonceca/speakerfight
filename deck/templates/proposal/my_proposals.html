@@ -22,8 +22,9 @@
                 </a>
               </h3>
               <p class="proposal-metadata">
-                {% blocktrans with profile_url=proposal.author.profile.get_absolute_url author=proposal.author.get_full_name|default:proposal.author.username created_at=proposal.created_at %}
+                {% blocktrans with profile_url=proposal.author.profile.get_absolute_url author=proposal.author.get_full_name|default:proposal.author.username created_at=proposal.created_at coauthors_names=proposal.coauthors_names%}
                   Created by <strong><a href="{{ profile_url }}">{{ author }}</a></strong> at {{ created_at }}.
+                  Co-authors: {{ coauthors_names }}
                 {% endblocktrans %}
               </p>
               <div class="proposal-description">

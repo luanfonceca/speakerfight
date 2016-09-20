@@ -75,6 +75,9 @@
             <div class="panel-body">
               {% if not event.anonymous_voting %}
               <img src="{{ proposal.author|get_user_photo }}" alt="author photo" class="img-circle pull-right author-photo">
+                {% for coauthor  in  proposal.coauthors.all %}
+                  <img src="{{ coauthor|get_user_photo }}" alt="author photo" class="img-circle pull-right author-photo">
+                {% endfor %}
               {% endif %}
               <h3 class="panel-title proposal-title">
                 <a href="#{{ proposal.slug }}">

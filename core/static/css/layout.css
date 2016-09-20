@@ -661,4 +661,5 @@ html {
 .proposal-item .author-photo {
   width: 40px;
   height: 40px;
+  margin-right: 5px;
 }

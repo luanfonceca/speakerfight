@@ -174,6 +174,7 @@ class Proposal(Activity):
 
     # relations
     event = models.ForeignKey(to='deck.Event', related_name='proposals')
+    coauthors = models.ManyToManyField(to=settings.AUTH_USER_MODEL, blank=True, null=True)
 
     class Meta:
         ordering = ['title']
@@ -242,6 +243,17 @@ class Proposal(Activity):
             raise ValidationError(_("This Proposal was already disapproved."))
         self.is_approved = False
         self.save()
+
+    @property
+    def coauthors_names(self):
+        coauthors = self.coauthors.values_list('username', flat=True)
+        if not coauthors:
+            return _("None")
+        return ", ".join(coauthors)
+
+    @property
+    def authors_emails(self):
+        return [self.author.email] + list(self.coauthors.values_list('email', flat=True))
 
 
 class Track(models.Model):
