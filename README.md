@@ -43,3 +43,8 @@ $ docker-compose run web python manage.py loaddata deck/fixtures/proposal.json
 $ docker-compose run web python manage.py loaddata deck/fixtures/socialapp.json
 $ docker-compose up
 ```
+
+## Support on Beerpay
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/luanfonceca/speakerfight/badge.svg?style=beer-square)](https://beerpay.io/luanfonceca/speakerfight)  [![Beerpay](https://beerpay.io/luanfonceca/speakerfight/make-wish.svg?style=flat-square)](https://beerpay.io/luanfonceca/speakerfight?focus=wish)
