@@ -1,11 +1,11 @@
 speakerfight
 ============
 
-[![Join the chat at https://gitter.im/luanfonceca/speakerfight](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/luanfonceca/speakerfight?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/luanfonceca/speakerfight](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/luanfonceca/speakerfight?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Beerpay](https://beerpay.io/luanfonceca/speakerfight/badge.svg?style=flat)](https://beerpay.io/luanfonceca/speakerfight) 
 
 Speakerfight is an arena where speakers can fight ~against~ each other and people choose who wins.
 
-[![Beerpay](https://beerpay.io/luanfonceca/speakerfight/badge.svg?style=flat)](https://beerpay.io/luanfonceca/speakerfight) [![Code Health](https://landscape.io/github/luanfonceca/speakerfight/master/landscape.svg?style=flat)](https://landscape.io/github/luanfonceca/speakerfight/master) [![Github Issues](http://img.shields.io/github/issues/luanfonceca/speakerfight.svg?style=flat)](https://github.com/luanfonceca/speakerfight/issues?sort=updated&state=open) [![Build Status](http://img.shields.io/travis/luanfonceca/speakerfight.svg?branch=master&style=flat)](https://travis-ci.org/luanfonceca/speakerfight) [![Coverage Status](http://img.shields.io/coveralls/luanfonceca/speakerfight.svg?branch=master&style=flat)](https://coveralls.io/r/luanfonceca/speakerfight?branch=master)
+[![Code Health](https://landscape.io/github/luanfonceca/speakerfight/master/landscape.svg?style=flat)](https://landscape.io/github/luanfonceca/speakerfight/master) [![Github Issues](http://img.shields.io/github/issues/luanfonceca/speakerfight.svg?style=flat)](https://github.com/luanfonceca/speakerfight/issues?sort=updated&state=open) [![Build Status](http://img.shields.io/travis/luanfonceca/speakerfight.svg?branch=master&style=flat)](https://travis-ci.org/luanfonceca/speakerfight) [![Coverage Status](http://img.shields.io/coveralls/luanfonceca/speakerfight.svg?branch=master&style=flat)](https://coveralls.io/r/luanfonceca/speakerfight?branch=master)
 
 ============
 ### Install
@@ -42,9 +42,3 @@ $ docker-compose run web python manage.py loaddata deck/fixtures/event.json
 $ docker-compose run web python manage.py loaddata deck/fixtures/proposal.json
 $ docker-compose run web python manage.py loaddata deck/fixtures/socialapp.json
 $ docker-compose up
-```
-
-## Support on Beerpay
-Hey dude! Help me out for a couple of :beers:!
-
-[![Beerpay](https://beerpay.io/luanfonceca/speakerfight/badge.svg?style=beer-square)](https://beerpay.io/luanfonceca/speakerfight)  [![Beerpay](https://beerpay.io/luanfonceca/speakerfight/make-wish.svg?style=flat-square)](https://beerpay.io/luanfonceca/speakerfight?focus=wish)
