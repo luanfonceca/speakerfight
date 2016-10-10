@@ -664,21 +664,21 @@ html {
 }
 
 .proposal-description {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 .proposal-description.proposal-collapse {
-    max-height: 150px;
-    cursor: pointer;
+  max-height: 150px;
+  cursor: pointer;
 }
 
 .proposal-description.proposal-collapse:after {
-    position: absolute;
-    content: '';
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 50px;
-    background: linear-gradient(rgba(255,255,255,0),#fff);
+  position: absolute;
+  content: '';
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: linear-gradient(rgba(255,255,255,0),#fff);
 }
