@@ -682,3 +682,32 @@ html {
   height: 50px;
   background: linear-gradient(rgba(255,255,255,0),#fff);
 }
+
+div.show-more {
+  text-align: center;
+  overflow: hidden;
+  padding: 10px 0 10px 0;
+  cursor: pointer;
+}
+
+div.show-more a {
+  position: relative;
+  padding: 0 10px;
+}
+
+div.show-more a:before,
+div.show-more a:after {
+  content: '';
+  position: absolute;
+  width: 1000px;
+  top: 0.73em;
+  border-top: 1px solid #eeeeee;
+}
+
+div.show-more a:before {
+  right: 100%;
+}
+
+div.show-more a:after {
+  left: 100%;
+}
