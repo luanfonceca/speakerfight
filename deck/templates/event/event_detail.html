@@ -157,12 +157,16 @@
     $(function () {
       $(".linkable").linkable();
       $(".proposal-description").each(function() {
-        if ($(this).height() > 150) {
-          $(this).addClass("proposal-collapse");
+        var self = $(this)
+        if (self.height() > 150) {
+          self.addClass("proposal-collapse");
+          self.after("<div class='show-more'><a>{% trans 'Show more' %}</a></div>");
         }
       });
-      $(".proposal-collapse").click(function() {
-        $(this).removeClass("proposal-collapse");
+      $(".show-more").click(function() {
+        var self = $(this)
+        self.prev().removeClass("proposal-collapse");
+        self.remove();
       });
     });
   </script>
