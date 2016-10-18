@@ -156,6 +156,14 @@
   <script type="text/javascript">
     $(function () {
       $(".linkable").linkable();
+      $(".proposal-description").each(function() {
+        if ($(this).height() > 150) {
+          $(this).addClass("proposal-collapse");
+        }
+      });
+      $(".proposal-collapse").click(function() {
+        $(this).removeClass("proposal-collapse");
+      });
     });
   </script>
 {% endblock scripts %}
