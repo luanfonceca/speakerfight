@@ -19,8 +19,10 @@
             <i class="icon-exclamation-sign"></i>
             {% trans "Due date pasted since the day" %} {{ event.due_date }}
           </span>
+        {% elif event.due_date_is_close %}
+          {% trans "Due date in" %} <span class="due-date-close">{{ event.due_date|timeuntil }}</span>
         {% else %}
-          {% trans "Due date in" %} {{ event.due_date|timeuntil }}
+          {% trans "Due date in" %} <span class="due-date">{{ event.due_date|timeuntil }}</span>
         {% endif %}
       {% endif %}
       {% if event.author_id == request.user.id or event|is_user_in_jury:request.user or request.user.is_superuser %}

@@ -682,3 +682,13 @@ html {
   height: 50px;
   background: linear-gradient(rgba(255,255,255,0),#fff);
 }
+
+.due-date{
+    color: #769739;
+    font-weight: bold;
+}
+
+.due-date-close{
+    color: #d01818;
+    font-weight: bold;
+}
