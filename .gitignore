@@ -58,3 +58,6 @@ docs/_build/
 
 # Development database
 db.sqlite3
+
+# PyCharm
+.idea/
