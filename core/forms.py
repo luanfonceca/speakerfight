@@ -61,3 +61,8 @@ class ProfileForm(forms.ModelForm):
             self.instance.user.username = data.get('username')
 
         self.instance.user.save()
+
+
+class FeedbackForm(forms.Form):
+    subject = forms.CharField()
+    message = forms.CharField(widget=forms.Textarea)

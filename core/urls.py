@@ -23,4 +23,5 @@ urlpatterns = patterns(
         view=views.ProfileUpdateView.as_view(),
         name='update_profile'),
     url(r'^jsi18n/$', javascript_catalog, name='javascript_catalog'),
+    url(r'/feedback/', views.FeedbackView.as_view(), name='feedback'),
 )

@@ -1495,3 +1495,11 @@ msgstr ""
 #, python-format
 msgid "The \"@%s\" was successfully removed from the Jury."
 msgstr ""
+
+#: core/templates/navbar.html
+msgid "Feedback"
+msgstr ""
+
+#: core/views.py
+msgid "Thank you for your feedback! We\'ll get in touch as soon as possible."
+msgstr ""

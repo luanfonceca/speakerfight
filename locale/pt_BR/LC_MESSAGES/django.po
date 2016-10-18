@@ -1775,3 +1775,11 @@ msgstr "O  \"@user\" foi removido do júri com sucesso."
 #, python-format
 msgid "The \"@%s\" was successfully removed from the Jury."
 msgstr "Os \"@%s\" foram removidos do júri com sucesso."
+
+#: core/templates/navbar.html
+msgid "Feedback"
+msgstr "Feedback"
+
+#: core/views.py
+msgid "Thank you for your feedback! We\'ll get in touch as soon as possible."
+msgstr "Agradecemos o seu feedback! Entraremos em contato assim que possível."

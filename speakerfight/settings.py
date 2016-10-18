@@ -40,6 +40,7 @@ STATICFILES_DIRS = []
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 DEFAULT_FROM_EMAIL = NO_REPLY_EMAIL = 'Speakerfight <noreply@speakerfight.com>'
+FEEDBACK_EMAIL = 'Speakerfight <feedback@speakerfight.com>'
 
 ALLOWED_HOSTS = [
     "speakerfight.com",

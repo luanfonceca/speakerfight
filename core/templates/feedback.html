@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+{% load bootstrap3 %}
+{% load account %}
+
+{% load deck_tags %}
+
+{% block head_title %}
+  {% trans "Feedback" %}
+{% endblock %}
+
+{% block head %}
+
+{% endblock head %}
+
+{% block content %}
+  <div class="row header">
+    <h2>
+      {% trans "Feedback" %}
+    </h2>
+  </div>
+  <div class="row form-wrapper">
+    <div class="column">
+      <form method="POST" novalidate>
+        {% csrf_token %}
+        {% if form.errors.description %}
+          <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>{% trans 'Description' %}</strong>
+              {{ form.errors.description }}
+          </div>
+        {% endif %}
+        {% bootstrap_form form layout='inline' %}
+
+        {% buttons %}
+          <button type="submit" class="btn-flat success text-upper">
+            <i class="icon icon-edit"></i>
+            {% trans "submit" %}
+          </button>
+        {% endbuttons %}
+      </form>
+    </div>
+    </div>
+  </div>
+{% endblock content %}

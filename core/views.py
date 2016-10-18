@@ -3,12 +3,14 @@ from django.utils.translation import ugettext as _
 from django.http import Http404, HttpResponseRedirect
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
+from django.core import mail
+from django.conf import settings
 
-from vanilla import TemplateView, DetailView, UpdateView
+from vanilla import TemplateView, DetailView, UpdateView, FormView
 
 from deck.models import Event, Proposal
 from core.models import Profile
-from core.forms import ProfileForm
+from core.forms import ProfileForm, FeedbackForm
 from core.mixins import LoginRequiredMixin, FormValidRedirectMixing
 
 
@@ -85,3 +87,18 @@ class ProfileUpdateView(LoginRequiredMixin,
             messages.error(self.request, error.as_data()[0].message)
 
         return self.get()
+
+
+class FeedbackView(LoginRequiredMixin, FormView):
+    template_name = 'feedback.html'
+    form_class = FeedbackForm
+
+    def form_valid(self, form):
+        message = mail.EmailMessage(form.cleaned_data['subject'],
+                                    form.cleaned_data['message'],
+                                    settings.NO_REPLY_EMAIL,
+                                    [settings.FEEDBACK_EMAIL],
+                                    headers={'Reply-To': self.request.user.email})
+        message.send()
+        messages.success(self.request, _('Thank you for your feedback! We\'ll get in touch as soon as possible.'))
+        return HttpResponseRedirect('/events/')
