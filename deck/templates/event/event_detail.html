@@ -159,7 +159,7 @@
       // Collapse proposals too large
       $(".proposal-description").each(function() {
         var self = $(this);
-        if (self.height() > 150) {
+        if (self.height() > 200) {
           self.addClass("proposal-collapse");
           self.after("<div class='show-more'><a>{% trans 'Show more' %}</a></div>");
         }
