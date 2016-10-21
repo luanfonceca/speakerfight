@@ -19,7 +19,10 @@ def allowed_to_vote(user, proposal):
 
 @register.filter
 def get_rate_display(user, proposal):
-    return proposal.votes.get(user=user).get_rate_display()
+    if not isinstance(user, AnonymousUser):
+        vote = proposal.votes.filter(user=user)
+        if vote:
+            return vote.first().get_rate_display()
 
 
 @register.filter

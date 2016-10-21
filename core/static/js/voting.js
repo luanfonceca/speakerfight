@@ -1,5 +1,5 @@
 $(function () {
-  $(".voting-link").on('click', function(e) {
+  $(".proposal-votes").on('click', '.voting-link', function(e) {
     e.preventDefault();
     var self = $(this);
     if (!self.attr('href')) {
@@ -10,8 +10,14 @@ $(function () {
       url: self.attr('href'),
       method: 'POST'
     }).success(function(data, status, xhr) {
-      self.parent('.proposal-votes').find('.voting-link').not(self).remove();
-      self.removeAttr('href');
+      // Make previous vote link clickable and current vote not clickable!
+      unvote = self.parent('.proposal-votes').find('.no-hover');
+      self.add(unvote).toggleClass('no-hover voting-link');
+      unvote.attr('href', unvote.attr('data-href'))
+            .removeAttr('data-href');
+      self.attr('data-href', self.attr('href'))
+          .removeAttr('href');
+      // Display success message
       var successAlert = '<div class="alert alert-success alert-dismissable text-left" id="succes-vote-alert">' +
                            '<i class="icon-exclamation-sign"></i>' +
                              data.message +

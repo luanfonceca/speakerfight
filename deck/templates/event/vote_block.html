@@ -2,18 +2,17 @@
 {% load deck_tags %}
 
 <div class="text-center proposal-votes vote-buttons">
-  {% if request.user|already_voted:proposal %}
-    {% with request.user|get_rate_display:proposal as rate %}
-        <a class="flat-icon" title="{{ rate|get_rate_title }}" title="{{ rate|get_rate_title }}" data-toggle="tooltip">
+  {% if request.user|allowed_to_vote:proposal %}
+    {% with request.user|get_rate_display:proposal as user_vote %}
+      <p>{{ _('Use the buttons bellow to vote:') }}</p>
+      {% for _, rate in vote_rates %}
+        {% url 'rate_proposal' event_slug=proposal.event.slug slug=proposal.slug rate=rate as vote_url %}
+        <a title="{{ rate|get_rate_title }}" data-toggle="tooltip" {% if user_vote == rate %}
+           data-href="{{ vote_url }}" class="flat-icon no-hover"{% else %}
+           href="{{ vote_url }}" class="flat-icon voting-link"{% endif %}>
           <i class="{{ rate }} black"></i>
         </a>
-    {% endwith %}
-  {% elif request.user|allowed_to_vote:proposal %}
-    <p>{{ _('Use the buttons bellow to vote:') }}</p>
-      {% for _, rate in vote_rates %}
-        <a href="{% url 'rate_proposal' event_slug=proposal.event.slug slug=proposal.slug rate=rate %}" class="flat-icon voting-link" title="{{ rate|get_rate_title }}" data-toggle="tooltip">
-            <i class="{{ rate }} black"></i>
-        </a>
       {% endfor %}
+    {% endwith %}
   {% endif %}
 </div>
