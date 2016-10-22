@@ -31,15 +31,35 @@ class BaseEventView(object):
 class ListEvents(BaseEventView, ListView):
     template_name = 'event/event_list.html'
     queryset = Event.objects.published_ones()
+    allow_empty = True
 
     def get_context_data(self, **kwargs):
         context = super(ListEvents, self).get_context_data(**kwargs)
         if self.request.user.is_authenticated():
-            event_list = Event.objects.filter(
-                models.Q(is_published=True) |
+            event_list = context['event_list'].filter(
                 models.Q(author=self.request.user))
             context.update(event_list=event_list)
         return context
+
+    def post(self, request, *args, **kwargs):
+        criteria = request.POST.get(u'criteria', None)
+
+        if not criteria:
+            return self.get(request, *args, **kwargs)
+
+        criteria_query = models.Q(title__contains=criteria) | \
+            models.Q(description__contains=criteria)
+        queryset = self.get_queryset().filter(criteria_query)
+
+        self.object_list = queryset
+        context = self.get_context_data(
+            page_obj=None,
+            is_paginated=False,
+            paginator=None,
+            criteria=criteria
+        )
+
+        return self.render_to_response(context)
 
 
 class CreateEvent(LoginRequiredMixin,
