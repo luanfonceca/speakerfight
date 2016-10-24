@@ -201,7 +201,12 @@ class Proposal(Activity):
     def rate(self, user, rate):
         rate_int = [r[0] for r in Vote.VOTE_RATES if rate in r][0]
         with transaction.atomic():
-            self.votes.create(user=user, rate=rate_int)
+            try:
+                vote = self.votes.get(user=user)
+            except Vote.DoesNotExist:
+                vote = self.votes.create(user=user)
+            vote.rate = rate_int
+            vote.save()
 
     def user_already_voted(self, user):
         if isinstance(user, AnonymousUser):
@@ -210,8 +215,7 @@ class Proposal(Activity):
 
     def user_can_vote(self, user):
         can_vote = False
-        if self.user_already_voted(user) or \
-           (self.author == user and not self.event.author == user):
+        if self.author == user and not self.event.author == user:
             pass
         elif self.event.allow_public_voting:
             can_vote = True
