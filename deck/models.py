@@ -21,6 +21,8 @@ from textwrap import dedent
 
 from jury.models import Jury
 
+import datetime
+
 
 class DeckBaseManager(models.QuerySet):
     def cached_authors(self):
@@ -294,6 +296,12 @@ class Event(DeckBaseModel):
         if not self.due_date:
             return False
         return timezone.now() > self.due_date
+
+    @property
+    def due_date_is_close(self):
+        if self.due_date_is_passed:
+            return False
+        return timezone.now() > self.due_date - datetime.timedelta(days=7)
 
     def get_absolute_url(self):
         return reverse('view_event', kwargs={'slug': self.slug})
