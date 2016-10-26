@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: speakerfight\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-22 17:54-0200\n"
-"PO-Revision-Date: 2016-10-22 16:56-0300\n"
+"POT-Creation-Date: 2016-10-26 21:37-0200\n"
+"PO-Revision-Date: 2016-10-26 20:38-0300\n"
 "Last-Translator: Luan Fonseca de Farias <luanfonceca@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/speakerfight/"
 "speakerfight/language/pt_BR/)\n"
@@ -22,8 +22,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#: api/permissions.py:10 deck/views.py:129 deck/views.py:143 deck/views.py:181
-#: deck/views.py:342 deck/views.py:406 deck/views.py:473 deck/views.py:540
+#: api/permissions.py:10 deck/views.py:130 deck/views.py:144 deck/views.py:182
+#: deck/views.py:343 deck/views.py:407 deck/views.py:474 deck/views.py:541
 msgid "You are not allowed to see this page."
 msgstr "Você não tem permissão para ver esta página."
 
@@ -882,8 +882,8 @@ msgstr "Usando Email e Senha"
 msgid "OpenID Sign In"
 msgstr "Acesso OpenID"
 
-#: core/templates/public_layout.html:58 deck/views.py:389 deck/views.py:456
-#: deck/views.py:523
+#: core/templates/public_layout.html:58 deck/views.py:390 deck/views.py:457
+#: deck/views.py:524
 msgid "You need to be logged in to continue to the next step."
 msgstr "Você precisa estar logado para ir para o próximo passo."
 
@@ -1131,7 +1131,7 @@ msgstr "Mais informações"
 msgid "Proposals"
 msgstr "Propostas"
 
-#: deck/models.py:188 deck/views.py:262
+#: deck/models.py:188 deck/views.py:263
 msgid "This Event doesn't accept Proposals anymore."
 msgstr "Este evento não aceita mais propostas."
 
@@ -1413,13 +1413,36 @@ msgstr "eventos"
 msgid "new event"
 msgstr "Novo evento"
 
-#: deck/templates/event/event_list.html:41
+#: deck/templates/event/event_list.html:39
+#, python-format
+msgid ""
+"\n"
+"                    Found %(num_of_results)s event matching your search for "
+"'%(criteria)s'\n"
+"                    "
+msgid_plural ""
+"\n"
+"                    Found %(num_of_results)s events matching your search for "
+"'%(criteria)s'\n"
+"                "
+msgstr[0] ""
+"\n"
+"                  Encontrados %(num_of_results)s eventos contendo o termo "
+"'%(criteria)s'\n"
+"                  "
+msgstr[1] ""
+"\n"
+"                  Encontrado %(num_of_results)s evento contendo o termo "
+"'%(criteria)s'\n"
+"                  "
+
+#: deck/templates/event/event_list.html:52
 #: deck/templates/event/my_events.html:24
 msgid "There are no events to show to you :("
 msgstr "Não há eventos para te exibir :("
 
-#: deck/templates/event/event_list.html:45
-#: deck/templates/event/event_list.html:46
+#: deck/templates/event/event_list.html:56
+#: deck/templates/event/event_list.html:57
 msgid "Back to the event list"
 msgstr "Voltar para a lista de eventos"
 
@@ -1658,67 +1681,67 @@ msgstr ""
 "Adicione qualquer coisa que você ache válido para as pessoas que irão "
 "escolher suas propostas, apenas Eles podem ver."
 
-#: deck/views.py:79
+#: deck/views.py:80
 msgid "Event created."
 msgstr "Evento criado"
 
-#: deck/views.py:85
+#: deck/views.py:86
 msgid "Your event is ready to receive proposals"
 msgstr "Seu evento está pronto para receber propostas"
 
-#: deck/views.py:121
+#: deck/views.py:122
 msgid "Event updated."
 msgstr "Evento Atualizado."
 
-#: deck/views.py:151
+#: deck/views.py:152
 msgid "Author"
 msgstr "Autor"
 
-#: deck/views.py:152
+#: deck/views.py:153
 msgid "Author E-Mail"
 msgstr "Email do Autor"
 
-#: deck/views.py:153
+#: deck/views.py:154
 msgid "Vote Rate"
 msgstr "Índice de Votos"
 
-#: deck/views.py:154
+#: deck/views.py:155
 msgid "Votes Count"
 msgstr "Quantidade de Votos"
 
-#: deck/views.py:278
+#: deck/views.py:279
 msgid "Proposal created."
 msgstr "Proposta criada."
 
-#: deck/views.py:287
+#: deck/views.py:288
 msgid "Your event has new proposals"
 msgstr "Seu evento recebeu novas propostas"
 
-#: deck/views.py:299
+#: deck/views.py:300
 msgid "Your proposal was submitted"
 msgstr "Sua proposta foi submetida"
 
-#: deck/views.py:324
+#: deck/views.py:325
 msgid "Proposal updated."
 msgstr "Proposta Atualizada."
 
-#: deck/views.py:333
+#: deck/views.py:334
 msgid "Proposal deleted."
 msgstr "Proposta removida."
 
-#: deck/views.py:357 deck/views.py:376
+#: deck/views.py:358 deck/views.py:377
 msgid "Rate Index not found."
 msgstr "Índice de classificação não encontrado."
 
-#: deck/views.py:363 deck/views.py:380
+#: deck/views.py:364 deck/views.py:381
 msgid "Proposal rated."
 msgstr "Proposta classificada."
 
-#: deck/views.py:433 deck/views.py:447
+#: deck/views.py:434 deck/views.py:448
 msgid "Proposal approved."
 msgstr "Proposta aprovada."
 
-#: deck/views.py:500 deck/views.py:514
+#: deck/views.py:501 deck/views.py:515
 msgid "Proposal disapproved."
 msgstr "Proposta desaprovada."
 

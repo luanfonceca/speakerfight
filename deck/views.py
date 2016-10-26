@@ -41,11 +41,11 @@ class ListEvents(BaseEventView, ListView):
             context.update(event_list=event_list)
         return context
 
-    def post(self, request, *args, **kwargs):
-        criteria = request.POST.get(u'criteria', None)
+    def get(self, request, *args, **kwargs):
+        criteria = request.GET.get(u'search', None)
 
         if not criteria:
-            return self.get(request, *args, **kwargs)
+            return super(ListEvents, self).get(request, *args, **kwargs)
 
         criteria_query = models.Q(title__contains=criteria) | \
             models.Q(description__contains=criteria)
@@ -56,7 +56,8 @@ class ListEvents(BaseEventView, ListView):
             page_obj=None,
             is_paginated=False,
             paginator=None,
-            criteria=criteria
+            criteria=criteria,
+            num_of_results=queryset.count()
         )
 
         return self.render_to_response(context)

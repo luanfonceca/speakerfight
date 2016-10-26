@@ -16,10 +16,10 @@
 
   <div class="row visible-xs">
     <div class="col-xs-12">
-      <form method="post" role="search">
+      <form method="get" role="search">
         <div id="responsive-search">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="{% trans 'Search Events' %}" value="{{ criteria }}" />
+            <input type="text" name="search" class="form-control" placeholder="{% trans 'Search Events' %}" value="{{ criteria }}" />
             <span class="input-group-btn">
               <button class="btn btn-info btn-lg" type="button">
                 <i class="icon-search"></i>
@@ -33,6 +33,17 @@
 
   <!-- Users table -->
   <div class="row" id="events-list">
+    {% if num_of_results > 0 %}
+        <div class="col-md-12">
+            <p class="bg-info">
+                {% blocktrans count counter=num_of_results %}
+                    Found {{ num_of_results }} event matching your search for '{{ criteria }}'
+                    {% plural %}
+                    Found {{ num_of_results }} events matching your search for '{{ criteria }}'
+                {% endblocktrans %}
+            </p>
+        </div>
+    {% endif %}
     <div class="col-md-12">
       {% for event in event_list %}
         {% include "event/snippets/event_list_item.html" %}
