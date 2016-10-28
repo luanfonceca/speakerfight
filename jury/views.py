@@ -19,6 +19,7 @@ class JuryView(UpdateView):
     template_name = 'jury/jury_detail.html'
     lookup_field = 'slug'
     model = Jury
+    fields = '__all__'
 
     def get_object(self):
         return Jury.objects.get(event__slug=self.kwargs.get('slug'))
@@ -31,7 +32,7 @@ class InviteEvent(BaseEventView, UpdateView):
     def form_valid(self, form):
         try:
             form.add_to_jury()
-        except ValidationError, e:
+        except ValidationError as e:
             messages.warning(self.request, e.message)
         else:
             user = User.objects.get(email=form.cleaned_data.get('email'))
