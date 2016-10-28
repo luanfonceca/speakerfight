@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 
+{% load staticfiles %}
 {% load i18n %}
 {% load bootstrap3 %}
 
@@ -13,7 +14,7 @@
 
 {% block head %}
   <!-- libraries for this page -->
-  <link href="{{ STATIC_URL }}css/libs/uniform.default.css" type="text/css" rel="stylesheet" />
+  <link href="{% static 'css/libs/uniform.default.css' %}" type="text/css" rel="stylesheet" />
 {% endblock head %}
 
 {% block content %}
@@ -82,7 +83,7 @@
 
 {% block scripts %}
   <!-- scripts for this page -->
-  <script src="{{ STATIC_URL }}js/libs/jquery.uniform.min.js"></script>
-  <script src="{{ STATIC_URL }}js/libs/tinymce/tinymce.min.js"></script>
-  <script src="{{ STATIC_URL }}js/forms.js"></script>
+  <script src="{% static 'js/libs/jquery.uniform.min.js' %}"></script>
+  <script src="{% static 'js/libs/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'js/forms.js' %}"></script>
 {% endblock scripts %}

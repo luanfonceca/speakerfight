@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% load staticfiles %}
 
 {% load i18n %}
 {% load bootstrap3 %}
@@ -7,9 +8,9 @@
 {% block head_title %}{% trans "Create the Schedule" %}: "{{ event }}"{% endblock %}
 
 {% block head %}
-  <link href="{{ STATIC_URL }}css/libs/dragula.min.css" rel="stylesheet" />  
+  <link href="{% static 'css/libs/dragula.min.css' %}" rel="stylesheet" />
 
-  <link href="{{ STATIC_URL }}css/event-schedule.css" rel="stylesheet" />  
+  <link href="{% static 'css/event-schedule.css' %}" rel="stylesheet" />
 {% endblock head %}
 
 {% block content %}
@@ -234,7 +235,7 @@
 {% endblock content %}
 
 {% block scripts %}
-  <script src="{{ STATIC_URL }}js/libs/dragula.min.js"></script>
+  <script src="{% static 'js/libs/dragula.min.js' %}"></script>
 
-  <script src="{{ STATIC_URL }}js/event-schedule.js"></script>
+  <script src="{% static 'js/event-schedule.js' %}"></script>
 {% endblock scripts %}

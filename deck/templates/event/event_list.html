@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 
+{% load staticfiles %}
 {% load i18n %}
 {% load bootstrap3 %}
 
@@ -29,7 +30,7 @@
 
 
 {% block scripts %}
-  <script src="{{ STATIC_URL }}js/libs/jquery.linkable.js"></script>
+  <script src="{% static 'js/libs/jquery.linkable.js' %}"></script>
 
   <script type="text/javascript">
     $(function () {
