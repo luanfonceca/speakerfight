@@ -3,9 +3,11 @@ from django.core.urlresolvers import reverse_lazy
 from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext as _
 
 
+@python_2_unicode_compatible
 class Profile(models.Model):
     about_me = models.TextField(
         _('About me'), max_length=500, null=True, blank=True)
@@ -22,7 +24,7 @@ class Profile(models.Model):
     class Meta:
         verbose_name = _('Profile')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.user.get_full_name()
 
     def get_absolute_url(self):
