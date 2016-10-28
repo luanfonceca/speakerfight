@@ -1,4 +1,3 @@
-from django.conf.urls import patterns, url
 from django.views.i18n import javascript_catalog
 
 from core import views
@@ -6,8 +5,7 @@ from core import views
 from smarturls import surl as url
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$', views.IndexView.as_view(),
         name='index_page'),
     url(regex=r'/profile/',
@@ -23,4 +21,4 @@ urlpatterns = patterns(
         view=views.ProfileUpdateView.as_view(),
         name='update_profile'),
     url(r'^jsi18n/$', javascript_catalog, name='javascript_catalog'),
-)
+]
