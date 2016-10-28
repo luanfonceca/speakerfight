@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 
 from deck.models import Event, Proposal, Vote, Jury
+from test_utils import get_all_field_names
 
 EVENT_DATA = {
     'title': 'RuPy',
@@ -44,7 +45,7 @@ class EventModelIntegrityTest(TestCase):
         self.assertEquals(_('Events'), Event._meta.verbose_name_plural)
 
     def test_assert_event_should_have_a_title(self):
-        self.assertIn('title', Event._meta.get_all_field_names())
+        self.assertIn('title', get_all_field_names(Event))
 
     def test_assert_event_title_should_be_a_CharField(self):
         self.assertIsInstance(self.fields['title'], CharField)
@@ -57,7 +58,7 @@ class EventModelIntegrityTest(TestCase):
         self.assertEquals(200, self.fields['title'].max_length)
 
     def test_assert_event_should_have_a_description(self):
-        self.assertIn('description', Event._meta.get_all_field_names())
+        self.assertIn('description', get_all_field_names(Event))
 
     def test_assert_event_description_should_be_a_TextField(self):
         self.assertIsInstance(self.fields['description'], TextField)
@@ -70,7 +71,7 @@ class EventModelIntegrityTest(TestCase):
         self.assertEquals(10000, self.fields['description'].max_length)
 
     def test_assert_event_should_allow_public_voting(self):
-        self.assertIn('allow_public_voting', Event._meta.get_all_field_names())
+        self.assertIn('allow_public_voting', get_all_field_names(Event))
 
     def test_assert_event_allow_public_voting_should_be_a_BooleanField(self):
         self.assertIsInstance(self.fields['allow_public_voting'], BooleanField)
@@ -79,7 +80,7 @@ class EventModelIntegrityTest(TestCase):
         self.assertEquals(True, self.fields['allow_public_voting'].default)
 
     def test_assert_event_should_have_a_author(self):
-        self.assertIn('author', Event._meta.get_all_field_names())
+        self.assertIn('author', get_all_field_names(Event))
 
     def test_assert_event_author_should_be_an_User(self):
         self.assertEquals(User, self.fields['author'].rel.to)
@@ -95,7 +96,7 @@ class EventModelIntegrityTest(TestCase):
         self.assertEquals('events', self.fields['author'].rel.related_name)
 
     def test_assert_event_should_have_a_publish_flag(self):
-        self.assertIn('is_published', Event._meta.get_all_field_names())
+        self.assertIn('is_published', get_all_field_names(Event))
 
     def test_assert_event_is_published_should_be_a_BooleanField(self):
         self.assertIsInstance(self.fields['is_published'], BooleanField)
@@ -104,7 +105,7 @@ class EventModelIntegrityTest(TestCase):
         self.assertEquals(True, self.fields['is_published'].default)
 
     def test_assert_event_should_have_a_jury(self):
-        self.assertIn('jury', Event._meta.get_all_field_names())
+        self.assertIn('jury', get_all_field_names(Event))
 
     def test_assert_event_jury_should_be_an_Jury(self):
         self.assertEquals(Jury, self.fields['jury'].rel.to)
@@ -156,7 +157,7 @@ class ProposalModelIntegrityTest(TestCase):
         self.assertEquals(_('Proposals'), Proposal._meta.verbose_name_plural)
 
     def test_assert_proposal_should_have_a_title(self):
-        self.assertIn('title', Proposal._meta.get_all_field_names())
+        self.assertIn('title', get_all_field_names(Proposal))
 
     def test_assert_proposal_title_should_be_a_CharField(self):
         self.assertIsInstance(self.fields['title'], CharField)
@@ -169,7 +170,7 @@ class ProposalModelIntegrityTest(TestCase):
         self.assertEquals(200, self.fields['title'].max_length)
 
     def test_assert_proposal_should_have_a_description(self):
-        self.assertIn('description', Proposal._meta.get_all_field_names())
+        self.assertIn('description', get_all_field_names(Proposal))
 
     def test_assert_proposal_description_should_be_a_TextField(self):
         self.assertIsInstance(self.fields['description'], TextField)
@@ -182,7 +183,7 @@ class ProposalModelIntegrityTest(TestCase):
         self.assertEquals(10000, self.fields['description'].max_length)
 
     def test_assert_proposal_should_have_a_author(self):
-        self.assertIn('author', Proposal._meta.get_all_field_names())
+        self.assertIn('author', get_all_field_names(Proposal))
 
     def test_assert_proposal_author_should_be_an_User(self):
         self.assertEquals(User, self.fields['author'].rel.to)
@@ -198,7 +199,7 @@ class ProposalModelIntegrityTest(TestCase):
         self.assertEquals('proposals', self.fields['event'].rel.related_name)
 
     def test_assert_proposal_should_have_a_event(self):
-        self.assertIn('event', Proposal._meta.get_all_field_names())
+        self.assertIn('event', get_all_field_names(Proposal))
 
     def test_assert_proposal_event_should_be_an_Event(self):
         self.assertEquals(Event, self.fields['event'].rel.to)
@@ -211,7 +212,7 @@ class ProposalModelIntegrityTest(TestCase):
         self.assertEquals(False, self.fields['event'].blank)
 
     def test_assert_proposal_should_have_a_publish_flag(self):
-        self.assertIn('is_published', Proposal._meta.get_all_field_names())
+        self.assertIn('is_published', get_all_field_names(Proposal))
 
     def test_assert_proposal_is_published_should_be_a_BooleanField(self):
         self.assertIsInstance(self.fields['is_published'], BooleanField)
@@ -305,7 +306,7 @@ class VoteModelIntegrityTest(TestCase):
         self.assertEquals((('proposal', 'user'),), Vote._meta.unique_together)
 
     def test_assert_vote_should_have_a_rate(self):
-        self.assertIn('rate', Vote._meta.get_all_field_names())
+        self.assertIn('rate', get_all_field_names(Vote))
 
     def test_assert_vote_rate_should_be_a_SmallIntegerField(self):
         self.assertIsInstance(self.fields['rate'], SmallIntegerField)
@@ -315,7 +316,7 @@ class VoteModelIntegrityTest(TestCase):
         self.assertEquals(True, self.fields['rate'].blank)
 
     def test_assert_vote_should_have_a_proposal(self):
-        self.assertIn('proposal', Vote._meta.get_all_field_names())
+        self.assertIn('proposal', get_all_field_names(Vote))
 
     def test_assert_vote_proposal_should_be_an_Proposal(self):
         self.assertEquals(Proposal, self.fields['proposal'].rel.to)
@@ -331,7 +332,7 @@ class VoteModelIntegrityTest(TestCase):
         self.assertEquals('votes', self.fields['proposal'].rel.related_name)
 
     def test_assert_vote_should_have_a_author(self):
-        self.assertIn('user', Vote._meta.get_all_field_names())
+        self.assertIn('user', get_all_field_names(Vote))
 
     def test_assert_vote_user_should_be_an_User(self):
         self.assertEquals(User, self.fields['user'].rel.to)
