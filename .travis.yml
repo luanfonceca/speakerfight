@@ -41,6 +41,11 @@ install:
   - pip install -r requirements.txt
   - pip install $DJANGO_VERSION
 script:
+  # check migration pending to create
+  - python manage.py makemigrations --dry-run --check
+  # show all warnings
+  - python -Wall manage.py check
+  # run tests and coverage
   - coverage run manage.py test -v 2
 after_success:
   - coveralls
