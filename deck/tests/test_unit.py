@@ -1,4 +1,7 @@
+import unittest
+
 from django.test import TestCase
+from django.utils import six
 from django.db.models import (CharField, TextField,
                               BooleanField, ForeignKey,
                               SmallIntegerField)
@@ -125,8 +128,9 @@ class EventObjectTest(TestCase):
     def setUp(self):
         self.event = Event(**EVENT_DATA)
 
+    @unittest.skipIf(six.PY3, 'not test unicode on python3')
     def test_assert_event_unicode_representation(self):
-        self.assertEquals(u'RuPy', unicode(self.event))
+        self.assertEquals(u'RuPy', six.text_type(self.event))
 
     def test_assert_event_title(self):
         self.assertEquals(u'RuPy', self.event.title)
@@ -237,8 +241,9 @@ class ProposalObjectTest(TestCase):
         self.vote = Vote(user_id=self.event.author_id,
                          proposal=self.proposal, rate=3)
 
+    @unittest.skipIf(six.PY3, 'not test unicode on python3')
     def test_assert_proposal_unicode_representation(self):
-        self.assertEquals(u'Python For Zombies', unicode(self.proposal))
+        self.assertEquals(u'Python For Zombies', six.text_type(self.proposal))
 
     def test_assert_proposal_title(self):
         self.assertEquals(u'Python For Zombies', self.proposal.title)
@@ -355,9 +360,10 @@ class VoteObjectTest(TestCase):
         self.vote = Vote(user_id=self.event.author_id,
                          proposal=self.proposal, rate=3)
 
+    @unittest.skipIf(six.PY3, 'not test unicode on python3')
     def test_assert_vote_unicode_representation(self):
         self.vote.user = User(username='User')
-        self.assertEquals(u'User: 3 in Python For Zombies', unicode(self.vote))
+        self.assertEquals(u'User: 3 in Python For Zombies', six.text_type(self.vote))
 
     def test_assert_vote_rate(self):
         self.assertEquals(3, self.vote.rate)
