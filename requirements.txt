@@ -10,7 +10,7 @@ django-anymail==0.1
 django-bootstrap3==3.3.0
 django-coverage==1.2.4
 django-datetime-widget==0.6
-django-debug-toolbar==1.2.1
+django-debug-toolbar==1.6
 django-extensions==1.7.4
 django-vanilla-views==1.0.4
 django-queryset-csv==0.3.3
