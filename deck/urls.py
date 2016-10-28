@@ -1,7 +1,7 @@
 
 from smarturls import surl as url
 
-import views
+from . import views
 
 urlpatterns = [
     url(regex=r'/my_proposals/',

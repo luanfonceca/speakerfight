@@ -1,6 +1,6 @@
 from django.views.i18n import javascript_catalog
 
-from core import views
+from . import views
 
 from smarturls import surl as url
 
