@@ -20,6 +20,10 @@ matrix:
       env:
         - TOX_ENV=py35
         - DJANGO_VERSION="Django>=1.10,<1.11"
+    - python: 3.5
+      env:
+        - TOX_ENV=py35
+        - DJANGO_VERSION="-e git+https://github.com/django/django.git@master#egg=Django"
     - python: 3.6-dev
       env:
         - TOX_ENV=py36
