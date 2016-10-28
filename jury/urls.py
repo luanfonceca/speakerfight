@@ -1,7 +1,7 @@
 
 from smarturls import surl as url
 
-import views
+from . import views
 
 urlpatterns = [
     url(regex=r'/events/<slug:slug>/jury/',

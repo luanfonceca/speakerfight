@@ -5,9 +5,9 @@ try:
 except:
     from django.views.i18n import javascript_catalog
 
-from . import views
-
 from smarturls import surl as url
+
+from . import views
 
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(),
