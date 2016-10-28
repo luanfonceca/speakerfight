@@ -741,7 +741,7 @@ class ProposalTest(TestCase):
         )
 
         self.assertEquals(400, response.status_code)
-        self.assertIn('message', json.loads(response.content))
+        self.assertIn('message', json.loads(response.content.decode("utf-8")))
         self.assertEquals(0, self.proposal.get_rate)
         self.assertEquals(0, self.proposal.votes.count())
         self.assertEquals(0, Vote.objects.count())
@@ -859,7 +859,7 @@ class ProposalTest(TestCase):
             follow=True
         )
         self.assertEquals(401, response.status_code)
-        self.assertIn('message', json.loads(response.content))
+        self.assertIn('message', json.loads(response.content.decode("utf-8")))
         self.assertEquals(0, self.proposal.get_rate)
         self.assertEquals(0, self.proposal.votes.count())
         self.assertEquals(0, Vote.objects.count())
@@ -976,7 +976,7 @@ class ProposalTest(TestCase):
         )
         self.proposal = Proposal.objects.first()
         self.assertEquals(401, response.status_code)
-        self.assertIn('message', json.loads(response.content))
+        self.assertIn('message', json.loads(response.content.decode("utf-8")))
         self.assertEquals(False, self.proposal.is_approved)
 
     def test_approve_proposal_with_the_admin_user(self):
@@ -996,7 +996,7 @@ class ProposalTest(TestCase):
 
         self.proposal = Proposal.objects.first()
         self.assertEquals(200, response.status_code)
-        self.assertIn('message', json.loads(response.content))
+        self.assertIn('message', json.loads(response.content.decode("utf-8")))
         self.assertEquals(True, self.proposal.is_approved)
 
     def test_approve_proposal_with_the_admin_user_by_get(self):
@@ -1034,7 +1034,7 @@ class ProposalTest(TestCase):
 
         self.proposal = Proposal.objects.first()
         self.assertEquals(200, response.status_code)
-        self.assertIn('message', json.loads(response.content))
+        self.assertIn('message', json.loads(response.content.decode("utf-8")))
         self.assertEquals(True, self.proposal.is_approved)
 
     def test_approve_proposal_with_the_jury_user_by_get(self):
@@ -1071,7 +1071,7 @@ class ProposalTest(TestCase):
         )
         self.proposal = Proposal.objects.first()
         self.assertEquals(401, response.status_code)
-        self.assertIn('message', json.loads(response.content))
+        self.assertIn('message', json.loads(response.content.decode("utf-8")))
         self.assertEquals(True, self.proposal.is_approved)
 
     def test_disapprove_proposal_with_the_admin_user(self):
@@ -1092,7 +1092,7 @@ class ProposalTest(TestCase):
 
         self.proposal = Proposal.objects.first()
         self.assertEquals(200, response.status_code)
-        self.assertIn('message', json.loads(response.content))
+        self.assertIn('message', json.loads(response.content.decode("utf-8")))
         self.assertEquals(False, self.proposal.is_approved)
 
     def test_disapprove_proposal_with_the_admin_user_by_get(self):
@@ -1133,7 +1133,7 @@ class ProposalTest(TestCase):
 
         self.proposal = Proposal.objects.first()
         self.assertEquals(200, response.status_code)
-        self.assertIn('message', json.loads(response.content))
+        self.assertIn('message', json.loads(response.content.decode("utf-8")))
         self.assertEquals(False, self.proposal.is_approved)
 
     def test_disapprove_proposal_with_the_jury_user_by_get(self):

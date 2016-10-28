@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
 # from django.core.exceptions import ValidationError
+from django.utils import six
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
 
@@ -26,7 +27,7 @@ class JuryTest(TestCase):
                                     follow=True)
 
         message = _(u'The "@%s" are successfully joined to the Jury.') % user
-        self.assertIn(message, response.content)
+        self.assertIn(six.text_type(message), six.text_type(response.content))
         self.assertEquals(2, event.jury.users.count())
         self.assertQuerysetEqual(event.jury.users.all(),
                                  ['<User: admin>', '<User: user>'],
@@ -40,7 +41,7 @@ class JuryTest(TestCase):
         response = self.client.post(invite_url, email, follow=True)
 
         message = _(u'The "@admin" already is being part of this jury.')
-        self.assertIn(message, response.content)
+        self.assertIn(six.text_type(message), six.text_type(response.content))
         self.assertEquals(1, event.jury.users.count())
         self.assertQuerysetEqual(event.jury.users.all(),
                                  ['<User: admin>'],
@@ -55,7 +56,7 @@ class JuryTest(TestCase):
 
         message = _(u'The "new_user@speakerfight.com" are not a Speakerfight '
                     u'user. For now, we just allow already joined users.')
-        self.assertIn(message, response.content)
+        self.assertIn(six.text_type(message), six.text_type(response.content))
         self.assertEquals(1, event.jury.users.count())
         self.assertQuerysetEqual(event.jury.users.all(),
                                  ['<User: admin>'],
@@ -73,7 +74,7 @@ class JuryTest(TestCase):
                                     {'email': user.email},
                                     follow=True)
         message = _(u'The "@user" was successfully removed from the Jury.')
-        self.assertIn(message, response.content)
+        self.assertIn(six.text_type(message), six.text_type(response.content))
         self.assertEquals(1, event.jury.users.count())
         self.assertQuerysetEqual(event.jury.users.all(),
                                  ['<User: admin>'],
