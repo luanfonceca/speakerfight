@@ -1,9 +1,13 @@
-from django.views.i18n import javascript_catalog
+try:
+    from django.views.i18n import JavaScriptCatalog
+
+    javascript_catalog = JavaScriptCatalog.as_view()
+except:
+    from django.views.i18n import javascript_catalog
 
 from . import views
 
 from smarturls import surl as url
-
 
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(),
@@ -20,5 +24,5 @@ urlpatterns = [
     url(regex=r'/profile/<username:user__username>/update/',
         view=views.ProfileUpdateView.as_view(),
         name='update_profile'),
-    url(r'^jsi18n/$', javascript_catalog, name='javascript_catalog'),
+    url(r'^jsi18n/$', javascript_catalog, name='javascript-catalog'),
 ]
