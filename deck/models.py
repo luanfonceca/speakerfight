@@ -115,8 +115,6 @@ class Vote(models.Model):
             validation_message = _(u'You cannot Rate your own proposals.')
         elif not self.proposal.event.allow_public_voting:
             validation_message = _(u"Proposal doesn't accept Public Voting.")
-        elif self.proposal.user_already_voted(self.user):
-            validation_message = _(u'Proposal already Rated by you.')
 
         if validation_message:
             raise ValidationError(_(validation_message))
