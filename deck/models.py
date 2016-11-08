@@ -199,12 +199,7 @@ class Proposal(Activity):
     def rate(self, user, rate):
         rate_int = [r[0] for r in Vote.VOTE_RATES if rate in r][0]
         with transaction.atomic():
-            try:
-                vote = self.votes.get(user=user)
-            except Vote.DoesNotExist:
-                vote = self.votes.create(user=user)
-            vote.rate = rate_int
-            vote.save()
+            self.votes.update_or_create(user=user, defaults={'rate': rate_int})
 
     def user_already_voted(self, user):
         if isinstance(user, AnonymousUser):
