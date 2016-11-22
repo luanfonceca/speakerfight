@@ -217,6 +217,45 @@ input.search {
     .navbar-inverse .pop-dialog .messages .footer {
     margin-top: 6px; }
 
+#responsive-search{
+  padding: 3px;
+  border: solid 1px #E4E4E4;
+  border-radius: 6px;
+  background-color: #fff;
+  margin: 10px 0;}
+.navbar form[role="search"]{
+  border: solid 1px #E4E4E4;
+  border-radius: 6px;
+  background-color: #fff;
+  margin: 4px 15px;
+  padding: 0 3px;}
+  .navbar form[role="search"] input{
+    border: 0;
+    box-shadow: none;}
+  .row.search form[role="search"] input,
+  #responsive-search input{
+    border: 0;
+    box-shadow: none;}
+  .navbar form[role="search"] .input-group-btn{
+    display: inline;}
+  .navbar form[role="search"] button,
+  #responsive-search button{
+    margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 8px 0 10px;
+    border-left: solid 1px #ccc;}
+  .navbar form[role="search"] button:hover,
+  #responsive-search button:hover{
+    border: 0;
+    box-shadow: none;
+    border-left: solid 1px #ccc;}
+  .navbar form[role="search"] .icon-search,
+  #responsive-search .icon-search{
+  font-size: 20px;}
+
 /* Sidebar */
 #sidebar-nav {
   position: absolute;
