@@ -274,6 +274,9 @@ class Track(models.Model):
             pk__in=self.activities.values_list('pk', flat=True)
         )
 
+    def get_absolute_url(self):
+        return reverse('view_event', kwargs={'slug': self.event.slug})
+
 
 class Event(DeckBaseModel):
     allow_public_voting = models.BooleanField(_('Allow Public Voting'),

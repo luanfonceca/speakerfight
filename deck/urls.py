@@ -56,4 +56,15 @@ urlpatterns = patterns(
               r'proposals/<slug:slug>/disapprove_proposal/',
         view=views.DisapproveProposal.as_view(),
         name='disapprove_proposal'),
+    url(regex=r'/events/<slug:slug>/tracks/create/',
+        view=views.CreateTrack.as_view(),
+        name='create_event_track'),
+    url(regex=r'/events/<slug:event_slug>/'
+              r'tracks/<slug:slug>/update/',
+        view=views.UpdateTrack.as_view(),
+        name='update_track'),
+    url(regex=r'/events/<slug:event_slug>/'
+              r'tracks/<slug:slug>/delete/',
+        view=views.DeleteTrack.as_view(),
+        name='delete_track'),
 )

@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 from datetimewidget.widgets import DateTimeWidget
 
-from .models import Event, Proposal, Activity
+from .models import Event, Proposal, Activity, Track
 
 
 class CustomDateTimeWidget(DateTimeWidget):
@@ -98,3 +98,9 @@ class ActivityTimetableForm(forms.ModelForm):
             'start_timetable': CustomTimeInputWidget(format='%H:%M'),
             'end_timetable': CustomTimeInputWidget(format='%H:%M'),
         }
+
+
+class TrackForm(forms.ModelForm):
+    class Meta:
+        model = Track
+        fields = ('title',)

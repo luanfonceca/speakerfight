@@ -59,6 +59,9 @@
       <a href="{% url 'create_event_schedule' slug=event.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Create and Organize the Schedule of Talks.' %}">
         <i class="icon-calendar"></i> {% trans "Create Schedule" %}
       </a>
+      <a href="{% url 'create_event_track' slug=event.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Create Tracks.' %}">
+        <i class="icon-th-list"></i> {% trans "Create Tracks" %}
+      </a>
     </div>
   {% endif %}
 </div>

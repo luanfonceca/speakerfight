@@ -17,8 +17,11 @@ from django.utils.translation import ugettext as _
 from vanilla import CreateView, DeleteView, DetailView, ListView, UpdateView
 from djqscsv import render_to_csv_response
 
-from .models import Event, Proposal, Vote, Activity
-from .forms import EventForm, ProposalForm, ActivityForm, ActivityTimetableForm
+from .models import Event, Proposal, Vote, Activity, Track
+from .forms import (
+    EventForm, ProposalForm, ActivityForm,
+    ActivityTimetableForm, TrackForm
+)
 from core.mixins import LoginRequiredMixin, FormValidRedirectMixing
 
 
@@ -551,3 +554,64 @@ class DisapproveProposal(BaseProposalView, UpdateView):
                 content_type='application/json'
             )
         return super(DisapproveProposal, self).dispatch(*args, **kwargs)
+
+
+class BaseTrackView(object):
+    model = Track
+    form_class = TrackForm
+    lookup_field = 'slug'
+
+
+class CreateTrack(LoginRequiredMixin,
+                  BaseTrackView,
+                  CreateView,
+                  FormValidRedirectMixing):
+    template_name = 'track/track_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateTrack, self).get_context_data(**kwargs)
+        context['event'] = Event.objects.get(slug=self.kwargs['slug'])
+        return context
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.author = self.request.user
+        self.object.event = Event.objects.get(slug=self.kwargs['slug'])
+        self.object.save()
+        return self.success_redirect(_(u'Track created.'))
+
+
+class UpdateTrack(LoginRequiredMixin,
+                  BaseTrackView,
+                  UpdateView,
+                  FormValidRedirectMixing):
+    template_name = 'track/track_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateTrack, self).get_context_data(**kwargs)
+        context['event'] = Event.objects.get(slug=self.kwargs['event_slug'])
+        return context
+
+    def form_valid(self, form):
+        self.object = form.save()
+        return self.success_redirect(_(u'Track updated.'))
+
+
+class DeleteTrack(BaseTrackView, DeleteView):
+    template_name = 'track/track_confirm_delete.html'
+
+    def post(self, request, *args, **kwargs):
+        track = self.get_object()
+        track.delete()
+        messages.success(self.request, _(u'Track deleted.'))
+        return HttpResponseRedirect(track.event.get_absolute_url())
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        track = self.get_object()
+        if (track.event.author != self.request.user and
+           not self.request.user.is_superuser):
+            messages.error(
+                self.request, _(u'You are not allowed to see this page.'))
+            return HttpResponseRedirect(track.event.get_absolute_url())
+        return super(DeleteProposal, self).dispatch(*args, **kwargs)

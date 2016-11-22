@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block head_title %}
+  {% if form.instance.pk %}
+    {% trans "Update Track" %}: "{{ object }}"
+  {% else %}
+    {% trans "New Track" %}
+  {% endif %}
+{% endblock %}
+
+{% block head %}
+  <!-- libraries for this page -->
+  <link href="{{ STATIC_URL }}css/libs/uniform.default.css" type="text/css" rel="stylesheet" />
+{% endblock head %}
+
+{% block content %}
+  <ol class="breadcrumb">
+    <li><a href="{% url 'index_page' %}">{% trans "Home" %}</a></li>
+    <li><a href="{% url 'list_events' %}">{% trans "Events" %}</a></li>
+    <li><a href="{% url 'view_event' slug=event.slug %}">{{ event.title }}</a></li>
+    {% if form.instance.pk %}
+    <li class="active">Update Track</li>
+    {% else %}
+    <li class="active">New Track</li>
+    {% endif %}
+  </ol>
+
+  <div class="row header">
+    <h2>
+      {% if form.instance.pk %}
+        {% trans "Update Track" %} "{{ object }}"
+      {% else %}
+        {% trans "New Track for" %} "{{ event }}"
+      {% endif %}
+    </h2>
+  </div>
+  <div class="row form-wrapper">
+    <!-- left column -->
+    <div class="column">
+      <form method="POST" novalidate>
+        {% csrf_token %}
+
+        {% bootstrap_form form layout="inline" %}
+
+        {% buttons %}
+          <button type="submit" class="btn-flat success text-upper">
+            <i class="icon icon-edit"></i>
+            {% trans "submit" %}
+          </button>
+          <div class="pull-right">
+            <a href="{% url 'view_event' slug=event.slug %}" class="link text-upper">
+              <i class="icon-calendar"></i>
+              {% trans "event detail" %}
+            </a>
+          </div>
+        {% endbuttons %}
+      </form>
+    </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block scripts %}
+  <!-- scripts for this page -->
+  <script src="{{ STATIC_URL }}js/libs/jquery.uniform.min.js"></script>
+{% endblock scripts %}
