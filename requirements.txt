@@ -19,7 +19,7 @@ master-sake==0.9
 mccabe==0.2.1
 networkx==1.8.1
 oauthlib==0.6.1
-python-coveralls
+python-coveralls==2.4.3
 python-openid==2.2.5
 raven==5.0.0
 requests-oauthlib==0.4.0
