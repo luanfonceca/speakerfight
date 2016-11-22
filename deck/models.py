@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import ValidationError
@@ -209,17 +210,23 @@ class Proposal(Activity):
         return self.votes.filter(user=user).exists()
 
     def user_can_vote(self, user):
-        can_vote = False
-        if self.user_already_voted(user) or \
-           (self.author == user and not self.event.author == user):
-            pass
-        elif self.event.allow_public_voting:
-            can_vote = True
-        elif user.is_superuser:
-            can_vote = True
-        elif self.event.jury.users.filter(pk=user.pk).exists():
-            can_vote = True
-        return can_vote
+        if self.user_already_voted(user):
+            return False
+
+        # An user can not vote on its own proposal unless he’s the event author.
+        if self.author == user and self.event.author != user:
+            return False
+
+        if self.event.allow_public_voting:
+            return True
+
+        if user.is_superuser:
+            return True
+
+        if self.event.jury.users.filter(pk=user.pk).exists():
+            return True
+
+        return False
 
     def user_can_approve(self, user):
         can_approve = False
