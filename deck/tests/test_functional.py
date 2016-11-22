@@ -90,6 +90,29 @@ class EventTest(TestCase):
         self.assertQuerysetEqual(response.context['event_list'],
                                  ["<Event: RuPy>"])
 
+    def test_search_event(self):
+        event_data = self.event_data.copy()
+        event_data.update(is_published=True)
+        Event.objects.create(**event_data)
+
+        response = self.client.get(reverse('list_events'),
+                                   data={'search': 'RuPy'}, follow=True)
+        self.assertEquals(200, response.status_code)
+        self.assertEqual(response.context['num_of_results'], 1)
+        self.assertQuerysetEqual(response.context['event_list'],
+                                 ["<Event: RuPy>"])
+
+    def test_empty_search(self):
+        event_data = self.event_data.copy()
+        event_data.update(is_published=True)
+        Event.objects.create(**event_data)
+
+        response = self.client.get(reverse('list_events'),
+                                   data={'search': 'SOME SEARCH'}, follow=True)
+        self.assertEquals(200, response.status_code)
+        self.assertEqual(response.context['num_of_results'], 0)
+        self.assertQuerysetEqual(response.context['event_list'], [])
+
     def test_detail_event(self):
         event = Event.objects.create(**self.event_data)
         response = self.client.get(

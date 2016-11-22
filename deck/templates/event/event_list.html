@@ -14,13 +14,51 @@
     </a>
   </div>
 
+  <div class="row visible-xs">
+    <div class="col-xs-12">
+      <form method="get" role="search">
+        <div id="responsive-search">
+          <div class="input-group">
+            <input type="text" name="search" class="form-control" placeholder="{% trans 'Search Events' %}" value="{{ criteria }}" />
+            <span class="input-group-btn">
+              <button class="btn btn-info btn-lg" type="button">
+                <i class="icon-search"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Users table -->
   <div class="row" id="events-list">
+    {% if num_of_results > 0 %}
+        <div class="col-md-12">
+            <p class="bg-info">
+                {% blocktrans count counter=num_of_results %}
+                    Found {{ num_of_results }} event matching your search for '{{ criteria }}'
+                    {% plural %}
+                    Found {{ num_of_results }} events matching your search for '{{ criteria }}'
+                {% endblocktrans %}
+            </p>
+        </div>
+    {% endif %}
     <div class="col-md-12">
       {% for event in event_list %}
         {% include "event/snippets/event_list_item.html" %}
       {% empty %}
-        <h3 class="text-center">{% trans "There are no events to show to you :(" %}</h3>
+        <h3 class="text-center">
+          {% trans "There are no events to show to you :(" %}
+          {% if criteria %}
+            <br />
+            <small class="text-center">
+              <a href="{% url 'list_events' %}" class="btn btn-link" title="{% trans 'Back to the event list' %}">
+                <i class="icon-arrow-left"></i> {% trans 'Back to the event list' %}
+              </a>
+            </small>
+          {% endif %}
+        </h3>
       {% endfor %}
     </div>
   </div>
