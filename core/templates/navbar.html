@@ -13,9 +13,9 @@
     </a>
   </div>
   <ul class="nav navbar-nav pull-right">
-    <form method="get" class="navbar-form navbar-left hidden-xs" role="search">
+    <form method="GET" action="{% url 'list_events' %}" class="navbar-form navbar-left hidden-xs" role="search">
       <div class="form-group">
-        <input type="text" name="search" class="form-control" placeholder="{% trans 'Search Events' %}" value="{{ criteria }}">
+        <input type="text" name="search" class="form-control" placeholder="{% trans 'Search Events' %}" value="{{ criteria|default:'' }}">
       </div>
       <span class="input-group-btn">
         <button type="submit" class="btn btn-info btn-lg">

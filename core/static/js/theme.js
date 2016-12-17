@@ -149,6 +149,4 @@ $(function () {
     if ($("#sidebar-nav").height() > $(".content").height()) {
       $("html").addClass("small");
     }
-
-
 });

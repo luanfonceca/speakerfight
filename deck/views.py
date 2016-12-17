@@ -30,37 +30,36 @@ class BaseEventView(object):
 
 class ListEvents(BaseEventView, ListView):
     template_name = 'event/event_list.html'
-    queryset = Event.objects.published_ones()
     allow_empty = True
+
+    def get_queryset(self):
+        queryset = super(ListEvents, self).get_queryset()
+
+        if self.request.user.is_authenticated():
+            queryset = queryset.filter(
+                models.Q(is_published=True) |
+                models.Q(author=self.request.user)
+            )
+        else:
+            queryset = queryset.published_ones()
+
+        criteria = self.request.GET.get(u'search', None)
+        if criteria:
+            queryset = queryset.filter(
+                models.Q(title__contains=criteria) |
+                models.Q(description__contains=criteria)
+            )
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super(ListEvents, self).get_context_data(**kwargs)
-        if self.request.user.is_authenticated():
-            event_list = context['event_list'].filter(
-                models.Q(author=self.request.user))
-            context.update(event_list=event_list)
-        return context
-
-    def get(self, request, *args, **kwargs):
-        criteria = request.GET.get(u'search', None)
-
-        if not criteria:
-            return super(ListEvents, self).get(request, *args, **kwargs)
-
-        criteria_query = models.Q(title__contains=criteria) | \
-            models.Q(description__contains=criteria)
-        queryset = self.get_queryset().filter(criteria_query)
-
-        self.object_list = queryset
-        context = self.get_context_data(
+        context.update(
             page_obj=None,
             is_paginated=False,
             paginator=None,
-            criteria=criteria,
-            num_of_results=queryset.count()
+            criteria=self.request.GET.get(u'search', None),
         )
-
-        return self.render_to_response(context)
+        return context
 
 
 class CreateEvent(LoginRequiredMixin,
