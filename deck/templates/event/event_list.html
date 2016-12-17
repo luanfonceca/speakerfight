@@ -21,9 +21,15 @@
           <div class="input-group">
             <input type="text" name="search" class="form-control" placeholder="{% trans 'Search Events' %}" value="{{ criteria|default:'' }}" />
             <span class="input-group-btn">
-              <button type="submit" class="btn btn-info btn-lg">
-                <i class="icon-search"></i>
-              </button>
+              {% if criteria %}
+                <button type="button" class="btn btn-info btn-lg reset-search">
+                  <i class="icon-remove"></i>
+                </button>
+              {% else %}
+                <button type="submit" class="btn btn-info btn-lg">
+                  <i class="icon-search"></i>
+                </button>
+              {% endif %}
             </span>
           </div>
         </div>
