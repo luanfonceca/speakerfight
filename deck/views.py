@@ -13,6 +13,7 @@ from django.template.loader import render_to_string
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from vanilla import CreateView, DeleteView, DetailView, ListView, UpdateView
 from djqscsv import render_to_csv_response
@@ -171,6 +172,7 @@ class CreateEventSchedule(BaseEventView, DetailView):
         context.update(activity_timetable_form=ActivityTimetableForm())
         return context
 
+    @method_decorator(ensure_csrf_cookie)
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         self.object = self.get_object()
