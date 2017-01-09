@@ -277,6 +277,7 @@ class Event(DeckBaseModel):
     allow_public_voting = models.BooleanField(_('Allow Public Voting'),
                                               default=True)
     due_date = models.DateTimeField(null=False, blank=False)
+    event_date = models.DateTimeField(null=True, blank=True)
     slots = models.SmallIntegerField(_('Slots'), default=10)
 
     # relations

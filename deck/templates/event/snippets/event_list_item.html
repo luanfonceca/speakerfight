@@ -8,6 +8,9 @@
 {% endif %}
   <div class="panel-body">
     <h3 class="panel-title event-title">{{ event.title }}</h3>
+    {% if event.event_date %}
+      <p>{{ event.event_date }}</p>
+    {% endif %}
     <p class="event-metadata">
       {% blocktrans with profile_url=event.author.profile.get_absolute_url author=event.author.get_full_name|default:event.author.username created_at=event.created_at %}
       Created by <strong><a href="{{ profile_url }}">{{ author }}</a></strong> at {{ created_at }}.

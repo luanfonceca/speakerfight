@@ -79,6 +79,18 @@ class EventTest(TestCase):
         self.assertEquals(Jury.objects.count(), 1)
         self.assertQuerysetEqual(event.jury.users.all(), ['<User: admin>'])
 
+    def test_event_with_event_date(self):
+        event_data = self.event_data.copy()
+        event_data['event_date'] = now() + timedelta(days=2)
+        event = Event.objects.create(**event_data)
+
+        response = self.client.get(
+            reverse('view_event', kwargs={'slug': event.slug}),
+            follow=True
+        )
+        
+        self.assertContains(response, event.event_date.strftime('%d/%m/%Y %H:%M', status_code=200 )
+
     def test_anonymous_user_create_events(self):
         self.client.logout()
         response = self.client.post(reverse('create_event'),
