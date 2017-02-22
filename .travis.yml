@@ -11,5 +11,5 @@ env:
   global:
   - secure: JFAH2i22AtBYLTpgzecYdv4aDuR5SIDAqgmZ6Vc5hx9GrvXs2W//NeMXPG6rTJhQoFfFUrko3Zjnasefm+CX+hJ/ZtwsgMgZlydqcEsVsPZrT6MQY6a0XIkgOKBsuZAbzztC/B8hiTnIiCSM00BKywprT/rM56u3AEGh4oJhMR0=
 before_install:
-- openssl aes-256-cbc -K $encrypted_12f6bf8c95e8_key -iv $encrypted_12f6bf8c95e8_iv
+- openssl aes-256-cbc -K $encrypted_abb2505bb1f5_key -iv $encrypted_abb2505bb1f5_iv
   -in deploy-key.enc -out deploy-key -d
