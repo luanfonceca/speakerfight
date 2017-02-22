@@ -579,7 +579,7 @@ msgid ""
 "We have sent you an e-mail. Please contact us if you do not receive it "
 "within a few minutes."
 msgstr ""
-"Nós he enviamos um e-mail. Por favor entre em contato se não recebê-lo em "
+"Nós lhe enviamos um e-mail. Por favor entre em contato se não recebê-lo em "
 "alguns minutos."
 
 #: core/templates/account/password_reset_from_key.html:18
