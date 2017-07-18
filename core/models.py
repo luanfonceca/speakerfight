@@ -2,7 +2,7 @@ from django.core.exceptions import AppRegistryNotReady
 from django.core.urlresolvers import reverse_lazy
 from django.conf import settings
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.utils.translation import ugettext as _
 
 
@@ -46,6 +46,10 @@ def create_user_profile(sender, instance, created, **kwargs):
         Profile.objects.create(user=instance)
 
 
+def slugify_user_username(sender, instance, **kwargs):
+    instance.username = instance.username.replace(' ', '_')
+
+
 try:
     from django.contrib.auth import get_user_model
     User = get_user_model()
@@ -53,3 +57,4 @@ except AppRegistryNotReady:
     from django.contrib.auth.models import User
 
 post_save.connect(create_user_profile, sender=User)
+pre_save.connect(slugify_user_username, sender=User)
