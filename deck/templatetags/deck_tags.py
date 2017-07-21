@@ -4,7 +4,9 @@ from django.contrib.auth.models import AnonymousUser
 from django import template
 register = template.Library()
 
-from deck.models import Vote
+from deck.models import Vote, Event
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 @register.filter
@@ -59,3 +61,8 @@ def event_get_embedded_code(schedule_url):
         '<script type="text/javascript" src="{iframe_resizer}"></script>'
         '<script type="text/javascript">iFrameResize()</script>'
     ).format(schedule_url=schedule_url, iframe_resizer=iframe_resizer)
+
+
+@register.filter
+def page_range_interval(page_number):
+    return Event().get_range_page(page_number)

@@ -21,6 +21,8 @@ from .models import Event, Proposal, Vote, Activity
 from .forms import EventForm, ProposalForm, ActivityForm, ActivityTimetableForm
 from core.mixins import LoginRequiredMixin, FormValidRedirectMixing
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 class BaseEventView(object):
     model = Event
@@ -49,7 +51,23 @@ class ListEvents(BaseEventView, ListView):
                 models.Q(title__contains=criteria) |
                 models.Q(description__contains=criteria)
             )
-        return queryset
+
+        paginator = Paginator(queryset, 15)
+
+        page = self.request.GET.get('page')
+
+        try:
+            qs = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            qs = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            qs = paginator.page(paginator.num_pages)
+
+        queryset = qs
+
+        return qs
 
     def get_context_data(self, **kwargs):
         context = super(ListEvents, self).get_context_data(**kwargs)

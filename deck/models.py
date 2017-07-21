@@ -4,6 +4,7 @@ from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db import models, transaction
 from django.db.models import Count
 from django.db.models.aggregates import Sum
@@ -339,6 +340,28 @@ class Event(DeckBaseModel):
             .annotate(Sum('votes__rate'))\
             .order_by('-is_approved', '-votes__rate__sum')
         return not_approved_schedule
+
+    def get_range_page(self, page_number):
+            paginator = Paginator(self.__class__.objects.all(), 15)
+            index = paginator.page_range.index(page_number)
+            max_index = len(paginator.page_range)
+
+            decrease = False
+            if page_number - 2 > 1:start_index = page_number - 2
+            else:
+                decrease = True
+                start_index = 0
+
+            if decrease:end_index = 5
+            elif page_number + 2 < max_index:end_index = page_number + 2
+            else:
+                start_index = max_index - 5
+                if start_index < 1:
+                    start_index = 0
+                end_index = max_index
+
+            page_range = paginator.page_range[start_index:end_index]
+            return page_range
 
 
 @receiver(user_signed_up)

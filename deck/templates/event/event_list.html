@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 
+{% load deck_tags %}
+
 {% load i18n %}
 {% load bootstrap3 %}
 
@@ -66,8 +68,35 @@
           {% endif %}
         </h3>
       {% endfor %}
+
     </div>
   </div>
+
+  <div align="center">
+      <ul class="pagination">
+        {% if event_list.has_previous %}
+          <li><a href="?page={{ event_list.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in event_list.number|page_range_interval %}
+          {% if event_list.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if event_list.has_next %}
+          <li><a href="?page={{ event_list.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+  </div>
+
+
+
+
   <!-- end events table -->
 {% endblock content %}
 
