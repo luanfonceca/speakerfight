@@ -785,7 +785,7 @@ class ProposalTest(TestCase):
         self.assertEquals(0, self.proposal.votes.count())
         self.assertEquals(0, Vote.objects.count())
 
-    def test_rate_proposal_multiple_times(self):
+    def test_rate_proposal_change_vote(self):
         rate_proposal_data = {
             'event_slug': self.proposal.event.slug,
             'slug': self.proposal.slug,
@@ -795,18 +795,19 @@ class ProposalTest(TestCase):
             reverse('rate_proposal', kwargs=rate_proposal_data),
             follow=True
         )
+        self.assertEquals(3, self.proposal.get_rate)
 
         rate_proposal_data.update({'rate': 'happy'})
         response = self.client.post(
             reverse('rate_proposal', kwargs=rate_proposal_data),
             follow=True
         )
-        self.assertEquals(401, response.status_code)
+        self.assertEquals(200, response.status_code)
         self.assertEquals(1, Vote.objects.count())
         self.assertEquals(1, self.proposal.votes.count())
-        self.assertEquals(3, self.proposal.get_rate)
+        self.assertEquals(2, self.proposal.get_rate)
 
-    def test_rate_proposal_multiple_times_by_get(self):
+    def test_rate_proposal_change_vote_by_get(self):
         rate_proposal_data = {
             'event_slug': self.proposal.event.slug,
             'slug': self.proposal.slug,
@@ -816,6 +817,7 @@ class ProposalTest(TestCase):
             reverse('rate_proposal', kwargs=rate_proposal_data),
             follow=True
         )
+        self.assertEquals(3, self.proposal.get_rate)
 
         rate_proposal_data.update({'rate': 'happy'})
         response = self.client.get(
@@ -825,7 +827,7 @@ class ProposalTest(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertEquals(1, Vote.objects.count())
         self.assertEquals(1, self.proposal.votes.count())
-        self.assertEquals(3, self.proposal.get_rate)
+        self.assertEquals(2, self.proposal.get_rate)
 
     def test_rate_proposal_with_the_same_author(self):
         self.client.logout()

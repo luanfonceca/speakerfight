@@ -116,8 +116,6 @@ class Vote(models.Model):
             validation_message = _(u'You cannot Rate your own proposals.')
         elif not self.proposal.event.allow_public_voting:
             validation_message = _(u"Proposal doesn't accept Public Voting.")
-        elif self.proposal.user_already_voted(self.user):
-            validation_message = _(u'Proposal already Rated by you.')
 
         if validation_message:
             raise ValidationError(_(validation_message))
@@ -202,7 +200,7 @@ class Proposal(Activity):
     def rate(self, user, rate):
         rate_int = [r[0] for r in Vote.VOTE_RATES if rate in r][0]
         with transaction.atomic():
-            self.votes.create(user=user, rate=rate_int)
+            self.votes.update_or_create(user=user, defaults={'rate': rate_int})
 
     def user_already_voted(self, user):
         if isinstance(user, AnonymousUser):
@@ -210,23 +208,16 @@ class Proposal(Activity):
         return self.votes.filter(user=user).exists()
 
     def user_can_vote(self, user):
-        if self.user_already_voted(user):
-            return False
-
-        # An user can not vote on its own proposal unless he’s the event author.
-        if self.author == user and self.event.author != user:
-            return False
-
-        if self.event.allow_public_voting:
-            return True
-
-        if user.is_superuser:
-            return True
-
-        if self.event.jury.users.filter(pk=user.pk).exists():
-            return True
-
-        return False
+        can_vote = False
+        if self.author == user and not self.event.author == user:
+            pass
+        elif self.event.allow_public_voting:
+            can_vote = True
+        elif user.is_superuser:
+            can_vote = True
+        elif self.event.jury.users.filter(pk=user.pk).exists():
+            can_vote = True
+        return can_vote
 
     def user_can_approve(self, user):
         can_approve = False
