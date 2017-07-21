@@ -724,7 +724,8 @@ html {
 div.show-more {
   text-align: center;
   overflow: hidden;
-  margin: 20px 0 20px 0;
+  padding: 10px 0 10px 0;
+  cursor: pointer;
 }
 
 div.show-more a {

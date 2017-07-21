@@ -156,17 +156,25 @@
   <script type="text/javascript">
     $(function () {
       $(".linkable").linkable();
+      // Collapse proposals too large
       $(".proposal-description").each(function() {
-        var self = $(this)
+        var self = $(this);
         if (self.height() > 200) {
           self.addClass("proposal-collapse");
-          self.after("<div class='show-more'><a>{% trans 'Show more' %}</a></div>");
+          self.after("<div class='show-more'><a>" + gettext('Show more') + "</a></div>");
         }
       });
+      // Expand proposal on click the "Show more" link
       $(".show-more").click(function() {
-        var self = $(this)
+        var self = $(this);
         self.prev().removeClass("proposal-collapse");
         self.remove();
+      });
+      // Also expand proposal on click the collapsed text area
+      $(".proposal-collapse").click(function() {
+        var self = $(this);
+        self.removeClass("proposal-collapse");
+        self.next().remove();
       });
     });
   </script>

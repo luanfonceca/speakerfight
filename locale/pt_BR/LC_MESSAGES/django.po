@@ -1380,6 +1380,10 @@ msgstr "Remover"
 msgid "There are no proposals to show"
 msgstr "Não há propostas para exibir"
 
+#: deck/templates/event/event_detail.html:164
+msgid "Show more"
+msgstr "Mostrar mais"
+
 #: deck/templates/event/event_detail_schedule.html:47
 msgid "More"
 msgstr "Mais"
