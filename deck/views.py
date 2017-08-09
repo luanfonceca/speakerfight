@@ -34,14 +34,7 @@ class ListEvents(BaseEventView, ListView):
 
     def get_queryset(self):
         queryset = super(ListEvents, self).get_queryset()
-
-        if self.request.user.is_authenticated():
-            queryset = queryset.filter(
-                models.Q(is_published=True) |
-                models.Q(author=self.request.user)
-            )
-        else:
-            queryset = queryset.published_ones()
+        queryset = queryset.published_ones()
 
         criteria = self.request.GET.get(u'search', None)
         if criteria:
@@ -49,6 +42,8 @@ class ListEvents(BaseEventView, ListView):
                 models.Q(title__contains=criteria) |
                 models.Q(description__contains=criteria)
             )
+        else:
+            queryset = queryset.upcoming()
         return queryset
 
     def get_context_data(self, **kwargs):

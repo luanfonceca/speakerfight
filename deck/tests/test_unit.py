@@ -4,6 +4,7 @@ from django.db.models import (CharField, TextField,
                               SmallIntegerField)
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
+from django.utils.timezone import now, timedelta
 
 from deck.models import Event, Proposal, Vote, Jury
 
@@ -13,7 +14,8 @@ EVENT_DATA = {
     'description': 'A really good event.',
     'author_id': 1,
     'is_published': False,
-    'slots': 30
+    'slots': 30,
+    'due_date': now() + timedelta(days=7),
 }
 
 PROPOSAL_DATA = {

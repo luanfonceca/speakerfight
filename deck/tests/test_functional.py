@@ -7,8 +7,7 @@ from django.core import mail
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
-
-from datetime import datetime, timedelta
+from django.utils.timezone import now, timedelta
 
 from deck.models import (Event, Proposal, Vote, Jury,
                          send_proposal_deleted_mail, send_welcome_mail)
@@ -85,6 +84,31 @@ class EventTest(TestCase):
         event_data.update(is_published=True)
         Event.objects.create(**event_data)
 
+        past_event_data = self.event_data.copy()
+        past_event_data.update(
+            title='Python Nordeste',
+            due_date=now() - timedelta(days=7)
+        )
+        Event.objects.create(**past_event_data)
+
+        response = self.client.get(reverse('list_events'), follow=True)
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_list'],
+                                 ["<Event: RuPy>"])
+
+    def test_list_event_with_logged_user(self):
+        event_data = self.event_data.copy()
+        event_data.update(is_published=True)
+        Event.objects.create(**event_data)
+
+        past_event_data = self.event_data.copy()
+        past_event_data.update(
+            title='Python Nordeste',
+            is_published=True,
+            due_date=now() - timedelta(days=7)
+        )
+        Event.objects.create(**past_event_data)
+
         response = self.client.get(reverse('list_events'), follow=True)
         self.assertEquals(200, response.status_code)
         self.assertQuerysetEqual(response.context['event_list'],
@@ -95,10 +119,17 @@ class EventTest(TestCase):
         event_data.update(is_published=True)
         Event.objects.create(**event_data)
 
+        past_event_data = self.event_data.copy()
+        past_event_data.update(
+            title='Python Nordeste',
+            is_published=True,
+            due_date=now() - timedelta(days=7)
+        )
+        Event.objects.create(**past_event_data)
+
         response = self.client.get(reverse('list_events'),
                                    data={'search': 'RuPy'}, follow=True)
         self.assertEquals(200, response.status_code)
-        self.assertEqual(response.context['num_of_results'], 1)
         self.assertQuerysetEqual(response.context['event_list'],
                                  ["<Event: RuPy>"])
 
@@ -110,7 +141,6 @@ class EventTest(TestCase):
         response = self.client.get(reverse('list_events'),
                                    data={'search': 'SOME SEARCH'}, follow=True)
         self.assertEquals(200, response.status_code)
-        self.assertEqual(response.context['num_of_results'], 0)
         self.assertQuerysetEqual(response.context['event_list'], [])
 
     def test_detail_event(self):
@@ -278,7 +308,7 @@ class EventTest(TestCase):
 
     def test_event_create_event_proposal_with_passed_due_date(self):
         event_data = self.event_data.copy()
-        event_data.update(due_date=datetime.now() - timedelta(hours=24))
+        event_data.update(due_date=now() - timedelta(hours=24))
         event = Event.objects.create(**event_data)
         with self.assertRaises(ValidationError):
             self.client.post(

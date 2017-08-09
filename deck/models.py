@@ -21,7 +21,6 @@ from textwrap import dedent
 
 from jury.models import Jury
 
-import datetime
 
 
 class DeckBaseManager(models.QuerySet):
@@ -30,6 +29,9 @@ class DeckBaseManager(models.QuerySet):
 
     def published_ones(self):
         return self.cached_authors().filter(is_published=True)
+
+    def upcoming(self, published_only=True):
+        return self.filter(due_date__gte=timezone.now(), is_published=published_only)
 
     def order_by_never_voted(self, user_id):
         if self.model != Proposal:
@@ -292,7 +294,7 @@ class Event(DeckBaseModel):
     def due_date_is_close(self):
         if self.due_date_is_passed:
             return False
-        return timezone.now() > self.due_date - datetime.timedelta(days=7)
+        return timezone.now() > self.due_date - timezone.timedelta(days=7)
 
     def get_absolute_url(self):
         return reverse('view_event', kwargs={'slug': self.slug})
