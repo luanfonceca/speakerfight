@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 
+{% load deck_tags %}
+
 {% load i18n %}
 {% load bootstrap3 %}
 
@@ -68,9 +70,46 @@
       {% endfor %}
     </div>
   </div>
+
+  <div align="center">
+    <ul class="pagination">
+      {% if event_list.has_previous %}
+        <li>
+          <a href="{% urlize page=event_list.previous_page_number search=criteria %}">
+            &laquo;
+          </a>
+        </li>
+      {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+      {% endif %}
+
+      {% for page_number in event_list.paginator.page_range %}
+        {% if event_list.number == page_number %}
+          <li class="active">
+            <span>{{ page_number }} <span class="sr-only">(current)</span></span>
+          </li>
+        {% else %}
+          <li>
+            <a href="{% urlize page=page_number search=criteria %}">
+              {{ page_number }}
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      {% if event_list.has_next %}
+        <li>
+          <a href="{% urlize page=event_list.next_page_number search=criteria %}">
+            &raquo;
+          </a>
+        </li>
+      {% else %}
+        <li class="disabled"><span>&raquo;</span></li>
+      {% endif %}
+    </ul>
+  </div>
   <!-- end events table -->
 {% endblock content %}
-
 
 {% block scripts %}
   <script src="{{ STATIC_URL }}js/libs/jquery.linkable.js"></script>

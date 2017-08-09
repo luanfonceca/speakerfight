@@ -143,6 +143,21 @@ class EventTest(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertQuerysetEqual(response.context['event_list'], [])
 
+    def test_list_event_pagination(self):
+        for x in xrange(0, 16):
+            event_data = self.event_data.copy()
+            event_data.update(
+                is_published=True,
+                title='{} - {}'.format(event_data.get('title'), x)
+            )
+            Event.objects.create(**event_data)
+
+        response = self.client.get(
+            '{}?{}'.format(reverse('list_events'), 'page=2'), follow=True)
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['event_list'],
+                                 ["<Event: RuPy - 0>"])
+
     def test_detail_event(self):
         event = Event.objects.create(**self.event_data)
         response = self.client.get(
