@@ -39,8 +39,8 @@ class ListEvents(BaseEventView, ListView):
         criteria = self.request.GET.get(u'search', None)
         if criteria:
             queryset = queryset.filter(
-                models.Q(title__contains=criteria) |
-                models.Q(description__contains=criteria)
+                models.Q(title__icontains=criteria) |
+                models.Q(description__icontains=criteria)
             )
         else:
             queryset = queryset.upcoming()
