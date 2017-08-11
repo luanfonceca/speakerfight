@@ -41,12 +41,7 @@
     {% block head %} {% endblock head %}
   </head>
   <body>
-    <div class="header">
-      <a href="{% url 'index_page' %}">
-        <img src="{{ STATIC_URL }}img/speakerfight.png" class="logo" alt="logo" />
-      </a>
-    </div>
-
+    {% include "navbar.html" with show_main_header=True %}
     <div class="row">
       <div class="content-wrap col-md-offset-1 col-md-10">
         {% if redirect_field_value %}

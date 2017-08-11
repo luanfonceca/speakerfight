@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<header class="navbar navbar-inverse" role="banner">
+<header class="{% if show_main_header %} main-header {% endif %} navbar navbar-inverse" role="banner">
   <div class="navbar-header">
     <button class="navbar-toggle" type="button" data-toggle="collapse" id="menu-toggler">
       <span class="sr-only">Toggle navigation</span>
@@ -29,46 +29,6 @@
         {% endif %}
       </span>
     </form>
-    {% if request.user.is_authenticated %}
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <i class="icon-user"></i>
-          &nbsp;
-          <span>{{ request.user.username }}</span>
-          &nbsp;
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="{% url 'profile' %}" role="button">{% trans "Profile" %}</a></li>
-          <li class="divider"></li>
-          <li><a href="{% url 'account_logout' %}" role="button">{% trans "Logout" %}</a></li>
-        </ul>
-      </li>
-    {% else %}
-      <li class="notification-dropdown">
-        <a href="#" class="trigger">
-          <i class="icon-reply"></i>
-          {% trans "Sign In" %}
-        </a>
-        <div class="pop-dialog">
-          <div class="pointer right">
-            <div class="arrow"></div>
-            <div class="arrow_border"></div>
-          </div>
-          <div class="body">
-            <h4>
-              <i class="icon-signin"></i>
-              {% trans "Sign in with one of your account" %}
-            </h4>
-            <div class="messages">
-              {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-              <div class="footer">
-                <a href="{% url 'account_login' %}">{% trans "Using Email and Password" %}</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </li>
-    {% endif %}
+    {% include "login_button.html" %}
   </ul>
 </header>
