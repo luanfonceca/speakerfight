@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<header class="{% if show_main_header %} main-header {% endif %} navbar navbar-inverse" role="banner">
+<header class="navbar navbar-inverse" role="banner">
   <div class="navbar-header">
     <button class="navbar-toggle" type="button" data-toggle="collapse" id="menu-toggler">
       <span class="sr-only">Toggle navigation</span>
@@ -29,6 +29,7 @@
         {% endif %}
       </span>
     </form>
-    {% include "login_button.html" %}
+    
+    {% include "snippets/login_button.html" %}
   </ul>
 </header>
