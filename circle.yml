@@ -1,6 +1,7 @@
 dependencies:
   override:
     - pip install -r requirements.txt
+    - pip install pycrypto
 test:
   override:
     - coverage run manage.py test
