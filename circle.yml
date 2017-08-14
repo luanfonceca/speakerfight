@@ -4,7 +4,15 @@ dependencies:
 test:
   override:
     - coverage run manage.py test
-    - coveralls
+  post:
+    - COVERALLS_PARALLEL=true coveralls:
+        parallel: true
+notify:
+  webhooks:
+    - url: https://coveralls.io/webhook?repo_token=05SKl9JC8eg9w4GYG3vJWm2AXs74uVZMBqHv6
+general:
+  artifacts:
+    - 'coverage'
 deployment:
   production:
     branch: test-circle
