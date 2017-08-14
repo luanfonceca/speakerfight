@@ -1,0 +1,13 @@
+dependencies:
+  override:
+    - pip install -r requirements.txt
+test:
+  override:
+    - coverage run manage.py test
+  post:
+    - coveralls
+deployment:
+  production:
+    branch: test-circle
+    commands:
+      - fab deploy
