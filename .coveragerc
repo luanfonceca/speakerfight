@@ -1,8 +1,8 @@
 [run]
 source = .
 omit = */migrations/*,
-	   *__init__*,
-	   */tests/*,
+       *__init__*,
+       */tests/*,
        speakerfight/*,
        fabfile.py,
        manage.py
