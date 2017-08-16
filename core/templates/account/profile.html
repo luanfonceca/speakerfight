@@ -110,3 +110,13 @@
     </div>
   {% endif %}
 {% endblock content %}
+
+{% block before_body_end %}
+  <script src="{{ STATIC_URL }}js/libs/jquery.cropit.js"></script>
+  <script>
+    $(function() {
+      $('.image-editor').cropit();
+      $(".image-editor img").attr('src', $("#user-photo").val())
+    });
+  </script>
+{% endblock before_body_end %}
