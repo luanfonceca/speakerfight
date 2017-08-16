@@ -1,0 +1,12 @@
+.cropit-preview {
+  background-color: #f8f8f8;
+  background-size: cover;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-top: 7px;
+  width: 200px;
+  height: 200px;
+}
+.cropit-preview-image-container {
+  cursor: move;
+}
