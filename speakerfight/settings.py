@@ -64,6 +64,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 DEFAULT_FROM_EMAIL = NO_REPLY_EMAIL = 'Speakerfight <noreply@speakerfight.com>'
 
 ALLOWED_HOSTS = [
+    "localhost",
     "speakerfight.com",
 ]
 
@@ -131,7 +132,7 @@ LANGUAGE_CODE = 'en-US'
 
 LANGUAGES = (
     ('en-us', 'English'),
-    ('pt_BR', u'Português'),
+    ('pt-BR', u'Português'),
 )
 
 LOCALE_PATHS = (
@@ -146,6 +147,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+DATETIME_INPUT_FORMATS = [
+    '%d/%m/%Y %H:%M',
+]
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
@@ -153,10 +158,10 @@ STATIC_URL = '/static/'
 
 SITE_ID = 1
 
-AUTHENTICATION_BACKENDS = global_settings.AUTHENTICATION_BACKENDS + (
+AUTHENTICATION_BACKENDS = global_settings.AUTHENTICATION_BACKENDS + [
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
-)
+]
 
 MIDDLEWARE_CLASSES = global_settings.MIDDLEWARE_CLASSES + [
     'django.middleware.security.SecurityMiddleware',

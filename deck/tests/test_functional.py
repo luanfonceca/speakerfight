@@ -8,6 +8,7 @@ from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
 from django.utils.timezone import now, timedelta
+from django.utils.translation import ugettext as _
 
 from deck.models import (Event, Proposal, Vote, Jury,
                          send_proposal_deleted_mail, send_welcome_mail)
@@ -25,8 +26,12 @@ class EventTest(TestCase):
         self.client.login(username='admin', password='admin')
 
     def test_create_event(self):
+        event_data = self.event_data.copy()
+        event_data['due_date'] = (
+            event_data['due_date'].strftime('%d/%m/%Y %H:%M')
+        )
         response = self.client.post(reverse('create_event'),
-                                    self.event_data, follow=True)
+                                    event_data, follow=True)
         self.assertEquals(200, response.status_code)
         self.assertQuerysetEqual(Event.objects.all(),
                                  ["<Event: RuPy>"])
@@ -43,7 +48,11 @@ class EventTest(TestCase):
         if not settings.SEND_NOTIFICATIONS:
             return
 
-        self.client.post(reverse('create_event'), self.event_data)
+        event_data = self.event_data.copy()
+        event_data['due_date'] = (
+            event_data['due_date'].strftime('%d/%m/%Y %H:%M')
+        )
+        self.client.post(reverse('create_event'), event_data, follow=True)
         event = Event.objects.get()
 
         self.assertEqual(1, len(mail.outbox))
@@ -53,7 +62,9 @@ class EventTest(TestCase):
 
     def test_create_event_with_jury(self):
         event_data = self.event_data.copy()
-
+        event_data['due_date'] = (
+            event_data['due_date'].strftime('%d/%m/%Y %H:%M')
+        )
         response = self.client.post(reverse('create_event'),
                                     event_data, follow=True)
         self.assertEquals(200, response.status_code)
@@ -213,7 +224,7 @@ class EventTest(TestCase):
 
         self.assertEquals(200, response.status_code)
         event = response.context['event']
-        self.assertEquals('rupy-2014', event.slug)
+        self.assertEquals('rupy', event.slug)
 
     def test_anonymous_user_update_events(self):
         self.client.logout()
@@ -709,7 +720,7 @@ class ProposalTest(TestCase):
                     kwargs={'event_slug': proposal.event.slug,
                             'slug': proposal.slug}), follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Proposal deleted.')
+        self.assertContains(response, _('Proposal deleted.'))
         self.assertEqual(
             Proposal.objects.filter(slug=proposal.slug).count(), 0)
 
@@ -719,7 +730,7 @@ class ProposalTest(TestCase):
                     kwargs={'event_slug': self.proposal.event.slug,
                             'slug': self.proposal.slug}), follow=True)
         self.assertEqual(200, response.status_code)
-        self.assertContains(response, 'You are not allowed to see this page.')
+        self.assertContains(response, _('You are not allowed to see this page.'))
 
     def test_rate_proposal(self):
         rate_proposal_data = {
@@ -1258,12 +1269,12 @@ class ProposalTest(TestCase):
 
     def test_my_proposals_menu_for_authenticated_users(self):
         response = self.client.get(reverse('list_events'))
-        self.assertContains(response, 'My Proposals')
+        self.assertContains(response, _('My Proposals'))
 
     def test_my_proposals_menu_for_non_authenticated_users(self):
         self.client.logout()
         response = self.client.get(reverse('list_events'))
-        self.assertNotContains(response, 'My Proposals')
+        self.assertNotContains(response, _('My Proposals'))
 
     def test_users_should_see_their_proposals(self):
         user = User.objects.get(username='user')
