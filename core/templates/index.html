@@ -1,5 +1,6 @@
 {% extends "public_layout.html" %}
 
+{% load staticfiles %}
 {% load i18n %}
 
 {% block head_title %}Index{% endblock head_title %}
@@ -58,7 +59,7 @@
       <p>{% trans "You can create new events and receive proposals from anyone in the world. All the events can be either public or private." %}</p>
     </div>
     <div class="col-lg-6 col-md-8">
-      <img src="{{ STATIC_URL }}img/event-list.png" alt="{% trans "Event List" %}" width="100%" class="image-shadow" />
+      <img src="{% static 'img/event-list.png' %}" alt="{% trans "Event List" %}" width="100%" class="image-shadow" />
     </div>
   </div>
 
@@ -66,7 +67,7 @@
 
   <div class="row">
     <div class="col-lg-offset-1 col-lg-6 col-md-8">
-      <img src="{{ STATIC_URL }}img/event-detail.png" alt="{% trans "Event details" %}" width="100%" class="image-shadow" />
+      <img src="{% static 'img/event-detail.png' %}" alt="{% trans "Event details" %}" width="100%" class="image-shadow" />
     </div>
     <div class="col-lg-3 col-md-4">
       <h2>{% trans "Event details" %}</h2>
@@ -83,7 +84,7 @@
       <p>{% trans "The event jury restricts the vote to a group of users. Anyone outside of that group will just see the proposals and they cannot vote." %}</p>
     </div>
     <div class="col-lg-6 col-md-8">
-      <img src="{{ STATIC_URL }}img/event-jury.png" alt="{% trans "Event Jury" %}" width="100%" class="image-shadow" />
+      <img src="{% static 'img/event-jury.png' %}" alt="{% trans "Event Jury" %}" width="100%" class="image-shadow" />
     </div>
   </div>
 
@@ -94,7 +95,7 @@
       <h1>{% trans "Enter in the arena" %}</h1>
       <div class="row">
         <div class="col-md-offset-3 col-md-6">
-          <a href="{% url 'list_events' %}" class="btn-flat info big-button text-center">{% trans "JOIN THE FIGHTERS" %}</a>
+          <a href="{% url 'list_events' %}' %}" class="btn-flat info big-button text-center">{% trans "JOIN THE FIGHTERS" %}</a>
         </div>
       </div>
     </div>

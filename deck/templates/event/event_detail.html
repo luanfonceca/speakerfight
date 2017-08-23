@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% load staticfiles %}
 
 {% load i18n %}
 {% load bootstrap3 %}
@@ -12,7 +13,7 @@
   </style>
   <!-- Go to www.addthis.com/dashboard to customize your tools -->
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f777bac7bca077f" async="async"></script>
-  <link rel="stylesheet" href="{{ STATIC_URL }}css/proposals.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="{% static 'css/proposals.css' %}" type="text/css" media="screen" />
 {% endblock head %}
 
 {% block head_title %}{{ event }}{% endblock %}
@@ -150,8 +151,8 @@
 {% endblock content %}
 
 {% block scripts %}
-  <script src="{{ STATIC_URL }}js/libs/jquery.linkable.js"></script>
-  <script src="{{ STATIC_URL }}js/voting.js"></script>
+  <script src="{% static 'js/libs/jquery.linkable.js' %}"></script>
+  <script src="{% static 'js/voting.js' %}"></script>
 
   <script type="text/javascript">
     $(function () {

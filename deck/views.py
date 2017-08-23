@@ -366,7 +366,7 @@ class RateProposal(BaseProposalView, UpdateView):
         except IndexError:
             response_content['message'] = _(u'Rate Index not found.')
             response_status = 400
-        except (IntegrityError, ValidationError), e:
+        except (IntegrityError, ValidationError) as e:
             response_content['message'] = e.message
             response_status = 400
         else:
@@ -384,7 +384,7 @@ class RateProposal(BaseProposalView, UpdateView):
             self.object.rate(self.request.user, rate)
         except IndexError:
             messages.error(self.request, _(u'Rate Index not found.'))
-        except (IntegrityError, ValidationError), e:
+        except (IntegrityError, ValidationError) as e:
             messages.error(self.request, e.message)
         else:
             messages.success(self.request, _(u'Proposal rated.'))
@@ -436,7 +436,7 @@ class ApproveProposal(BaseProposalView, UpdateView):
 
         try:
             self.object.approve()
-        except (IntegrityError, ValidationError), e:
+        except (IntegrityError, ValidationError) as e:
             response_content['message'] = e.message
             response_status = 400
         else:
@@ -451,7 +451,7 @@ class ApproveProposal(BaseProposalView, UpdateView):
 
         try:
             self.object.approve()
-        except (IntegrityError, ValidationError), e:
+        except (IntegrityError, ValidationError) as e:
             messages.error(self.request, e.message)
         else:
             messages.success(self.request, _(u'Proposal approved.'))
@@ -503,7 +503,7 @@ class DisapproveProposal(BaseProposalView, UpdateView):
 
         try:
             self.object.disapprove()
-        except (IntegrityError, ValidationError), e:
+        except (IntegrityError, ValidationError) as e:
             response_content['message'] = e.message
             response_status = 400
         else:
@@ -518,7 +518,7 @@ class DisapproveProposal(BaseProposalView, UpdateView):
 
         try:
             self.object.disapprove()
-        except (IntegrityError, ValidationError), e:
+        except (IntegrityError, ValidationError) as e:
             messages.error(self.request, e.message)
         else:
             messages.success(self.request, _(u'Proposal disapproved.'))

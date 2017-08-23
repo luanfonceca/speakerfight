@@ -1,6 +1,6 @@
 from smarturls import surl as url
 
-from api import views
+from . import views
 
 
 urlpatterns = [

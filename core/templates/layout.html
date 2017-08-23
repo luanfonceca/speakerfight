@@ -1,3 +1,4 @@
+{% load staticfiles %}
 {% load bootstrap3 %}
 {% load i18n %}
 
@@ -10,20 +11,20 @@
     </title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="{{ STATIC_URL }}img/speakerfight.ico"/>
+    <link rel="shortcut icon" href="{% static 'img/speakerfight.ico' %}"/>
 
     <!-- bootstrap -->
-    <link href="{{ STATIC_URL }}css/libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
-    <link href="{{ STATIC_URL }}css/libs/bootstrap/bootstrap-overrides.css" type="text/css" rel="stylesheet" />
+    <link href="{% static 'css/libs/bootstrap/bootstrap.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/libs/bootstrap/bootstrap-overrides.css' %}" type="text/css" rel="stylesheet" />
 
     <!-- libraries -->
-    <link href="{{ STATIC_URL }}css/libs/font-awesome.css" type="text/css" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/flat-icons.css" type="text/css" media="screen" />
+    <link href="{% static 'css/libs/font-awesome.css' %}" type="text/css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/flat-icons.css' %}" type="text/css" media="screen" />
 
     <!-- global styles -->
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/layout.css" />
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/elements.css" />
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/icons.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/layout.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/elements.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/icons.css' %}" />
 
 
     <!-- open sans font -->
@@ -38,10 +39,10 @@
 
 
     <!-- scripts -->
-    <script src="{{ STATIC_URL }}js/libs/jquery.min.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-    <script src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
-    <script src="{{ STATIC_URL }}js/theme.js"></script>
+    <script src="{% static 'js/libs/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
+    <script src="{% static 'js/theme.js' %}"></script>
 
     {% block scripts %}{% endblock scripts %}
     <!-- end scripts -->

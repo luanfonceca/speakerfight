@@ -1,11 +1,9 @@
-from django.conf.urls import patterns
 
 from smarturls import surl as url
 
-import views
+from . import views
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(regex=r'/events/<slug:slug>/jury/',
         view=views.JuryView.as_view(),
         name='jury_event'),
@@ -15,4 +13,4 @@ urlpatterns = patterns(
     url(regex=r'/events/<slug:slug>/remove/jury/<int:user_pk>/',
         view=views.remove_user_from_event_jury,
         name='event_remove_from_jury'),
-)
+]

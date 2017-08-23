@@ -1,11 +1,12 @@
 {% extends "public_layout.html" %}
 
+{% load staticfiles %}
 {% load i18n %}
 
 {% block head_title %}{% trans 'About page' %}{% endblock head_title %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ STATIC_URL }}css/flat-icons.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="{% static 'css/flat-icons.css' %}" type="text/css" media="screen" />
 {% endblock head %}
 
 {% block content %}
