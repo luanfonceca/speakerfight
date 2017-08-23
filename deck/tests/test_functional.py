@@ -30,8 +30,9 @@ class EventTest(TestCase):
         event_data['due_date'] = (
             event_data['due_date'].strftime('%d/%m/%Y %H:%M')
         )
-        response = self.client.post(reverse('create_event'),
-                                    event_data, follow=True)
+        with self.settings(LANGUAGE_CODE='pt-BR'):
+            response = self.client.post(reverse('create_event'),
+                                        event_data, follow=True)
         self.assertEquals(200, response.status_code)
         self.assertQuerysetEqual(Event.objects.all(),
                                  ["<Event: RuPy>"])
@@ -52,7 +53,9 @@ class EventTest(TestCase):
         event_data['due_date'] = (
             event_data['due_date'].strftime('%d/%m/%Y %H:%M')
         )
-        self.client.post(reverse('create_event'), event_data, follow=True)
+        with self.settings(LANGUAGE_CODE='pt-BR'):
+            self.client.post(reverse('create_event'),
+                             event_data, follow=True)
         event = Event.objects.get()
 
         self.assertEqual(1, len(mail.outbox))
@@ -65,8 +68,9 @@ class EventTest(TestCase):
         event_data['due_date'] = (
             event_data['due_date'].strftime('%d/%m/%Y %H:%M')
         )
-        response = self.client.post(reverse('create_event'),
-                                    event_data, follow=True)
+        with self.settings(LANGUAGE_CODE='pt-BR'):
+            response = self.client.post(reverse('create_event'),
+                                        event_data, follow=True)
         self.assertEquals(200, response.status_code)
 
         event = response.context['event']
