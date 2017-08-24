@@ -61,3 +61,10 @@ class ProfileForm(forms.ModelForm):
             self.instance.user.username = data.get('username')
 
         self.instance.user.save()
+
+
+class ProfilePictureForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = ('image',)
