@@ -22,5 +22,8 @@ urlpatterns = patterns(
     url(regex=r'/profile/<username:user__username>/update/',
         view=views.ProfileUpdateView.as_view(),
         name='update_profile'),
+    url(regex=r'/profile/<username:user__username>/update/picture/',
+        view=views.ProfileUpdatePictureView.as_view(),
+        name='update_profile_picture'),
     url(r'^jsi18n/$', javascript_catalog, name='javascript_catalog'),
 )
