@@ -36,6 +36,9 @@ def get_rate_title(rate):
 def get_user_photo(user, size=40):
     social = user.socialaccount_set.first()
 
+    if user.profile.image:
+        return user.profile.image.url
+
     if social:
         return social.get_avatar_url()
 
