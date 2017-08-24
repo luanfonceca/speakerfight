@@ -8,7 +8,7 @@ from vanilla import TemplateView, DetailView, UpdateView
 
 from deck.models import Event, Proposal
 from core.models import Profile
-from core.forms import ProfileForm
+from core.forms import ProfileForm, ProfilePictureForm
 from core.mixins import LoginRequiredMixin, FormValidRedirectMixing
 
 
@@ -46,6 +46,7 @@ class ProfileView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
         context.update(profile_form=ProfileForm(instance=self.get_object()))
+        context.update(profile_picture_form=ProfilePictureForm(instance=self.get_object()))
         return context
 
 
