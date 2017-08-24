@@ -86,3 +86,7 @@ class ProfileUpdateView(LoginRequiredMixin,
             messages.error(self.request, error.as_data()[0].message)
 
         return self.get()
+
+
+class ProfileUpdatePictureView(ProfileUpdateView):
+    form_class = ProfilePictureForm
