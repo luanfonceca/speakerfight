@@ -2,6 +2,10 @@
   float: left;
 }
 
+#profile-detail #profile-photo .btn-flat {
+  margin-top: 5px;
+}
+
 #profile-detail .thumbnail {
   width: 210px;
 }
