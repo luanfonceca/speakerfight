@@ -28,13 +28,12 @@
         <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-body">
-              <div id="profile-photo">
-                <div class="image-editor thumbnail">
-                  <input type="file" class="cropit-image-input">
-                  <div class="avatar cropit-preview">
-                    <input id="user-photo" type="hidden" value="{{ object.user|get_user_photo:200 }}">
+              <div id="profile-photo" class="text-center">
+                <div class="thumbnail">
+                  <div class="avatar">
+                    <img width="200"src="{{ object.user|get_user_photo:200 }}">
                   </div>
-                  <a href="javascript:;" data-toggle="modal" data-target="#update-profile-modal" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Edit profile.' %}">
+                  <a href="javascript:;" data-toggle="modal" data-target="#update-profile-picture-modal" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Edit profile.' %}">
                     <i class="icon-pencil"></i> Change photo
                   </a>
                 </div>
