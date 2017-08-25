@@ -19,6 +19,7 @@ class JuryView(UpdateView):
     template_name = 'jury/jury_detail.html'
     lookup_field = 'slug'
     model = Jury
+    fields = ['users']
 
     def get_object(self):
         return Jury.objects.get(event__slug=self.kwargs.get('slug'))
