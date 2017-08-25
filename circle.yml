@@ -5,11 +5,13 @@ dependencies:
 test:
   override:
     - coverage run manage.py test
+  post:
+    - coveralls
 general:
   artifacts:
     - 'coverage'
 deployment:
   production:
-    branch: test-circle
+    branch: master
     commands:
       - fab deploy
