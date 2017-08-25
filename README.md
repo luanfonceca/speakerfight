@@ -38,6 +38,7 @@
 </blockquote>
 
 <h3>Normal Installation</h3>
+
 ```sh
 $ git clone git@github.com:luanfonceca/speakerfight.git
 $ cd speakerfight
