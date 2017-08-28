@@ -3,7 +3,7 @@ MarkupSafe==1.0
 PyYAML==3.12
 Pygments==2.2.0
 Werkzeug==0.12.2
-coverage==3.7.1
+coverage==4.4.1
 django-activelink==0.4
 django-allauth==0.19.1
 django-anymail==0.1
