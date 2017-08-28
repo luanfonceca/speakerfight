@@ -1,4 +1,4 @@
-Django==1.7.4
+Django==1.11.4
 MarkupSafe==0.23
 PyYAML==3.11
 Pygments==1.6
