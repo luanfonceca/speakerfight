@@ -15,7 +15,7 @@ django-extensions==1.9.0
 django-vanilla-views==1.0.4
 django-queryset-csv==1.0.0
 djangorestframework==3.6.4
-master-sake==0.9
+master-sake==0.9.7
 mccabe==0.2.1
 networkx==1.8.1
 oauthlib==0.6.1
