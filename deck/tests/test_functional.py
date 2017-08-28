@@ -353,14 +353,14 @@ class EventTest(TestCase):
 
     def test_export_votes_to_csv_queryset(self):
         event = Event.objects.create(**self.event_data)
-        Proposal.objects.create(event=event, **self.proposal_data)
+        proposal = Proposal.objects.create(event=event, **self.proposal_data)
         proposals = event.get_votes_to_export()
         exported_data = [{'title': u'Python For Zombies',
                           'votes__count': 0,
                           'author__email': u'admin@speakerfight.com',
                           'author__username': u'admin',
                           'votes__rate__sum': None,
-                          'id': 1}]
+                          'id': proposal.pk}]
         self.assertEqual(list(proposals), exported_data)
 
     def test_export_votes_sum_rate(self):
