@@ -29,5 +29,5 @@ sqlparse==0.2.3
 uWSGI==2.0.15
 wsgiref==0.1.2
 smarturls==0.1.7
-Fabric==1.9.0
+Fabric==1.14.0
 pycparser==2.16
