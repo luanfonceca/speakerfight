@@ -3,7 +3,7 @@ from smarturls import surl as url
 
 from . import views
 
-urlpatterns = [
+urlpatterns = (
     url(regex=r'/my_proposals/',
         view=views.ListMyProposals.as_view(),
         name='my_proposals'),
@@ -54,4 +54,4 @@ urlpatterns = [
               r'proposals/<slug:slug>/disapprove_proposal/',
         view=views.DisapproveProposal.as_view(),
         name='disapprove_proposal'),
-]
+)

@@ -9,7 +9,7 @@ from smarturls import surl as url
 
 from . import views
 
-urlpatterns = [
+urlpatterns = (
     url(r'^$', views.IndexView.as_view(),
         name='index_page'),
     url(regex=r'/profile/',
@@ -25,4 +25,4 @@ urlpatterns = [
         view=views.ProfileUpdateView.as_view(),
         name='update_profile'),
     url(r'^jsi18n/$', javascript_catalog, name='javascript-catalog'),
-]
+)
