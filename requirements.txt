@@ -2,7 +2,7 @@ Django==1.11.4
 MarkupSafe==1.0
 PyYAML==3.12
 Pygments==2.2.0
-Werkzeug==0.9.4
+Werkzeug==0.12.2
 coverage==3.7.1
 django-activelink==0.4
 django-allauth==0.19.1
