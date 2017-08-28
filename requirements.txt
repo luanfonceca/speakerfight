@@ -1,5 +1,5 @@
 Django==1.11.4
-MarkupSafe==0.23
+MarkupSafe==1.0
 PyYAML==3.11
 Pygments==1.6
 Werkzeug==0.9.4
