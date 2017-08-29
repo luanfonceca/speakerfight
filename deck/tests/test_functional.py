@@ -1,13 +1,15 @@
+
 from collections import namedtuple
 import json
 
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core import mail
-from django.core.exceptions import ValidationError
+from django.utils import six
 from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
 from django.utils.timezone import now, timedelta
+
 from django.utils.translation import ugettext as _
 
 from deck.models import (Event, Proposal, Vote, Jury,
@@ -340,11 +342,12 @@ class EventTest(TestCase):
         event_data = self.event_data.copy()
         event_data.update(due_date=now() - timedelta(hours=24))
         event = Event.objects.create(**event_data)
-        with self.assertRaises(ValidationError):
-            self.client.post(
-                reverse('create_event_proposal', kwargs={'slug': event.slug}),
-                self.proposal_data
-            )
+        response = self.client.post(
+            reverse('create_event_proposal', kwargs={'slug': event.slug}),
+            self.proposal_data, follow=True
+        )
+        message = _(u'This Event doesn\'t accept Proposals anymore.')
+        self.assertIn(six.text_type(message), six.text_type(response.content))
         self.assertEquals(0, event.proposals.count())
 
         response = self.client.get(
