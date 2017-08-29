@@ -279,7 +279,14 @@ class CreateProposal(LoginRequiredMixin,
         self.object = form.save(commit=False)
         self.object.author = self.request.user
         self.object.event = Event.objects.get(slug=self.kwargs['slug'])
-        self.object.save()
+
+        try:
+            self.object.save()
+        except (IntegrityError, ValidationError) as e:
+            messages.error(self.request, e.message)
+            return HttpResponseRedirect(
+                reverse('view_event', kwargs={'slug': self.object.event.slug}),
+            )
 
         if settings.SEND_NOTIFICATIONS:
             self.send_new_proposal_to_jury_email()
