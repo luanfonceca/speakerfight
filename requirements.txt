@@ -46,7 +46,7 @@ pathlib2==2.3.0
 pexpect==4.2.1
 pickleshare==0.7.4
 prompt-toolkit==1.0.15
-psycopg2==2.7.3
+psycopg2==2.7.3.1
 ptyprocess==0.5.2
 pyasn1==0.3.3
 pycparser==2.18
