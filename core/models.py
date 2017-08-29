@@ -33,11 +33,11 @@ class Profile(models.Model):
 
     def get_github_url(self):
         if self.github:
-            return 'http://github.com/{}'.format(self.github)
+            return 'https://github.com/{}'.format(self.github)
 
     def get_facebook_url(self):
         if self.facebook:
-            return 'http://facebook.com/{}'.format(self.facebook)
+            return 'https://facebook.com/{}'.format(self.facebook)
 
     def get_site_url(self):
         return self.site

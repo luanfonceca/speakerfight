@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="{% static 'img/speakerfight.ico' %}"/>
 
     <!-- open sans font -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
 
     <link rel="stylesheet" href="{% static 'schedule/style.css' %}">
     <title>Speakerfight - {{ event }}</title>
@@ -54,7 +54,7 @@
         {% endfor %}
       </div>
       <div id="footer">
-        <a href="{{ 'http://'|add:request.get_host }}" target="_blank">
+        <a href="{{ 'https://'|add:request.get_host }}" target="_blank">
           <figure class="logo" style="background-image: url({% static 'img/speakerfight.png' %})">&nbsp;</figure>
         </a>
       </div>
