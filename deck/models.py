@@ -339,13 +339,11 @@ class Event(DeckBaseModel):
         return schedule
 
     def get_not_approved_schedule(self):
-        not_approved_schedule = self.proposals\
+        return self.proposals\
             .cached_authors()\
-            .filter(models.Q(is_approved=False) |
-                    models.Q(track__isnull=True))\
-            .annotate(Sum('votes__rate'))\
-            .order_by('-is_approved', '-votes__rate__sum')
-        return not_approved_schedule
+            .filter(
+                models.Q(is_approved=False) |
+                models.Q(track__isnull=True))
 
 
 @receiver(user_signed_up)
