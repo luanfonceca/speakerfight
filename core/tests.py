@@ -20,7 +20,7 @@ class AboutViewTest(TestCase):
 
 
 class ProfileUpdateTest(TestCase):
-    fixtures = ['user.json']
+    fixtures = ['user.json', 'event.json', 'proposal.json']
 
     def setUp(self):
         self.client = Client()
@@ -78,3 +78,30 @@ class ProfileUpdateTest(TestCase):
         self.assertEquals(200, response.status_code)
         new_profile = response.context['profile']
         self.assertEquals('https://speakerfight.com/profile/', new_profile.site)
+
+    def test_events_on_profile(self):
+        response = self.client.get(
+            reverse('user_profile', kwargs={
+                'user__username': self.profile.user.username
+            }), follow=True)
+
+        self.assertEquals(200, response.status_code)
+        self.assertQuerysetEqual(response.context['events'],
+                                 ["<Event: RuPy Natal>"])
+
+    def test_proposals_on_profile(self):
+        self.client.logout()
+        self.client.login(username='admin', password='admin')
+
+        response = self.client.get(
+            reverse('user_profile', kwargs={
+                'user__username': self.profile.user.username
+            }), follow=True)
+
+        self.assertEquals(200, response.status_code)
+        exceped_proposals = [
+            '<Proposal: Django Vanilla Views>',
+            '<Proposal: Flask is Fun>',
+        ]
+        self.assertQuerysetEqual(response.context['proposals'],
+                                 exceped_proposals)

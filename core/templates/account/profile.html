@@ -79,6 +79,40 @@
     </div>
   </div>
 
+  {% with object.get_profile_events as events %}
+    {% if events.exists %}
+      <div class="row header">
+        <h2>{% trans "Events" %}</h2>
+      </div>
+      <div class="row" id="event-list">
+        <div class="col-md-12">
+          <div id="event-proposals">
+            {% for event in events %}
+              {% include "event/snippets/event_list_item.html" %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  {% with object.get_profile_proposals as proposals %}
+    {% if proposals.exists %}
+      <div class="row header">
+        <h2>{% trans "Proposals" %}</h2>
+      </div>
+      <div class="row" id="proposal-list">
+        <div class="col-md-12">
+          <div id="event-proposals">
+            {% for proposal in proposals %}
+              {% include "proposal/snippets/proposal_list_item.html" %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endwith %}
+
   {% if object.user.id == request.user.id or request.user.is_superuser %}
     <div class="modal fade" id="update-profile-modal">
       <div class="modal-dialog">
@@ -106,3 +140,13 @@
     </div>
   {% endif %}
 {% endblock content %}
+
+{% block scripts %}
+  <script src="{% static 'js/libs/jquery.linkable.js' %}"></script>
+
+  <script type="text/javascript">
+    $(function () {
+      $(".linkable").linkable();
+    });
+  </script>
+{% endblock scripts %}

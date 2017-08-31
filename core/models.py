@@ -6,6 +6,8 @@ from django.db.models.signals import post_save, pre_save
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext as _
 
+from deck.models import Proposal
+
 
 @python_2_unicode_compatible
 class Profile(models.Model):
@@ -41,6 +43,16 @@ class Profile(models.Model):
 
     def get_site_url(self):
         return self.site
+
+    def get_profile_events(self):
+        return self.user.events.filter(is_published=True)
+
+    def get_profile_proposals(self):
+        return Proposal.objects.filter(
+            author=self.user,
+            event__is_published=True,
+            is_published=True,
+        )
 
 
 def create_user_profile(sender, instance, created, **kwargs):

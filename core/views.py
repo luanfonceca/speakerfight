@@ -45,7 +45,12 @@ class ProfileView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
-        context.update(profile_form=ProfileForm(instance=self.get_object()))
+        self.object = self.get_object()
+        context.update(
+            profile_form=ProfileForm(instance=self.object),
+            events=self.object.get_profile_events(),
+            proposals=self.object.get_profile_proposals(),
+        )
         return context
 
 
