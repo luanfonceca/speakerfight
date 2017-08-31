@@ -3,7 +3,22 @@
 
 <div id="footer">
   <div class="row">
-    <div class="content-wrap col-md-4 col-md-4">
+    <div class="content-wrap col-md-3 col-md-3">
+      <p>
+        <p class="text-center">
+          {% blocktrans %}
+            Sponsored and Maintained by <br class="hidden-sm"> <strong>Labcodes Software Studio</strong>
+          {% endblocktrans %}
+        </p>
+        <div class="text-center">
+          <a href="https://www.labcodes.com.br" target="_blank">
+            <img src="{{ STATIC_URL }}img/labcodes.svg" alt="{% trans 'Labcodes Software Studio' %}" width="100px" />
+          </a>
+        </div>
+      </p>
+    </div>
+
+    <div class="content-wrap col-md-3 col-md-3">
       <p>
         <p class="text-center">
           {% blocktrans %}
@@ -22,7 +37,7 @@
       </p>
     </div>
 
-    <div class="content-wrap col-md-4 col-md-4">
+    <div class="content-wrap col-md-3 col-md-3">
       <p>
         <p class="text-center">
           {% with anchor_start='<a target="_blank" href="https://github.com/luanfonceca/speakerfight/issues">' anchor_end='</a>' %}
@@ -39,7 +54,7 @@
       </p>
     </div>
 
-    <div class="content-wrap col-md-4 col-md-4">
+    <div class="content-wrap col-md-3 col-md-3">
       <p>
         <p class="text-center">
           {% trans 'This project believes that small acts can change the world through' %}
