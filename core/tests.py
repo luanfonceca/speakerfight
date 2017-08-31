@@ -67,7 +67,7 @@ class ProfileUpdateTest(TestCase):
 
     def test_update_profile_site(self):
         new_profile_data = self.profile_data.copy()
-        new_profile_data['site'] = 'http://speakerfight.com/profile/'
+        new_profile_data['site'] = 'https://speakerfight.com/profile/'
 
         response = self.client.post(
             reverse('update_profile', kwargs={
@@ -77,4 +77,4 @@ class ProfileUpdateTest(TestCase):
 
         self.assertEquals(200, response.status_code)
         new_profile = response.context['profile']
-        self.assertEquals('http://speakerfight.com/profile/', new_profile.site)
+        self.assertEquals('https://speakerfight.com/profile/', new_profile.site)

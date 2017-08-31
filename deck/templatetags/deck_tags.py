@@ -38,9 +38,8 @@ def get_user_photo(user, size=40):
 
     if social:
         return social.get_avatar_url()
-
-    return 'http://www.gravatar.com/avatar/{}?s={}&d=mm'.format(
-        hashlib.md5(user.email).hexdigest(), size)
+    hash_hexdigest = hashlib.md5(user.email.encode('utf-8')).hexdigest()
+    return 'https://www.gravatar.com/avatar/{}?s={}&d=mm'.format(hash_hexdigest, size)
 
 
 @register.filter

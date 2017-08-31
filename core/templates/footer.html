@@ -1,3 +1,4 @@
+{% load staticfiles %}
 {% load i18n %}
 
 <div id="footer">
@@ -26,10 +27,10 @@
           <i style="color: red; margin-left: 2px;" class="icon-heart"></i>
         </p>
         <div class="text-center">
-          <a href="http://www.python.org" target="_blank">
-            <img src="{{ STATIC_URL }}img/python-powered.svg" alt="{% trans 'Python powered' %}" width="18%" height="18%" />
+          <a href="https://www.python.org" target="_blank">
+            <img src="{% static 'img/python-powered.svg' %}" alt="{% trans 'Python powered' %}" width="18%" height="18%" />
           </a>
-          <a href="http://www.djangoproject.com/" target="_blank">
+          <a href="https://www.djangoproject.com/" target="_blank">
             <img src="https://www.djangoproject.com/m/img/badges/djangopowered126x54.gif" border="0" alt="{% trans 'Powered by Django.' %}" title="Powered by Django." width="17%" height="17%" />
           </a>
         </div>
@@ -61,8 +62,8 @@
           <strong>{% trans 'Small Acts Manifesto' %}</strong>
         </p>
         <div class="text-center">
-          <a href="http://smallactsmanifesto.org" title="{% trans 'Small Acts Manifesto' %}" target="_blank">
-            <img src="{{ STATIC_URL }}img/smallacts-badge-88x31-blue.png" style="border: none;" alt="{% trans 'Small Acts Manifesto' %}" />
+          <a href="https://smallactsmanifesto.org" title="{% trans 'Small Acts Manifesto' %}" target="_blank">
+            <img src="{% static 'img/smallacts-badge-88x31-blue.png' %}" style="border: none;" alt="{% trans 'Small Acts Manifesto' %}" />
           </a>
         </div>
       </p>

@@ -3,6 +3,7 @@ from django.db.models import (ManyToManyField)
 from django.contrib.auth.models import User
 
 from jury.models import Jury
+from test_utils import get_all_field_names
 
 
 class JuryModelIntegrityTest(TestCase):
@@ -12,7 +13,7 @@ class JuryModelIntegrityTest(TestCase):
         }
 
     def test_assert_jury_should_have_users(self):
-        self.assertIn('users', Jury._meta.get_all_field_names())
+        self.assertIn('users', get_all_field_names(Jury))
 
     def test_assert_jury_users_should_be_an_User(self):
         self.assertEquals(User, self.fields['users'].rel.to)

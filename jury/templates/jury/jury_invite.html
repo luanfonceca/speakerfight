@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 
+{% load staticfiles %}
 {% load i18n %}
 {% load bootstrap3 %}
 
@@ -9,7 +10,7 @@
 
 {% block head %}
   <!-- libraries for this page -->
-  <link href="{{ STATIC_URL }}css/libs/uniform.default.css" type="text/css" rel="stylesheet" />
+  <link href="{% static 'css/libs/uniform.default.css' %}" type="text/css" rel="stylesheet" />
   {{ form.media }}
 {% endblock head %}
 
@@ -38,7 +39,7 @@
             </button>
           {% endbuttons %}
         </form>
-      </div>  
+      </div>
     </div>
     </div>
   </div>
@@ -46,7 +47,7 @@
 
 {% block scripts %}
   <!-- scripts for this page -->
-  <script src="{{ STATIC_URL }}js/libs/jquery.uniform.min.js"></script>
+  <script src="{% static 'js/libs/jquery.uniform.min.js' %}"></script>
 
   <!-- call this page plugins -->
   <script type="text/javascript">

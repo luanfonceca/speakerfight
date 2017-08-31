@@ -526,6 +526,12 @@ input.search {
   position: relative;
 }
 
+/* Header section */
+
+.main-header {
+  margin-bottom: 60px;
+}
+
 .navbar-header {
   float: left;
 }

@@ -1,9 +1,9 @@
 from smarturls import surl as url
 
-from api import views
+from . import views
 
 
-urlpatterns = [
+urlpatterns = (
     url(
         r'/events/<slug:slug>/schedule/',
         views.RetrieveEventScheduleView.as_view(),
@@ -19,4 +19,4 @@ urlpatterns = [
         views.ActivityView.as_view(),
         name='api_event_activity'
     ),
-]
+)

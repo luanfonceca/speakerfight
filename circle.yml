@@ -1,0 +1,15 @@
+dependencies:
+  override:
+    - pip install -r requirements.txt
+    - pip install pycrypto
+test:
+  override:
+    - coverage run manage.py test
+general:
+  artifacts:
+    - 'coverage'
+deployment:
+  production:
+    branch: master
+    commands:
+      - fab deploy
