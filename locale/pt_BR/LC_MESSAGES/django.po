@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: speakerfight\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-04 16:09-0300\n"
-"PO-Revision-Date: 2017-09-04 16:17-0300\n"
+"POT-Creation-Date: 2017-09-04 16:23-0300\n"
+"PO-Revision-Date: 2017-09-04 16:24-0300\n"
 "Last-Translator: Luan Fonseca de Farias <luanfonceca@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/speakerfight/"
 "speakerfight/language/pt_BR/)\n"
@@ -1836,6 +1836,14 @@ msgstr "O  \"@user\" foi removido do júri com sucesso."
 #, python-format
 msgid "The \"@%s\" was successfully removed from the Jury."
 msgstr "Os \"@%s\" foram removidos do júri com sucesso."
+
+#: speakerfight/settings.py:135
+msgid "English"
+msgstr "Inglês"
+
+#: speakerfight/settings.py:136
+msgid "Portuguese"
+msgstr "Português"
 
 #~ msgid ""
 #~ "\n"
