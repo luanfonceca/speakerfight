@@ -134,8 +134,33 @@
   <script src="{{ STATIC_URL }}js/libs/jquery.cropit.js"></script>
   <script>
     $(function() {
-      $('.image-editor').cropit();
-      $(".image-editor img").attr('src', $("#user-photo").val())
+      $(".change-picture-button-js").click(function () {
+        $("#profile-photo form input[type='file']").trigger("click");
+      });
+
+      $("#profile-photo form input[type='file']").change(function () {
+        if ($(this).val()) {
+          $(".change-picture-button-js").hide();
+          $(".submit-picture-button-js").removeClass("hide");
+          $(".cancel-button-js").removeClass("hide");
+
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            $(".avatar img").attr("src", e.target.result);
+          }
+
+          reader.readAsDataURL(this.files[0])
+        }
+      });
+
+      $(".cancel-button-js").click(function (e) {
+        e.preventDefault();
+        $(".avatar img").attr("src", $(".hidden-profile-picture-js").val());
+        $(this).addClass("hide");
+        $(".submit-picture-button-js").addClass("hide");
+        $(".change-picture-button-js").removeClass("hide");
+        $(".change-picture-button-js").show();
+      });
     });
   </script>
 {% endblock before_body_end %}
