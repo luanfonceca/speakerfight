@@ -31,6 +31,11 @@
   font-style: normal;
 }
 
+.avatar-image {
+  width: 200px;
+  height: 200px;
+}
+
 /* Landscape tablet and desktop */
 @media (max-width: 1024px) {
   #profile-detail #profile-info #profile-links {
