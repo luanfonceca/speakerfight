@@ -33,9 +33,29 @@
                   <div class="avatar">
                     <img class="avatar-image" src="{{ object.user|get_user_photo:200 }}">
                   </div>
-                  <a href="javascript:;" data-toggle="modal" data-target="#update-profile-picture-modal" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Edit profile.' %}">
-                    <i class="icon-pencil"></i> Change photo
-                  </a>
+                  <button class="btn-flat gray text-upper change-picture-button-js">
+                    <i class="icon-camera"></i> Change photo
+                  </button>
+                  <!-- <a href="javascript:;" class="btn-flat gray text-upper" title="{% trans 'Edit profile.' %}">
+                    <i class="icon-camera"></i> Change photo
+                  </a> -->
+
+                  <form id="update-profile-picture-form" method="POST" action="{% url 'update_profile_picture' object.user.username %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="hide">
+                      {% bootstrap_field profile_picture_form.image layout='inline' %}
+                      <input type="hidden" class="hidden-profile-picture-js" value="{{ object.user|get_user_photo:200 }}">
+                    </div>
+                    <button class="btn-flat danger text-upper hide cancel-button-js">
+                      <i class="icon-remove"></i>
+                      {% trans "cancel" %}
+                    </button>
+                    <button type="submit" class="btn-flat success text-upper hide submit-picture-button-js">
+                      <i class="icon-camera"></i>
+                      {% trans "submit" %}
+                    </button>
+                  </form>
+
                 </div>
               </div>
               <div class="clearfix-on-small"></div>
