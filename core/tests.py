@@ -2,6 +2,7 @@
 
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
+from django.utils.translation import get_language
 
 from core.models import Profile
 
@@ -78,6 +79,21 @@ class ProfileUpdateTest(TestCase):
         self.assertEquals(200, response.status_code)
         new_profile = response.context['profile']
         self.assertEquals('https://speakerfight.com/profile/', new_profile.site)
+
+    def test_update_profile_language(self):
+        data = {
+            'language': 'pt-br'
+        }
+        response = self.client.post(
+            reverse('change_language', kwargs={
+                'user__username': self.profile.user.username
+            }),
+            data, follow=True)
+
+        self.assertEquals(200, response.status_code)
+        new_profile = response.context['profile']
+        self.assertEquals('pt-br', new_profile.language)
+        self.assertEquals('pt-br', get_language())
 
     def test_events_on_profile(self):
         response = self.client.get(

@@ -132,7 +132,7 @@ LANGUAGE_CODE = 'en-US'
 
 LANGUAGES = (
     ('en-us', 'English'),
-    ('pt-BR', u'Português'),
+    ('pt-br', u'Português'),
 )
 
 LOCALE_PATHS = (
@@ -172,6 +172,7 @@ MIDDLEWARE_CLASSES = global_settings.MIDDLEWARE_CLASSES + [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'locale_middleware.LocaleMiddleware',
 ]
 
 # Password validation

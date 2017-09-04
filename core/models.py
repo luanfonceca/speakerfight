@@ -1,3 +1,4 @@
+
 from django.core.exceptions import AppRegistryNotReady
 from django.core.urlresolvers import reverse_lazy
 from django.conf import settings
@@ -11,6 +12,9 @@ from deck.models import Proposal
 
 @python_2_unicode_compatible
 class Profile(models.Model):
+    language = models.CharField(
+        _('Language'), choices=settings.LANGUAGES,
+        max_length=50, null=True, blank=False)
     about_me = models.TextField(
         _('About me'), max_length=500, null=True, blank=True)
     github = models.CharField(
