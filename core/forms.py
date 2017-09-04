@@ -16,7 +16,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        exclude = ('user',)
+        exclude = ('user', 'language')
 
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
@@ -61,3 +61,14 @@ class ProfileForm(forms.ModelForm):
             self.instance.user.username = data.get('username')
 
         self.instance.user.save()
+
+
+class ProfileChangeLanguageForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('language',)
+
+    def __init__(self, *args, **kwargs):
+        super(ProfileChangeLanguageForm, self).__init__(*args, **kwargs)
+        field = self.fields['language']
+        field.choices = field.choices[1:]

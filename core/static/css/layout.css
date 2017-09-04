@@ -756,3 +756,11 @@ div.show-more a:before {
 div.show-more a:after {
   left: 100%;
 }
+
+.navbar-inverse .navbar-nav .dropdown .dropdown-menu {
+  left: -54px !important;
+}
+
+.btn-group.btn-group-justified .btn {
+  height: 50px;
+}

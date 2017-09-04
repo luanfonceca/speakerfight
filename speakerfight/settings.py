@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 '''
 
 from django.conf import global_settings
+from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -131,8 +132,8 @@ TIME_ZONE = 'America/Sao_Paulo'
 LANGUAGE_CODE = 'en-US'
 
 LANGUAGES = (
-    ('en-us', 'English'),
-    ('pt-BR', u'Português'),
+    ('en-us', _('English')),
+    ('pt-br', _('Portuguese')),
 )
 
 LOCALE_PATHS = (
@@ -172,6 +173,7 @@ MIDDLEWARE_CLASSES = global_settings.MIDDLEWARE_CLASSES + [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'locale_middleware.LocaleMiddleware',
 ]
 
 # Password validation

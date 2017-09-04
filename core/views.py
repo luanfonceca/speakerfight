@@ -1,14 +1,16 @@
+
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.http import Http404, HttpResponseRedirect
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
+from django.utils import translation
 
 from vanilla import TemplateView, DetailView, UpdateView
 
 from deck.models import Event, Proposal
 from core.models import Profile
-from core.forms import ProfileForm
+from core.forms import ProfileForm, ProfileChangeLanguageForm
 from core.mixins import LoginRequiredMixin, FormValidRedirectMixing
 
 
@@ -48,6 +50,7 @@ class ProfileView(DetailView):
         self.object = self.get_object()
         context.update(
             profile_form=ProfileForm(instance=self.object),
+            language_form=ProfileChangeLanguageForm(instance=self.object),
             events=self.object.get_profile_events(),
             proposals=self.object.get_profile_proposals(),
         )
@@ -90,3 +93,15 @@ class ProfileUpdateView(LoginRequiredMixin,
             messages.error(self.request, error.as_data()[0].message)
 
         return self.get()
+
+
+class ProfileChangeLanguageView(ProfileUpdateView):
+    form_class = ProfileChangeLanguageForm
+
+    def form_valid(self, form):
+        self.object = form.save()
+        translation.activate(self.object.language)
+        self.request.session[
+            translation.LANGUAGE_SESSION_KEY
+        ] = self.object.language
+        return self.success_redirect(_(u'Language changed.'))
