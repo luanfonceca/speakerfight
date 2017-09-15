@@ -1,12 +1,20 @@
+
 from django.core.exceptions import AppRegistryNotReady
 from django.core.urlresolvers import reverse_lazy
 from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save, pre_save
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext as _
 
+from deck.models import Proposal
 
+
+@python_2_unicode_compatible
 class Profile(models.Model):
+    language = models.CharField(
+        _('Language'), choices=settings.LANGUAGES,
+        max_length=50, null=True, blank=False)
     about_me = models.TextField(
         _('About me'), max_length=500, null=True, blank=True)
     github = models.CharField(
@@ -23,7 +31,7 @@ class Profile(models.Model):
     class Meta:
         verbose_name = _('Profile')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.user.get_full_name()
 
     def get_absolute_url(self):
@@ -32,14 +40,24 @@ class Profile(models.Model):
 
     def get_github_url(self):
         if self.github:
-            return 'http://github.com/{}'.format(self.github)
+            return 'https://github.com/{}'.format(self.github)
 
     def get_facebook_url(self):
         if self.facebook:
-            return 'http://facebook.com/{}'.format(self.facebook)
+            return 'https://facebook.com/{}'.format(self.facebook)
 
     def get_site_url(self):
         return self.site
+
+    def get_profile_events(self):
+        return self.user.events.filter(is_published=True)
+
+    def get_profile_proposals(self):
+        return Proposal.objects.filter(
+            author=self.user,
+            event__is_published=True,
+            is_published=True,
+        )
 
 
 def create_user_profile(sender, instance, created, **kwargs):

@@ -12,7 +12,8 @@ from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _
-from django.utils import timezone
+from django.utils import timezone, six
+from django.utils.encoding import python_2_unicode_compatible
 
 from django_extensions.db.fields import AutoSlugField
 
@@ -58,6 +59,7 @@ class DeckBaseManager(models.QuerySet):
         )
 
 
+@python_2_unicode_compatible
 class DeckBaseModel(models.Model):
     title = models.CharField(_('Title'), max_length=200)
     slug = AutoSlugField(populate_from='title', overwrite=True,
@@ -77,10 +79,11 @@ class DeckBaseModel(models.Model):
     class Meta:
         abstract = True
 
-    def __unicode__(self):
-        return unicode(self.title)
+    def __str__(self):
+        return six.text_type(self.title)
 
 
+@python_2_unicode_compatible
 class Vote(models.Model):
     ANGRY, SLEEPY, SAD, HAPPY, LAUGHING = range(-1, 4)
     VOTE_TITLES = dict(
@@ -105,8 +108,8 @@ class Vote(models.Model):
         verbose_name_plural = _('Votes')
         unique_together = (('proposal', 'user'),)
 
-    def __unicode__(self):
-        return u"{0.user}: {0.rate} in {0.proposal}".format(self)
+    def __str__(self):
+        return six.text_type("{0.user}: {0.rate} in {0.proposal}".format(self))
 
     def save(self, *args, **kwargs):
         validation_message = None
@@ -247,6 +250,7 @@ class Proposal(Activity):
         self.save()
 
 
+@python_2_unicode_compatible
 class Track(models.Model):
     title = models.CharField(_('Title'), max_length=200)
     slug = AutoSlugField(populate_from='title', overwrite=True,
@@ -259,8 +263,8 @@ class Track(models.Model):
         verbose_name = _('Track')
         verbose_name_plural = _('Tracks')
 
-    def __unicode__(self):
-        return 'Track for: "%s"' % self.event.title
+    def __str__(self):
+        return six.text_type('Track for: "%s"' % self.event.title)
 
     @property
     def proposals(self):
@@ -335,13 +339,11 @@ class Event(DeckBaseModel):
         return schedule
 
     def get_not_approved_schedule(self):
-        not_approved_schedule = self.proposals\
+        return self.proposals\
             .cached_authors()\
-            .filter(models.Q(is_approved=False) |
-                    models.Q(track__isnull=True))\
-            .annotate(Sum('votes__rate'))\
-            .order_by('-is_approved', '-votes__rate__sum')
-        return not_approved_schedule
+            .filter(
+                models.Q(is_approved=False) |
+                models.Q(track__isnull=True))
 
 
 @receiver(user_signed_up)

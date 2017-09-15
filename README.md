@@ -1,36 +1,65 @@
-speakerfight
-============
+<h1 align="center">
+	<a href="http://www.speakerfight.com/events"><img src="http://i.imgur.com/cDfy85g.png" alt="Speakerfight" width="75%"></a>
+	<br>
+	The Easier way to choose the best talks.
+	<br>
+	<p align="center">
+	  <a href="https://gitter.im/luanfonceca/speakerfight"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Gitter"></a>
+	  <a href="https://circleci.com/gh/luanfonceca/speakerfight/tree/master"><img src="https://circleci.com/gh/luanfonceca/speakerfight.svg?style=shield"></a>
+	  <a href="https://landscape.io/github/luanfonceca/speakerfight/master"><img src="https://landscape.io/github/luanfonceca/speakerfight/master/landscape.svg?style=flat"></a>
+	  <a href="https://coveralls.io/r/luanfonceca/speakerfight?branch=master"><img src="http://img.shields.io/coveralls/luanfonceca/speakerfight.svg?branch=master"></a>
+	 	<a href="http://waffle.io/luanfonceca/speakerfight" target="_blank"><img src="https://img.shields.io/waffle/label/luanfonceca/speakerfight/ready.svg?style=flat&label=Roadmap"></a>
+	</p>
+	<br>
+</h1>
 
-[![Join the chat at https://gitter.im/luanfonceca/speakerfight](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/luanfonceca/speakerfight?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Beerpay](https://beerpay.io/luanfonceca/speakerfight/badge.svg?style=flat)](https://beerpay.io/luanfonceca/speakerfight) 
+<h2>How to Contribute</h2>
+<blockquote>
+	In case if you wont to contribute with code, I recomend You to look at our <a href="https://github.com/luanfonceca/speakerfight/projects?query=is%3Aopen+sort%3Aname-asc" target="_blank">Roadmap</a> in that section you will find many issues to help us to keep on track of an awesome project timeline.
+	<br>
+	See our <a href="https://github.com/luanfonceca/speakerfight/blob/master/CONTRIBUTING.md" target="_blank">CONTRIBUTING.md</a> file to understand how we code.
+</blockquote>
+<h3>
+	<ul>
+		<li>
+			<a href="https://waffle.io/luanfonceca/speakerfight" target="_blank">
+				Roadmap Issues
+			</a>
+		</li>
+		<li>Review Pull Requests</li>
+		<li>Review Issues</li>
+		<li>Blogposts</li>
+	</ul>
+</h3>
 
-Speakerfight is an arena where speakers can fight ~against~ each other and people choose who wins.
+<h2>How to Install</h2>
+<blockquote>
+	After installation, you will have two users created "admin:admin" and "user:user", in order to use the Social Authentication you need to setup the <a href="https://github.com/pennersr/django-allauth">django-allauth</a> by yourself, for security reasons.
+</blockquote>
 
-[![Code Health](https://landscape.io/github/luanfonceca/speakerfight/master/landscape.svg?style=flat)](https://landscape.io/github/luanfonceca/speakerfight/master) [![Github Issues](http://img.shields.io/github/issues/luanfonceca/speakerfight.svg?style=flat)](https://github.com/luanfonceca/speakerfight/issues?sort=updated&state=open) [![Build Status](http://img.shields.io/travis/luanfonceca/speakerfight.svg?branch=master&style=flat)](https://travis-ci.org/luanfonceca/speakerfight) [![Coverage Status](http://img.shields.io/coveralls/luanfonceca/speakerfight.svg?branch=master&style=flat)](https://coveralls.io/r/luanfonceca/speakerfight?branch=master)
+<h3>Normal Installation</h3>
 
-============
-### Install
-
-#### Normal installation
 ```sh
 $ git clone git@github.com:luanfonceca/speakerfight.git
 $ cd speakerfight
-$ pip install -r requirements.txt
-$ make setup # we have a fixture for the users...
-# username: admin, password: admin;
-# username: user, password: user
+$ make setup
 $ python manage.py runserver
 ```
 
-#### Using Docker
-Dependecies
-- [docker](https://www.docker.com/)
-- [docker-compose](https://docs.docker.com/compose/)
+<h3>Docker Installation</h3>
+<h4>
+	<h5>Dependencies:</h5>
+	<ul>
+		<li><a href="https://www.docker.com" target="_blank">Docker</a></li>
+		<li><a href="https://docs.docker.com/compose" target="_blank">Docker compose</a></li>
+	</ul>
+</h4>
 
 ```sh
 $ git clone git@github.com:luanfonceca/speakerfight.git
 $ cd speakerfight
 $ docker-compose build
-$ docker-compose run web make setup # we have a fixture for the users...
-# username: admin, password: admin;
-# username: user, password: user
+$ docker-compose run web make setup
 $ docker-compose up
+```
+

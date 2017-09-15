@@ -1,11 +1,9 @@
-from django.conf.urls import patterns
 
 from smarturls import surl as url
 
-import views
+from . import views
 
-urlpatterns = patterns(
-    '',
+urlpatterns = (
     url(regex=r'/my_proposals/',
         view=views.ListMyProposals.as_view(),
         name='my_proposals'),

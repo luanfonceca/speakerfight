@@ -12,11 +12,11 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 '''
 
 from django.conf import global_settings
+from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -27,12 +27,35 @@ SECRET_KEY = 'hchgjid4s$nhe_@3*ildx480lpld*t$cs*#qvg((j_+g4zr++8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
 # Template
-TEMPLATE_DIRS = [
-    # hardcoded for override the external app's template
-    os.path.join(BASE_DIR, *'speakerfight core templates'.split()),
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            # hardcoded for override the external app's template
+            os.path.join(BASE_DIR, *'speakerfight core templates'.split()),
+        ],
+        'OPTIONS': {
+            # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
+            'debug': DEBUG,
+            # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
+            # https://docs.djangoproject.com/en/dev/ref/templates/api/#loader-types
+            'loaders': [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+            ],
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.template.context_processors.request',
+                'django.contrib.messages.context_processors.messages',
+            ]
+        },
+    },
 ]
 
 # Absolute path to the directory static files should be collected to.
@@ -42,11 +65,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 DEFAULT_FROM_EMAIL = NO_REPLY_EMAIL = 'Speakerfight <noreply@speakerfight.com>'
 
 ALLOWED_HOSTS = [
+    "localhost",
     "speakerfight.com",
 ]
 
 # Media files.
-MEDIA_URL='/media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Application definition
@@ -112,8 +136,8 @@ TIME_ZONE = 'America/Sao_Paulo'
 LANGUAGE_CODE = 'en-US'
 
 LANGUAGES = (
-    ('en', 'English'),
-    ('pt-BR', u'Português'),
+    ('en-us', _('English')),
+    ('pt-br', _('Portuguese')),
 )
 
 LOCALE_PATHS = (
@@ -128,6 +152,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+DATETIME_INPUT_FORMATS = [
+    '%d/%m/%Y %H:%M',
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
@@ -136,27 +163,40 @@ STATIC_URL = '/static/'
 
 SITE_ID = 1
 
-# All Auth Confs
-TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
-    'django.core.context_processors.request',
-
-    # allauth specific context processors
-    'allauth.account.context_processors.account',
-    'allauth.socialaccount.context_processors.socialaccount',
-)
-
-AUTHENTICATION_BACKENDS = global_settings.AUTHENTICATION_BACKENDS + (
+AUTHENTICATION_BACKENDS = global_settings.AUTHENTICATION_BACKENDS + [
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
-)
+]
 
-MIDDLEWARE_CLASSES = global_settings.AUTHENTICATION_BACKENDS + (
+MIDDLEWARE_CLASSES = global_settings.MIDDLEWARE_CLASSES + [
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware'
-)
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'locale_middleware.LocaleMiddleware',
+]
+
+# Password validation
+# https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
+
+AUTH_PASSWORD_VALIDATORS = [
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    # },
+]
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -184,7 +224,6 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_EMAIL_REQUIRED = True
 SOCIALACCOUNT_QUERY_EMAIL = True
 
-
 # Django Debug Toolbar
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
@@ -192,7 +231,6 @@ DEBUG_TOOLBAR_PATCH_SETTINGS = False
 SURL_REGEXERS = {
     'username': '[\w@.-]+'
 }
-
 
 SEND_NOTIFICATIONS = True
 

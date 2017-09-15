@@ -1,13 +1,16 @@
+
 from collections import namedtuple
 import json
 
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core import mail
-from django.core.exceptions import ValidationError
+from django.utils import six
 from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
 from django.utils.timezone import now, timedelta
+
+from django.utils.translation import ugettext as _
 
 from deck.models import (Event, Proposal, Vote, Jury,
                          send_proposal_deleted_mail, send_welcome_mail)
@@ -25,8 +28,13 @@ class EventTest(TestCase):
         self.client.login(username='admin', password='admin')
 
     def test_create_event(self):
-        response = self.client.post(reverse('create_event'),
-                                    self.event_data, follow=True)
+        event_data = self.event_data.copy()
+        event_data['due_date'] = (
+            event_data['due_date'].strftime('%d/%m/%Y %H:%M')
+        )
+        with self.settings(LANGUAGE_CODE='pt-BR'):
+            response = self.client.post(reverse('create_event'),
+                                        event_data, follow=True)
         self.assertEquals(200, response.status_code)
         self.assertQuerysetEqual(Event.objects.all(),
                                  ["<Event: RuPy>"])
@@ -43,7 +51,13 @@ class EventTest(TestCase):
         if not settings.SEND_NOTIFICATIONS:
             return
 
-        self.client.post(reverse('create_event'), self.event_data)
+        event_data = self.event_data.copy()
+        event_data['due_date'] = (
+            event_data['due_date'].strftime('%d/%m/%Y %H:%M')
+        )
+        with self.settings(LANGUAGE_CODE='pt-BR'):
+            self.client.post(reverse('create_event'),
+                             event_data, follow=True)
         event = Event.objects.get()
 
         self.assertEqual(1, len(mail.outbox))
@@ -53,9 +67,12 @@ class EventTest(TestCase):
 
     def test_create_event_with_jury(self):
         event_data = self.event_data.copy()
-
-        response = self.client.post(reverse('create_event'),
-                                    event_data, follow=True)
+        event_data['due_date'] = (
+            event_data['due_date'].strftime('%d/%m/%Y %H:%M')
+        )
+        with self.settings(LANGUAGE_CODE='pt-BR'):
+            response = self.client.post(reverse('create_event'),
+                                        event_data, follow=True)
         self.assertEquals(200, response.status_code)
 
         event = response.context['event']
@@ -213,7 +230,7 @@ class EventTest(TestCase):
 
         self.assertEquals(200, response.status_code)
         event = response.context['event']
-        self.assertEquals('rupy-2014', event.slug)
+        self.assertEquals('rupy', event.slug)
 
     def test_anonymous_user_update_events(self):
         self.client.logout()
@@ -325,11 +342,12 @@ class EventTest(TestCase):
         event_data = self.event_data.copy()
         event_data.update(due_date=now() - timedelta(hours=24))
         event = Event.objects.create(**event_data)
-        with self.assertRaises(ValidationError):
-            self.client.post(
-                reverse('create_event_proposal', kwargs={'slug': event.slug}),
-                self.proposal_data
-            )
+        response = self.client.post(
+            reverse('create_event_proposal', kwargs={'slug': event.slug}),
+            self.proposal_data, follow=True
+        )
+        message = _(u'This Event doesn\'t accept Proposals anymore.')
+        self.assertIn(six.text_type(message), six.text_type(response.content))
         self.assertEquals(0, event.proposals.count())
 
         response = self.client.get(
@@ -338,14 +356,14 @@ class EventTest(TestCase):
 
     def test_export_votes_to_csv_queryset(self):
         event = Event.objects.create(**self.event_data)
-        Proposal.objects.create(event=event, **self.proposal_data)
+        proposal = Proposal.objects.create(event=event, **self.proposal_data)
         proposals = event.get_votes_to_export()
         exported_data = [{'title': u'Python For Zombies',
                           'votes__count': 0,
                           'author__email': u'admin@speakerfight.com',
                           'author__username': u'admin',
                           'votes__rate__sum': None,
-                          'id': 1}]
+                          'id': proposal.pk}]
         self.assertEqual(list(proposals), exported_data)
 
     def test_export_votes_sum_rate(self):
@@ -709,7 +727,7 @@ class ProposalTest(TestCase):
                     kwargs={'event_slug': proposal.event.slug,
                             'slug': proposal.slug}), follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Proposal deleted.')
+        self.assertContains(response, _('Proposal deleted.'))
         self.assertEqual(
             Proposal.objects.filter(slug=proposal.slug).count(), 0)
 
@@ -719,7 +737,7 @@ class ProposalTest(TestCase):
                     kwargs={'event_slug': self.proposal.event.slug,
                             'slug': self.proposal.slug}), follow=True)
         self.assertEqual(200, response.status_code)
-        self.assertContains(response, 'You are not allowed to see this page.')
+        self.assertContains(response, _('You are not allowed to see this page.'))
 
     def test_rate_proposal(self):
         rate_proposal_data = {
@@ -809,7 +827,7 @@ class ProposalTest(TestCase):
         )
 
         self.assertEquals(400, response.status_code)
-        self.assertIn('message', json.loads(response.content))
+        self.assertIn('message', json.loads(response.content.decode("utf-8")))
         self.assertEquals(0, self.proposal.get_rate)
         self.assertEquals(0, self.proposal.votes.count())
         self.assertEquals(0, Vote.objects.count())
@@ -929,7 +947,7 @@ class ProposalTest(TestCase):
             follow=True
         )
         self.assertEquals(401, response.status_code)
-        self.assertIn('message', json.loads(response.content))
+        self.assertIn('message', json.loads(response.content.decode("utf-8")))
         self.assertEquals(0, self.proposal.get_rate)
         self.assertEquals(0, self.proposal.votes.count())
         self.assertEquals(0, Vote.objects.count())
@@ -1046,7 +1064,7 @@ class ProposalTest(TestCase):
         )
         self.proposal = Proposal.objects.first()
         self.assertEquals(401, response.status_code)
-        self.assertIn('message', json.loads(response.content))
+        self.assertIn('message', json.loads(response.content.decode("utf-8")))
         self.assertEquals(False, self.proposal.is_approved)
 
     def test_approve_proposal_with_the_admin_user(self):
@@ -1066,7 +1084,7 @@ class ProposalTest(TestCase):
 
         self.proposal = Proposal.objects.first()
         self.assertEquals(200, response.status_code)
-        self.assertIn('message', json.loads(response.content))
+        self.assertIn('message', json.loads(response.content.decode("utf-8")))
         self.assertEquals(True, self.proposal.is_approved)
 
     def test_approve_proposal_with_the_admin_user_by_get(self):
@@ -1104,7 +1122,7 @@ class ProposalTest(TestCase):
 
         self.proposal = Proposal.objects.first()
         self.assertEquals(200, response.status_code)
-        self.assertIn('message', json.loads(response.content))
+        self.assertIn('message', json.loads(response.content.decode("utf-8")))
         self.assertEquals(True, self.proposal.is_approved)
 
     def test_approve_proposal_with_the_jury_user_by_get(self):
@@ -1141,7 +1159,7 @@ class ProposalTest(TestCase):
         )
         self.proposal = Proposal.objects.first()
         self.assertEquals(401, response.status_code)
-        self.assertIn('message', json.loads(response.content))
+        self.assertIn('message', json.loads(response.content.decode("utf-8")))
         self.assertEquals(True, self.proposal.is_approved)
 
     def test_disapprove_proposal_with_the_admin_user(self):
@@ -1162,7 +1180,7 @@ class ProposalTest(TestCase):
 
         self.proposal = Proposal.objects.first()
         self.assertEquals(200, response.status_code)
-        self.assertIn('message', json.loads(response.content))
+        self.assertIn('message', json.loads(response.content.decode("utf-8")))
         self.assertEquals(False, self.proposal.is_approved)
 
     def test_disapprove_proposal_with_the_admin_user_by_get(self):
@@ -1203,7 +1221,7 @@ class ProposalTest(TestCase):
 
         self.proposal = Proposal.objects.first()
         self.assertEquals(200, response.status_code)
-        self.assertIn('message', json.loads(response.content))
+        self.assertIn('message', json.loads(response.content.decode("utf-8")))
         self.assertEquals(False, self.proposal.is_approved)
 
     def test_disapprove_proposal_with_the_jury_user_by_get(self):
@@ -1258,12 +1276,12 @@ class ProposalTest(TestCase):
 
     def test_my_proposals_menu_for_authenticated_users(self):
         response = self.client.get(reverse('list_events'))
-        self.assertContains(response, 'My Proposals')
+        self.assertContains(response, _('My Proposals'))
 
     def test_my_proposals_menu_for_non_authenticated_users(self):
         self.client.logout()
         response = self.client.get(reverse('list_events'))
-        self.assertNotContains(response, 'My Proposals')
+        self.assertNotContains(response, _('My Proposals'))
 
     def test_users_should_see_their_proposals(self):
         user = User.objects.get(username='user')

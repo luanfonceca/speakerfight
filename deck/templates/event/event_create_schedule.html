@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% load staticfiles %}
 
 {% load i18n %}
 {% load bootstrap3 %}
@@ -7,9 +8,9 @@
 {% block head_title %}{% trans "Create the Schedule" %}: "{{ event }}"{% endblock %}
 
 {% block head %}
-  <link href="{{ STATIC_URL }}css/libs/dragula.min.css" rel="stylesheet" />  
+  <link href="{% static 'css/libs/dragula.min.css' %}" rel="stylesheet" />
 
-  <link href="{{ STATIC_URL }}css/event-schedule.css" rel="stylesheet" />  
+  <link href="{% static 'css/event-schedule.css' %}" rel="stylesheet" />
 {% endblock head %}
 
 {% block content %}
@@ -217,7 +218,7 @@
         </div>
         <div class="modal-body">
           {% url 'view_event_schedule' event.slug as view_event_schedule %}
-          {% with 'http://'|add:request.get_host|add:view_event_schedule as schedule_url %}
+          {% with 'https://'|add:request.get_host|add:view_event_schedule as schedule_url %}
             <textarea onclick="this.focus();this.select()" class="form-control" id="id_embedded_schedule" name="embedded_schedule" rows="10">{{ schedule_url|event_get_embedded_code }}</textarea>
           {% endwith %}
         </div>
@@ -234,7 +235,7 @@
 {% endblock content %}
 
 {% block scripts %}
-  <script src="{{ STATIC_URL }}js/libs/dragula.min.js"></script>
+  <script src="{% static 'js/libs/dragula.min.js' %}"></script>
 
-  <script src="{{ STATIC_URL }}js/event-schedule.js"></script>
+  <script src="{% static 'js/event-schedule.js' %}"></script>
 {% endblock scripts %}

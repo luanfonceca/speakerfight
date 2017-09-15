@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% load staticfiles %}
 
 {% load i18n %}
 {% load bootstrap3 %}
@@ -12,8 +13,10 @@
 
 {% block head %}
   <!-- libraries for this page -->
-  <link href="{{ STATIC_URL }}css/profile.css" type="text/css" rel="stylesheet" />
-  <link href="{{ STATIC_URL }}css/libs/cropit.css" type="text/css" rel="stylesheet" />
+
+  <link href="{% static 'css/profile.css' %}" type="text/css" rel="stylesheet" />
+  <link href="{% static 'css/libs/cropit.css' %}" type="text/css" rel="stylesheet" />
+  <link href="{% static 'css/profile.css' %}" type="text/css" rel="stylesheet" />
   {{ form.media }}
 {% endblock head %}
 
@@ -34,26 +37,25 @@
                     <img class="avatar-image" src="{{ object.user|get_user_photo:200 }}">
                   </div>
                   <button class="btn-flat gray text-upper change-picture-button-js">
-                    <i class="icon-camera"></i> Change photo
+                    <i class="icon-camera"></i> {% trans 'Change photo.' %}
                   </button>
-                  <!-- <a href="javascript:;" class="btn-flat gray text-upper" title="{% trans 'Edit profile.' %}">
-                    <i class="icon-camera"></i> Change photo
-                  </a> -->
 
-                  <form id="update-profile-picture-form" method="POST" action="{% url 'update_profile_picture' object.user.username %}" enctype="multipart/form-data">
+                  <form id="update-profile-picture-form" method="POST" action="{% url 'update_profile_picture' object.user.username %}" enctype="multipart/form-data" class="row">
                     {% csrf_token %}
                     <div class="hide">
-                      {% bootstrap_field profile_picture_form.image layout='inline' %}
+                      {% bootstrap_field profile_form.image layout='inline' %}
                       <input type="hidden" class="hidden-profile-picture-js" value="{{ object.user|get_user_photo:200 }}">
                     </div>
-                    <button class="btn-flat danger text-upper hide cancel-button-js">
-                      <i class="icon-remove"></i>
-                      {% trans "cancel" %}
-                    </button>
-                    <button type="submit" class="btn-flat success text-upper hide submit-picture-button-js">
-                      <i class="icon-camera"></i>
-                      {% trans "submit" %}
-                    </button>
+                    <div class="col-md-12">
+                      <button class="col-md-12 btn-flat danger text-upper hide cancel-button-js">
+                        <i class="icon-remove"></i>
+                        {% trans "cancel" %}
+                      </button>
+                      <button type="submit" class="col-md-12 btn-flat success text-upper hide submit-picture-button-js">
+                        <i class="icon-camera"></i>
+                        {% trans "submit" %}
+                      </button>
+                    </div>
                   </form>
 
                 </div>
@@ -94,6 +96,9 @@
                 <a href="javascript:;" data-toggle="modal" data-target="#update-profile-modal" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Edit profile.' %}">
                   <i class="icon-pencil"></i> {% trans "Edit" %}
                 </a>
+                <a href="javascript:;" data-toggle="modal" data-target="#change-language-modal" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Change Language.' %}">
+                  <i class="icon-globe"></i> {% trans "Change Language" %}
+                </a>
               </div>
             {% endif %}
           </div>
@@ -101,6 +106,40 @@
       </div>
     </div>
   </div>
+
+  {% with object.get_profile_events as events %}
+    {% if events.exists %}
+      <div class="row header">
+        <h2>{% trans "Events" %}</h2>
+      </div>
+      <div class="row" id="event-list">
+        <div class="col-md-12">
+          <div id="event-proposals">
+            {% for event in events %}
+              {% include "event/snippets/event_list_item.html" %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  {% with object.get_profile_proposals as proposals %}
+    {% if proposals.exists %}
+      <div class="row header">
+        <h2>{% trans "Proposals" %}</h2>
+      </div>
+      <div class="row" id="proposal-list">
+        <div class="col-md-12">
+          <div id="event-proposals">
+            {% for proposal in proposals %}
+              {% include "proposal/snippets/proposal_list_item.html" %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endwith %}
 
   {% if object.user.id == request.user.id or request.user.is_superuser %}
     <div class="modal fade" id="update-profile-modal">
@@ -127,13 +166,53 @@
         </div>
       </div>
     </div>
+
+    <div class="modal fade" id="change-language-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form id="change-language-form" method="POST" action="{% url 'change_language' object.user.username %}">
+            {% csrf_token %}
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title">{% trans "Change Language" %}</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <div class="form-group">
+                  <div class="btn-group btn-group-justified" data-toggle="buttons">
+                    {% for value, label in language_form.language.field.choices %}
+                      <label class="btn btn-default {% if value == object.language %}active{% endif %}">
+                        <input type="radio" name="language" value="{{ value }}" {% if value == object.language %}checked="checked"{% endif %}>
+                        {{ label }}
+                      </label>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn-flat success text-upper">
+                <i class="icon icon-pencil"></i>
+                {% trans "submit" %}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   {% endif %}
 {% endblock content %}
 
-{% block before_body_end %}
-  <script src="{{ STATIC_URL }}js/libs/jquery.cropit.js"></script>
-  <script>
-    $(function() {
+{% block scripts %}
+  <script src="{% static 'js/libs/jquery.linkable.js' %}"></script>
+  <script src="{% static 'js/libs/jquery.cropit.js' %}"></script>
+
+  <script type="text/javascript">
+    $(function () {
+      $(".linkable").linkable();
+
       $(".change-picture-button-js").click(function () {
         $("#profile-photo form input[type='file']").trigger("click");
       });
@@ -163,4 +242,4 @@
       });
     });
   </script>
-{% endblock before_body_end %}
+{% endblock scripts %}

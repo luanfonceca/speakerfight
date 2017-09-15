@@ -22,7 +22,7 @@
     "fields": {
         "description": "<p>Flask is a microframework for Python based on Werkzeug, Jinja 2 and good intentions. And before you ask: It's BSD licensed!</p>",
         "author": [
-            "admin"
+            "user"
         ],
         "track": null,
         "created_at": "2015-09-19T17:46:53.813Z",
@@ -41,7 +41,7 @@
     "fields": {
         "description": "<p>Django's generic class-based view implementation is unneccesarily complicated.\\r\\nDjango vanilla views gives you <strong>exactly the same functionality</strong>, in a vastly simplified, easier-to-use package, including:</p>\r\n<p>* No mixin classes.</p>\r\n<p>* No calls to super().</p>\r\n<p>* A sane class hierarchy.</p>\r\n<p>* A stripped down API.</p>\r\n<p>* Simpler method implementations, with less magical behavior.</p>",
         "author": [
-            "admin"
+            "user"
         ],
         "track": null,
         "created_at": "2015-09-19T17:47:32.466Z",
