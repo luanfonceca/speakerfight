@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-15 18:24-0300\n"
+"POT-Creation-Date: 2017-09-15 21:01-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,7 @@ msgid "Site url"
 msgstr ""
 
 #: core/models.py:32 core/templates/account/profile.html:11
-#: core/templates/account/profile.html:25
+#: core/templates/account/profile.html:24
 #: core/templates/snippets/login_button.html:13
 msgid "Profile"
 msgstr ""
@@ -527,7 +527,7 @@ msgstr ""
 msgid "Set Password"
 msgstr ""
 
-#: core/templates/account/profile.html:40
+#: core/templates/account/profile.html:39
 msgid "Change photo."
 msgstr ""
 
@@ -536,8 +536,8 @@ msgid "cancel"
 msgstr ""
 
 #: core/templates/account/profile.html:55
-#: core/templates/account/profile.html:160
-#: core/templates/account/profile.html:196
+#: core/templates/account/profile.html:161
+#: core/templates/account/profile.html:197
 #: deck/templates/event/event_create_schedule.html:42
 #: deck/templates/event/event_create_schedule.html:178
 #: deck/templates/event/event_create_schedule.html:202
@@ -546,35 +546,35 @@ msgstr ""
 msgid "submit"
 msgstr ""
 
-#: core/templates/account/profile.html:85
+#: core/templates/account/profile.html:86
 msgid "About Me"
 msgstr ""
 
-#: core/templates/account/profile.html:87
+#: core/templates/account/profile.html:88
 msgid "-"
 msgstr ""
 
-#: core/templates/account/profile.html:94
+#: core/templates/account/profile.html:95
 msgid "Edit profile."
 msgstr ""
 
-#: core/templates/account/profile.html:95
+#: core/templates/account/profile.html:96
 #: deck/templates/event/event_detail.html:134
 #: deck/templates/event/snippets/event_list_item.html:51
 #: deck/templates/proposal/snippets/proposal_list_item.html:26
 msgid "Edit"
 msgstr ""
 
-#: core/templates/account/profile.html:97
+#: core/templates/account/profile.html:98
 msgid "Change Language."
 msgstr ""
 
-#: core/templates/account/profile.html:98
-#: core/templates/account/profile.html:177
+#: core/templates/account/profile.html:99
+#: core/templates/account/profile.html:178
 msgid "Change Language"
 msgstr ""
 
-#: core/templates/account/profile.html:111 core/templates/sidebar.html:24
+#: core/templates/account/profile.html:112 core/templates/sidebar.html:24
 #: deck/models.py:290 deck/templates/event/event_create_schedule.html:19
 #: deck/templates/event/event_detail.html:24
 #: deck/templates/event/event_form.html:24
@@ -585,12 +585,12 @@ msgstr ""
 msgid "Events"
 msgstr ""
 
-#: core/templates/account/profile.html:128 deck/models.py:188
+#: core/templates/account/profile.html:129 deck/models.py:188
 #: deck/templates/event/event_detail.html:70 deck/tests/test_unit.py:163
 msgid "Proposals"
 msgstr ""
 
-#: core/templates/account/profile.html:152
+#: core/templates/account/profile.html:153
 msgid "Update profile"
 msgstr ""
 
@@ -910,7 +910,7 @@ msgstr ""
 msgid "Photo changed."
 msgstr ""
 
-#: core/views.py:116
+#: core/views.py:115
 msgid "Language changed."
 msgstr ""
 
@@ -1237,7 +1237,7 @@ msgid "Delete the proposal."
 msgstr ""
 
 #: deck/templates/event/event_detail.html:137
-#: deck/templates/proposal/proposal_confirm_delete.html:17
+#: deck/templates/proposal/proposal_confirm_delete.html:18
 #: deck/templates/proposal/snippets/proposal_list_item.html:29
 msgid "Delete"
 msgstr ""
@@ -1263,7 +1263,7 @@ msgid "New Event"
 msgstr ""
 
 #: deck/templates/event/event_form.html:65
-#: deck/templates/proposal/proposal_confirm_delete.html:22
+#: deck/templates/proposal/proposal_confirm_delete.html:23
 #: deck/templates/proposal/proposal_form.html:74
 #: jury/templates/jury/jury_detail.html:105
 msgid "event detail"
@@ -1437,7 +1437,7 @@ msgstr ""
 msgid "After deleting this proposal all votes will be lost forever."
 msgstr ""
 
-#: deck/templates/proposal/proposal_confirm_delete.html:26
+#: deck/templates/proposal/proposal_confirm_delete.html:27
 msgid "my proposals"
 msgstr ""
 
@@ -1604,10 +1604,10 @@ msgstr ""
 msgid "The \"@%s\" was successfully removed from the Jury."
 msgstr ""
 
-#: speakerfight/settings.py:139
+#: speakerfight/settings.py:138
 msgid "English"
 msgstr ""
 
-#: speakerfight/settings.py:140
+#: speakerfight/settings.py:139
 msgid "Portuguese"
 msgstr ""
