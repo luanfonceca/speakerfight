@@ -69,8 +69,11 @@ ALLOWED_HOSTS = [
     "speakerfight.com",
 ]
 
-# Application definition
+# Media files.
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+# Application definition
 DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

@@ -10,7 +10,7 @@ from vanilla import TemplateView, DetailView, UpdateView
 
 from deck.models import Event, Proposal
 from core.models import Profile
-from core.forms import ProfileForm, ProfileChangeLanguageForm
+from core.forms import ProfileForm, ProfilePictureForm, ProfileChangeLanguageForm
 from core.mixins import LoginRequiredMixin, FormValidRedirectMixing
 
 
@@ -93,6 +93,14 @@ class ProfileUpdateView(LoginRequiredMixin,
             messages.error(self.request, error.as_data()[0].message)
 
         return self.get()
+
+
+class ProfileUpdatePictureView(ProfileUpdateView):
+    form_class = ProfilePictureForm
+
+    def form_valid(self, form):
+        self.object = form.save()
+        return self.success_redirect(_(u'Photo changed.'))
 
 
 class ProfileChangeLanguageView(ProfileUpdateView):
