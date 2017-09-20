@@ -59,7 +59,7 @@ requests==2.18.4
 scandir==1.5
 sh==1.12.14
 simplegeneric==0.8.1
-six==1.10.0
+six==1.11.0
 smarturls==0.1.7
 sqlparse==0.2.3
 traitlets==4.3.2
