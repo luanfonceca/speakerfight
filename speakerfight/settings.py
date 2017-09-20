@@ -141,7 +141,6 @@ DATABASES = {
     )
 }
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -248,8 +247,3 @@ SURL_REGEXERS = {
 }
 
 SEND_NOTIFICATIONS = True
-
-try:
-    from local_settings import *
-except ImportError:
-    pass

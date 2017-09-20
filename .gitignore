@@ -53,6 +53,7 @@ speakerfight/local_settings.py
 speakerfight/uwsgi.yaml
 speakerfight/nginx.conf
 media/*
+speakerfight/staticfiles
 
 # Sphinx documentation
 docs/_build/

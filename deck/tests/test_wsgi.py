@@ -1,9 +1,11 @@
-from django.test import TestCase
-from django.core.handlers.wsgi import WSGIHandler
 
 from os import environ
 
+from django.test import TestCase
+
 from speakerfight.wsgi import application
+
+from whitenoise.django import DjangoWhiteNoise
 
 
 class WSGITest(TestCase):
@@ -12,4 +14,4 @@ class WSGITest(TestCase):
                           environ.get('DJANGO_SETTINGS_MODULE'))
 
     def test_assert_application(self):
-        self.assertIsInstance(application, WSGIHandler)
+        self.assertIsInstance(application, DjangoWhiteNoise)
