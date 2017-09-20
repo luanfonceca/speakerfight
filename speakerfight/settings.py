@@ -11,21 +11,30 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 '''
 
+import os
+
+import decouple
+
+import dj_database_url
+
 from django.conf import global_settings
 from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'hchgjid4s$nhe_@3*ildx480lpld*t$cs*#qvg((j_+g4zr++8'
+# SECRET_KEY = 'hchgjid4s$nhe_@3*ildx480lpld*t$cs*#qvg((j_+g4zr++8'
+SECRET_KEY = decouple.config('SECRET_KEY', cast=str, default='secret')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = decouple.config('DEBUG', cast=bool, default=False)
 
 # Template
 TEMPLATES = [
@@ -60,18 +69,23 @@ TEMPLATES = [
 
 # Absolute path to the directory static files should be collected to.
 STATICFILES_DIRS = []
+# STATICFILES_DIRS = [
+#     os.path.join(PROJECT_ROOT, 'static'),
+# ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 DEFAULT_FROM_EMAIL = NO_REPLY_EMAIL = 'Speakerfight <noreply@speakerfight.com>'
 
 ALLOWED_HOSTS = [
-    "localhost",
-    "speakerfight.com",
+    '*',
 ]
 
 # Media files.
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Application definition
 DEFAULT_APPS = [
@@ -121,11 +135,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3'
-    }
+    'default': dj_database_url.config(
+        default='sqlite:///{path}/db.sqlite3'.format(path=BASE_DIR),
+        conn_max_age=500
+    )
 }
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -140,7 +155,7 @@ LANGUAGES = (
 )
 
 LOCALE_PATHS = (
-    os.path.join(BASE_DIR, "locale"),
+    os.path.join(BASE_DIR, 'locale'),
 )
 
 # TIME_ZONE = 'UTC'
@@ -177,6 +192,7 @@ MIDDLEWARE_CLASSES = global_settings.MIDDLEWARE_CLASSES + [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'locale_middleware.LocaleMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 # Password validation
