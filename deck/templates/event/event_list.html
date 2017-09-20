@@ -46,8 +46,8 @@
       <div class="row-fluid">
         <div class="col-md-12">
           <p>
-            {% blocktrans with counter=event_list.count %}
-              Found {{ counter }} event{{ counter|pluralize }} matching your search for '{{ criteria }}'
+            {% blocktrans with events_count=event_list.paginator.count events_pluralize=event_list.paginator.count|pluralize %}
+              Found {{ events_count }} event{{ events_pluralize }} matching your search for '{{ criteria }}'
             {% endblocktrans %}
           </p>
         </div>
