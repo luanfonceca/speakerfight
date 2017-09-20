@@ -52,6 +52,7 @@ coverage.xml
 speakerfight/local_settings.py
 speakerfight/uwsgi.yaml
 speakerfight/nginx.conf
+media/*
 
 # Sphinx documentation
 docs/_build/
