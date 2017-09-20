@@ -129,10 +129,15 @@ ROOT_URLCONF = 'speakerfight.urls'
 
 WSGI_APPLICATION = 'speakerfight.wsgi.application'
 
-EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+EMAIL_BACKEND = decouple.config(
+    'EMAIL_BACKEND', cast=str,
+    default='django.core.mail.backends.locmem.EmailBackend'
+)
+
+if EMAIL_BACKEND.endswith('MailgunBackend'):
+    MAILGUN_API_KEY = decouple.config('MAILGUN_API_KEY', cast=str)
 
 # Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
     'default': dj_database_url.config(
@@ -146,7 +151,7 @@ DATABASES = {
 
 TIME_ZONE = 'America/Sao_Paulo'
 
-LANGUAGE_CODE = 'en-US'
+LANGUAGE_CODE = decouple.config('LANGUAGE_CODE', cast=str, default='en-US')
 
 LANGUAGES = (
     ('en-us', _('English')),
@@ -247,3 +252,53 @@ SURL_REGEXERS = {
 }
 
 SEND_NOTIFICATIONS = True
+
+# Django extension
+EXTENSIONS_MAX_UNIQUE_QUERY_ATTEMPTS = 1000
+
+# Sentry
+RAVEN_CONFIG = {
+    'dsn': decouple.config('RAVEN_CONFIG_DSN', cast=str, default=''),
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'root': {
+        'level': 'DEBUG',
+        'handlers': ['sentry'],
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'sentry': {
+            'level': 'DEBUG',
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'raven': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'sentry.errors': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+    },
+}
