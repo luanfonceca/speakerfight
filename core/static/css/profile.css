@@ -2,6 +2,10 @@
   float: left;
 }
 
+#profile-detail #profile-photo .btn-flat {
+  margin-top: 5px;
+}
+
 #profile-detail .thumbnail {
   width: 210px;
 }
@@ -25,6 +29,11 @@
 #profile-detail #profile-info .name small {
   margin-left: 0;
   font-style: normal;
+}
+
+.avatar-image {
+  width: 200px;
+  height: 200px;
 }
 
 /* Landscape tablet and desktop */
