@@ -31,6 +31,7 @@ deployment:
       - heroku maintenance:on --app staging-speakerfight
       - heroku scale web=0 --app staging-speakerfight
       - git push git@heroku.com:staging-speakerfight.git $CIRCLE_SHA1:refs/heads/master
-      - heroku run python manage.py deploy --app staging-speakerfight
+      - heroku run python manage.py migrate --app staging-speakerfight
+      - heroku run python manage.py compilemessges --app staging-speakerfight
       - heroku scale web=1 --app staging-speakerfight
       - heroku maintenance:off --app staging-speakerfight
