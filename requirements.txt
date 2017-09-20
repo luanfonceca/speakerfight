@@ -39,7 +39,7 @@ ipython==5.4.1
 master-sake==0.9.7
 mccabe==0.6.1
 model-mommy==1.4.0
-networkx==1.11
+networkx==2.0
 oauthlib==2.0.4
 paramiko==2.3.0
 pathlib2==2.3.0
