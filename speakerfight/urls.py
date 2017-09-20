@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.staticfiles.urls import static
 
 
 urlpatterns = (
@@ -12,6 +13,10 @@ urlpatterns = (
     url(r'^', include('deck.urls')),
     url(r'^', include('jury.urls')),
     url(r'^api/', include('api.urls')),
+)
+
+urlpatterns += tuple(
+    static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 )
 
 if settings.DEBUG:
