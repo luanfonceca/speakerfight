@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: speakerfight\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-19 14:12-0300\n"
+"POT-Creation-Date: 2017-09-20 09:13-0300\n"
 "PO-Revision-Date: 2017-09-15 21:02-0300\n"
 "Last-Translator: Luan Fonseca de Farias <luanfonceca@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/speakerfight/"
@@ -1466,40 +1466,30 @@ msgid "new event"
 msgstr "novo evento"
 
 #: deck/templates/event/event_list.html:49
-#, fuzzy, python-format
+#, python-format
 #| msgid ""
 #| "\n"
-#| "              Found %(counter)s event%(counter|pluralize)s matching your "
-#| "search for '%(criteria)s'\n"
+#| "              Found %(events_count)s event%(events_pluralize)s matching "
+#| "your search for '%(criteria)s'\n"
 #| "            "
 msgid ""
 "\n"
-"              Found %(counter)s event matching your search for "
-"'%(criteria)s'\n"
-"              "
-msgid_plural ""
-"\n"
-"              Found %(counter)s events matching your search for "
-"'%(criteria)s'\n"
+"              Found %(events_count)s event%(events_pluralize)s matching your "
+"search for '%(criteria)s'\n"
 "            "
-msgstr[0] ""
+msgstr ""
 "\n"
-"              Encontrados %(counter)s evento%(counter|pluralize)s contendo o "
-"termo ‘%(criteria)s’\n"
-"            "
-msgstr[1] ""
-"\n"
-"              Encontrados %(counter)s evento%(counter|pluralize)s contendo o "
-"termo ‘%(criteria)s’\n"
+"              Encontrados %(events_count)s evento%(events_pluralize)s "
+"contendo o termo '%(criteria)s'\n"
 "            "
 
-#: deck/templates/event/event_list.html:63
+#: deck/templates/event/event_list.html:61
 #: deck/templates/event/my_events.html:25
 msgid "There are no events to show to you :("
 msgstr "Não há eventos para te exibir :("
 
-#: deck/templates/event/event_list.html:67
-#: deck/templates/event/event_list.html:68
+#: deck/templates/event/event_list.html:65
+#: deck/templates/event/event_list.html:66
 msgid "Back to the event list"
 msgstr "Voltar para a lista de eventos"
 
@@ -1866,12 +1856,11 @@ msgid "The \"@%s\" was successfully removed from the Jury."
 msgstr "Os \"@%s\" foram removidos do júri com sucesso."
 
 #: speakerfight/settings.py:138
-msgid "English"
-msgstr "Inglês"
-
-#: speakerfight/settings.py:139
 msgid "Portuguese"
 msgstr "Português"
+
+#~ msgid "English"
+#~ msgstr "Inglês"
 
 #~ msgid ""
 #~ "\n"

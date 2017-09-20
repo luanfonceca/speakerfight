@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-19 14:12-0300\n"
+"POT-Creation-Date: 2017-09-20 09:13-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1283,24 +1283,18 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"              Found %(counter)s event matching your search for "
-"'%(criteria)s'\n"
-"              "
-msgid_plural ""
-"\n"
-"              Found %(counter)s events matching your search for "
-"'%(criteria)s'\n"
+"              Found %(events_count)s event%(events_pluralize)s matching your "
+"search for '%(criteria)s'\n"
 "            "
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
 
-#: deck/templates/event/event_list.html:63
+#: deck/templates/event/event_list.html:61
 #: deck/templates/event/my_events.html:25
 msgid "There are no events to show to you :("
 msgstr ""
 
-#: deck/templates/event/event_list.html:67
-#: deck/templates/event/event_list.html:68
+#: deck/templates/event/event_list.html:65
+#: deck/templates/event/event_list.html:66
 msgid "Back to the event list"
 msgstr ""
 
@@ -1611,9 +1605,5 @@ msgid "The \"@%s\" was successfully removed from the Jury."
 msgstr ""
 
 #: speakerfight/settings.py:138
-msgid "English"
-msgstr ""
-
-#: speakerfight/settings.py:139
 msgid "Portuguese"
 msgstr ""
