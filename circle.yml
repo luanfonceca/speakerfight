@@ -4,6 +4,7 @@ dependencies:
     - pip install pycrypto
 test:
   override:
+    - python manage.py collectstatic --no-input
     - coverage run manage.py test
 general:
   artifacts:
