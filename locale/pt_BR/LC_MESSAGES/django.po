@@ -216,22 +216,16 @@ msgstr "Proposta de %s acabou de ser removida"
 
 #: templates/event/event_confirm_delete.html:6
 #: templates/event/event_confirm_delete.html:10
-#, fuzzy
-#| msgid "Delete"
 msgid "Delete Event"
-msgstr "Remover"
+msgstr "Remover Evento"
 
 #: templates/event/event_confirm_delete.html:11
-#, fuzzy
-#| msgid "Are you sure you want to delete this proposal?"
 msgid "Are you sure you want to delete this event?"
-msgstr "Você tem certeza que deseja remover esta proposta?"
+msgstr "Você tem certeza que deseja remover este evento?"
 
 #: templates/event/event_confirm_delete.html:12
-#, fuzzy
-#| msgid "After deleting this proposal all votes will be lost forever."
 msgid "After deleting this event all proposals will be lost forever."
-msgstr "Após remover esta proposta todos os votos serão perdidos para sempre."
+msgstr "Após remover este evento todas as propostas serão perdidas para sempre."
 
 #: templates/event/event_confirm_delete.html:18
 #: templates/event/event_detail.html:137
@@ -552,10 +546,8 @@ msgid "Edit the event."
 msgstr "Edite o evento"
 
 #: templates/event/snippets/event_list_item.html:53
-#, fuzzy
-#| msgid "Edit the event."
 msgid "Delete the event."
-msgstr "Edite o evento"
+msgstr "Remover o evento"
 
 #: templates/event/snippets/event_list_item.html:56
 msgid "Manage the jury."
@@ -753,10 +745,8 @@ msgid "See in Event"
 msgstr "Ver no Evento"
 
 #: tests/test_functional.py:276 views.py:152
-#, fuzzy
-#| msgid "Event created."
 msgid "Event deleted."
-msgstr "Evento criado."
+msgstr "Evento removido."
 
 #: tests/test_functional.py:285 tests/test_functional.py:761 views.py:139
 #: views.py:161 views.py:173 views.py:211 views.py:379 views.py:443
