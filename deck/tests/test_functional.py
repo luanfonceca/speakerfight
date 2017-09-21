@@ -263,6 +263,27 @@ class EventTest(TestCase):
         self.assertEquals('event/event_detail.html', response.template_name[0])
         self.assertEquals('RuPy', event.title)
 
+    def test_delete_event(self):
+        new_event_data = self.event_data.copy()
+        new_event_data['author_id'] = User.objects.get(username='user').id
+        new_event_data['description'] = 'A good candidate to be deleted.'
+        event = Event.objects.create(**new_event_data)
+
+        self.client.login(username='user', password='user')
+        response = self.client.post(
+            reverse('delete_event', kwargs={'slug': event.slug}), follow=True)
+        self.assertEquals(response.status_code, 200)
+        self.assertContains(response, _('Event deleted.'))
+        self.assertEquals(Event.objects.filter(slug=event.slug).count(), 0)
+
+    def test_not_allowed_to_delete_event(self):
+        event = Event.objects.create(**self.event_data)
+        self.client.login(username='user', password='user')
+        response = self.client.post(
+            reverse('delete_event', kwargs={'slug': event.slug}), follow=True)
+        self.assertEqual(200, response.status_code)
+        self.assertContains(response, _('You are not allowed to see this page.'))
+
     def test_publish_event(self):
         event = Event.objects.create(**self.event_data)
         event_data = self.event_data.copy()

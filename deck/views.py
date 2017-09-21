@@ -143,6 +143,26 @@ class UpdateEvent(BaseEventView, UpdateView, FormValidRedirectMixing):
         return super(UpdateEvent, self).dispatch(*args, **kwargs)
 
 
+class DeleteEvent(BaseEventView, DeleteView):
+    template_name = 'event/event_confirm_delete.html'
+
+    def post(self, request, *args, **kwargs):
+        event = self.get_object()
+        event.delete()
+        messages.success(self.request, _(u'Event deleted.'))
+        return HttpResponseRedirect(reverse('my_events'))
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        event = self.get_object()
+        if (event.author != self.request.user and
+           not self.request.user.is_superuser):
+            messages.error(
+                self.request, _(u'You are not allowed to see this page.'))
+            return HttpResponseRedirect(event.get_absolute_url())
+        return super(DeleteEvent, self).dispatch(*args, **kwargs)
+
+
 class ExportEvent(BaseEventView, DetailView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
