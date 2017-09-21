@@ -134,7 +134,7 @@ EMAIL_BACKEND = decouple.config(
     default='django.core.mail.backends.locmem.EmailBackend'
 )
 
-if EMAIL_BACKEND.endswith('MailgunBackend'):
+if EMAIL_BACKEND.endswith('mailgun.EmailBackend'):
     MAILGUN_API_KEY = decouple.config('MAILGUN_API_KEY', cast=str)
 
 # Database
