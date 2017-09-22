@@ -45,7 +45,7 @@
       <div class="addthis_native_toolbox"></div>
     {% endif %}
   </div>
-  {% if event.author_id == request.user.id or request.user.is_superuser %}
+  {% if not event.due_date_is_passed and event.author_id == request.user.id or request.user.is_superuser %}
     <div class="panel-footer event-actions text-center">
       <a href="{% url 'update_event' slug=event.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Edit the event.' %}">
         <i class="icon-pencil"></i> {% trans "Edit" %}

@@ -1,5 +1,5 @@
-
 from collections import namedtuple
+import datetime
 import json
 
 from django.conf import settings
@@ -174,6 +174,22 @@ class EventTest(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertQuerysetEqual(response.context['event_list'],
                                  ["<Event: RuPy - 0>"])
+
+    def test_list_past_events(self):
+        # A future far far away
+        future_event_data = self.event_data.copy()
+        future_event_data.update(is_published=True,
+                                 due_date=datetime.datetime(3000, 01, 01))
+        Event.objects.create(**future_event_data)
+        past_event_data = self.event_data.copy()
+        past_event_data.update(title='Speakerfight rocks',
+                               is_published=True,
+                               due_date=datetime.datetime(1900, 01, 01))
+        Event.objects.create(**past_event_data)
+
+        response = self.client.get(reverse('past_events'))
+        self.assertEquals(response.status_code, 200)
+        self.assertEquals(len(response.context['event_list']), 1)
 
     def test_detail_event(self):
         event = Event.objects.create(**self.event_data)
