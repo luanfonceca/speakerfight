@@ -276,13 +276,14 @@ class Track(models.Model):
 class Event(DeckBaseModel):
     allow_public_voting = models.BooleanField(_('Allow Public Voting'),
                                               default=True)
-    due_date = models.DateTimeField(null=True, blank=True)
+    due_date = models.DateTimeField(null=False, blank=False)
     slots = models.SmallIntegerField(_('Slots'), default=10)
 
     # relations
     jury = models.OneToOneField(to='jury.Jury', related_name='event',
                                 null=True, blank=True)
-    anonymous_voting = models.BooleanField(_('Anonymous Voting?'), default=False)
+    anonymous_voting = models.BooleanField(
+        _('Anonymous Voting?'), default=False)
 
     class Meta:
         ordering = ['-due_date', '-created_at']
@@ -291,8 +292,6 @@ class Event(DeckBaseModel):
 
     @property
     def due_date_is_passed(self):
-        if not self.due_date:
-            return False
         return timezone.now() > self.due_date
 
     @property
