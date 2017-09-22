@@ -42,7 +42,7 @@ mccabe==0.6.1
 model-mommy==1.4.0
 networkx==1.11
 oauthlib==2.0.4
-paramiko==2.3.0
+paramiko==2.3.1
 pathlib2==2.3.0
 pexpect==4.2.1
 pickleshare==0.7.4
