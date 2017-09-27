@@ -28,10 +28,10 @@ deployment:
         EOF
       - chmod 600 ~/.netrc # Heroku cli complains about permissions without this
       - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
-      - heroku maintenance:on --app staging-speakerfight
-      - heroku scale web=0 --app staging-speakerfight
-      - git push git@heroku.com:staging-speakerfight.git $CIRCLE_SHA1:refs/heads/master
-      - heroku run python manage.py migrate --app staging-speakerfight
-      - heroku run python manage.py compilemessages --app staging-speakerfight
-      - heroku scale web=1 --app staging-speakerfight
-      - heroku maintenance:off --app staging-speakerfight
+      - heroku maintenance:on --app speakerfight
+      - heroku scale web=0 --app speakerfight
+      - git push git@heroku.com:speakerfight.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run python manage.py migrate --app speakerfight
+      - heroku run python manage.py compilemessages --app speakerfight
+      - heroku scale web=1 --app speakerfight
+      - heroku maintenance:off --app speakerfight
