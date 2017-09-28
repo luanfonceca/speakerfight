@@ -24,13 +24,13 @@ msgstr ""
 #: forms.py:49
 #, python-format
 msgid ""
-"The \"%s\" are not a Speakerfight user. For now, we just allow already "
-"joined users."
+"The \"%s\" is not a Speakerfight user. For now, we only allow already "
+"registered users."
 msgstr ""
 
 #: forms.py:53
 #, python-format
-msgid "The \"@%s\" already is being part of this jury."
+msgid "The \"@%s\" is already part of this jury."
 msgstr ""
 
 #: models.py:64 models.py:255
@@ -100,7 +100,7 @@ msgid "Workshop"
 msgstr ""
 
 #: models.py:143
-msgid "Openning"
+msgid "Opening"
 msgstr ""
 
 #: models.py:144
@@ -204,7 +204,7 @@ msgstr ""
 
 #: models.py:384
 #, python-format
-msgid "Proposal from %s just got deleted"
+msgid "Proposal from %s has been deleted"
 msgstr ""
 
 #: templates/event/event_confirm_delete.html:6
@@ -333,7 +333,7 @@ msgstr ""
 msgid ""
 "\n"
 "          This event is in the <strong>Anonymous Voting</strong> mode, all "
-"the speakers are hidden for voting, you should base your vote just in the "
+"the speakers are hidden for voting, you should base your vote just on the "
 "content of the proposals.\n"
 "        "
 msgstr ""
@@ -555,7 +555,7 @@ msgid ""
 "\n"
 "  This email is a confirmation for the creation of your event "
 "\"%(event_title)s\" on Speakerfight! Remember to share the event so more "
-"people can submit proposals and engaje more participants!\n"
+"people can submit proposals and engage more participants!\n"
 "\n"
 "  Good luck!\n"
 msgstr ""
@@ -590,7 +590,7 @@ msgid ""
 "  Welcome to Speakerfight! Here you will be able to submit proposals and "
 "evaluate talks of other possible speakers.\n"
 "\n"
-"  Speakerfight it's an open source project that you can help to improve it. "
+"  Speakerfight it's an open source project that you can help to improve. "
 "Check out: https://github.com/luanfonceca/speakerfight.\n"
 "\n"
 "  Thank you for use it.\n"
@@ -638,8 +638,8 @@ msgstr ""
 
 #: templates/proposal/proposal_form.html:59
 msgid ""
-"Add anything you think it will be valuable for the people who are choosing "
-"the talks, only They can see it."
+"Add anything you think will be valuable for the people who are choosing "
+"talks, only They can see it."
 msgstr ""
 
 #: templates/proposal/snippets/proposal_list_item.html:12
