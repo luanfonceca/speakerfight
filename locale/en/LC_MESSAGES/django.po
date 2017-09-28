@@ -593,7 +593,7 @@ msgid ""
 "  Speakerfight it's an open source project that you can help to improve. "
 "Check out: https://github.com/luanfonceca/speakerfight.\n"
 "\n"
-"  Thank you for use it.\n"
+"  Thank you for using it.\n"
 msgstr ""
 
 #: templates/proposal/my_proposals.html:7
