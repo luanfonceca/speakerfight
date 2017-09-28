@@ -12,11 +12,39 @@
   </div>
   <div class="row" id="proposal-list">
     <div class="col-md-12">
-      <div id="event-proposals">
-        {% for proposal in object_list %}
-          {% include "proposal/snippets/proposal_list_item.html" %}
-        {% endfor %}
-      </div>
+      {% regroup object_list by event as event_list %}
+      {% for event in event_list %}
+        <div class="panel panel-default event-item">
+          <div class="panel-body">
+            <h3 class="panel-title event-title">{{ event.grouper.title }}</h3>
+            <p class="event-metadata">
+              {% blocktrans with profile_url=event.grouper.author.profile.get_absolute_url author=event.grouper.author.get_full_name|default:event.grouper.author.username created_at=event.grouper.created_at %}
+              Created by <strong><a href="{{ profile_url }}">{{ author }}</a></strong> at {{ created_at }}.
+              {% endblocktrans %}
+              {% if event.grouper.due_date %}
+                <br/>
+                {% if event.grouper.due_date_is_passed %}
+                  <span class="text-danger">
+                    <i class="icon-exclamation-sign"></i>
+                    {% trans "Due date pasted since the day" %} {{ event.grouper.due_date }}
+                  </span>
+                {% else %}
+                  {% trans "Due date in" %} <span class="{% if event.grouper.due_date_is_close %}text-danger{% else %}text-warning{% endif %}">{{ event.grouper.due_date|timeuntil }}</span>
+                {% endif %}
+              {% endif %}
+            </p>
+
+            <div class="col-md-10 col-md-offset-1" id="event-proposals">
+              {% for proposal in event.list %}
+                <div class="event-proposals-header">
+                  <h3>{% trans "Proposals" %}</h3>
+                </div>
+                {% include "proposal/snippets/proposal_list_item.html" %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
   </div>
 {% endblock content %}
