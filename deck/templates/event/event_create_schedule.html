@@ -55,75 +55,77 @@
         <p class="text-center text-muted">{% trans "Approved talks" %}</p>
         <div id="event-approved-proposals" class="proposal-container">
           {% for activity in event.get_schedule %}
-            {% if activity.activity_type == 'proposal' %}
-              <div id="{{ activity.slug }}"  data-href="{% url 'api_event_activity' event_slug=event.slug slug=activity.slug %}" class="panel proposal-item panel-success">
-                <div class="panel-body">
-                  <input checked="checked" name="approved_activities" value="{{ activity.pk }}" class="hide" type="checkbox" />
-                  <div class="pull-right proposal-actions">
-                    <img src="{{ activity.author|get_user_photo }}" alt="author photo" class="img-circle author-photo hide">
-                      {% if request.user in event.jury.users or request.user.is_superuser %}
-                          <a href="{% url 'disapprove_proposal' event_slug=event.slug slug=activity.slug %}?next={{ request.path }}"
-                             class="btn-flat gray text-upper disapprove-link"
-                             data-toggle="tooltip"
-                             title="{% trans 'Disapprove the proposal.' %}">
-                              <i class="icon-check-empty"></i>
-                              <span>{% trans "Disapprove" %}</span>
-                          </a>
-                      {% endif %}
-                    <button type="button" class="btn-flat gray text-upper update-activity">
-                      <i class="icon-pencil"></i>
-                    </button>
-                  </div>
+              {% if activity.proposal.is_approved %}
+                {% if activity.activity_type == 'proposal' %}
+                  <div id="{{ activity.slug }}"  data-href="{% url 'api_event_activity' event_slug=event.slug slug=activity.slug %}" class="panel proposal-item panel-success">
+                    <div class="panel-body">
+                      <input checked="checked" name="approved_activities" value="{{ activity.pk }}" class="hide" type="checkbox" />
+                      <div class="pull-right proposal-actions">
+                        <img src="{{ activity.author|get_user_photo }}" alt="author photo" class="img-circle author-photo hide">
+                          {% if request.user in event.jury.users or request.user.is_superuser %}
+                              <a href="{% url 'disapprove_proposal' event_slug=event.slug slug=activity.slug %}?next={{ request.path }}"
+                                 class="btn-flat gray text-upper disapprove-link"
+                                 data-toggle="tooltip"
+                                 title="{% trans 'Disapprove the proposal.' %}">
+                                  <i class="icon-check-empty"></i>
+                                  <span>{% trans "Disapprove" %}</span>
+                              </a>
+                          {% endif %}
+                        <button type="button" class="btn-flat gray text-upper update-activity">
+                          <i class="icon-pencil"></i>
+                        </button>
+                      </div>
 
-                  <div class="pull-left text-center proposal-rate">
-                    <div class="proposal-points hide">
-                      <p>{% trans "Points" %}</p>
-                      <h3>{{ activity.proposal.get_rate }}</h3>
-                    </div>
-                    <div class="proposal-timetable">
-                      <p>{{ activity.get_activity_type_display }}</p>
-                      <span class="timetable">{{ activity.timetable }}</span>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 class="panel-title proposal-title">
-                      <a href="#{{ activity.slug }}">{{ activity }}</a>
-                      <p class="proposal-metadata">
-                        {% blocktrans with profile_url=activity.author.profile.get_absolute_url author=activity.author.get_full_name|default:activity.author.username created_at=activity.created_at %}
-                          Proposed by <strong><a href="{{ profile_url }}">{{ author }}</a></strong> at {{ created_at }}.
-                        {% endblocktrans %}
-                      </p>
-                    </h3>
-                  </div>
-                </div>
-              </div>
-            {% else %}
-              <div id="{{ activity.slug }}"  data-href="{% url 'api_event_activity' event_slug=event.slug slug=activity.slug %}" class="panel panel-success proposal-item event-activity">
-                <div class="panel-body">
-                  <input checked="checked" name="approved_activities" value="{{ activity.pk }}" class="hide" type="checkbox" />
-                  <div class="pull-right proposal-actions">
-                    <button type="button" class="btn-flat gray text-upper update-activity">
-                      <i class="icon-pencil"></i>
-                    </button>
-                    <button type="button" class="btn-flat gray text-upper remove-activity">
-                      <i class="icon-trash"></i>
-                    </button>
-                  </div>
-                  <div class="pull-left text-center proposal-rate">
-                    <div class="proposal-timetable">
-                      <p>{{ activity.get_activity_type_display }}</p>
-                      <span class="timetable">{{ activity.timetable }}</span>
+                      <div class="pull-left text-center proposal-rate">
+                        <div class="proposal-points hide">
+                          <p>{% trans "Points" %}</p>
+                          <h3>{{ activity.proposal.get_rate }}</h3>
+                        </div>
+                        <div class="proposal-timetable">
+                          <p>{{ activity.get_activity_type_display }}</p>
+                          <span class="timetable">{{ activity.timetable }}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <h3 class="panel-title proposal-title">
+                          <a href="#{{ activity.slug }}">{{ activity }}</a>
+                          <p class="proposal-metadata">
+                            {% blocktrans with profile_url=activity.author.profile.get_absolute_url author=activity.author.get_full_name|default:activity.author.username created_at=activity.created_at %}
+                              Proposed by <strong><a href="{{ profile_url }}">{{ author }}</a></strong> at {{ created_at }}.
+                            {% endblocktrans %}
+                          </p>
+                        </h3>
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <h3 class="panel-title proposal-title">
-                      <a href="#{{ activity.slug }}">{{ activity }}</a>
-                      <p class="proposal-metadata">{{ activity.description }}</p>
-                    </h3>
+                {% else %}
+                  <div id="{{ activity.slug }}"  data-href="{% url 'api_event_activity' event_slug=event.slug slug=activity.slug %}" class="panel panel-success proposal-item event-activity">
+                    <div class="panel-body">
+                      <input checked="checked" name="approved_activities" value="{{ activity.pk }}" class="hide" type="checkbox" />
+                      <div class="pull-right proposal-actions">
+                        <button type="button" class="btn-flat gray text-upper update-activity">
+                          <i class="icon-pencil"></i>
+                        </button>
+                        <button type="button" class="btn-flat gray text-upper remove-activity">
+                          <i class="icon-trash"></i>
+                        </button>
+                      </div>
+                      <div class="pull-left text-center proposal-rate">
+                        <div class="proposal-timetable">
+                          <p>{{ activity.get_activity_type_display }}</p>
+                          <span class="timetable">{{ activity.timetable }}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <h3 class="panel-title proposal-title">
+                          <a href="#{{ activity.slug }}">{{ activity }}</a>
+                          <p class="proposal-metadata">{{ activity.description }}</p>
+                        </h3>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            {% endif %}
+                {% endif %}
+              {% endif %}
           {% endfor %}
         </div>
 
