@@ -9,6 +9,7 @@ from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError, models
+from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils import timezone
@@ -487,6 +488,8 @@ class ApproveProposal(BaseProposalView, UpdateView):
             messages.error(self.request, e.message)
         else:
             messages.success(self.request, _(u'Proposal approved.'))
+        if self.request.GET.get('next', None):
+            return redirect(self.request.GET.get('next', None))
         return HttpResponseRedirect(self.get_success_url())
 
     def dispatch(self, *args, **kwargs):
@@ -554,6 +557,8 @@ class DisapproveProposal(BaseProposalView, UpdateView):
             messages.error(self.request, e.message)
         else:
             messages.success(self.request, _(u'Proposal disapproved.'))
+        if self.request.GET.get('next', None):
+            return redirect(self.request.GET.get('next', None))
         return HttpResponseRedirect(self.get_success_url())
 
     def dispatch(self, *args, **kwargs):

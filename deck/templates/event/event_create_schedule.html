@@ -61,6 +61,15 @@
                   <input checked="checked" name="approved_activities" value="{{ activity.pk }}" class="hide" type="checkbox" />
                   <div class="pull-right proposal-actions">
                     <img src="{{ activity.author|get_user_photo }}" alt="author photo" class="img-circle author-photo hide">
+                      {% if request.user in event.jury.users or request.user.is_superuser %}
+                          <a href="{% url 'disapprove_proposal' event_slug=event.slug slug=activity.slug %}?next={{ request.path }}"
+                             class="btn-flat gray text-upper disapprove-link"
+                             data-toggle="tooltip"
+                             title="{% trans 'Disapprove the proposal.' %}">
+                              <i class="icon-check-empty"></i>
+                              <span>{% trans "Disapprove" %}</span>
+                          </a>
+                      {% endif %}
                     <button type="button" class="btn-flat gray text-upper update-activity">
                       <i class="icon-pencil"></i>
                     </button>
@@ -125,6 +134,14 @@
               <div class="panel-body">
                 <input name="approved_activities" value="{{ proposal.pk }}" class="hide" type="checkbox" />
                 <div class="pull-right proposal-actions">
+                    {% if request.user in event.jury.users or request.user.is_superuser %}
+                        <a href="{% url 'approve_proposal' event_slug=event.slug slug=proposal.slug %}?next={{ request.path }}"
+                           class="btn-flat gray text-upper approve-link" data-toggle="tooltip"
+                           title="{% trans 'Approve the proposal.' %}">
+                            <i class="icon-check"></i>
+                            <span>{% trans "Approve" %}</span>
+                        </a>
+                    {% endif %}
                   <img src="{{ proposal.author|get_user_photo }}" alt="author photo" class="img-circle author-photo">
                   <button type="button" class="btn-flat gray text-upper hide update-activity">
                     <i class="icon-pencil"></i>
