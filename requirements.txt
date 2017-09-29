@@ -57,7 +57,7 @@ pytz==2017.2
 raven==6.1.0
 requests-oauthlib==0.8.0
 requests==2.18.4
-scandir==1.5
+scandir==1.6
 sh==1.12.14
 simplegeneric==0.8.1
 six==1.11.0
