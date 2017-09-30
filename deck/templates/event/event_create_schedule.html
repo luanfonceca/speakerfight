@@ -51,6 +51,9 @@
             After <strong>Sort</strong>, <strong>Adding</strong> or <strong>Removing</strong> talks into the schedule, you need to save your work, by clicking on the "submit" button.
           {% endblocktrans %}
         </div>
+        <div id="message">
+
+        </div>
         <p class="text-center text-muted">{% trans "Approved talks" %}</p>
         <div id="event-approved-proposals" class="proposal-container">
           {% for activity in event.get_schedule %}
@@ -72,6 +75,7 @@
                         <button type="button" class="btn-flat gray text-upper update-activity">
                           <i class="icon-pencil"></i>
                         </button>
+                        <img src="{{ activity.proposal.author|get_user_photo }}" alt="author photo" class="img-circle author-photo">
                       </div>
 
                       <div class="pull-left text-center proposal-rate">
@@ -142,10 +146,10 @@
                           <span>{% trans "Approve" %}</span>
                         </a>
                     {% endif %}
-                  <img src="{{ proposal.author|get_user_photo }}" alt="author photo" class="img-circle author-photo">
                   <button type="button" class="btn-flat gray text-upper hide update-activity">
                     <i class="icon-pencil"></i>
                   </button>
+                  <img src="{{ proposal.author|get_user_photo }}" alt="author photo" class="img-circle author-photo">
                 </div>
 
                 <div class="pull-left text-center proposal-rate">
@@ -253,7 +257,6 @@
 
 {% block scripts %}
   <script src="{% static 'js/libs/dragula.min.js' %}"></script>
-  <script src="{% static 'js/voting.js' %}"></script>
 
   <script src="{% static 'js/event-schedule.js' %}"></script>
 {% endblock scripts %}

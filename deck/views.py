@@ -9,7 +9,6 @@ from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError, models
-from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils import timezone
