@@ -488,8 +488,6 @@ class ApproveProposal(BaseProposalView, UpdateView):
             messages.error(self.request, e.message)
         else:
             messages.success(self.request, _(u'Proposal approved.'))
-        if self.request.GET.get('next', None):
-            return redirect(self.request.GET.get('next', None))
         return HttpResponseRedirect(self.get_success_url())
 
     def dispatch(self, *args, **kwargs):
@@ -557,8 +555,6 @@ class DisapproveProposal(BaseProposalView, UpdateView):
             messages.error(self.request, e.message)
         else:
             messages.success(self.request, _(u'Proposal disapproved.'))
-        if self.request.GET.get('next', None):
-            return redirect(self.request.GET.get('next', None))
         return HttpResponseRedirect(self.get_success_url())
 
     def dispatch(self, *args, **kwargs):
