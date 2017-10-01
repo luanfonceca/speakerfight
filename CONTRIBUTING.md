@@ -17,7 +17,7 @@ with a fix.
 
 ### Asigning to you a issue
 
-If you want to fix a issue, please comment in the issue thread to show to everyone that you want to do that, ask anything about it, explain your thoughts. It is so much important for us to have that conversation to avoid misconceptions, bugs, non-necesseracy implementations and over-engineering.
+If you want to fix a issue, please comment in the issue thread to show to everyone that you want to do that, ask anything about it, explain your thoughts. It is very important for us to have that conversation to avoid misconceptions, bugs, non-necessary implementations and over-engineering.
 
 ### Submitting an Issue
 
