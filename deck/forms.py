@@ -50,7 +50,7 @@ class InviteForm(forms.ModelForm):
                   u'For now, we just allow already joined users.') % email)
         if self.instance.jury.users.filter(pk=user.pk).exists():
             raise ValidationError(
-                _(u'The "@%s" already is being part of this jury.') % user)
+                _(u'The "@%s" is already a part of this jury.') % user)
         self.instance.jury.users.add(user)
 
 
