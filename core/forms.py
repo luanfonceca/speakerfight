@@ -35,7 +35,7 @@ class ProfileForm(forms.ModelForm):
 
         if User.objects.filter(username=username).exists():
             message = _(
-                u'The "%s" username are already being used by someone.'
+                u'The "%s" username is already being used by someone.'
             ) % username
             raise ValidationError(message)
 
