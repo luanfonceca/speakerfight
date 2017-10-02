@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+
+{% load deck_tags %}
+
+{% load staticfiles %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block head_title %}{% trans "Past Events" %}{% endblock %}
+
+{% block content %}
+  <div class="row header">
+    <h2><strong>{% trans "Past Events" %}</strong></h2>
+    <a href="{% url 'create_event' %}" class="btn-flat success pull-right text-upper">
+      <i class="icon-plus"></i>
+      {% trans "new event" %}
+    </a>
+  </div>
+
+  <div class="row visible-xs">
+    <div class="col-xs-12">
+      <form method="get" role="search">
+        <div id="responsive-search">
+          <div class="input-group">
+            <input type="text" name="search" class="form-control" placeholder="{% trans 'Search Events' %}" value="{{ criteria|default:'' }}" />
+            <span class="input-group-btn">
+              {% if criteria %}
+                <button type="button" class="btn btn-info btn-lg reset-search">
+                  <i class="icon-remove"></i>
+                </button>
+              {% else %}
+                <button type="submit" class="btn btn-info btn-lg">
+                  <i class="icon-search"></i>
+                </button>
+              {% endif %}
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Users table -->
+  <div class="row" id="events-list">
+    {% if criteria %}
+      <div class="row-fluid">
+        <div class="col-md-12">
+          <p>
+            {% blocktrans with events_count=event_list.paginator.count events_pluralize=event_list.paginator.count|pluralize %}
+              Found {{ events_count }} event{{ events_pluralize }} matching your search for '{{ criteria }}'
+            {% endblocktrans %}
+          </p>
+        </div>
+      </div>
+    {% endif %}
+    <div class="col-md-12">
+      {% for event in event_list %}
+        {% include "event/snippets/event_list_item.html" %}
+      {% empty %}
+        <h3 class="text-center">
+          {% trans "There are no events to show to you :(" %}
+          {% if criteria %}
+            <br />
+            <small class="text-center">
+              <a href="{% url 'list_events' %}" class="btn btn-link" title="{% trans 'Back to the event list' %}">
+                <i class="icon-arrow-left"></i> {% trans 'Back to the event list' %}
+              </a>
+            </small>
+          {% endif %}
+        </h3>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div align="center">
+    <ul class="pagination">
+      {% if event_list.has_previous %}
+        <li>
+          <a href="{% urlize page=event_list.previous_page_number search=criteria %}">
+            &laquo;
+          </a>
+        </li>
+      {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+      {% endif %}
+
+      {% for page_number in event_list.paginator.page_range %}
+        {% if event_list.number == page_number %}
+          <li class="active">
+            <span>{{ page_number }} <span class="sr-only">(current)</span></span>
+          </li>
+        {% else %}
+          <li>
+            <a href="{% urlize page=page_number search=criteria %}">
+              {{ page_number }}
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      {% if event_list.has_next %}
+        <li>
+          <a href="{% urlize page=event_list.next_page_number search=criteria %}">
+            &raquo;
+          </a>
+        </li>
+      {% else %}
+        <li class="disabled"><span>&raquo;</span></li>
+      {% endif %}
+    </ul>
+  </div>
+  <!-- end events table -->
+{% endblock content %}
+
+{% block scripts %}
+  <script src="{% static 'js/libs/jquery.linkable.js' %}"></script>
+
+  <script type="text/javascript">
+    $(function () {
+      $(".linkable").linkable();
+    });
+  </script>
+{% endblock scripts %}

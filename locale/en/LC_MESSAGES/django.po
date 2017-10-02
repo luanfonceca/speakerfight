@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-21 17:29-0300\n"
+"POT-Creation-Date: 2017-09-22 16:14-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -155,7 +155,7 @@ msgstr ""
 msgid "Proposals"
 msgstr ""
 
-#: models.py:193 tests/test_functional.py:370 views.py:292
+#: models.py:193 tests/test_functional.py:386 views.py:297
 msgid "This Event doesn't accept Proposals anymore."
 msgstr ""
 
@@ -429,14 +429,15 @@ msgid "event list"
 msgstr ""
 
 #: templates/event/event_list.html:16 templates/event/my_events.html:15
+#: templates/event/past_event_list.html:16
 msgid "new event"
 msgstr ""
 
-#: templates/event/event_list.html:25
+#: templates/event/event_list.html:25 templates/event/past_event_list.html:25
 msgid "Search Events"
 msgstr ""
 
-#: templates/event/event_list.html:49
+#: templates/event/event_list.html:49 templates/event/past_event_list.html:49
 #, python-format
 msgid ""
 "\n"
@@ -446,15 +447,23 @@ msgid ""
 msgstr ""
 
 #: templates/event/event_list.html:61 templates/event/my_events.html:25
+#: templates/event/past_event_list.html:61
 msgid "There are no events to show to you :("
 msgstr ""
 
 #: templates/event/event_list.html:65 templates/event/event_list.html:66
+#: templates/event/past_event_list.html:65
+#: templates/event/past_event_list.html:66
 msgid "Back to the event list"
 msgstr ""
 
 #: templates/event/my_events.html:8 templates/event/my_events.html:12
 msgid "My Events"
+msgstr ""
+
+#: templates/event/past_event_list.html:9
+#: templates/event/past_event_list.html:13
+msgid "Past Events"
 msgstr ""
 
 #: templates/event/snippets/event_list_item.html:12
@@ -588,8 +597,8 @@ msgid ""
 msgstr ""
 
 #: templates/proposal/my_proposals.html:7
-#: templates/proposal/my_proposals.html:11 tests/test_functional.py:1300
-#: tests/test_functional.py:1305
+#: templates/proposal/my_proposals.html:11 tests/test_functional.py:1316
+#: tests/test_functional.py:1321
 msgid "My Proposals"
 msgstr ""
 
@@ -650,80 +659,80 @@ msgstr ""
 msgid "See in Event"
 msgstr ""
 
-#: tests/test_functional.py:276 views.py:152
+#: tests/test_functional.py:292 views.py:157
 msgid "Event deleted."
 msgstr ""
 
-#: tests/test_functional.py:285 tests/test_functional.py:761 views.py:139
-#: views.py:161 views.py:173 views.py:211 views.py:379 views.py:443
-#: views.py:510 views.py:577
+#: tests/test_functional.py:301 tests/test_functional.py:777 views.py:144
+#: views.py:166 views.py:178 views.py:216 views.py:384 views.py:448
+#: views.py:515 views.py:582
 msgid "You are not allowed to see this page."
 msgstr ""
 
-#: tests/test_functional.py:751 views.py:370
+#: tests/test_functional.py:767 views.py:375
 msgid "Proposal deleted."
 msgstr ""
 
-#: views.py:89
+#: views.py:94
 msgid "Event created."
 msgstr ""
 
-#: views.py:95
+#: views.py:100
 msgid "Your event is ready to receive proposals"
 msgstr ""
 
-#: views.py:131
+#: views.py:136
 msgid "Event updated."
 msgstr ""
 
-#: views.py:181
+#: views.py:186
 msgid "Author"
 msgstr ""
 
-#: views.py:182
+#: views.py:187
 msgid "Author E-Mail"
 msgstr ""
 
-#: views.py:183
+#: views.py:188
 msgid "Vote Rate"
 msgstr ""
 
-#: views.py:184
+#: views.py:189
 msgid "Votes Count"
 msgstr ""
 
-#: views.py:315
+#: views.py:320
 msgid "Proposal created."
 msgstr ""
 
-#: views.py:324
+#: views.py:329
 msgid "Your event has new proposals"
 msgstr ""
 
-#: views.py:336
+#: views.py:341
 msgid "Your proposal was submitted"
 msgstr ""
 
-#: views.py:361
+#: views.py:366
 msgid "Proposal updated."
 msgstr ""
 
-#: views.py:394 views.py:413
+#: views.py:399 views.py:418
 msgid "Rate Index not found."
 msgstr ""
 
-#: views.py:400 views.py:417
+#: views.py:405 views.py:422
 msgid "Proposal rated."
 msgstr ""
 
-#: views.py:426 views.py:493 views.py:560
+#: views.py:431 views.py:498 views.py:565
 msgid "You need to be logged in to continue to the next step."
 msgstr ""
 
-#: views.py:470 views.py:484
+#: views.py:475 views.py:489
 msgid "Proposal approved."
 msgstr ""
 
-#: views.py:537 views.py:551
+#: views.py:542 views.py:556
 msgid "Proposal disapproved."
 msgstr ""
