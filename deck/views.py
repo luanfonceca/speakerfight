@@ -11,6 +11,7 @@ from django.core.urlresolvers import reverse
 from django.db import IntegrityError, models
 from django.template.loader import render_to_string
 from django.http import HttpResponse, HttpResponseRedirect
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
 
@@ -31,12 +32,16 @@ class BaseEventView(object):
 
 
 class ListEvents(BaseEventView, ListView):
-    template_name = 'event/event_list.html'
     allow_empty = True
+    past_events = False
 
     def get_queryset(self):
         queryset = super(ListEvents, self).get_queryset()
         queryset = queryset.published_ones()
+
+        # When it should only show past events
+        if self.past_events:
+            queryset = queryset.filter(due_date__lt=timezone.now())
 
         criteria = self.request.GET.get(u'search', None)
         if criteria:
@@ -44,7 +49,7 @@ class ListEvents(BaseEventView, ListView):
                 models.Q(title__icontains=criteria) |
                 models.Q(description__icontains=criteria)
             )
-        else:
+        elif not self.past_events:
             queryset = queryset.upcoming()
 
         paginator = Paginator(queryset, 15)
@@ -141,6 +146,26 @@ class UpdateEvent(BaseEventView, UpdateView, FormValidRedirectMixing):
                 reverse('view_event', kwargs={'slug': event.slug}),
             )
         return super(UpdateEvent, self).dispatch(*args, **kwargs)
+
+
+class DeleteEvent(BaseEventView, DeleteView):
+    template_name = 'event/event_confirm_delete.html'
+
+    def post(self, request, *args, **kwargs):
+        event = self.get_object()
+        event.delete()
+        messages.success(self.request, _(u'Event deleted.'))
+        return HttpResponseRedirect(reverse('my_events'))
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        event = self.get_object()
+        if (event.author != self.request.user and
+           not self.request.user.is_superuser):
+            messages.error(
+                self.request, _(u'You are not allowed to see this page.'))
+            return HttpResponseRedirect(event.get_absolute_url())
+        return super(DeleteEvent, self).dispatch(*args, **kwargs)
 
 
 class ExportEvent(BaseEventView, DetailView):

@@ -30,6 +30,7 @@ django-extensions==1.9.1
 django-vanilla-views==1.0.4
 djangorestframework==3.6.4
 enum34==1.1.6
+fixmydjango==0.3.1
 greenlet==0.4.12
 idna==2.6
 ipaddress==1.0.18
@@ -39,7 +40,7 @@ ipython==5.4.1
 master-sake==0.9.7
 mccabe==0.6.1
 model-mommy==1.4.0
-networkx==1.11
+networkx==2.0
 oauthlib==2.0.4
 paramiko==2.3.0
 pathlib2==2.3.0
