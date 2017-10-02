@@ -34,3 +34,15 @@
 form.password_reset {
   margin: 10px 0px 10px 0px;
 }
+
+@media (max-width: 575px) {
+  .cta-button {
+    font-size: 5.4vw;
+  }
+}
+
+@media (min-width: 991px) and (max-width: 1199px) {
+  .cta-button {
+    font-size: 23px;
+  }
+}
