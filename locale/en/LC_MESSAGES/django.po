@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-20 09:13-0300\n"
+"POT-Creation-Date: 2017-09-22 16:14-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,1089 +17,255 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: api/permissions.py:10 deck/tests/test_functional.py:740 deck/views.py:140
-#: deck/views.py:154 deck/views.py:192 deck/views.py:360 deck/views.py:424
-#: deck/views.py:491 deck/views.py:558
-msgid "You are not allowed to see this page."
-msgstr ""
-
-#: core/forms.py:13
-msgid "Username"
-msgstr ""
-
-#: core/forms.py:14
-msgid "Name"
-msgstr ""
-
-#: core/forms.py:15
-msgid "Email"
-msgstr ""
-
-#: core/forms.py:38
-#, python-format
-msgid "The \"%s\" username are already being used by someone."
-msgstr ""
-
-#: core/models.py:16
-msgid "Language"
-msgstr ""
-
-#: core/models.py:19
-msgid "About me"
-msgstr ""
-
-#: core/models.py:21
-msgid "Github username"
-msgstr ""
-
-#: core/models.py:23
-msgid "Facebook username"
-msgstr ""
-
-#: core/models.py:25
-msgid "Site url"
-msgstr ""
-
-#: core/models.py:32 core/templates/account/profile.html:11
-#: core/templates/account/profile.html:24
-#: core/templates/snippets/login_button.html:13
-msgid "Profile"
-msgstr ""
-
-#: core/templates/404.html:4 core/templates/404.html:10
-msgid "Page Not Found"
-msgstr ""
-
-#: core/templates/404.html:11
-msgid "The requested URL "
-msgstr ""
-
-#: core/templates/404.html:11
-msgid "was not found on this server. Click below to see all events available."
-msgstr ""
-
-#: core/templates/404.html:14 core/templates/index.html:95
-msgid "Enter in the arena"
-msgstr ""
-
-#: core/templates/404.html:17
-msgid "SEE ALL EVENTS"
-msgstr ""
-
-#: core/templates/500.html:4 core/templates/500.html:10
-msgid "Internal Server Error"
-msgstr ""
-
-#: core/templates/500.html:11
-msgid ""
-"I'm sorry, that page is currently unavailable due to a server "
-"misconfiguration. The server administrator has been notified, and we "
-"apologise for any inconvenience."
-msgstr ""
-
-#: core/templates/about.html:6
-msgid "About page"
-msgstr ""
-
-#: core/templates/about.html:16
-msgid "What is Speakerfight?"
-msgstr ""
-
-#: core/templates/about.html:19 core/templates/index.html:13
-msgid ""
-"\n"
-"          <strong>Speakerfight</strong> is an arena where the speakers can\n"
-"          fight each other and the people choose who wins.\n"
-"        "
-msgstr ""
-
-#: core/templates/about.html:29
-msgid "Why the Speakerfight was created?"
-msgstr ""
-
-#: core/templates/about.html:32
-msgid ""
-"\n"
-"          When the people from Grupy-RN was making a regional edition of the "
-"RuPy, in 2014, we were tired of using Google forms or Call4Paperz to manage "
-"that, so  <a target=\"_blank\" href=\"https://github.com/luanfonceca\">Luan "
-"Fonseca</a> took some time and build an MVP version to make the RuPy call "
-"for papers happen in the Speakerfight.\n"
-"        "
-msgstr ""
-
-#: core/templates/about.html:41
-msgid "How the Speakerfight is made?"
-msgstr ""
-
-#: core/templates/about.html:44
-msgid ""
-"\n"
-"          We have a repository on the <a target=\"_blank\" href=\"https://"
-"github.com/luanfonceca/speakerfight\">Github</a> with some open issues "
-"labeled with different levels of dificulty, besides we are open enough to "
-"accept any kind of contribution, We also have an Chat in <a target=\"_blank"
-"\" href=\"https://gitter.im/luanfonceca/speakerfight\">Gitter</a>, anyone "
-"can reach us out in there and talk freely about almost anything. Read our <a "
-"target=\"_blank\" href=\"https://github.com/luanfonceca/speakerfight/blob/"
-"master/CONTRIBUTING.md\">Contributing section on the Github</a> to know more "
-"details.\n"
-"        "
-msgstr ""
-
-#: core/templates/about.html:53
-msgid "How works the voting system?"
-msgstr ""
-
-#: core/templates/about.html:55
-msgid "The system is composed by 5 options of vote:"
-msgstr ""
-
-#: core/templates/about.html:60 deck/models.py:90
-msgid "Angry"
-msgstr ""
-
-#: core/templates/about.html:63
-msgid ""
-"\n"
-"              If you are not satisfied with the propose's talk and don't "
-"want this in your event, select this option. This option contains the value "
-"<strong>-1</strong>, causing down vote to the fighter.\n"
-"            "
-msgstr ""
-
-#: core/templates/about.html:69 deck/models.py:90
-msgid "Sad"
-msgstr ""
-
-#: core/templates/about.html:72
-msgid ""
-"\n"
-"              If you are sad with this propose's talk, but you don't mind if "
-"the talk will be approved, select this option. This option contains the "
-"value <strong>0</strong>, not changing the score.\n"
-"            "
-msgstr ""
-
-#: core/templates/about.html:78 deck/models.py:91
-msgid "Sleepy"
-msgstr ""
-
-#: core/templates/about.html:81
-msgid ""
-"\n"
-"              If the level of the topic's talk is warm, select this option. "
-"This option contains the value <strong>1</strong>, adding one point to the "
-"fighter.\n"
-"            "
-msgstr ""
-
-#: core/templates/about.html:88 deck/models.py:91
-msgid "Happy"
-msgstr ""
-
-#: core/templates/about.html:91
-msgid ""
-"\n"
-"              If you are glad with the topic of the talk, and you want this "
-"fighter speak in your event, select this option. This option contains the "
-"value <strong>2</strong>, adding two points to the fighter.\n"
-"            "
-msgstr ""
-
-#: core/templates/about.html:97 deck/models.py:92
-msgid "Laughing"
-msgstr ""
-
-#: core/templates/about.html:100
-msgid ""
-"\n"
-"              If your are laughing's happy about the topic of the talk, and "
-"want very much this in your event, select this option. This option contains "
-"the value <strong>3</strong>, adding three points to the fighter.\n"
-"            "
-msgstr ""
-
-#: core/templates/about.html:111
-msgid "How to measure which fighter should be approved?"
-msgstr ""
-
-#: core/templates/about.html:113
-msgid "Those fighters that have more points wins the battle."
-msgstr ""
-
-#: core/templates/about.html:116
-msgid "Speaker Tip"
-msgstr ""
-
-#: core/templates/about.html:118
-msgid ""
-"\n"
-"          Usually the first fighters who submit a talk have more chances to "
-"win the battle. So, don't let be the one of the last and hurry up :)\n"
-"        "
-msgstr ""
-
-#: core/templates/account/account_inactive.html:5
-#: core/templates/account/account_inactive.html:8
-msgid "Account Inactive"
-msgstr ""
-
-#: core/templates/account/account_inactive.html:10
-msgid "This account is inactive."
-msgstr ""
-
-#: core/templates/account/email.html:5
-msgid "Account"
-msgstr ""
-
-#: core/templates/account/email.html:8
-msgid "E-mail Addresses"
-msgstr ""
-
-#: core/templates/account/email.html:10
-msgid "The following e-mail addresses are associated with your account:"
-msgstr ""
-
-#: core/templates/account/email.html:24
-msgid "Verified"
-msgstr ""
-
-#: core/templates/account/email.html:26
-msgid "Unverified"
-msgstr ""
-
-#: core/templates/account/email.html:28
-msgid "Primary"
-msgstr ""
-
-#: core/templates/account/email.html:34
-msgid "Make Primary"
-msgstr ""
-
-#: core/templates/account/email.html:35
-msgid "Re-send Verification"
-msgstr ""
-
-#: core/templates/account/email.html:36
-#: core/templates/socialaccount/connections.html:35
-msgid "Remove"
-msgstr ""
-
-#: core/templates/account/email.html:43
-msgid "Warning:"
-msgstr ""
-
-#: core/templates/account/email.html:43
-msgid ""
-"You currently do not have any e-mail address set up. You should really add "
-"an e-mail address so you can receive notifications, reset your password, etc."
-msgstr ""
-
-#: core/templates/account/email.html:48
-msgid "Add E-mail Address"
-msgstr ""
-
-#: core/templates/account/email.html:53
-msgid "Add E-mail"
-msgstr ""
-
-#: core/templates/account/email.html:62
-msgid "Do you really want to remove the selected e-mail address?"
-msgstr ""
-
-#: core/templates/account/email/email_confirmation_message.txt:1
-#, python-format
-msgid ""
-"User \"%(user_display)s\" at \"%(site_name)s\" has given this as an email "
-"address.\n"
-"\n"
-"To confirm this is correct, go to \"%(activate_url)s\"\n"
-msgstr ""
-
-#: core/templates/account/email/email_confirmation_subject.txt:3
-#: core/templates/account/email_confirm.html:6
-#: core/templates/account/email_confirm.html:10
-#: core/templates/account/email_confirmed.html:6
-#: core/templates/account/email_confirmed.html:11
-msgid "Confirm E-mail Address"
-msgstr ""
-
-#: core/templates/account/email/password_reset_key_message.txt:1
-#, python-format
-msgid ""
-"You're receiving this e-mail because you or someone else has requested a "
-"password for your user account at %(site_domain)s.\n"
-"It can be safely ignored if you did not request a password reset. Click the "
-"link below to reset your password.\n"
-"\n"
-"%(password_reset_url)s\n"
-"\n"
-"In case you forgot, your username is %(username)s.\n"
-"\n"
-"Thanks for using our site!\n"
-msgstr ""
-
-#: core/templates/account/email/password_reset_key_subject.txt:3
-msgid "Password Reset E-mail"
-msgstr ""
-
-#: core/templates/account/email_confirm.html:16
-#, python-format
-msgid ""
-"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
-"address for user %(user_display)s."
-msgstr ""
-
-#: core/templates/account/email_confirm.html:20
-msgid "Confirm"
-msgstr ""
-
-#: core/templates/account/email_confirm.html:27
-#, python-format
-msgid ""
-"This e-mail confirmation link expired or is invalid. Please <a href="
-"\"%(email_url)s\">issue a new e-mail confirmation request</a>."
-msgstr ""
-
-#: core/templates/account/email_confirmed.html:15
-#, python-format
-msgid ""
-"You have confirmed that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-"
-"mail address for user %(user_display)s."
-msgstr ""
-
-#: core/templates/account/login.html:7 core/templates/account/login.html:11
-#: core/templates/account/login.html:34
-#: core/templates/account/password_change.html:7
-#: core/templates/snippets/login_button.html:22
-msgid "Sign In"
-msgstr ""
-
-#: core/templates/account/login.html:15
-#, python-format
-msgid ""
-"\n"
-"          Please sign in with one of your existing third party accounts. Or, "
-"<a href=\"%(signup_url)s\">sign up</a> for a %(site_name)s account and sign "
-"in below:\n"
-"        "
-msgstr ""
-
-#: core/templates/account/login.html:22
-#, python-format
-msgid ""
-"\n"
-"          If you have not created an account yet, then please <a href="
-"\"%(signup_url)s\">sign up</a> first.\n"
-"        "
-msgstr ""
-
-#: core/templates/account/login.html:36
-msgid "Forgot Password?"
-msgstr ""
-
-#: core/templates/account/login.html:42 core/templates/account/signup.html:28
-msgid ""
-"\n"
-"          Or sign up using your social networks:\n"
-"        "
-msgstr ""
-
-#: core/templates/account/logout.html:5 core/templates/account/logout.html:8
-#: core/templates/account/logout.html:17
-msgid "Sign Out"
-msgstr ""
-
-#: core/templates/account/logout.html:10
-msgid "Are you sure you want to sign out?"
-msgstr ""
-
-#: core/templates/account/messages/cannot_delete_primary_email.txt:2
-#, python-format
-msgid "You cannot remove your primary e-mail address (%(email)s)."
-msgstr ""
-
-#: core/templates/account/messages/email_confirmation_sent.txt:2
-#, python-format
-msgid "Confirmation e-mail sent to %(email)s."
-msgstr ""
-
-#: core/templates/account/messages/email_confirmed.txt:2
-#, python-format
-msgid "You have confirmed %(email)s."
-msgstr ""
-
-#: core/templates/account/messages/email_deleted.txt:2
-#, python-format
-msgid "Removed e-mail address %(email)s."
-msgstr ""
-
-#: core/templates/account/messages/logged_in.txt:4
-#, python-format
-msgid "Successfully signed in as %(name)s."
-msgstr ""
-
-#: core/templates/account/messages/logged_out.txt:2
-msgid "You have signed out."
-msgstr ""
-
-#: core/templates/account/messages/password_changed.txt:2
-msgid "Password successfully changed."
-msgstr ""
-
-#: core/templates/account/messages/password_set.txt:2
-msgid "Password successfully set."
-msgstr ""
-
-#: core/templates/account/messages/primary_email_set.txt:2
-msgid "Primary e-mail address set."
-msgstr ""
-
-#: core/templates/account/messages/unverified_primary_email.txt:2
-msgid "Your primary e-mail address must be verified."
-msgstr ""
-
-#: core/templates/account/password_change.html:11
-#: core/templates/account/password_change.html:16
-#: core/templates/account/password_reset_from_key.html:7
-#: core/templates/account/password_reset_from_key.html:21
-#: core/templates/account/password_reset_from_key.html:29
-msgid "Change Password"
-msgstr ""
-
-#: core/templates/account/password_reset.html:8
-#: core/templates/account/password_reset.html:12
-#: core/templates/account/password_reset_done.html:6
-#: core/templates/account/password_reset_done.html:10
-msgid "Password Reset"
-msgstr ""
-
-#: core/templates/account/password_reset.html:17
-#: core/templates/account/password_reset_from_key.html:22
-#: core/templates/account/password_set.html:12
-msgid ""
-"Forgotten your password? Enter your e-mail address below, and we'll send you "
-"an e-mail allowing you to reset it."
-msgstr ""
-
-#: core/templates/account/password_reset.html:26
-msgid "Reset My Password"
-msgstr ""
-
-#: core/templates/account/password_reset.html:31
-#: core/templates/account/password_reset_from_key.html:33
-msgid "Please contact us if you have any trouble resetting your password."
-msgstr ""
-
-#: core/templates/account/password_reset_done.html:16
-msgid ""
-"We have sent you an e-mail. Please contact us if you do not receive it "
-"within a few minutes."
-msgstr ""
-
-#: core/templates/account/password_reset_from_key.html:17
-#, python-format
-msgid ""
-"The password reset link was invalid, possibly because it has already been "
-"used.\n"
-"      <br>\n"
-"      Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
-"a>."
-msgstr ""
-
-#: core/templates/account/password_reset_from_key_done.html:4
-#: core/templates/account/password_reset_from_key_done.html:8
-msgid "Password Changed"
-msgstr ""
-
-#: core/templates/account/password_reset_from_key_done.html:10
-msgid "Your password is now changed."
-msgstr ""
-
-#: core/templates/account/password_reset_from_key_done.html:11
-msgid "Login"
-msgstr ""
-
-#: core/templates/account/password_set.html:7
-#: core/templates/account/password_set.html:11
-#: core/templates/account/password_set.html:19
-msgid "Set Password"
-msgstr ""
-
-#: core/templates/account/profile.html:39
-msgid "Change photo."
-msgstr ""
-
-#: core/templates/account/profile.html:51
-msgid "cancel"
-msgstr ""
-
-#: core/templates/account/profile.html:55
-#: core/templates/account/profile.html:161
-#: core/templates/account/profile.html:197
-#: deck/templates/event/event_create_schedule.html:42
-#: deck/templates/event/event_create_schedule.html:178
-#: deck/templates/event/event_create_schedule.html:202
-#: deck/templates/event/event_form.html:59
-#: deck/templates/proposal/proposal_form.html:69
-msgid "submit"
-msgstr ""
-
-#: core/templates/account/profile.html:86
-msgid "About Me"
-msgstr ""
-
-#: core/templates/account/profile.html:88
-msgid "-"
-msgstr ""
-
-#: core/templates/account/profile.html:95
-msgid "Edit profile."
-msgstr ""
-
-#: core/templates/account/profile.html:96
-#: deck/templates/event/event_detail.html:134
-#: deck/templates/event/snippets/event_list_item.html:51
-#: deck/templates/proposal/snippets/proposal_list_item.html:26
-msgid "Edit"
-msgstr ""
-
-#: core/templates/account/profile.html:98
-msgid "Change Language."
-msgstr ""
-
-#: core/templates/account/profile.html:99
-#: core/templates/account/profile.html:178
-msgid "Change Language"
-msgstr ""
-
-#: core/templates/account/profile.html:112 core/templates/sidebar.html:24
-#: deck/models.py:290 deck/templates/event/event_create_schedule.html:19
-#: deck/templates/event/event_detail.html:24
-#: deck/templates/event/event_form.html:24
-#: deck/templates/event/event_list.html:9
-#: deck/templates/event/event_list.html:13
-#: deck/templates/proposal/proposal_form.html:23 deck/tests/test_unit.py:50
-#: jury/templates/jury/jury_detail.html:46
-msgid "Events"
-msgstr ""
-
-#: core/templates/account/profile.html:129 deck/models.py:188
-#: deck/templates/event/event_detail.html:70 deck/tests/test_unit.py:163
-msgid "Proposals"
-msgstr ""
-
-#: core/templates/account/profile.html:153
-msgid "Update profile"
-msgstr ""
-
-#: core/templates/account/signup.html:7 core/templates/account/signup.html:11
-#: core/templates/account/signup.html:23
-#: core/templates/socialaccount/signup.html:7
-msgid "Sign Up"
-msgstr ""
-
-#: core/templates/account/signup.html:13
-#, python-format
-msgid ""
-"Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
-msgstr ""
-
-#: core/templates/account/signup_closed.html:5
-#: core/templates/account/signup_closed.html:8
-msgid "Sign Up Closed"
-msgstr ""
-
-#: core/templates/account/signup_closed.html:10
-msgid "We are sorry, but the sign up is currently closed."
-msgstr ""
-
-#: core/templates/account/snippets/already_logged_in.html:5
-msgid "Note"
-msgstr ""
-
-#: core/templates/account/snippets/already_logged_in.html:5
-#, python-format
-msgid "you are already logged in as %(user_display)s."
-msgstr ""
-
-#: core/templates/account/verification_sent.html:5
-#: core/templates/account/verification_sent.html:9
-#: core/templates/account/verified_email_required.html:5
-#: core/templates/account/verified_email_required.html:9
-msgid "Verify Your E-mail Address"
-msgstr ""
-
-#: core/templates/account/verification_sent.html:11
-msgid ""
-"We have sent an e-mail to you for verification. Follow the link provided to "
-"finalize the signup process. Please contact us if you do not receive it "
-"within a few minutes."
-msgstr ""
-
-#: core/templates/account/verified_email_required.html:12
-msgid ""
-"This part of the site requires us to verify that\n"
-"    you are who you claim to be. For this purpose, we require that you\n"
-"    verify ownership of your e-mail address. "
-msgstr ""
-
-#: core/templates/account/verified_email_required.html:16
-msgid ""
-"We have sent an e-mail to you for\n"
-"    verification. Please click on the link inside this e-mail. Please\n"
-"    contact us if you do not receive it within a few minutes."
-msgstr ""
-
-#: core/templates/account/verified_email_required.html:20
-#, python-format
-msgid ""
-"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
-"mail address</a>."
-msgstr ""
-
-#: core/templates/footer.html:9
-msgid ""
-"\n"
-"            Sponsored and Maintained by <br class=\"hidden-sm\"> "
-"<strong>Labcodes Software Studio</strong>\n"
-"          "
-msgstr ""
-
-#: core/templates/footer.html:15
-msgid "Labcodes Software Studio"
-msgstr ""
-
-#: core/templates/footer.html:24
-msgid ""
-"\n"
-"            Proudly made with <strong>Open Source</strong> technologies and "
-"a great group of people motivated to <strong>give back to the community</"
-"strong>\n"
-"          "
-msgstr ""
-
-#: core/templates/footer.html:31
-msgid "Python powered"
-msgstr ""
-
-#: core/templates/footer.html:34
-msgid "Powered by Django."
-msgstr ""
-
-#: core/templates/footer.html:44
-#, python-format
-msgid ""
-"\n"
-"              <strong>Speakerfight</strong> is proudly an open-source\n"
-"              project and is always being enhanced. If the software\n"
-"              has any odd behavior %(anchor_start)splease let us know"
-"%(anchor_end)s\n"
-"            "
-msgstr ""
-
-#: core/templates/footer.html:60
-msgid "This project believes that small acts can change the world through"
-msgstr ""
-
-#: core/templates/footer.html:62 core/templates/footer.html:65
-#: core/templates/footer.html:66
-msgid "Small Acts Manifesto"
-msgstr ""
-
-#: core/templates/index.html:20
-msgid "GET STARTED"
-msgstr ""
-
-#: core/templates/index.html:25
-#, python-format
-msgid ""
-"\n"
-"        <h2>\n"
-"          Right now we have <strong>%(events)s event%(events_plural)s</"
-"strong>,\n"
-"          <br>\n"
-"          <strong>%(proposals)s proposal%(proposals_plural)s</strong> and\n"
-"          <strong>%(users)s user%(users_plural)s</strong> at Speakerfight.\n"
-"        </h2>\n"
-"      "
-msgstr ""
-
-#: core/templates/index.html:40
-msgid "How it works?"
-msgstr ""
-
-#: core/templates/index.html:43
-msgid "TELL ME ABOUT SPEAKERFIGHT"
-msgstr ""
-
-#: core/templates/index.html:51
-msgid "Some features"
-msgstr ""
-
-#: core/templates/index.html:57
-msgid "Event list"
-msgstr ""
-
-#: core/templates/index.html:58
-msgid "The event list show all public events to let you join to the vote."
-msgstr ""
-
-#: core/templates/index.html:59
-msgid ""
-"You can create new events and receive proposals from anyone in the world. "
-"All the events can be either public or private."
-msgstr ""
-
-#: core/templates/index.html:62
-msgid "Event List"
-msgstr ""
-
-#: core/templates/index.html:70 core/templates/index.html:73
-msgid "Event details"
-msgstr ""
-
-#: core/templates/index.html:74
-msgid ""
-"Every event can be configured to receive votes from everyone, only logged "
-"users or only the people you choose."
-msgstr ""
-
-#: core/templates/index.html:75
-msgid "All the events have an URL that can be shared as you like."
-msgstr ""
-
-#: core/templates/index.html:83 core/templates/index.html:87
-msgid "Event Jury"
-msgstr ""
-
-#: core/templates/index.html:84
-msgid ""
-"The event jury restricts the vote to a group of users. Anyone outside of "
-"that group will just see the proposals and they cannot vote."
-msgstr ""
-
-#: core/templates/index.html:98
-msgid "JOIN THE FIGHTERS"
-msgstr ""
-
-#: core/templates/navbar.html:19 deck/templates/event/event_list.html:25
-msgid "Search Events"
-msgstr ""
-
-#: core/templates/openid/login.html:9
-msgid "OpenID Sign In"
-msgstr ""
-
-#: core/templates/public_layout.html:55 deck/views.py:407 deck/views.py:474
-#: deck/views.py:541
-msgid "You need to be logged in to continue to the next step."
-msgstr ""
-
-#: core/templates/sidebar.html:31 deck/templates/proposal/my_proposals.html:7
-#: deck/templates/proposal/my_proposals.html:11
-#: deck/tests/test_functional.py:1279 deck/tests/test_functional.py:1284
-msgid "My Proposals"
-msgstr ""
-
-#: core/templates/sidebar.html:37 deck/templates/event/my_events.html:8
-#: deck/templates/event/my_events.html:12
-msgid "My Events"
-msgstr ""
-
-#: core/templates/snippets/login_button.html:15
-msgid "Logout"
-msgstr ""
-
-#: core/templates/snippets/login_button.html:32
-msgid "Sign in with one of your account"
-msgstr ""
-
-#: core/templates/snippets/login_button.html:37
-msgid "Using Email and Password"
-msgstr ""
-
-#: core/templates/socialaccount/authentication_error.html:5
-#: core/templates/socialaccount/authentication_error.html:8
-msgid "Social Network Login Failure"
-msgstr ""
-
-#: core/templates/socialaccount/authentication_error.html:10
-msgid ""
-"An error occurred while attempting to login via your social network account."
-msgstr ""
-
-#: core/templates/socialaccount/connections.html:5
-#: core/templates/socialaccount/connections.html:8
-msgid "Account Connections"
-msgstr ""
-
-#: core/templates/socialaccount/connections.html:11
-msgid ""
-"You can sign in to your account using any of the following third party "
-"accounts:"
-msgstr ""
-
-#: core/templates/socialaccount/connections.html:43
-msgid ""
-"You currently have no social network accounts connected to this account."
-msgstr ""
-
-#: core/templates/socialaccount/connections.html:46
-msgid "Add a 3rd Party Account"
-msgstr ""
-
-#: core/templates/socialaccount/login_cancelled.html:5
-#: core/templates/socialaccount/login_cancelled.html:9
-msgid "Login Cancelled"
-msgstr ""
-
-#: core/templates/socialaccount/login_cancelled.html:13
-#, python-format
-msgid ""
-"You decided to cancel logging in to our site using one of your existing "
-"accounts. If this was a mistake, please proceed to <a href=\"%(login_url)s"
-"\">sign in</a>."
-msgstr ""
-
-#: core/templates/socialaccount/messages/account_connected.txt:2
-msgid "The social account has been connected."
-msgstr ""
-
-#: core/templates/socialaccount/messages/account_connected_other.txt:2
-msgid "The social account is already connected to a different account."
-msgstr ""
-
-#: core/templates/socialaccount/messages/account_disconnected.txt:2
-msgid "The social account has been disconnected."
-msgstr ""
-
-#: core/templates/socialaccount/signup.html:13
-msgid ""
-"\n"
-"        Do you already have an account, but choose the wrong Provider to "
-"access right now.\n"
-"      "
-msgstr ""
-
-#: core/templates/socialaccount/signup.html:16
-msgid "Click"
-msgstr ""
-
-#: core/templates/socialaccount/signup.html:16
-msgid "here"
-msgstr ""
-
-#: core/templates/socialaccount/signup.html:17
-msgid "to be redirected to the right  page"
-msgstr ""
-
-#: core/templates/socialaccount/signup.html:24
-msgid ""
-"\n"
-"          Or try another social network provider:\n"
-"        "
-msgstr ""
-
-#: core/views.py:82
-msgid "Profile updated."
-msgstr ""
-
-#: core/views.py:103
-msgid "Photo changed."
-msgstr ""
-
-#: core/views.py:115
-msgid "Language changed."
-msgstr ""
-
-#: deck/forms.py:37 jury/forms.py:10
+#: forms.py:37
 msgid "User email"
 msgstr ""
 
-#: deck/forms.py:49 jury/forms.py:22
+#: forms.py:49
 #, python-format
 msgid ""
 "The \"%s\" are not a Speakerfight user. For now, we just allow already "
 "joined users."
 msgstr ""
 
-#: deck/forms.py:53 jury/forms.py:26
+#: forms.py:53
 #, python-format
 msgid "The \"@%s\" already is being part of this jury."
 msgstr ""
 
-#: deck/models.py:64 deck/models.py:255
+#: models.py:64 models.py:255
 msgid "Title"
 msgstr ""
 
-#: deck/models.py:68 deck/templates/event/event_form.html:50
-#: deck/templates/proposal/proposal_form.html:50
+#: models.py:68 templates/event/event_form.html:50
+#: templates/proposal/proposal_form.html:50
 msgid "Description"
 msgstr ""
 
-#: deck/models.py:69
+#: models.py:69
 msgid "Created At"
 msgstr ""
 
-#: deck/models.py:70
+#: models.py:70
 msgid "Publish"
 msgstr ""
 
-#: deck/models.py:99
+#: models.py:90
+msgid "Angry"
+msgstr ""
+
+#: models.py:90
+msgid "Sad"
+msgstr ""
+
+#: models.py:91
+msgid "Sleepy"
+msgstr ""
+
+#: models.py:91
+msgid "Happy"
+msgstr ""
+
+#: models.py:92
+msgid "Laughing"
+msgstr ""
+
+#: models.py:99
 msgid "Rate Index"
 msgstr ""
 
-#: deck/models.py:107 deck/tests/test_unit.py:307
+#: models.py:107 tests/test_unit.py:307
 msgid "Vote"
 msgstr ""
 
-#: deck/models.py:108 deck/tests/test_unit.py:310
+#: models.py:108 tests/test_unit.py:310
 msgid "Votes"
 msgstr ""
 
-#: deck/models.py:122
+#: models.py:122
 msgid "You cannot Rate your own proposals."
 msgstr ""
 
-#: deck/models.py:124
+#: models.py:124
 msgid "Proposal doesn't accept Public Voting."
 msgstr ""
 
-#: deck/models.py:141 deck/models.py:187
-#: deck/templates/event/event_create_schedule.html:140
-#: deck/tests/test_unit.py:160
+#: models.py:141 models.py:187 templates/event/event_create_schedule.html:140
+#: tests/test_unit.py:160
 msgid "Proposal"
 msgstr ""
 
-#: deck/models.py:142
+#: models.py:142
 msgid "Workshop"
 msgstr ""
 
-#: deck/models.py:143
+#: models.py:143
 msgid "Openning"
 msgstr ""
 
-#: deck/models.py:144
+#: models.py:144
 msgid "Coffee Break"
 msgstr ""
 
-#: deck/models.py:145
+#: models.py:145
 msgid "Lunch"
 msgstr ""
 
-#: deck/models.py:146
+#: models.py:146
 msgid "Lightning Talks"
 msgstr ""
 
-#: deck/models.py:147
+#: models.py:147
 msgid "Ending"
 msgstr ""
 
-#: deck/models.py:150
+#: models.py:150
 msgid "Start Timetable"
 msgstr ""
 
-#: deck/models.py:152
+#: models.py:152
 msgid "End Timetable"
 msgstr ""
 
-#: deck/models.py:153
+#: models.py:153
 msgid "Order"
 msgstr ""
 
-#: deck/models.py:155
+#: models.py:155
 msgid "Type"
 msgstr ""
 
-#: deck/models.py:163
+#: models.py:163
 msgid "Activity"
 msgstr ""
 
-#: deck/models.py:164
+#: models.py:164
 msgid "Activities"
 msgstr ""
 
-#: deck/models.py:178
+#: models.py:178
 msgid "Is approved"
 msgstr ""
 
-#: deck/models.py:180
+#: models.py:180
 msgid "More information"
 msgstr ""
 
-#: deck/models.py:193 deck/tests/test_functional.py:349 deck/views.py:273
+#: models.py:188 templates/event/event_detail.html:70 tests/test_unit.py:163
+msgid "Proposals"
+msgstr ""
+
+#: models.py:193 tests/test_functional.py:386 views.py:297
 msgid "This Event doesn't accept Proposals anymore."
 msgstr ""
 
-#: deck/models.py:242
+#: models.py:242
 msgid "This Proposal was already approved."
 msgstr ""
 
-#: deck/models.py:248
+#: models.py:248
 msgid "This Proposal was already disapproved."
 msgstr ""
 
-#: deck/models.py:263
+#: models.py:263
 msgid "Track"
 msgstr ""
 
-#: deck/models.py:264
+#: models.py:264
 msgid "Tracks"
 msgstr ""
 
-#: deck/models.py:277
+#: models.py:277
 msgid "Allow Public Voting"
 msgstr ""
 
-#: deck/models.py:280
+#: models.py:280
 msgid "Slots"
 msgstr ""
 
-#: deck/models.py:285
+#: models.py:285
 msgid "Anonymous Voting?"
 msgstr ""
 
-#: deck/models.py:289 deck/tests/test_unit.py:47
+#: models.py:289 tests/test_unit.py:47
 msgid "Event"
 msgstr ""
 
-#: deck/models.py:354
+#: models.py:290 templates/event/event_create_schedule.html:19
+#: templates/event/event_detail.html:24 templates/event/event_form.html:24
+#: templates/event/event_list.html:9 templates/event/event_list.html:13
+#: templates/proposal/proposal_form.html:23 tests/test_unit.py:50
+msgid "Events"
+msgstr ""
+
+#: models.py:354
 msgid "Welcome"
 msgstr ""
 
-#: deck/models.py:384
+#: models.py:384
 #, python-format
 msgid "Proposal from %s just got deleted"
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:8
+#: templates/event/event_confirm_delete.html:6
+#: templates/event/event_confirm_delete.html:10
+msgid "Delete Event"
+msgstr ""
+
+#: templates/event/event_confirm_delete.html:11
+msgid "Are you sure you want to delete this event?"
+msgstr ""
+
+#: templates/event/event_confirm_delete.html:12
+msgid "After deleting this event all proposals will be lost forever."
+msgstr ""
+
+#: templates/event/event_confirm_delete.html:18
+#: templates/event/event_detail.html:137
+#: templates/event/snippets/event_list_item.html:54
+#: templates/proposal/proposal_confirm_delete.html:18
+#: templates/proposal/snippets/proposal_list_item.html:29
+msgid "Delete"
+msgstr ""
+
+#: templates/event/event_confirm_delete.html:23
+#: templates/event/event_form.html:65
+#: templates/proposal/proposal_confirm_delete.html:23
+#: templates/proposal/proposal_form.html:74
+msgid "event detail"
+msgstr ""
+
+#: templates/event/event_create_schedule.html:8
 msgid "Create the Schedule"
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:18
-#: deck/templates/event/event_detail.html:23
-#: deck/templates/event/event_form.html:23
-#: deck/templates/proposal/proposal_form.html:22
-#: jury/templates/jury/jury_detail.html:45
+#: templates/event/event_create_schedule.html:18
+#: templates/event/event_detail.html:23 templates/event/event_form.html:23
+#: templates/proposal/proposal_form.html:22
 msgid "Home"
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:21
-#: deck/templates/event/event_create_schedule.html:30
+#: templates/event/event_create_schedule.html:21
+#: templates/event/event_create_schedule.html:30
 msgid "Schedule of Talks"
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:34
+#: templates/event/event_create_schedule.html:34
 msgid "add activity"
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:38
+#: templates/event/event_create_schedule.html:38
 msgid "embedded schedule"
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:50
+#: templates/event/event_create_schedule.html:42
+#: templates/event/event_create_schedule.html:178
+#: templates/event/event_create_schedule.html:202
+#: templates/event/event_form.html:59 templates/proposal/proposal_form.html:69
+msgid "submit"
+msgstr ""
+
+#: templates/event/event_create_schedule.html:50
 msgid ""
 "\n"
 "            After <strong>Sort</strong>, <strong>Adding</strong> or "
@@ -1108,16 +274,16 @@ msgid ""
 "          "
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:55
+#: templates/event/event_create_schedule.html:55
 msgid "Approved talks"
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:71
-#: deck/templates/event/event_create_schedule.html:136
+#: templates/event/event_create_schedule.html:71
+#: templates/event/event_create_schedule.html:136
 msgid "Points"
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:83
+#: templates/event/event_create_schedule.html:83
 #, python-format
 msgid ""
 "\n"
@@ -1126,11 +292,11 @@ msgid ""
 "                        "
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:121
+#: templates/event/event_create_schedule.html:121
 msgid "Disapproved talks"
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:148
+#: templates/event/event_create_schedule.html:148
 #, python-format
 msgid ""
 "\n"
@@ -1139,23 +305,23 @@ msgid ""
 "                      "
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:170
+#: templates/event/event_create_schedule.html:170
 msgid "Add activity"
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:194
+#: templates/event/event_create_schedule.html:194
 msgid "Update timetable"
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:217
+#: templates/event/event_create_schedule.html:217
 msgid "Copy and Paste on your site"
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:228
+#: templates/event/event_create_schedule.html:228
 msgid "Raw API"
 msgstr ""
 
-#: deck/templates/event/event_detail.html:38
+#: templates/event/event_detail.html:38
 msgid ""
 "\n"
 "          This event doesn't accept <strong>Public Voting</strong>, because "
@@ -1163,7 +329,7 @@ msgid ""
 "        "
 msgstr ""
 
-#: deck/templates/event/event_detail.html:49
+#: templates/event/event_detail.html:49
 msgid ""
 "\n"
 "          This event is in the <strong>Anonymous Voting</strong> mode, all "
@@ -1172,15 +338,15 @@ msgid ""
 "        "
 msgstr ""
 
-#: deck/templates/event/event_detail.html:61
+#: templates/event/event_detail.html:61
 msgid "The event is no longer accepting proposals."
 msgstr ""
 
-#: deck/templates/event/event_detail.html:66
+#: templates/event/event_detail.html:66
 msgid "Send a proposal"
 msgstr ""
 
-#: deck/templates/event/event_detail.html:87
+#: templates/event/event_detail.html:87
 #, python-format
 msgid ""
 "\n"
@@ -1189,7 +355,7 @@ msgid ""
 "                  "
 msgstr ""
 
-#: deck/templates/event/event_detail.html:91
+#: templates/event/event_detail.html:91
 #, python-format
 msgid ""
 "\n"
@@ -1197,7 +363,7 @@ msgid ""
 "                  "
 msgstr ""
 
-#: deck/templates/event/event_detail.html:103
+#: templates/event/event_detail.html:103
 #, python-format
 msgid ""
 "\n"
@@ -1206,80 +372,72 @@ msgid ""
 "                      "
 msgstr ""
 
-#: deck/templates/event/event_detail.html:107
+#: templates/event/event_detail.html:107
 msgid "This proposal never received a vote."
 msgstr ""
 
-#: deck/templates/event/event_detail.html:121
+#: templates/event/event_detail.html:121
 msgid "Disapprove the proposal."
 msgstr ""
 
-#: deck/templates/event/event_detail.html:123
+#: templates/event/event_detail.html:123
 msgid "Disapprove"
 msgstr ""
 
-#: deck/templates/event/event_detail.html:126
+#: templates/event/event_detail.html:126
 msgid "Approve the proposal."
 msgstr ""
 
-#: deck/templates/event/event_detail.html:128
+#: templates/event/event_detail.html:128
 msgid "Approve"
 msgstr ""
 
-#: deck/templates/event/event_detail.html:133
-#: deck/templates/proposal/snippets/proposal_list_item.html:25
+#: templates/event/event_detail.html:133
+#: templates/proposal/snippets/proposal_list_item.html:25
 msgid "Edit the proposal."
 msgstr ""
 
-#: deck/templates/event/event_detail.html:136
-#: deck/templates/proposal/snippets/proposal_list_item.html:28
+#: templates/event/event_detail.html:134
+#: templates/event/snippets/event_list_item.html:51
+#: templates/proposal/snippets/proposal_list_item.html:26
+msgid "Edit"
+msgstr ""
+
+#: templates/event/event_detail.html:136
+#: templates/proposal/snippets/proposal_list_item.html:28
 msgid "Delete the proposal."
 msgstr ""
 
-#: deck/templates/event/event_detail.html:137
-#: deck/templates/proposal/proposal_confirm_delete.html:18
-#: deck/templates/proposal/snippets/proposal_list_item.html:29
-msgid "Delete"
-msgstr ""
-
-#: deck/templates/event/event_detail.html:145
+#: templates/event/event_detail.html:145
 msgid "There are no proposals to show"
 msgstr ""
 
-#: deck/templates/event/event_detail_schedule.html:47
+#: templates/event/event_detail_schedule.html:47
 msgid "More"
 msgstr ""
 
-#: deck/templates/event/event_form.html:9
-#: deck/templates/event/event_form.html:36
-#: jury/templates/jury/jury_detail.html:8
-#: jury/templates/jury/jury_detail.html:56
+#: templates/event/event_form.html:9 templates/event/event_form.html:36
 msgid "Update"
 msgstr ""
 
-#: deck/templates/event/event_form.html:11
-#: deck/templates/event/event_form.html:38
+#: templates/event/event_form.html:11 templates/event/event_form.html:38
 msgid "New Event"
 msgstr ""
 
-#: deck/templates/event/event_form.html:65
-#: deck/templates/proposal/proposal_confirm_delete.html:23
-#: deck/templates/proposal/proposal_form.html:74
-#: jury/templates/jury/jury_detail.html:105
-msgid "event detail"
-msgstr ""
-
-#: deck/templates/event/event_form.html:70
-#: jury/templates/jury/jury_detail.html:110
+#: templates/event/event_form.html:70
 msgid "event list"
 msgstr ""
 
-#: deck/templates/event/event_list.html:16
-#: deck/templates/event/my_events.html:15
+#: templates/event/event_list.html:16 templates/event/my_events.html:15
+#: templates/event/past_event_list.html:16
 msgid "new event"
 msgstr ""
 
-#: deck/templates/event/event_list.html:49
+#: templates/event/event_list.html:25 templates/event/past_event_list.html:25
+msgid "Search Events"
+msgstr ""
+
+#: templates/event/event_list.html:49 templates/event/past_event_list.html:49
 #, python-format
 msgid ""
 "\n"
@@ -1288,17 +446,27 @@ msgid ""
 "            "
 msgstr ""
 
-#: deck/templates/event/event_list.html:61
-#: deck/templates/event/my_events.html:25
+#: templates/event/event_list.html:61 templates/event/my_events.html:25
+#: templates/event/past_event_list.html:61
 msgid "There are no events to show to you :("
 msgstr ""
 
-#: deck/templates/event/event_list.html:65
-#: deck/templates/event/event_list.html:66
+#: templates/event/event_list.html:65 templates/event/event_list.html:66
+#: templates/event/past_event_list.html:65
+#: templates/event/past_event_list.html:66
 msgid "Back to the event list"
 msgstr ""
 
-#: deck/templates/event/snippets/event_list_item.html:12
+#: templates/event/my_events.html:8 templates/event/my_events.html:12
+msgid "My Events"
+msgstr ""
+
+#: templates/event/past_event_list.html:9
+#: templates/event/past_event_list.html:13
+msgid "Past Events"
+msgstr ""
+
+#: templates/event/snippets/event_list_item.html:12
 #, python-format
 msgid ""
 "\n"
@@ -1307,15 +475,15 @@ msgid ""
 "      "
 msgstr ""
 
-#: deck/templates/event/snippets/event_list_item.html:20
+#: templates/event/snippets/event_list_item.html:20
 msgid "Due date pasted since the day"
 msgstr ""
 
-#: deck/templates/event/snippets/event_list_item.html:23
+#: templates/event/snippets/event_list_item.html:23
 msgid "Due date in"
 msgstr ""
 
-#: deck/templates/event/snippets/event_list_item.html:30
+#: templates/event/snippets/event_list_item.html:30
 #, python-format
 msgid ""
 "\n"
@@ -1326,43 +494,47 @@ msgid ""
 "            "
 msgstr ""
 
-#: deck/templates/event/snippets/event_list_item.html:34
+#: templates/event/snippets/event_list_item.html:34
 msgid "This event never received a proposal."
 msgstr ""
 
-#: deck/templates/event/snippets/event_list_item.html:50
+#: templates/event/snippets/event_list_item.html:50
 msgid "Edit the event."
 msgstr ""
 
-#: deck/templates/event/snippets/event_list_item.html:53
+#: templates/event/snippets/event_list_item.html:53
+msgid "Delete the event."
+msgstr ""
+
+#: templates/event/snippets/event_list_item.html:56
 msgid "Manage the jury."
 msgstr ""
 
-#: deck/templates/event/snippets/event_list_item.html:54
+#: templates/event/snippets/event_list_item.html:57
 msgid "Manage Jury"
 msgstr ""
 
-#: deck/templates/event/snippets/event_list_item.html:56
+#: templates/event/snippets/event_list_item.html:59
 msgid "Export CSV with all proposals and vote results."
 msgstr ""
 
-#: deck/templates/event/snippets/event_list_item.html:57
+#: templates/event/snippets/event_list_item.html:60
 msgid "Export votes"
 msgstr ""
 
-#: deck/templates/event/snippets/event_list_item.html:59
+#: templates/event/snippets/event_list_item.html:62
 msgid "Create and Organize the Schedule of Talks."
 msgstr ""
 
-#: deck/templates/event/snippets/event_list_item.html:60
+#: templates/event/snippets/event_list_item.html:63
 msgid "Create Schedule"
 msgstr ""
 
-#: deck/templates/event/vote_block.html:7
+#: templates/event/vote_block.html:7
 msgid "Use the buttons bellow to vote:"
 msgstr ""
 
-#: deck/templates/mailing/author_proposal_created.txt:3
+#: templates/mailing/author_proposal_created.txt:3
 #, python-format
 msgid ""
 "\n"
@@ -1375,7 +547,7 @@ msgid ""
 "  Good luck!\n"
 msgstr ""
 
-#: deck/templates/mailing/event_created.txt:3
+#: templates/mailing/event_created.txt:3
 #, python-format
 msgid ""
 "\n"
@@ -1388,7 +560,7 @@ msgid ""
 "  Good luck!\n"
 msgstr ""
 
-#: deck/templates/mailing/jury_deleted_proposal.txt:3
+#: templates/mailing/jury_deleted_proposal.txt:3
 #, python-format
 msgid ""
 "\n"
@@ -1398,7 +570,7 @@ msgid ""
 "your event \"%(event_title)s\" on Speakerfight: %(proposal_title)s\n"
 msgstr ""
 
-#: deck/templates/mailing/jury_new_proposal.txt:3
+#: templates/mailing/jury_new_proposal.txt:3
 #, python-format
 msgid ""
 "  \n"
@@ -1410,7 +582,7 @@ msgid ""
 "  Cheers!\n"
 msgstr ""
 
-#: deck/templates/mailing/welcome.txt:3
+#: templates/mailing/welcome.txt:3
 msgid ""
 "  \n"
 "  Hi!\n"
@@ -1424,47 +596,53 @@ msgid ""
 "  Thank you for use it.\n"
 msgstr ""
 
-#: deck/templates/proposal/proposal_confirm_delete.html:6
-#: deck/templates/proposal/proposal_confirm_delete.html:10
+#: templates/proposal/my_proposals.html:7
+#: templates/proposal/my_proposals.html:11 tests/test_functional.py:1316
+#: tests/test_functional.py:1321
+msgid "My Proposals"
+msgstr ""
+
+#: templates/proposal/proposal_confirm_delete.html:6
+#: templates/proposal/proposal_confirm_delete.html:10
 msgid "Delete Proposal"
 msgstr ""
 
-#: deck/templates/proposal/proposal_confirm_delete.html:11
+#: templates/proposal/proposal_confirm_delete.html:11
 msgid "Are you sure you want to delete this proposal?"
 msgstr ""
 
-#: deck/templates/proposal/proposal_confirm_delete.html:12
+#: templates/proposal/proposal_confirm_delete.html:12
 msgid "After deleting this proposal all votes will be lost forever."
 msgstr ""
 
-#: deck/templates/proposal/proposal_confirm_delete.html:27
+#: templates/proposal/proposal_confirm_delete.html:27
 msgid "my proposals"
 msgstr ""
 
-#: deck/templates/proposal/proposal_form.html:9
-#: deck/templates/proposal/proposal_form.html:35
+#: templates/proposal/proposal_form.html:9
+#: templates/proposal/proposal_form.html:35
 msgid "Update Proposal"
 msgstr ""
 
-#: deck/templates/proposal/proposal_form.html:11
+#: templates/proposal/proposal_form.html:11
 msgid "New Proposal"
 msgstr ""
 
-#: deck/templates/proposal/proposal_form.html:37
+#: templates/proposal/proposal_form.html:37
 msgid "New Proposal for"
 msgstr ""
 
-#: deck/templates/proposal/proposal_form.html:58
+#: templates/proposal/proposal_form.html:58
 msgid "More information:"
 msgstr ""
 
-#: deck/templates/proposal/proposal_form.html:59
+#: templates/proposal/proposal_form.html:59
 msgid ""
 "Add anything you think it will be valuable for the people who are choosing "
 "the talks, only They can see it."
 msgstr ""
 
-#: deck/templates/proposal/snippets/proposal_list_item.html:12
+#: templates/proposal/snippets/proposal_list_item.html:12
 #, python-format
 msgid ""
 "\n"
@@ -1473,137 +651,88 @@ msgid ""
 "      "
 msgstr ""
 
-#: deck/templates/proposal/snippets/proposal_list_item.html:21
+#: templates/proposal/snippets/proposal_list_item.html:21
 msgid "See the proposal in Event."
 msgstr ""
 
-#: deck/templates/proposal/snippets/proposal_list_item.html:22
+#: templates/proposal/snippets/proposal_list_item.html:22
 msgid "See in Event"
 msgstr ""
 
-#: deck/tests/test_functional.py:730 deck/views.py:351
+#: tests/test_functional.py:292 views.py:157
+msgid "Event deleted."
+msgstr ""
+
+#: tests/test_functional.py:301 tests/test_functional.py:777 views.py:144
+#: views.py:166 views.py:178 views.py:216 views.py:384 views.py:448
+#: views.py:515 views.py:582
+msgid "You are not allowed to see this page."
+msgstr ""
+
+#: tests/test_functional.py:767 views.py:375
 msgid "Proposal deleted."
 msgstr ""
 
-#: deck/views.py:90
+#: views.py:94
 msgid "Event created."
 msgstr ""
 
-#: deck/views.py:96
+#: views.py:100
 msgid "Your event is ready to receive proposals"
 msgstr ""
 
-#: deck/views.py:132
+#: views.py:136
 msgid "Event updated."
 msgstr ""
 
-#: deck/views.py:162
+#: views.py:186
 msgid "Author"
 msgstr ""
 
-#: deck/views.py:163
+#: views.py:187
 msgid "Author E-Mail"
 msgstr ""
 
-#: deck/views.py:164
+#: views.py:188
 msgid "Vote Rate"
 msgstr ""
 
-#: deck/views.py:165
+#: views.py:189
 msgid "Votes Count"
 msgstr ""
 
-#: deck/views.py:296
+#: views.py:320
 msgid "Proposal created."
 msgstr ""
 
-#: deck/views.py:305
+#: views.py:329
 msgid "Your event has new proposals"
 msgstr ""
 
-#: deck/views.py:317
+#: views.py:341
 msgid "Your proposal was submitted"
 msgstr ""
 
-#: deck/views.py:342
+#: views.py:366
 msgid "Proposal updated."
 msgstr ""
 
-#: deck/views.py:375 deck/views.py:394
+#: views.py:399 views.py:418
 msgid "Rate Index not found."
 msgstr ""
 
-#: deck/views.py:381 deck/views.py:398
+#: views.py:405 views.py:422
 msgid "Proposal rated."
 msgstr ""
 
-#: deck/views.py:451 deck/views.py:465
+#: views.py:431 views.py:498 views.py:565
+msgid "You need to be logged in to continue to the next step."
+msgstr ""
+
+#: views.py:475 views.py:489
 msgid "Proposal approved."
 msgstr ""
 
-#: deck/views.py:518 deck/views.py:532
+#: views.py:542 views.py:556
 msgid "Proposal disapproved."
-msgstr ""
-
-#: jury/models.py:12
-msgid "Jury"
-msgstr ""
-
-#: jury/models.py:13
-msgid "Juries"
-msgstr ""
-
-#: jury/templates/jury/jury_detail.html:8
-#: jury/templates/jury/jury_detail.html:56
-msgid "jury"
-msgstr ""
-
-#: jury/templates/jury/jury_detail.html:61
-msgid "Manage users"
-msgstr ""
-
-#: jury/templates/jury/jury_detail.html:62
-msgid "Here you can add or remove people from Jury."
-msgstr ""
-
-#: jury/templates/jury/jury_invite.html:8
-#: jury/templates/jury/jury_invite.html:19
-msgid "Accept invite"
-msgstr ""
-
-#: jury/templates/jury/jury_invite.html:25
-msgid ""
-"By Accepting this invite you will Vote in any Proposals maded on the event: "
-msgstr ""
-
-#: jury/templates/jury/jury_invite.html:38
-msgid "Accept"
-msgstr ""
-
-#: jury/tests/test_functional.py:29 jury/views.py:41
-#, python-format
-msgid "The \"@%s\" are successfully joined to the Jury."
-msgstr ""
-
-#: jury/tests/test_functional.py:43
-msgid "The \"@admin\" already is being part of this jury."
-msgstr ""
-
-#: jury/tests/test_functional.py:57
-msgid ""
-"The \"new_user@speakerfight.com\" are not a Speakerfight user. For now, we "
-"just allow already joined users."
-msgstr ""
-
-#: jury/tests/test_functional.py:76
-msgid "The \"@user\" was successfully removed from the Jury."
-msgstr ""
-
-#: jury/views.py:59
-#, python-format
-msgid "The \"@%s\" was successfully removed from the Jury."
-msgstr ""
-
-#: speakerfight/settings.py:138
-msgid "Portuguese"
 msgstr ""

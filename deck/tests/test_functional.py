@@ -1,5 +1,5 @@
-
 from collections import namedtuple
+import datetime
 import json
 
 from django.conf import settings
@@ -175,6 +175,22 @@ class EventTest(TestCase):
         self.assertQuerysetEqual(response.context['event_list'],
                                  ["<Event: RuPy - 0>"])
 
+    def test_list_past_events(self):
+        # A future far far away
+        future_event_data = self.event_data.copy()
+        future_event_data.update(is_published=True,
+                                 due_date=datetime.datetime(3000, 01, 01))
+        Event.objects.create(**future_event_data)
+        past_event_data = self.event_data.copy()
+        past_event_data.update(title='Speakerfight rocks',
+                               is_published=True,
+                               due_date=datetime.datetime(1900, 01, 01))
+        Event.objects.create(**past_event_data)
+
+        response = self.client.get(reverse('past_events'))
+        self.assertEquals(response.status_code, 200)
+        self.assertEquals(len(response.context['event_list']), 1)
+
     def test_detail_event(self):
         event = Event.objects.create(**self.event_data)
         response = self.client.get(
@@ -262,6 +278,27 @@ class EventTest(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertEquals('event/event_detail.html', response.template_name[0])
         self.assertEquals('RuPy', event.title)
+
+    def test_delete_event(self):
+        new_event_data = self.event_data.copy()
+        new_event_data['author_id'] = User.objects.get(username='user').id
+        new_event_data['description'] = 'A good candidate to be deleted.'
+        event = Event.objects.create(**new_event_data)
+
+        self.client.login(username='user', password='user')
+        response = self.client.post(
+            reverse('delete_event', kwargs={'slug': event.slug}), follow=True)
+        self.assertEquals(response.status_code, 200)
+        self.assertContains(response, _('Event deleted.'))
+        self.assertEquals(Event.objects.filter(slug=event.slug).count(), 0)
+
+    def test_not_allowed_to_delete_event(self):
+        event = Event.objects.create(**self.event_data)
+        self.client.login(username='user', password='user')
+        response = self.client.post(
+            reverse('delete_event', kwargs={'slug': event.slug}), follow=True)
+        self.assertEqual(200, response.status_code)
+        self.assertContains(response, _('You are not allowed to see this page.'))
 
     def test_publish_event(self):
         event = Event.objects.create(**self.event_data)
@@ -1288,5 +1325,5 @@ class ProposalTest(TestCase):
         self.proposal.author = user
         self.proposal.save()
         response = self.client.get(reverse('my_proposals'))
-        self.assertQuerysetEqual(response.context['object_list'],
-                                 ['<Proposal: Python For Zombies>'])
+        self.assertContains(response, 'RuPy')
+        self.assertContains(response, 'Python For Zombies')

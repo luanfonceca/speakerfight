@@ -100,6 +100,7 @@ THIRD_PARTY_APPS = [
     'raven.contrib.django.raven_compat',
     'rest_framework',
     'anymail',
+    'fixmydjango',
 ]
 
 LOCAL_APPS = [
