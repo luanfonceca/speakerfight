@@ -21,6 +21,7 @@ from djqscsv import render_to_csv_response
 from .models import Event, Proposal, Vote, Activity
 from .forms import EventForm, ProposalForm, ActivityForm, ActivityTimetableForm
 from core.mixins import LoginRequiredMixin, FormValidRedirectMixing
+from deck.permissions import has_manage_schedule_permission
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -209,9 +210,7 @@ class CreateEventSchedule(BaseEventView, DetailView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         self.object = self.get_object()
-        in_jury = self.object.jury.users.filter(
-            pk=self.request.user.pk).exists()
-        if (not in_jury and not self.request.user.is_superuser):
+        if not has_manage_schedule_permission(self.request.user, self.object):
             messages.error(
                 self.request, _(u'You are not allowed to see this page.'))
             return HttpResponseRedirect(
