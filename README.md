@@ -15,7 +15,7 @@
 
 <h2>How to Contribute</h2>
 <blockquote>
-	In case you want to contribute with code, I recomend you to look at our <a href="https://github.com/luanfonceca/speakerfight/milestones" target="_blank">Roadmap</a>. In that section, you will find many issues to help us to keep on track of an awesome project timeline.
+	In case if you want to contribute with code, I recomend you to look at our <a href="https://github.com/luanfonceca/speakerfight/milestones" target="_blank">Roadmap</a>. In that section you will find many issues to help us to keep on track of an awesome project timeline.
 	<br>
 	See our <a href="https://github.com/luanfonceca/speakerfight/blob/master/CONTRIBUTING.md" target="_blank">CONTRIBUTING.md</a> file to understand how we code.
 </blockquote>
