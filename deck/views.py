@@ -22,6 +22,7 @@ from .models import Event, Proposal, Vote, Activity
 from .forms import EventForm, ProposalForm, ActivityForm, ActivityTimetableForm
 from core.mixins import LoginRequiredMixin, FormValidRedirectMixing
 from deck.permissions import has_manage_schedule_permission
+from deck.use_cases import initialize_event_schedule
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -219,19 +220,7 @@ class CreateEventSchedule(BaseEventView, DetailView):
         return super(CreateEventSchedule, self).dispatch(*args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        track = self.object.tracks.first()
-
-        # On the first time we generate a schedule based on the Slots.
-        if not track.activities.exists():
-            top_not_approved_ones = self.object.get_not_approved_schedule()
-            order = 0
-            for proposal in top_not_approved_ones[:self.object.slots]:
-                proposal.track = track
-                proposal.is_approved = True
-                proposal.track_order = order
-                proposal.save()
-                order += 1
+        initialize_event_schedule(self.object)
         return super(CreateEventSchedule, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
