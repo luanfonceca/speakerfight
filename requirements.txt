@@ -62,7 +62,7 @@ sh==1.12.14
 simplegeneric==0.8.1
 six==1.11.0
 smarturls==0.1.7
-sqlparse==0.2.3
+sqlparse==0.2.4
 traitlets==4.3.2
 uWSGI==2.0.15
 unicodecsv==0.14.1
