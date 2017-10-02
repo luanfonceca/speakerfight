@@ -34,7 +34,7 @@
 
 <h2>How to Install</h2>
 <blockquote>
-	After installation, you will have two users created "admin:admin" and "user:user", in order to use the Social Authentication you need to setup the <a href="https://github.com/pennersr/django-allauth">django-allauth</a> by yourself, for security reasons.
+	After installation, you will have two users created "admin:admin" and "user:user". In order to use the Social Authentication you need to setup the <a href="https://github.com/pennersr/django-allauth">django-allauth</a> by yourself, for security reasons.
 </blockquote>
 
 <h3>Normal Installation</h3>
