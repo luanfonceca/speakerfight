@@ -38,7 +38,7 @@ class EventForm(forms.ModelForm):
                 'placeholder': 'Paper Closing Date',
                 'data_form_class':'col-md-4'
             }),
-            'slots': forms.TextInput(attrs={'class': 'inline-input','data_form_class':'col-md-4'}),
+            'slots': forms.NumberInput(attrs={'class': 'inline-input','data_form_class':'col-md-4'}),
         }
 
 
