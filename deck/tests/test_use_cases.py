@@ -2,8 +2,8 @@ from mock import Mock, call
 
 from django.test import TestCase
 
-from deck.models import Proposal, Track, Event
-from deck.use_cases import initialize_event_schedule
+from deck.models import Proposal, Track, Event, Activity
+from deck.use_cases import initialize_event_schedule, rearrange_event_schedule
 
 
 class InitializeEventScheduleTestCase(TestCase):
@@ -39,3 +39,24 @@ class InitializeEventScheduleTestCase(TestCase):
         self.track.has_activities.assert_called_once_with()
         self.assertFalse(self.event.filter_not_scheduled_by_slots.called)
         self.assertFalse(self.track.add_proposal_to_slot.called)
+
+
+class RearrangeEventScheduleTestCase(TestCase):
+
+    def setUp(self):
+        self.track = Mock(Track)
+        self.event = Mock(Event)
+        self.event.get_main_track.return_value = self.track
+
+    def test_rearrange_event_schedule_respecting_new_activitites_arrangement(self):
+        activities = [Mock(Activity), Mock(Activity)]
+
+        returned_activities = rearrange_event_schedule(self.event, activities)
+
+        self.assertEqual(activities, returned_activities)
+        self.event.get_main_track.assert_called_once_with()
+        self.track.refresh_track.assert_called_once_with()
+        self.track.add_activity_to_slot.assert_has_calls([
+            call(activities[0], 0),
+            call(activities[1], 1),
+        ])

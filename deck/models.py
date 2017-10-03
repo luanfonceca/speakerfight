@@ -282,6 +282,12 @@ class Track(models.Model):
     def add_proposal_to_slot(self, proposal, slot_index):
         raise NotImplementedError
 
+    def add_activity_to_slot(self, proposal, slot_index):
+        raise NotImplementedError
+
+    def refresh_track(self):
+        raise NotImplementedError
+
 
 class Event(DeckBaseModel):
     allow_public_voting = models.BooleanField(_('Allow Public Voting'),

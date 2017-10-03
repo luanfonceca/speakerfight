@@ -9,5 +9,11 @@ def initialize_event_schedule(event):
 
     return True
 
-def rearrange_event_schedule(event, new_activities_arrange):
-    raise NotImplementedError
+def rearrange_event_schedule(event, new_activities_arrangement):
+    track = event.get_main_track()
+    track.refresh_track()
+
+    for order, activity in enumerate(new_activities_arrangement):
+        track.add_activity_to_slot(activity, order)
+
+    return new_activities_arrangement
