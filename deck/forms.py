@@ -28,8 +28,16 @@ class EventForm(forms.ModelForm):
             'due_date': CustomDateTimeWidget(attrs={
                 'id': 'id_due_date',
                 'class': 'inline-input',
-                'placeholder': 'Due Date'
+                'placeholder': 'Due Date',
+                'data_col_width':'col-md-4'
             }),
+            'paper_closing_date': CustomDateTimeWidget(attrs={
+                'id': 'id_paper_closing_date',
+                'class': 'inline-input',
+                'placeholder': 'Paper Closing Date',
+                'data_col_width':'col-md-4'
+            }),
+            'slots': forms.TextInput(attrs={'class': 'inline-input','data_col_width':'col-md-4'})
         }
 
 

@@ -278,7 +278,8 @@ class Event(DeckBaseModel):
                                               default=True)
     due_date = models.DateTimeField(null=False, blank=False)
     slots = models.SmallIntegerField(_('Slots'), default=10)
-
+    paper_closing_date = models.DateTimeField(null=False, blank=False)
+    
     # relations
     jury = models.OneToOneField(to='jury.Jury', related_name='event',
                                 null=True, blank=True)
