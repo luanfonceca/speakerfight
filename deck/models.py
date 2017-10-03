@@ -383,6 +383,9 @@ class Event(DeckBaseModel):
     def filter_not_scheduled_by_slots(self):
         return self.get_not_approved_schedule()[:self.slots]
 
+    def user_in_jury(self, user):
+        return self.jury.users.filter(pk=user.pk).exists()
+
 
 @receiver(user_signed_up)
 def send_welcome_mail(request, user, **kwargs):

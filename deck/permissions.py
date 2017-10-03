@@ -1,2 +1,5 @@
 def has_manage_schedule_permission(user, event):
-    raise NotImplementedError
+    if user.is_superuser:
+        return True
+    else:
+        return event.user_in_jury(user)

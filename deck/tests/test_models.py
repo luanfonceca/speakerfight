@@ -3,6 +3,7 @@ from mock import patch, Mock
 from model_mommy import mommy
 
 from django.test import TestCase
+from django.conf import settings
 from django.utils import timezone
 
 from deck.models import Event, Track, Proposal, Activity, get_activities_by_parameters_order
@@ -34,6 +35,12 @@ class EventModelTests(TestCase):
         self.assertEqual(3, len(to_schedule_proposals))
         for proposal in event_proposals[:3]:
             self.assertIn(proposal, to_schedule_proposals)
+
+    def test_check_if_user_is_in_jury(self):
+        user = mommy.make(settings.AUTH_USER_MODEL)
+        self.assertFalse(self.event.user_in_jury(user))
+        self.event.jury.users.add(user)
+        self.assertTrue(self.event.user_in_jury(user))
 
 
 class TrackModelTests(TestCase):
