@@ -129,7 +129,7 @@ class Vote(models.Model):
         return super(Vote, self).save(*args, **kwargs)
 
 
-def get_activities_by_parameters_order(id):
+def get_activities_by_parameters_order(ids):
     raise NotImplementedError
 
 
@@ -361,10 +361,10 @@ class Event(DeckBaseModel):
                 models.Q(track__isnull=True))
 
     def get_main_track(self):
-        raise NotImplementedError
+        return self.tracks.first()
 
     def filter_not_scheduled_by_slots(self):
-        raise NotImplementedError
+        return self.get_not_approved_schedule()[:self.slots]
 
 
 @receiver(user_signed_up)
