@@ -52,7 +52,7 @@
           </div>
         {% endif %}
         {% for field in form %}
-        {% bootstrap_field field layout='inline' form_group_class=field.field.widget.attrs.data_col_width|add:' form-group' %}
+        {% bootstrap_field field layout='inline' form_group_class=field.field.widget.attrs.data_field_class|add:' form-group' %}
         {% endfor %}
         <!-- {% bootstrap_form form layout='inline' %} -->
         {% buttons %}
