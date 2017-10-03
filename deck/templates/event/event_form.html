@@ -51,9 +51,13 @@
               {{ form.errors.description }}
           </div>
         {% endif %}
+        <!-- Iterate through all rows to make all the fields
+             If a field has a custom form class(declared in attr with attr name 'data_form_class') then this will also be prepended to the form class group
+         -->
         {% for field in form %}
-        {% bootstrap_field field layout='inline' form_group_class=field.field.widget.attrs.data_field_class|add:' form-group' %}
+        {% bootstrap_field field layout='inline' form_group_class=field.field.widget.attrs.data_form_class|add:' form-group' %}
         {% endfor %}
+
         <!-- {% bootstrap_form form layout='inline' %} -->
         {% buttons %}
           <button type="submit" class="btn-flat success text-upper">

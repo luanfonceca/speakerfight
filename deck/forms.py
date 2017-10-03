@@ -23,21 +23,22 @@ class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         exclude = ['author', 'jury']
+        # data_form_class : To give custom form classes to in the form
         widgets = {
             'title': forms.TextInput(attrs={'class': 'inline-input'}),
             'due_date': CustomDateTimeWidget(attrs={
                 'id': 'id_due_date',
                 'class': 'inline-input',
                 'placeholder': 'Due Date',
-                'data_field_class':'col-md-4'
+                'data_form_class':'col-md-4' 
             }),
             'paper_closing_date': CustomDateTimeWidget(attrs={
                 'id': 'id_paper_closing_date',
                 'class': 'inline-input',
                 'placeholder': 'Paper Closing Date',
-                'data_field_class':'col-md-4'
+                'data_form_class':'col-md-4'
             }),
-            'slots': forms.TextInput(attrs={'class': 'inline-input','data_field_class':'col-md-4'}),
+            'slots': forms.TextInput(attrs={'class': 'inline-input','data_form_class':'col-md-4'}),
         }
 
 

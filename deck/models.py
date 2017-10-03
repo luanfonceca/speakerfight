@@ -278,8 +278,9 @@ class Event(DeckBaseModel):
                                               default=True)
     anonymous_voting = models.BooleanField(
         _('Anonymous Voting?'), default=False)
-    due_date = models.DateTimeField(null=False, blank=False)
+    
     slots = models.SmallIntegerField(_('Slots'), default=10)
+    due_date = models.DateTimeField(null=False, blank=False)
     paper_closing_date = models.DateTimeField(null=False, blank=False)
     
     # relations
