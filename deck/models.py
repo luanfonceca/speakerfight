@@ -130,7 +130,12 @@ class Vote(models.Model):
 
 
 def get_activities_by_parameters_order(ids):
-    raise NotImplementedError
+    activities = []
+    for id_ in ids:
+        activities.append(
+            Activity.objects.get(id=id_)
+        )
+    return activities
 
 
 class Activity(DeckBaseModel):

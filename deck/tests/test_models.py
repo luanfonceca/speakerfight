@@ -5,7 +5,7 @@ from model_mommy import mommy
 from django.test import TestCase
 from django.utils import timezone
 
-from deck.models import Event, Track, Proposal, Activity
+from deck.models import Event, Track, Proposal, Activity, get_activities_by_parameters_order
 
 
 class EventModelTests(TestCase):
@@ -90,3 +90,20 @@ class TrackModelTests(TestCase):
         self.assertEqual(activity.track, self.track)
         self.assertEqual(activity.track_order, 3)
         self.track.add_proposal_to_slot.assert_called_once_with(activity.proposal)
+
+
+class GetActivitiesByParametersOrderTests(TestCase):
+
+    def test_respect_ids_order(self):
+        activities = mommy.make(Activity, _quantity=3)
+        query = [
+            activities[1].id,
+            activities[2].id,
+            activities[0].id,
+        ]
+
+        filtered_activities = get_activities_by_parameters_order(query)
+
+        self.assertEqual(filtered_activities[0], activities[1])
+        self.assertEqual(filtered_activities[1], activities[2])
+        self.assertEqual(filtered_activities[2], activities[0])
