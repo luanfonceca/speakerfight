@@ -129,6 +129,10 @@ class Vote(models.Model):
         return super(Vote, self).save(*args, **kwargs)
 
 
+def get_activities_by_parameters_order(id):
+    raise NotImplementedError
+
+
 class Activity(DeckBaseModel):
     PROPOSAL = 'proposal'
     WORKSHOP = 'workshop'

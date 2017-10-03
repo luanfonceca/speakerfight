@@ -8,6 +8,7 @@ from django.test import TestCase
 from django.utils import timezone
 
 from deck.forms import ActivityForm, ActivityTimetableForm
+from deck.models import Activity
 
 
 class CreateEventScheduleViewTests(TestCase):
@@ -64,3 +65,17 @@ class CreateEventScheduleViewTests(TestCase):
         response = self.client.get(self.url)
 
         self.assertEqual(response.status_code, 404)
+
+    @patch('deck.views.has_manage_schedule_permission', Mock(return_value=True))
+    @patch('deck.views.get_activities_by_parameters_order')
+    @patch('deck.views.rearrange_event_schedule')
+    def test_rearrange_event_with_post_order(self, mocked_use_case, mocked_query_method):
+        activities = mommy.make(Activity, _quantity=3)
+        mocked_query_method.return_value = activities
+        post_data = {'approved_activities': [1, 2, 3]}
+
+        response = self.client.post(self.url, post_data)
+
+        self.assertRedirects(response, self.url, fetch_redirect_response=False)
+        mocked_query_method.assert_called_once_with(['1', '2', '3'])
+        mocked_use_case.assert_called_once_with(self.event, activities)
