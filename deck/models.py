@@ -276,6 +276,12 @@ class Track(models.Model):
             pk__in=self.activities.values_list('pk', flat=True)
         )
 
+    def has_activities(self):
+        raise NotImplementedError
+
+    def add_proposal_to_slot(self, proposal, slot_index):
+        raise NotImplementedError
+
 
 class Event(DeckBaseModel):
     allow_public_voting = models.BooleanField(_('Allow Public Voting'),
@@ -347,6 +353,12 @@ class Event(DeckBaseModel):
             .filter(
                 models.Q(is_approved=False) |
                 models.Q(track__isnull=True))
+
+    def get_main_track(self):
+        raise NotImplementedError
+
+    def filter_not_scheduled_by_slots(self):
+        raise NotImplementedError
 
 
 @receiver(user_signed_up)
