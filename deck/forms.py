@@ -32,7 +32,7 @@ class EventForm(forms.ModelForm):
                 'placeholder': 'Due Date',
                 'data_form_class':'col-md-4' 
             }),
-            'paper_closing_date': CustomDateTimeWidget(attrs={
+            'event_date': CustomDateTimeWidget(attrs={
                 'id': 'id_paper_closing_date',
                 'class': 'inline-input',
                 'placeholder': 'Paper Closing Date',
