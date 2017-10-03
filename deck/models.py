@@ -177,6 +177,10 @@ class Activity(DeckBaseModel):
             self.end_timetable.strftime('%H:%M')
         )
 
+    @property
+    def is_proposal(self):
+        return self.activity_type == self.PROPOSAL
+
 
 class Proposal(Activity):
     is_approved = models.BooleanField(_('Is approved'), default=False)
@@ -277,16 +281,24 @@ class Track(models.Model):
         )
 
     def has_activities(self):
-        raise NotImplementedError
+        return self.activities.exists()
 
     def add_proposal_to_slot(self, proposal, slot_index):
-        raise NotImplementedError
+        proposal.track = self
+        proposal.is_approved = True
+        proposal.track_order = slot_index
+        proposal.save()
 
-    def add_activity_to_slot(self, proposal, slot_index):
-        raise NotImplementedError
+    def add_activity_to_slot(self, activity, slot_index):
+        activity.track = self
+        activity.track_order = slot_index
+        activity.save()
+        if activity.is_proposal:
+            self.add_proposal_to_slot(activity.proposal)
 
     def refresh_track(self):
-        raise NotImplementedError
+        self.proposals.update(is_approved=False)
+        self.activities.update(track=None, track_order=None)
 
 
 class Event(DeckBaseModel):
