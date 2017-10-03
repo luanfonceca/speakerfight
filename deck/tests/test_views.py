@@ -10,7 +10,7 @@ from django.utils import timezone
 
 from deck.exceptions import EmptyActivitiesArrangementException
 from deck.forms import ActivityForm, ActivityTimetableForm
-from deck.models import Activity
+from deck.models import Activity, Vote
 
 
 class CreateEventScheduleViewTests(TestCase):
@@ -100,3 +100,30 @@ class CreateEventScheduleViewTests(TestCase):
         error_msg = u'You must pass at least one activity.'
         self.assertRedirects(response, self.url, fetch_redirect_response=False)
         self.assertSingleMessage(response, error_msg, messages.ERROR)
+
+    def test_full_integration_test(self):
+        # DB Setup
+        tomorrow = timezone.now() + timedelta(days=1)
+        event = mommy.make('deck.Event', _fill_optional=['jury'], slots=3, due_date=tomorrow)
+        proposals = mommy.make('deck.Proposal', event=event, is_approved=False, _quantity=5)
+        approved_proposals = [
+            mommy.make(Vote, proposal=proposals[0], rate=Vote.LAUGHING),
+            mommy.make(Vote, proposal=proposals[1], rate=Vote.HAPPY),
+            mommy.make(Vote, proposal=proposals[2], rate=Vote.SAD),
+        ]
+        not_approved_proposals = [
+            mommy.make(Vote, proposal=proposals[3], rate=Vote.SLEEPY),
+            mommy.make(Vote, proposal=proposals[4], rate=Vote.ANGRY),
+        ]
+
+        # Request Setup
+        user = mommy.make(settings.AUTH_USER_MODEL)
+        event.jury.users.add(user)
+        self.client.force_login(user)
+        url = reverse('create_event_schedule', args=[event.slug])
+
+        # HTTP Request
+        response = self.client.get(url)
+
+        self.assertEqual(200, response.status_code)
+        self.assertTemplateUsed(response, 'event/event_create_schedule.html')
