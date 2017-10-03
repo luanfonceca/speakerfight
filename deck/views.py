@@ -23,6 +23,7 @@ from .forms import EventForm, ProposalForm, ActivityForm, ActivityTimetableForm
 from core.mixins import LoginRequiredMixin, FormValidRedirectMixing
 from deck.permissions import has_manage_schedule_permission
 from deck.use_cases import initialize_event_schedule, rearrange_event_schedule
+from deck.exceptions import EmptyActivitiesArrangementException
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -226,7 +227,10 @@ class CreateEventSchedule(BaseEventView, DetailView):
     def post(self, request, *args, **kwargs):
         approved_activities_pks = self.request.POST.getlist('approved_activities')
         new_activites_arrange = get_activities_by_parameters_order(approved_activities_pks)
-        rearrange_event_schedule(self.object, new_activites_arrange)
+        try:
+            rearrange_event_schedule(self.object, new_activites_arrange)
+        except EmptyActivitiesArrangementException:
+             messages.error(self.request, _(u'You must pass at least one activity.'))
         return HttpResponseRedirect(reverse('create_event_schedule', kwargs={'slug': self.object.slug}))
 
 

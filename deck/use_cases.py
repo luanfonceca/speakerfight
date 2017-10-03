@@ -1,3 +1,6 @@
+from deck.exceptions import EmptyActivitiesArrangementException
+
+
 def initialize_event_schedule(event):
     track = event.get_main_track()
 
@@ -10,6 +13,9 @@ def initialize_event_schedule(event):
     return True
 
 def rearrange_event_schedule(event, new_activities_arrangement):
+    if not new_activities_arrangement:
+        raise EmptyActivitiesArrangementException
+
     track = event.get_main_track()
     track.refresh_track()
 

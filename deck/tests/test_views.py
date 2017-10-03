@@ -2,16 +2,24 @@ from mock import patch, Mock
 from model_mommy import mommy
 from datetime import timedelta
 
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.test import TestCase
 from django.utils import timezone
 
+from deck.exceptions import EmptyActivitiesArrangementException
 from deck.forms import ActivityForm, ActivityTimetableForm
 from deck.models import Activity
 
 
 class CreateEventScheduleViewTests(TestCase):
+
+    def assertSingleMessage(self, response, msg, level):
+        self.assertEqual(1, len(response.context['messages']))
+        for message in response.context['messages']:
+            self.assertEqual(msg, message.message)
+            self.assertEqual(level, message.level)
 
     def setUp(self):
         tomorrow = timezone.now() + timedelta(days=1)
@@ -79,3 +87,16 @@ class CreateEventScheduleViewTests(TestCase):
         self.assertRedirects(response, self.url, fetch_redirect_response=False)
         mocked_query_method.assert_called_once_with(['1', '2', '3'])
         mocked_use_case.assert_called_once_with(self.event, activities)
+
+    @patch('deck.views.has_manage_schedule_permission', Mock(return_value=True))
+    @patch('deck.views.get_activities_by_parameters_order', Mock(return_value=[]))
+    @patch('deck.views.rearrange_event_schedule', Mock(side_effect=EmptyActivitiesArrangementException))
+    @patch('deck.views.initialize_event_schedule', Mock())
+    def test_redirect_back_to_create_event_on_exception(self):
+        post_data = {'approved_activities': []}
+
+        response = self.client.post(self.url, post_data, follow=True)
+
+        error_msg = u'You must pass at least one activity.'
+        self.assertRedirects(response, self.url, fetch_redirect_response=False)
+        self.assertSingleMessage(response, error_msg, messages.ERROR)

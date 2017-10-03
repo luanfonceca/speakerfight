@@ -4,6 +4,7 @@ from django.test import TestCase
 
 from deck.models import Proposal, Track, Event, Activity
 from deck.use_cases import initialize_event_schedule, rearrange_event_schedule
+from deck.exceptions import EmptyActivitiesArrangementException
 
 
 class InitializeEventScheduleTestCase(TestCase):
@@ -60,3 +61,11 @@ class RearrangeEventScheduleTestCase(TestCase):
             call(activities[0], 0),
             call(activities[1], 1),
         ])
+
+    def test_raise_custom_exception_if_no_activities_arrangement(self):
+        self.assertRaises(
+            EmptyActivitiesArrangementException,
+            rearrange_event_schedule, self.event, []
+        )
+        self.assertFalse(self.event.get_main_track.called)
+        self.assertFalse(self.track.refresh_track.called)
