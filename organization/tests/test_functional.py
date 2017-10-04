@@ -1,5 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.test import Client, TestCase
+from django.contrib.auth import get_user_model
 
 from organization.models import Organization
 
@@ -8,6 +9,8 @@ class OrganizationTest(TestCase):
     fixtures = ['user.json']
 
     def setUp(self):
+        User = get_user_model()
+        self.user = User.objects.get(username='user')
         self.client = Client()
         self.client.login(username='user', password='user')
 
@@ -28,11 +31,13 @@ class OrganizationTest(TestCase):
         organization = Organization.objects.get(slug='speakerfight-corp')
         self.assertEqual(organization.name, 'Speakerfight Corp')
         self.assertEqual(organization.about, 'Cool company')
+        self.assertEqual(organization.created_by, self.user)
 
     def test_update_event(self):
         organization = Organization.objects.create(
             name='Speakerfight Corp',
-            about='Cool company'
+            about='Cool company',
+            created_by=self.user,
         )
         url = reverse('update_organization', kwargs={'slug': 'speakerfight-corp'})
         response = self.client.get(url)

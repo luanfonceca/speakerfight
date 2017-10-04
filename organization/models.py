@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+
 from __future__ import unicode_literals
 
 from django.db import models
 from django.utils import six
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext as _
+from django.conf import settings
 
 from django_extensions.db.fields import AutoSlugField
 
@@ -16,6 +18,11 @@ class Organization(models.Model):
                          max_length=200, unique=True, db_index=True)
     about = models.TextField(
         _('About'), max_length=10000, blank=True)
+
+    # relations
+    created_by = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL, related_name='organizations'
+    )
 
     def __str__(self):
         return six.text_type(self.name)
