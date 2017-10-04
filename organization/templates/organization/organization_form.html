@@ -23,10 +23,10 @@
     <li><a href="{% url 'index_page' %}">{% trans "Home" %}</a></li>
     <li>{% trans "Organizations" %}</li>
     {% if form.instance.pk %}
-    <li><a href="{% url 'update_organization' slug=organization.slug %}">{{ organization.title }}</a></li>
-    <li class="active">Update</li>
+      <li><a href="{% url 'update_organization' slug=organization.slug %}">{{ organization }}</a></li>
+      <li class="active">{% trans "Update" %}</li>
     {% else %}
-    <li class="active">New Organization</li>
+      <li class="active">{% trans "New Organization" %}</li>
     {% endif %}
   </ol>
 
