@@ -68,4 +68,5 @@ uWSGI==2.0.15
 unicodecsv==0.14.1
 urllib3==1.22
 wcwidth==0.1.7
-Pillow==4.3.0mock==2.0.0
+Pillow==4.3.0
+mock==2.0.0
