@@ -28,12 +28,12 @@ class EventForm(forms.ModelForm):
             'due_date': CustomDateTimeWidget(attrs={
                 'id': 'id_due_date',
                 'class': 'inline-input',
-                'placeholder': 'Due Date'
+                'placeholder': gettext('Due Date')
             }),
             'event_date': CustomDateTimeWidget(attrs={
                 'id': 'id_event_date',
                 'class': 'inline-input',
-                'placeholder': 'Event Date'
+                'placeholder': gettext('Event Date')
             }),
         }
 

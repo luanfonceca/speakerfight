@@ -1,11 +1,8 @@
 [run]
-source = .
-omit = */migrations/*,
-       *__init__*,
-       */tests/*,
-       speakerfight/*,
-       fabfile.py,
-       manage.py
+branch = True
+source = api, core, deck, jury
+omit = *migrations*
+
 
 [html]
 directory = docs/report

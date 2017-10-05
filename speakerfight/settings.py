@@ -108,6 +108,7 @@ LOCAL_APPS = [
     'core',
     'jury',
     'api',
+    'organization',
 ]
 
 INSTALLED_APPS = LOCAL_APPS + THIRD_PARTY_APPS + DEFAULT_APPS

@@ -1337,5 +1337,5 @@ class ProposalTest(TestCase):
         self.proposal.author = user
         self.proposal.save()
         response = self.client.get(reverse('my_proposals'))
-        self.assertQuerysetEqual(response.context['object_list'],
-                                 ['<Proposal: Python For Zombies>'])
+        self.assertContains(response, 'RuPy')
+        self.assertContains(response, 'Python For Zombies')

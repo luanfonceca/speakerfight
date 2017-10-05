@@ -286,6 +286,10 @@ class Event(DeckBaseModel):
     anonymous_voting = models.BooleanField(
         _('Anonymous Voting?'), default=False)
 
+    @property
+    def due_date_class(self):
+        return 'text-danger' if self.due_date_is_close else 'text-warning'
+
     class Meta:
         ordering = ['-due_date', '-created_at']
         verbose_name = _('Event')
