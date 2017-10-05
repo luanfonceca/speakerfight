@@ -61,6 +61,20 @@ class OrganizationTest(TestCase):
             about='Cool company',
             created_by=self.user,
         )
-        url = reverse('delete_organization', kwargs={'slug': 'speakerfight-corp'})
+        url = reverse('delete_organization', kwargs={'slug': organization.slug})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+
+    def test_delete_organization(self):
+        organization = Organization.objects.create(
+            name='Speakerfight Corp',
+            about='Cool company',
+            created_by=self.user,
+        )
+        url = reverse('delete_organization', kwargs={'slug': organization.slug})
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('list_events'))
+
+        with self.assertRaises(Organization.DoesNotExist):
+            Organization.objects.get(slug=organization.slug)

@@ -35,3 +35,10 @@ class UpdateOrganization(BaseOrganizationView, UpdateView):
 
 class DeleteOrganization(BaseOrganizationView, DeleteView):
     template_Name = 'organization/organization_confirm_delete.html'
+
+    def form_valid(self, form):
+        return self.success_redirect(_(u'Organization deleted.'))
+
+    def get_success_url(self):
+        # TODO: Redirect to the organization list route when it gets done
+        return reverse('list_events')
