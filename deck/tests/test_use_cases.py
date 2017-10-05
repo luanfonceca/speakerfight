@@ -1,6 +1,6 @@
-from mock import Mock, call
-
 from django.test import TestCase
+
+from mock import Mock, call
 
 from deck.models import Proposal, Track, Event, Activity
 from deck.use_cases import initialize_event_schedule, rearrange_event_schedule

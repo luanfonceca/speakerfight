@@ -1,12 +1,12 @@
-from mock import patch, Mock
-from model_mommy import mommy
-from datetime import timedelta
-
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.test import TestCase
 from django.utils import timezone
+
+from mock import patch, Mock
+from model_mommy import mommy
+from datetime import timedelta
 
 from deck.exceptions import EmptyActivitiesArrangementException
 from deck.forms import ActivityForm, ActivityTimetableForm

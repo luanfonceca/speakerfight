@@ -1,8 +1,8 @@
-from mock import patch, Mock
-from model_mommy import mommy
-
 from django.test import TestCase
 from django.conf import settings
+
+from mock import patch, Mock
+from model_mommy import mommy
 
 from deck.permissions import has_manage_schedule_permission
 from deck.models import Event
