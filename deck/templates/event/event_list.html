@@ -72,6 +72,8 @@
     </div>
   </div>
 
+
+  {% if event_list.has_other_pages %}
   <div align="center">
     <ul class="pagination">
       {% if event_list.has_previous %}
@@ -109,6 +111,7 @@
       {% endif %}
     </ul>
   </div>
+  {% endif %}
   <!-- end events table -->
 {% endblock content %}
 
