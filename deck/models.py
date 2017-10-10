@@ -285,6 +285,8 @@ class Event(DeckBaseModel):
     anonymous_voting = models.BooleanField(
         _('Anonymous Voting?'), default=False)
 
+    accept_proposals_at = models.DateTimeField(null=True, blank=True)
+
     class Meta:
         ordering = ['-due_date', '-created_at']
         verbose_name = _('Event')
