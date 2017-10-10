@@ -125,6 +125,9 @@ class EventModelIntegrityTest(TestCase):
     def test_assert_event_jury_should_have_a_related_name(self):
         self.assertEquals('event', self.fields['jury'].rel.related_name)
 
+    def test_assert_event_date_accept_proposals_should_not_be_required(self):
+        self.assertEquals(True, self.fields['accept_proposals_at'].null)
+        self.assertEquals(True, self.fields['accept_proposals_at'].blank)
 
 class EventObjectTest(TestCase):
     def setUp(self):
