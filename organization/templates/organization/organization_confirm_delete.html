@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block head_title %}{% trans "Delete Organization" %}: "{{ object }}"{% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+  <li><a href="{% url 'index_page' %}">{% trans "Home" %}</a></li>
+  <li>{% trans "Organizations" %}</li>
+  <li>{{ object }}</li>
+  <li class="active">{% trans "Remove" %}</li>
+</ol>
+
+<div class="row">
+  <h1>{% trans "Delete" %} "{{ object }}"</h1>
+  <p>{% trans "Are you sure you want to delete this organization?" %}</p>
+  <p>{% trans "After deleting this organization all events will be lost forever." %}</p>
+  <form method="POST">
+    {% csrf_token %}
+    {% buttons %}
+      <button type="submit" class="btn-flat success text-upper">
+        <i class="icon icon-trash"></i>
+        {% trans "Delete" %}
+      </button>
+      <div class="pull-right">
+        <a href="#" class="link text-upper">
+          <i class="icon-calendar"></i>
+          {% trans "organization detail" %}
+        </a>
+      </div>
+    {% endbuttons %}
+  </form>
+</div>
+{% endblock content %}

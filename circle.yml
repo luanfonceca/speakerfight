@@ -8,8 +8,8 @@ test:
 general:
   artifacts:
     - 'coverage'
-deployment:
-  production:
-    branch: master
-    commands:
-      - fab deploy
+# deployment:
+  # production:
+  #   branch: master
+  #   commands:
+  #     - fab deploy
