@@ -65,7 +65,6 @@ $(function () {
       },
       data: {
         title: $(modal).find('#id_title').val(),
-        description: $(modal).find('#id_description').val(),
         activity_type: $(modal).find('#id_activity_type').val(),
         start_timetable: $(modal).find('#id_start_timetable').val(),
         end_timetable: $(modal).find('#id_end_timetable').val(),
@@ -118,7 +117,6 @@ $(function () {
       method: 'GET',
     }).success(function(data, status, xhr) {
       $(modal).find('#id_title').val(data.title);
-      $(modal).find('#id_description').val(data.description);
       $(modal).find('#id_start_timetable').val(data.start_timetable);
       $(modal).find('#id_end_timetable').val(data.end_timetable);
       $(modal).find('#oldSlug').val(data.slug);
@@ -140,7 +138,6 @@ $(function () {
       },
       data: {
         title: $(modal).find('#id_title').val(),
-        description: $(modal).find('#id_description').val(),
         start_timetable: $(modal).find('#id_start_timetable').val(),
         end_timetable: $(modal).find('#id_end_timetable').val(),
       }
@@ -156,7 +153,6 @@ $(function () {
       $(activityBlock).find('.proposal-points').addClass('hide');
       $(activityBlock).find('.proposal-timetable .timetable').text(data.timetable);
       $(activityBlock).find('.proposal-title a').text(data.title);
-      $(activityBlock).find('.proposal-metadata').text(data.description);
       $(activityBlock).find('.proposal-timetable').removeClass('hide');
       $(modal).modal('hide');
     }).error(function(data, status, xhr) {
