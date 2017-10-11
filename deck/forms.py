@@ -28,7 +28,7 @@ class EventForm(forms.ModelForm):
             'closing_date': CustomDateTimeWidget(attrs={
                 'id': 'id_closing_date',
                 'class': 'inline-input',
-                'placeholder': 'Due Date'
+                'placeholder': 'Closing Date'
             }),
         }
 
