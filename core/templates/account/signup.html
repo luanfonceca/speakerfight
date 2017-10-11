@@ -19,6 +19,8 @@
       {% bootstrap_form form layout="inline" %}
       {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        <input type="text" name="first_name" id="first_name"  placeholder="First Name">
+        <input type="text" name="last_name" id="last_name" placeholder="Last Name">
       {% endif %}
       <button class="btn-flat success text-upper" type="submit">{% trans "Sign Up" %}</button>
     </form>
