@@ -30,6 +30,11 @@ class EventForm(forms.ModelForm):
                 'class': 'inline-input',
                 'placeholder': 'Due Date'
             }),
+            'accept_proposals_at': CustomDateTimeWidget(attrs={
+                'id': 'id_accept_proposals',
+                'class': 'inline-input',
+                'placeholder': 'Date Accept Proposals'
+            }),
         }
 
 
