@@ -80,3 +80,16 @@
     margin-top: 20px;
   }
 }
+
+.social-update-form .input-group-addon i {
+  font-size: 18px;
+  line-height: 1.42857143;
+}
+
+.social-update-form .input-group .input-group-addon {
+  border-color: #ccc;
+  border-right-width: 0px;
+}
+.social-update-form .input-group input {
+  border-color: #ccc;
+}
