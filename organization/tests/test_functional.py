@@ -14,7 +14,7 @@ class OrganizationTest(TestCase):
         self.client = Client()
         self.client.login(username='user', password='user')
 
-    def test_create_event(self):
+    def test_create_organization(self):
         url = reverse('create_organization')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -33,7 +33,7 @@ class OrganizationTest(TestCase):
         self.assertEqual(organization.about, 'Cool company')
         self.assertEqual(organization.created_by, self.user)
 
-    def test_update_event(self):
+    def test_update_organization(self):
         organization = Organization.objects.create(
             name='Speakerfight Corp',
             about='Cool company',
@@ -54,3 +54,27 @@ class OrganizationTest(TestCase):
         organization = Organization.objects.get(slug='speakerfight-school')
         self.assertEqual(organization.name, 'Speakerfight School')
         self.assertEqual(organization.about, 'Cool school')
+
+    def test_delete_organization_confirmation(self):
+        organization = Organization.objects.create(
+            name='Speakerfight Corp',
+            about='Cool company',
+            created_by=self.user,
+        )
+        url = reverse('delete_organization', kwargs={'slug': organization.slug})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_delete_organization(self):
+        organization = Organization.objects.create(
+            name='Speakerfight Corp',
+            about='Cool company',
+            created_by=self.user,
+        )
+        url = reverse('delete_organization', kwargs={'slug': organization.slug})
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('list_events'))
+
+        with self.assertRaises(Organization.DoesNotExist):
+            Organization.objects.get(slug=organization.slug)

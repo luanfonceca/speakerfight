@@ -711,15 +711,7 @@ class ProposalTest(TestCase):
     def test_update_proposal(self):
         new_proposal_data = self.proposal_data.copy()
         new_proposal_data['description'] = 'A really really good proposal.'
-
-        self.assertEquals(self.proposal_data['description'],
-                          self.proposal.description)
-
-        response = self.client.get(
-            reverse('update_proposal',
-                    kwargs={'event_slug': self.event.slug,
-                            'slug': self.proposal.slug}))
-        self.assertEqual(response.context['event'], self.event)
+        new_proposal_data['slides_url'] = 'john_doe/talk'
 
         response = self.client.post(
             reverse('update_proposal',
@@ -730,21 +722,28 @@ class ProposalTest(TestCase):
         self.assertEquals(200, response.status_code)
         self.proposal = response.context['event'].proposals.first()
         self.assertEquals('Python For Zombies', self.proposal.title)
-        self.assertEquals('A really really good proposal.',
+        self.assertEquals(new_proposal_data['description'],
                           self.proposal.description)
+        self.assertEquals(new_proposal_data['slides_url'],
+                          self.proposal.slides_url)
 
     def test_anonymous_user_update_proposal(self):
         self.client.logout()
         new_proposal_data = self.proposal_data.copy()
         new_proposal_data['description'] = 'A really really good proposal.'
+        new_proposal_data['slides_url'] = 'john_doe/talk'
+
         proposal_update_url = reverse(
-            'update_proposal',
-            kwargs={'event_slug': self.event.slug,
-                    'slug': self.proposal.slug})
+                'update_proposal',
+                kwargs={'event_slug': self.event.slug,
+                        'slug': self.proposal.slug}
+        )
+
         response = self.client.post(
             proposal_update_url,
             new_proposal_data, follow=True
         )
+
         self.assertEquals(200, response.status_code)
         self.assertEquals(proposal_update_url,
                           response.context_data.get('redirect_field_value'))
