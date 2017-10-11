@@ -19,7 +19,7 @@ EVENT_DATA = {
     'author_id': 1,
     'is_published': False,
     'slots': 30,
-    'due_date': now() + timedelta(days=7),
+    'closing_date': now() + timedelta(days=7),
 }
 
 PROPOSAL_DATA = {
