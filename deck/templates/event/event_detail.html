@@ -55,7 +55,7 @@
 
     <div class="col-md-10 col-md-offset-1">
       <div class="event-proposals-header">
-        {% if event.due_date_is_passed %}
+        {% if event.closing_date_is_passed %}
           <span class="pull-right text-danger">
             <i class="icon-warning-sign"></i>
             {% trans "The event is no longer accepting proposals." %}

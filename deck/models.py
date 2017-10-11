@@ -188,7 +188,7 @@ class Proposal(Activity):
         verbose_name_plural = _('Proposals')
 
     def save(self, *args, **kwargs):
-        if not self.pk and self.event.due_date_is_passed:
+        if not self.pk and self.event.closing_date_is_passed:
             raise ValidationError(
                 _("This Event doesn't accept Proposals anymore."))
         return super(Proposal, self).save(*args, **kwargs)
@@ -276,7 +276,7 @@ class Track(models.Model):
 class Event(DeckBaseModel):
     allow_public_voting = models.BooleanField(_('Allow Public Voting'),
                                               default=True)
-    due_date = models.DateTimeField(null=False, blank=False)
+    closing_date = models.DateTimeField(null=False, blank=False)
     slots = models.SmallIntegerField(_('Slots'), default=10)
 
     # relations
@@ -286,19 +286,19 @@ class Event(DeckBaseModel):
         _('Anonymous Voting?'), default=False)
 
     class Meta:
-        ordering = ['-due_date', '-created_at']
+        ordering = ['-closing_date', '-created_at']
         verbose_name = _('Event')
         verbose_name_plural = _('Events')
 
     @property
-    def due_date_is_passed(self):
-        return timezone.now() > self.due_date
+    def closing_date_is_passed(self):
+        return timezone.now() > self.closing_date
 
     @property
-    def due_date_is_close(self):
-        if self.due_date_is_passed:
+    def closing_date_is_close(self):
+        if self.closing_date_is_passed:
             return False
-        return timezone.now() > self.due_date - timezone.timedelta(days=7)
+        return timezone.now() > self.closing_date - timezone.timedelta(days=7)
 
     def get_absolute_url(self):
         return reverse('view_event', kwargs={'slug': self.slug})
