@@ -153,7 +153,13 @@
               <h4 class="modal-title">{% trans "Update profile" %}</h4>
             </div>
             <div class="modal-body">
-              {% bootstrap_form profile_form layout='inline' %}
+              {% bootstrap_field profile_form.about_me layout='inline' %}
+              {% bootstrap_field profile_form.github layout='inline' %}
+              {% bootstrap_field profile_form.facebook layout='inline' %}
+              {% bootstrap_field profile_form.site layout='inline' %}
+              {% bootstrap_field profile_form.username layout='inline' %}
+              {% bootstrap_field profile_form.name layout='inline' %}
+              {% bootstrap_field profile_form.email layout='inline' %}
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn-flat success text-upper">
