@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% load staticfiles %}
+
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block content %}
+  <ol class="breadcrumb">
+    <li><a href="{% url 'index_page' %}">{% trans "Home" %}</a></li>
+    <li class="active">{% trans "Organizations" %}</li>
+  </ol>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2><strong>{{ organization.name }}</strong></h2>
+      <p>{{ organization.about }}</p>
+    </div>
+  </div>
+
+  <!-- header -->
+  <div class="row" id="organization-detail">
+
+    <div class="col-md-12">
+
+      <h2><strong>{% trans "Organizations" %}</strong></h2>
+
+      {% for organization in object_list %}
+
+        <div class="panel panel-default" style="cursor: pointer;">
+          <div class="panel-body">
+            <h3 class="panel-title event-title">{{ organization.name }}</h3>
+            <p class="event-metadata">
+              Created by <strong><a href="/profile/user/">{{ organization.created_by }}</a></strong>
+            </p>
+            <div class="event-description">
+              <p>Link: /{{ organization.slug }}</p>
+              <p>{{ organization.about }}</p>
+            </div>
+
+            <div class="panel-footer event-actions text-center">
+              <a href="{% url 'update_organization' organization.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="" data-original-title="Edit this organization">
+                <i class="icon-pencil"></i> Edit
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      {% empty %}
+
+        <p class="panel-title ">No organization created.</p>
+        <p>
+          <a href="{% url 'create_organization' %}" class="btn-flat success text-upper">
+            <i class="icon-plus"></i>Create my organization</a>
+        </p>
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+{% endblock content %}
