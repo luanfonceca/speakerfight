@@ -117,8 +117,11 @@ $(function () {
       url: $(this).parents('.panel').attr('data-href'),
       method: 'GET',
     }).success(function(data, status, xhr) {
+      $(modal).find('#id_title').val(data.title);
+      $(modal).find('#id_description').val(data.description);
       $(modal).find('#id_start_timetable').val(data.start_timetable);
       $(modal).find('#id_end_timetable').val(data.end_timetable);
+      $(modal).find('#oldSlug').val(data.slug);
     });
 
     $(modal).attr('data-href', $(this).parents('.panel').attr('data-href'));
@@ -136,13 +139,24 @@ $(function () {
         'X-CSRFToken': getCookie('csrftoken')
       },
       data: {
+        title: $(modal).find('#id_title').val(),
+        description: $(modal).find('#id_description').val(),
         start_timetable: $(modal).find('#id_start_timetable').val(),
         end_timetable: $(modal).find('#id_end_timetable').val(),
       }
     }).success(function(data, status, xhr) {
+
+      var oldSlug = $(modal).find('#oldSlug').val();
+
+      $(modal).attr('data-href', data.url_api_event_activity)
+      $('#' + oldSlug).attr('data-href', data.url_api_event_activity);
+      $('#' + oldSlug).attr('id', data.slug);
+
       var activityBlock = $('#' + data.slug);
       $(activityBlock).find('.proposal-points').addClass('hide');
       $(activityBlock).find('.proposal-timetable .timetable').text(data.timetable);
+      $(activityBlock).find('.proposal-title a').text(data.title);
+      $(activityBlock).find('.proposal-metadata').text(data.description);
       $(activityBlock).find('.proposal-timetable').removeClass('hide');
       $(modal).modal('hide');
     }).error(function(data, status, xhr) {
