@@ -33,7 +33,7 @@ class DeckBaseManager(models.QuerySet):
         return self.cached_authors().filter(is_published=True)
 
     def upcoming(self, published_only=True):
-        return self.filter(due_date__gte=timezone.now(), is_published=published_only)
+        return self.filter(closing_date__gte=timezone.now(), is_published=published_only)
 
     def order_by_never_voted(self, user_id):
         if self.model != Proposal:
