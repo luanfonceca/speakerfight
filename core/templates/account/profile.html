@@ -72,6 +72,9 @@
                       <a href="{{ object.get_facebook_url|default:'javascript:;' }}" class="btn btn-default btn-sm {% if not object.facebook %}disabled{% endif %}" target="_blank">
                         <i class="icon-facebook"></i>
                       </a>
+                      <a href="{{ object.get_twitter_url|default:'javascript:;' }}" class="btn btn-default btn-sm {% if not object.twitter %}disabled{% endif %}" target="_blank">
+                        <i class="icon-twitter"></i>
+                      </a>
                       <a href="{{ object.get_site_url|default:'javascript:;' }}" class="btn btn-default btn-sm {% if not object.site %}disabled{% endif %}" target="_blank">
                         <i class="icon-globe"></i>
                       </a>
