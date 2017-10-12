@@ -15,8 +15,29 @@
     {% include "snippets/render_form_error.html" %}
 
     <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-      {% csrf_token %}
+{#      <div class="row">#}
+{#        <div class="">#}
+{#            <div class="form-group">#}
+{#      <input type="text" placeholder="First name" />#}
+{#    </div>#}
+{#  </div><!-- /.col -->#}
+{#  <div class="col-md-10">#}
+{#    <div class="form-group">#}
+{#      <input type="text" placeholder="Last name" />#}
+{#    </div>#}
+{#  </div><!-- /.col -->#}
+{#</div><!-- /.row -->#}
+    <div class="form-group">
+        <label class="sr-only" for="id_firstname">First Name</label>
+        <input type="text" name="First Name" title="" minlength="1" maxlength="150" autofocus="autofocus" placeholder="First Name" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="id_lastname">Last Name</label>
+        <input type="text" name="Last Name" title="" minlength="1" maxlength="150" autofocus="autofocus" placeholder="Last Name" class="form-control"/>
+    </div>
+        {% csrf_token %}
       {% bootstrap_form form layout="inline" %}
+
       {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
       {% endif %}

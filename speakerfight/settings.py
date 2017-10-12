@@ -82,6 +82,7 @@ DEFAULT_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+
 ]
 
 THIRD_PARTY_APPS = [
@@ -215,7 +216,7 @@ SOCIALACCOUNT_PROVIDERS = {
         'VERIFIED_EMAIL': False
     }
 }
-
+ALLOWED_HOSTS = ['198.211.99.20', 'localhost', '127.0.0.1']
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/events/'
 ACCOUNT_LOGOUT_ON_GET = True
