@@ -26,7 +26,8 @@ PROPOSAL_DATA = {
     'title': 'Python For Zombies',
     'slug': 'python-for-zombies',
     'description': 'Brain...',
-    'author_id': 1
+    'author_id': 1,
+    'slides_url': 'jane_doe/talk'
 }
 
 ANOTHER_PROPOSAL_DATA = {
@@ -185,7 +186,7 @@ class ProposalModelIntegrityTest(TestCase):
         self.assertEquals(False, self.fields['description'].null)
         self.assertEquals(True, self.fields['description'].blank)
 
-    def test_assert_proposal_description_should_have_10000_characters(self):
+    def test_assert_proposal_description_should_have_at_most_10000_characters(self):
         self.assertEquals(10000, self.fields['description'].max_length)
 
     def test_assert_proposal_should_have_a_author(self):
@@ -232,6 +233,16 @@ class ProposalModelIntegrityTest(TestCase):
     def test_assert_proposal_is_approved_should_be_False_as_default(self):
         self.assertEquals(False, self.fields['is_approved'].default)
 
+    def test_assert_proposal_slides_url_should_not_be_required(self):
+        self.assertEquals(True, self.fields['slides_url'].null)
+        self.assertEquals(True, self.fields['slides_url'].blank)
+
+    def test_assert_proposal_slides_url_should_be_a_CharField(self):
+        self.assertIsInstance(self.fields['slides_url'], CharField)
+
+    def test_assert_proposal_slides_url_should_have_at_most_250_characters(self):
+        self.assertEquals(250, self.fields['slides_url'].max_length)
+
 
 class ProposalObjectTest(TestCase):
     fixtures = ['user.json']
@@ -252,6 +263,9 @@ class ProposalObjectTest(TestCase):
 
     def test_assert_proposal_description(self):
         self.assertEquals(u'Brain...', self.proposal.description)
+
+    def test_assert_proposal_slides_url(self):
+        self.assertEquals(u'jane_doe/talk', self.proposal.slides_url)
 
     def test_assert_proposal_author(self):
         self.assertEquals(1, self.proposal.author_id)
