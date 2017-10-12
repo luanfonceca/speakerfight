@@ -82,6 +82,7 @@ DEFAULT_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+
 ]
 
 THIRD_PARTY_APPS = [
