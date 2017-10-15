@@ -43,6 +43,7 @@
 $ git clone git@github.com:luanfonceca/speakerfight.git
 $ cd speakerfight
 $ make setup
+$ make db
 $ python manage.py runserver
 ```
 
@@ -62,4 +63,3 @@ $ docker-compose build
 $ docker-compose run web make setup
 $ docker-compose up
 ```
-
