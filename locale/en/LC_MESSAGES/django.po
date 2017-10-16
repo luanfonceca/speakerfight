@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-04 16:35-0300\n"
+"POT-Creation-Date: 2017-10-16 15:43-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: core/forms.py:14 organization/models.py:14
+#: core/forms.py:14 organization/models.py:16
 msgid "Name"
 msgstr ""
 
@@ -284,6 +284,7 @@ msgstr ""
 
 #: core/templates/account/email.html:36
 #: core/templates/socialaccount/connections.html:35
+#: organization/templates/organization/organization_confirm_delete.html:13
 msgid "Remove"
 msgstr ""
 
@@ -1102,6 +1103,8 @@ msgstr ""
 #: deck/templates/event/snippets/event_list_item.html:54
 #: deck/templates/proposal/proposal_confirm_delete.html:18
 #: deck/templates/proposal/snippets/proposal_list_item.html:29
+#: organization/templates/organization/organization_confirm_delete.html:17
+#: organization/templates/organization/organization_confirm_delete.html:25
 msgid "Delete"
 msgstr ""
 
@@ -1122,6 +1125,7 @@ msgstr ""
 #: deck/templates/event/event_form.html:23
 #: deck/templates/proposal/proposal_form.html:22
 #: jury/templates/jury/jury_detail.html:45
+#: organization/templates/organization/organization_confirm_delete.html:10
 #: organization/templates/organization/organization_form.html:23
 msgid "Home"
 msgstr ""
@@ -1293,6 +1297,7 @@ msgstr ""
 #: jury/templates/jury/jury_detail.html:8
 #: jury/templates/jury/jury_detail.html:56
 #: organization/templates/organization/organization_form.html:9
+#: organization/templates/organization/organization_form.html:27
 #: organization/templates/organization/organization_form.html:36
 msgid "Update"
 msgstr ""
@@ -1661,25 +1666,47 @@ msgstr ""
 msgid "The \"@%s\" was successfully removed from the Jury."
 msgstr ""
 
-#: organization/models.py:18
+#: organization/models.py:20
 msgid "About"
 msgstr ""
 
-#: organization/templates/organization/organization_form.html:11
-#: organization/templates/organization/organization_form.html:38
-msgid "New Organization"
+#: organization/templates/organization/organization_confirm_delete.html:6
+msgid "Delete Organization"
 msgstr ""
 
+#: organization/templates/organization/organization_confirm_delete.html:11
 #: organization/templates/organization/organization_form.html:24
 msgid "Organizations"
 msgstr ""
 
-#: organization/views.py:22
+#: organization/templates/organization/organization_confirm_delete.html:18
+msgid "Are you sure you want to delete this organization?"
+msgstr ""
+
+#: organization/templates/organization/organization_confirm_delete.html:19
+msgid "After deleting this organization all events will be lost forever."
+msgstr ""
+
+#: organization/templates/organization/organization_confirm_delete.html:30
+msgid "organization detail"
+msgstr ""
+
+#: organization/templates/organization/organization_form.html:11
+#: organization/templates/organization/organization_form.html:29
+#: organization/templates/organization/organization_form.html:38
+msgid "New Organization"
+msgstr ""
+
+#: organization/views.py:27
 msgid "Organization created."
 msgstr ""
 
-#: organization/views.py:37
+#: organization/views.py:33
 msgid "Organization updated."
+msgstr ""
+
+#: organization/views.py:40
+msgid "Organization deleted."
 msgstr ""
 
 #: speakerfight/settings.py:140
