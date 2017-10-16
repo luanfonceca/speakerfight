@@ -35,9 +35,11 @@
                   <div class="avatar">
                     <img class="avatar-image" src="{{ object.user|get_user_photo:200 }}">
                   </div>
+                  {% if object.user == request.user %}
                   <button class="btn-flat gray text-upper change-picture-button-js">
                     <i class="icon-camera"></i> {% trans 'Change photo.' %}
                   </button>
+                  {% endif %}
 
                   <form id="update-profile-picture-form" method="POST" action="{% url 'update_profile_picture' object.user.username %}" enctype="multipart/form-data" class="row">
                     {% csrf_token %}
