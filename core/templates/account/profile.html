@@ -35,27 +35,29 @@
                   <div class="avatar">
                     <img class="avatar-image" src="{{ object.user|get_user_photo:200 }}">
                   </div>
-                  <button class="btn-flat gray text-upper change-picture-button-js">
-                    <i class="icon-camera"></i> {% trans 'Change photo.' %}
-                  </button>
+                  {% if object.user.id == request.user.id or request.user.is_superuser %}
+                    <button class="btn-flat gray text-upper change-picture-button-js">
+                      <i class="icon-camera"></i> {% trans 'Change photo.' %}
+                    </button>
 
-                  <form id="update-profile-picture-form" method="POST" action="{% url 'update_profile_picture' object.user.username %}" enctype="multipart/form-data" class="row">
-                    {% csrf_token %}
-                    <div class="hide">
-                      {% bootstrap_field profile_form.image layout='inline' %}
-                      <input type="hidden" class="hidden-profile-picture-js" value="{{ object.user|get_user_photo:200 }}">
-                    </div>
-                    <div class="col-md-12">
-                      <button class="col-md-12 btn-flat danger text-upper hide cancel-button-js">
-                        <i class="icon-remove"></i>
-                        {% trans "cancel" %}
-                      </button>
-                      <button type="submit" class="col-md-12 btn-flat success text-upper hide submit-picture-button-js">
-                        <i class="icon-camera"></i>
-                        {% trans "submit" %}
-                      </button>
-                    </div>
-                  </form>
+                    <form id="update-profile-picture-form" method="POST" action="{% url 'update_profile_picture' object.user.username %}" enctype="multipart/form-data" class="row">
+                      {% csrf_token %}
+                      <div class="hide">
+                        {% bootstrap_field profile_form.image layout='inline' %}
+                        <input type="hidden" class="hidden-profile-picture-js" value="{{ object.user|get_user_photo:200 }}">
+                      </div>
+                      <div class="col-md-12">
+                        <button class="col-md-12 btn-flat danger text-upper hide cancel-button-js">
+                          <i class="icon-remove"></i>
+                          {% trans "cancel" %}
+                        </button>
+                        <button type="submit" class="col-md-12 btn-flat success text-upper hide submit-picture-button-js">
+                          <i class="icon-camera"></i>
+                          {% trans "submit" %}
+                        </button>
+                      </div>
+                    </form>
+                  {% endif %}
 
                 </div>
               </div>
@@ -71,6 +73,9 @@
                       </a>
                       <a href="{{ object.get_facebook_url|default:'javascript:;' }}" class="btn btn-default btn-sm {% if not object.facebook %}disabled{% endif %}" target="_blank">
                         <i class="icon-facebook"></i>
+                      </a>
+                      <a href="{{ object.get_twitter_url|default:'javascript:;' }}" class="btn btn-default btn-sm {% if not object.twitter %}disabled{% endif %}" target="_blank">
+                        <i class="icon-twitter"></i>
                       </a>
                       <a href="{{ object.get_site_url|default:'javascript:;' }}" class="btn btn-default btn-sm {% if not object.site %}disabled{% endif %}" target="_blank">
                         <i class="icon-globe"></i>
@@ -153,13 +158,28 @@
               <h4 class="modal-title">{% trans "Update profile" %}</h4>
             </div>
             <div class="modal-body">
-              {% bootstrap_field profile_form.about_me layout='inline' %}
-              {% bootstrap_field profile_form.github layout='inline' %}
-              {% bootstrap_field profile_form.facebook layout='inline' %}
-              {% bootstrap_field profile_form.site layout='inline' %}
-              {% bootstrap_field profile_form.username layout='inline' %}
-              {% bootstrap_field profile_form.name layout='inline' %}
-              {% bootstrap_field profile_form.email layout='inline' %}
+              <div class="row">
+                <div class="col-md-6 col-sm-12">
+                  {% bootstrap_field profile_form.name %}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  {% bootstrap_field profile_form.username %}
+                </div>
+              </div>
+              {% bootstrap_field profile_form.email %}
+              {% bootstrap_field profile_form.about_me %}
+              {% bootstrap_field profile_form.site %}
+              <div class="row social-update-form">
+                <div class="col-md-4 col-sm-12">
+                  {% bootstrap_field profile_form.github layout="inline" addon_before='<i class="icon-github"></i>' %}
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  {% bootstrap_field profile_form.facebook layout="inline" addon_before='<i class="icon-facebook"></i>' %}
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  {% bootstrap_field profile_form.twitter layout="inline" addon_before='<i class="icon-twitter"></i>' %}
+                </div>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn-flat success text-upper">
