@@ -129,6 +129,15 @@ class Vote(models.Model):
         return super(Vote, self).save(*args, **kwargs)
 
 
+def get_activities_by_parameters_order(ids):
+    activities = []
+    for id_ in ids:
+        activities.append(
+            Activity.objects.get(id=id_)
+        )
+    return activities
+
+
 class Activity(DeckBaseModel):
     PROPOSAL = 'proposal'
     WORKSHOP = 'workshop'
@@ -172,6 +181,10 @@ class Activity(DeckBaseModel):
             self.start_timetable.strftime('%H:%M'),
             self.end_timetable.strftime('%H:%M')
         )
+
+    @property
+    def is_proposal(self):
+        return self.activity_type == self.PROPOSAL
 
 
 class Proposal(Activity):
@@ -274,6 +287,26 @@ class Track(models.Model):
             pk__in=self.activities.values_list('pk', flat=True)
         )
 
+    def has_activities(self):
+        return self.activities.exists()
+
+    def add_proposal_to_slot(self, proposal, slot_index):
+        proposal.track = self
+        proposal.is_approved = True
+        proposal.track_order = slot_index
+        proposal.save()
+
+    def add_activity_to_slot(self, activity, slot_index):
+        activity.track = self
+        activity.track_order = slot_index
+        activity.save()
+        if activity.is_proposal:
+            self.add_proposal_to_slot(activity.proposal)
+
+    def refresh_track(self):
+        self.proposals.update(is_approved=False)
+        self.activities.update(track=None, track_order=None)
+
 
 class Event(DeckBaseModel):
     allow_public_voting = models.BooleanField(_('Allow Public Voting'),
@@ -345,6 +378,15 @@ class Event(DeckBaseModel):
             .filter(
                 models.Q(is_approved=False) |
                 models.Q(track__isnull=True))
+
+    def get_main_track(self):
+        return self.tracks.first()
+
+    def filter_not_scheduled_by_slots(self):
+        return self.get_not_approved_schedule()[:self.slots]
+
+    def user_in_jury(self, user):
+        return self.jury.users.filter(pk=user.pk).exists()
 
 
 @receiver(user_signed_up)
