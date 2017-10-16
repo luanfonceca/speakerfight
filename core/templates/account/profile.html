@@ -35,29 +35,29 @@
                   <div class="avatar">
                     <img class="avatar-image" src="{{ object.user|get_user_photo:200 }}">
                   </div>
-                  {% if object.user == request.user %}
-                  <button class="btn-flat gray text-upper change-picture-button-js">
-                    <i class="icon-camera"></i> {% trans 'Change photo.' %}
-                  </button>
-                  {% endif %}
+                  {% if object.user.id == request.user.id or request.user.is_superuser %}
+                    <button class="btn-flat gray text-upper change-picture-button-js">
+                      <i class="icon-camera"></i> {% trans 'Change photo.' %}
+                    </button>
 
-                  <form id="update-profile-picture-form" method="POST" action="{% url 'update_profile_picture' object.user.username %}" enctype="multipart/form-data" class="row">
-                    {% csrf_token %}
-                    <div class="hide">
-                      {% bootstrap_field profile_form.image layout='inline' %}
-                      <input type="hidden" class="hidden-profile-picture-js" value="{{ object.user|get_user_photo:200 }}">
-                    </div>
-                    <div class="col-md-12">
-                      <button class="col-md-12 btn-flat danger text-upper hide cancel-button-js">
-                        <i class="icon-remove"></i>
-                        {% trans "cancel" %}
-                      </button>
-                      <button type="submit" class="col-md-12 btn-flat success text-upper hide submit-picture-button-js">
-                        <i class="icon-camera"></i>
-                        {% trans "submit" %}
-                      </button>
-                    </div>
-                  </form>
+                    <form id="update-profile-picture-form" method="POST" action="{% url 'update_profile_picture' object.user.username %}" enctype="multipart/form-data" class="row">
+                      {% csrf_token %}
+                      <div class="hide">
+                        {% bootstrap_field profile_form.image layout='inline' %}
+                        <input type="hidden" class="hidden-profile-picture-js" value="{{ object.user|get_user_photo:200 }}">
+                      </div>
+                      <div class="col-md-12">
+                        <button class="col-md-12 btn-flat danger text-upper hide cancel-button-js">
+                          <i class="icon-remove"></i>
+                          {% trans "cancel" %}
+                        </button>
+                        <button type="submit" class="col-md-12 btn-flat success text-upper hide submit-picture-button-js">
+                          <i class="icon-camera"></i>
+                          {% trans "submit" %}
+                        </button>
+                      </div>
+                    </form>
+                  {% endif %}
 
                 </div>
               </div>
