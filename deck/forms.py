@@ -25,10 +25,10 @@ class EventForm(forms.ModelForm):
         exclude = ['author', 'jury']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'inline-input'}),
-            'due_date': CustomDateTimeWidget(attrs={
-                'id': 'id_due_date',
+            'closing_date': CustomDateTimeWidget(attrs={
+                'id': 'id_closing_date',
                 'class': 'inline-input',
-                'placeholder': 'Due Date'
+                'placeholder': 'Closing Date'
             }),
         }
 

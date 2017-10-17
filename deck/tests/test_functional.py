@@ -29,8 +29,8 @@ class EventTest(TestCase):
 
     def test_create_event(self):
         event_data = self.event_data.copy()
-        event_data['due_date'] = (
-            event_data['due_date'].strftime('%d/%m/%Y %H:%M')
+        event_data['closing_date'] = (
+            event_data['closing_date'].strftime('%d/%m/%Y %H:%M')
         )
         with self.settings(LANGUAGE_CODE='pt-BR'):
             response = self.client.post(reverse('create_event'),
@@ -52,8 +52,8 @@ class EventTest(TestCase):
             return
 
         event_data = self.event_data.copy()
-        event_data['due_date'] = (
-            event_data['due_date'].strftime('%d/%m/%Y %H:%M')
+        event_data['closing_date'] = (
+            event_data['closing_date'].strftime('%d/%m/%Y %H:%M')
         )
         with self.settings(LANGUAGE_CODE='pt-BR'):
             self.client.post(reverse('create_event'),
@@ -67,8 +67,8 @@ class EventTest(TestCase):
 
     def test_create_event_with_jury(self):
         event_data = self.event_data.copy()
-        event_data['due_date'] = (
-            event_data['due_date'].strftime('%d/%m/%Y %H:%M')
+        event_data['closing_date'] = (
+            event_data['closing_date'].strftime('%d/%m/%Y %H:%M')
         )
         with self.settings(LANGUAGE_CODE='pt-BR'):
             response = self.client.post(reverse('create_event'),
@@ -104,7 +104,7 @@ class EventTest(TestCase):
         past_event_data = self.event_data.copy()
         past_event_data.update(
             title='Python Nordeste',
-            due_date=now() - timedelta(days=7)
+            closing_date=now() - timedelta(days=7)
         )
         Event.objects.create(**past_event_data)
 
@@ -122,7 +122,7 @@ class EventTest(TestCase):
         past_event_data.update(
             title='Python Nordeste',
             is_published=True,
-            due_date=now() - timedelta(days=7)
+            closing_date=now() - timedelta(days=7)
         )
         Event.objects.create(**past_event_data)
 
@@ -140,7 +140,7 @@ class EventTest(TestCase):
         past_event_data.update(
             title='Python Nordeste',
             is_published=True,
-            due_date=now() - timedelta(days=7)
+            closing_date=now() - timedelta(days=7)
         )
         Event.objects.create(**past_event_data)
 
@@ -179,12 +179,12 @@ class EventTest(TestCase):
         # A future far far away
         future_event_data = self.event_data.copy()
         future_event_data.update(is_published=True,
-                                 due_date=datetime.datetime(3000, 01, 01))
+                                 closing_date=datetime.datetime(3000, 01, 01))
         Event.objects.create(**future_event_data)
         past_event_data = self.event_data.copy()
         past_event_data.update(title='Speakerfight rocks',
                                is_published=True,
-                               due_date=datetime.datetime(1900, 01, 01))
+                               closing_date=datetime.datetime(1900, 01, 01))
         Event.objects.create(**past_event_data)
 
         response = self.client.get(reverse('past_events'))
@@ -375,9 +375,9 @@ class EventTest(TestCase):
                           response.context_data.get('redirect_field_value'))
         self.assertEquals(0, event.proposals.count())
 
-    def test_event_create_event_proposal_with_passed_due_date(self):
+    def test_event_create_event_proposal_with_passed_closing_date(self):
         event_data = self.event_data.copy()
-        event_data.update(due_date=now() - timedelta(hours=24))
+        event_data.update(closing_date=now() - timedelta(hours=24))
         event = Event.objects.create(**event_data)
         response = self.client.post(
             reverse('create_event_proposal', kwargs={'slug': event.slug}),
