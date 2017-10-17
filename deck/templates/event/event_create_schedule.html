@@ -191,7 +191,11 @@
             <h4 class="modal-title">{% trans "Add activity" %}</h4>
           </div>
           <div class="modal-body">
-            {% bootstrap_form activity_form layout='inline' %}
+            {% bootstrap_field activity_form.title layout='inline' %}
+            {% bootstrap_field activity_form.activity_type layout='inline' %}
+            {% bootstrap_field activity_form.description layout='inline' %}
+            {% bootstrap_field activity_form.start_timetable layout='inline' %}
+            {% bootstrap_field activity_form.end_timetable layout='inline' %}
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn-flat success text-upper">
@@ -212,10 +216,40 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <h4 class="modal-title">{% trans "Update timetable" %}</h4>
+            <h4 class="modal-title">{% trans "Update activity" %}</h4>
           </div>
           <div class="modal-body">
-            {% bootstrap_form activity_timetable_form layout='inline' %}
+            {% bootstrap_field activity_form.title layout='inline' %}
+            {% bootstrap_field activity_form.activity_type layout='inline' %}
+            {% bootstrap_field activity_form.description layout='inline' %}
+            {% bootstrap_field activity_form.start_timetable layout='inline' %}
+            {% bootstrap_field activity_form.end_timetable layout='inline' %}
+            <input type="hidden" id="oldSlug">
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn-flat success text-upper">
+              <i class="icon icon-pencil"></i>
+              {% trans "submit" %}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="update-proposal-modal" data-href="">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="update-proposal-form">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">{% trans "Update proposal" %}</h4>
+          </div>
+          <div class="modal-body">
+            {% bootstrap_field activity_timetable_form.start_timetable layout='inline' %}
+            {% bootstrap_field activity_timetable_form.end_timetable layout='inline' %}
             <input type="hidden" id="oldSlug">
           </div>
           <div class="modal-footer">
