@@ -26,9 +26,12 @@ class EventForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'inline-input'}),
             'due_date': CustomDateTimeWidget(attrs={
-                'id': 'id_due_date',
                 'class': 'inline-input',
-                'placeholder': 'Due Date'
+                'placeholder': 'Due Date',
+            }),
+            'event_date': CustomDateTimeWidget(attrs={
+                'class': 'inline-input',
+                'placeholder': 'Event Date',
             }),
         }
 
