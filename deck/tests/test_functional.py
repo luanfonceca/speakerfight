@@ -179,12 +179,12 @@ class EventTest(TestCase):
         # A future far far away
         future_event_data = self.event_data.copy()
         future_event_data.update(is_published=True,
-                                 closing_date=datetime.datetime(3000, 01, 01))
+                                 closing_date=datetime.datetime(3000, 1, 1))
         Event.objects.create(**future_event_data)
         past_event_data = self.event_data.copy()
         past_event_data.update(title='Speakerfight rocks',
                                is_published=True,
-                               closing_date=datetime.datetime(1900, 01, 01))
+                               closing_date=datetime.datetime(1900, 1, 1))
         Event.objects.create(**past_event_data)
 
         response = self.client.get(reverse('past_events'))
