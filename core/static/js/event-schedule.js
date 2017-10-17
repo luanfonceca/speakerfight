@@ -117,6 +117,8 @@ $(function () {
       method: 'GET',
     }).success(function(data, status, xhr) {
       $(modal).find('#id_title').val(data.title);
+      $(modal).find('#id_description').val(data.description);
+      tinymce.get('id_description').setContent(data.description);
       $(modal).find('#id_start_timetable').val(data.start_timetable);
       $(modal).find('#id_end_timetable').val(data.end_timetable);
       $(modal).find('#oldSlug').val(data.slug);
@@ -138,6 +140,7 @@ $(function () {
       },
       data: {
         title: $(modal).find('#id_title').val(),
+        description: $(modal).find('#id_description').val(),
         start_timetable: $(modal).find('#id_start_timetable').val(),
         end_timetable: $(modal).find('#id_end_timetable').val(),
       }
@@ -303,5 +306,14 @@ $(function () {
         }
       }
     });
+  });
+
+  tinymce.init({
+    selector: "[name='description']",
+    menubar: false,
+    skin: 'light',
+    plugins: 'link paste preview textcolor',
+    toolbar: "bold italic underline forecolor | alignleft aligncenter alignright | link unlink | undo redo removeformat | formatselect fontsizeselect pastetext | preview",
+    body_class: 'form-control',
   });
 });
