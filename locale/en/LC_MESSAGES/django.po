@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-16 15:48-0200\n"
+"POT-Creation-Date: 2017-10-17 18:19-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,19 +24,19 @@ msgstr ""
 msgid "You are not allowed to see this page."
 msgstr ""
 
-#: core/forms.py:13
+#: core/forms.py:14
 msgid "Username"
 msgstr ""
 
-#: core/forms.py:14 organization/models.py:16
+#: core/forms.py:15 organization/models.py:16
 msgid "Name"
 msgstr ""
 
-#: core/forms.py:15
+#: core/forms.py:16
 msgid "Email"
 msgstr ""
 
-#: core/forms.py:38
+#: core/forms.py:39
 #, python-format
 msgid "The \"%s\" username are already being used by someone."
 msgstr ""
@@ -545,8 +545,9 @@ msgstr ""
 #: core/templates/account/profile.html:187
 #: core/templates/account/profile.html:223
 #: deck/templates/event/event_create_schedule.html:42
-#: deck/templates/event/event_create_schedule.html:199
-#: deck/templates/event/event_create_schedule.html:223
+#: deck/templates/event/event_create_schedule.html:203
+#: deck/templates/event/event_create_schedule.html:232
+#: deck/templates/event/event_create_schedule.html:258
 #: deck/templates/event/event_form.html:59
 #: deck/templates/proposal/proposal_form.html:78
 #: organization/templates/organization/organization_form.html:59
@@ -1215,15 +1216,19 @@ msgstr ""
 msgid "Add activity"
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:215
-msgid "Update timetable"
+#: deck/templates/event/event_create_schedule.html:219
+msgid "Update activity"
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:238
+#: deck/templates/event/event_create_schedule.html:248
+msgid "Update proposal"
+msgstr ""
+
+#: deck/templates/event/event_create_schedule.html:273
 msgid "Copy and Paste on your site"
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:249
+#: deck/templates/event/event_create_schedule.html:284
 msgid "Raw API"
 msgstr ""
 
@@ -1360,12 +1365,12 @@ msgstr ""
 
 #: deck/templates/event/snippets/event_list_item.html:20
 #: deck/templates/proposal/my_proposals.html:29
-msgid "Due date pasted since the day"
+msgid "Proposals closed in"
 msgstr ""
 
 #: deck/templates/event/snippets/event_list_item.html:23
 #: deck/templates/proposal/my_proposals.html:32
-msgid "Due date in"
+msgid "Accepting proposals until"
 msgstr ""
 
 #: deck/templates/event/snippets/event_list_item.html:30
@@ -1709,11 +1714,11 @@ msgstr ""
 msgid "Organization created."
 msgstr ""
 
-#: organization/views.py:33
+#: organization/views.py:34
 msgid "Organization updated."
 msgstr ""
 
-#: organization/views.py:40
+#: organization/views.py:49
 msgid "Organization deleted."
 msgstr ""
 
