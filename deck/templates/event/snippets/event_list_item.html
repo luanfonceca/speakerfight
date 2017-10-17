@@ -12,15 +12,15 @@
       {% blocktrans with profile_url=event.author.profile.get_absolute_url author=event.author.get_full_name|default:event.author.username created_at=event.created_at %}
       Created by <strong><a href="{{ profile_url }}">{{ author }}</a></strong> at {{ created_at }}.
       {% endblocktrans %}
-      {% if event.due_date %}
+      {% if event.closing_date %}
         <br/>
-        {% if event.due_date_is_passed %}
+        {% if event.closing_date_is_passed %}
           <span class="text-danger">
             <i class="icon-exclamation-sign"></i>
-            {% trans "Due date pasted since the day" %} {{ event.due_date }}
+            {% trans "Proposals closed in" %} {{ event.closing_date }}
           </span>
         {% else %}
-          {% trans "Due date in" %} <span class="{% if event.due_date_is_close %}text-danger{% else %}text-warning{% endif %}">{{ event.due_date|timeuntil }}</span>
+          {% trans "Accepting proposals until" %} <span class="{% if event.closing_date_is_close %}text-danger{% else %}text-warning{% endif %}">{{ event.closing_date|timeuntil }}</span>
         {% endif %}
       {% endif %}
       {% if event.author_id == request.user.id or event|is_user_in_jury:request.user or request.user.is_superuser %}

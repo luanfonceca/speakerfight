@@ -44,7 +44,7 @@ class ListEvents(BaseEventView, ListView):
 
         # When it should only show past events
         if self.past_events:
-            queryset = queryset.filter(due_date__lt=timezone.now())
+            queryset = queryset.filter(closing_date__lt=timezone.now())
 
         criteria = self.request.GET.get(u'search', None)
         if criteria:
@@ -258,7 +258,7 @@ class CreateProposal(LoginRequiredMixin,
     def get(self, request, *args, **kwargs):
         data = self.get_context_data()
         event = data.get('event')
-        if event.due_date_is_passed:
+        if event.closing_date_is_passed:
             messages.error(
                 self.request,
                 _(u"This Event doesn't accept Proposals anymore."))

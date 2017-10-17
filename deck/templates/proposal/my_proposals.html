@@ -21,15 +21,15 @@
               {% blocktrans with profile_url=event.grouper.author.profile.get_absolute_url author=event.grouper.author.get_full_name|default:event.grouper.author.username created_at=event.grouper.created_at %}
               Created by <strong><a href="{{ profile_url }}">{{ author }}</a></strong> at {{ created_at }}.
               {% endblocktrans %}
-              {% if event.grouper.due_date %}
+              {% if event.grouper.closing_date %}
                 <br/>
-                {% if event.grouper.due_date_is_passed %}
+                {% if event.grouper.closing_date_is_passed %}
                   <span class="text-danger">
                     <i class="icon-exclamation-sign"></i>
-                    {% trans "Due date pasted since the day" %} {{ event.grouper.due_date }}
+                    {% trans "Proposals closed in" %} {{ event.grouper.closing_date }}
                   </span>
                 {% else %}
-                  {% trans "Due date in" %} <span class="{% if event.grouper.due_date_is_close %}text-danger{% else %}text-warning{% endif %}">{{ event.grouper.due_date|timeuntil }}</span>
+                  {% trans "Accepting proposals until" %} <span class="{% if event.grouper.closing_date_is_close %}text-danger{% else %}text-warning{% endif %}">{{ event.grouper.closing_date|timeuntil }}</span>
                 {% endif %}
               {% endif %}
             </p>
