@@ -24,7 +24,7 @@ class CreateEventScheduleViewTests(TestCase):
     def setUp(self):
         tomorrow = timezone.now() + timedelta(days=1)
         # DB Setup
-        self.event = mommy.make('deck.Event', due_date=tomorrow)
+        self.event = mommy.make('deck.Event', closing_date=tomorrow)
         self.url = reverse('create_event_schedule', args=[self.event.slug])
         # Request Setup
         self.user = mommy.make(settings.AUTH_USER_MODEL)
@@ -104,7 +104,7 @@ class CreateEventScheduleViewTests(TestCase):
     def test_full_integration_test(self):
         # DB Setup
         tomorrow = timezone.now() + timedelta(days=1)
-        event = mommy.make('deck.Event', _fill_optional=['jury'], slots=3, due_date=tomorrow)
+        event = mommy.make('deck.Event', _fill_optional=['jury'], slots=3, closing_date=tomorrow)
         proposals = mommy.make('deck.Proposal', event=event, is_approved=False, _quantity=5)
         approved_proposals = [
             mommy.make(Vote, proposal=proposals[0], rate=Vote.LAUGHING),

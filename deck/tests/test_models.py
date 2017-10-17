@@ -13,7 +13,7 @@ class EventModelTests(TestCase):
 
     def setUp(self):
         tomorrow = timezone.now() + timedelta(days=1)
-        self.event = mommy.make(Event, slots=3, due_date=tomorrow)
+        self.event = mommy.make(Event, slots=3, closing_date=tomorrow)
 
     def test_get_main_track_returns_first_track(self):
         # first track is created automagically via post-save
@@ -47,7 +47,7 @@ class TrackModelTests(TestCase):
 
     def setUp(self):
         tomorrow = timezone.now() + timedelta(days=1)
-        self.track = mommy.make(Track, event__due_date=tomorrow)
+        self.track = mommy.make(Track, event__closing_date=tomorrow)
 
     def test_check_if_track_has_activities(self):
         self.assertFalse(self.track.has_activities())
