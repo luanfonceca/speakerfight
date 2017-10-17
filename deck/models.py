@@ -301,7 +301,7 @@ class Track(models.Model):
         activity.track_order = slot_index
         activity.save()
         if activity.is_proposal:
-            self.add_proposal_to_slot(activity.proposal)
+            self.add_proposal_to_slot(activity.proposal, slot_index)
 
     def refresh_track(self):
         self.proposals.update(is_approved=False)

@@ -96,7 +96,7 @@ class TrackModelTests(TestCase):
 
         self.assertEqual(activity.track, self.track)
         self.assertEqual(activity.track_order, 3)
-        self.track.add_proposal_to_slot.assert_called_once_with(activity.proposal)
+        self.track.add_proposal_to_slot.assert_called_once_with(activity.proposal, 3)
 
 
 class GetActivitiesByParametersOrderTests(TestCase):
