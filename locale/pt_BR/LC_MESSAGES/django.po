@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: speakerfight\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-16 15:48-0200\n"
+"POT-Creation-Date: 2017-10-17 18:19-0200\n"
 "PO-Revision-Date: 2017-10-16 14:48-0300\n"
 "Last-Translator: Luan Fonseca de Farias <luanfonceca@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/speakerfight/"
@@ -29,19 +29,19 @@ msgstr ""
 msgid "You are not allowed to see this page."
 msgstr "Você não tem permissão para ver esta página."
 
-#: core/forms.py:13
+#: core/forms.py:14
 msgid "Username"
 msgstr "Nome de usuário"
 
-#: core/forms.py:14 organization/models.py:16
+#: core/forms.py:15 organization/models.py:16
 msgid "Name"
 msgstr "Nome"
 
-#: core/forms.py:15
+#: core/forms.py:16
 msgid "Email"
 msgstr "E-mail"
 
-#: core/forms.py:38
+#: core/forms.py:39
 #, python-format
 msgid "The \"%s\" username are already being used by someone."
 msgstr "O nome de usuário: \"%s\" já está sendo usado por alguém."
@@ -647,8 +647,9 @@ msgstr "cancelar"
 #: core/templates/account/profile.html:187
 #: core/templates/account/profile.html:223
 #: deck/templates/event/event_create_schedule.html:42
-#: deck/templates/event/event_create_schedule.html:199
-#: deck/templates/event/event_create_schedule.html:223
+#: deck/templates/event/event_create_schedule.html:203
+#: deck/templates/event/event_create_schedule.html:232
+#: deck/templates/event/event_create_schedule.html:258
 #: deck/templates/event/event_form.html:59
 #: deck/templates/proposal/proposal_form.html:78
 #: organization/templates/organization/organization_form.html:59
@@ -1383,15 +1384,19 @@ msgstr ""
 msgid "Add activity"
 msgstr "Adicionar atividade"
 
-#: deck/templates/event/event_create_schedule.html:215
-msgid "Update timetable"
-msgstr "Atualizar horário"
+#: deck/templates/event/event_create_schedule.html:219
+msgid "Update activity"
+msgstr "Atualizar atividade"
 
-#: deck/templates/event/event_create_schedule.html:238
+#: deck/templates/event/event_create_schedule.html:248
+msgid "Update proposal"
+msgstr "Atualizar Proposta"
+
+#: deck/templates/event/event_create_schedule.html:273
 msgid "Copy and Paste on your site"
 msgstr "Copie e Cola em seu site"
 
-#: deck/templates/event/event_create_schedule.html:249
+#: deck/templates/event/event_create_schedule.html:284
 msgid "Raw API"
 msgstr "API Pura"
 
@@ -1555,13 +1560,15 @@ msgstr ""
 
 #: deck/templates/event/snippets/event_list_item.html:20
 #: deck/templates/proposal/my_proposals.html:29
-msgid "Due date pasted since the day"
-msgstr "Data limite ultrapassada desde o dia"
+#, fuzzy
+#| msgid "Proposal deleted."
+msgid "Proposals closed in"
+msgstr "Proposta removida."
 
 #: deck/templates/event/snippets/event_list_item.html:23
 #: deck/templates/proposal/my_proposals.html:32
-msgid "Due date in"
-msgstr "Data limite em"
+msgid "Accepting proposals until"
+msgstr ""
 
 #: deck/templates/event/snippets/event_list_item.html:30
 #, python-format
@@ -1961,11 +1968,11 @@ msgstr "Nova Organização"
 msgid "Organization created."
 msgstr "Organização criada."
 
-#: organization/views.py:33
+#: organization/views.py:34
 msgid "Organization updated."
 msgstr "Organização atualizada."
 
-#: organization/views.py:40
+#: organization/views.py:49
 msgid "Organization deleted."
 msgstr "Organização removida."
 
@@ -1976,6 +1983,15 @@ msgstr "Inglês"
 #: speakerfight/settings.py:141
 msgid "Portuguese"
 msgstr "Português"
+
+#~ msgid "Update timetable"
+#~ msgstr "Atualizar horário"
+
+#~ msgid "Due date pasted since the day"
+#~ msgstr "Data limite ultrapassada desde o dia"
+
+#~ msgid "Due date in"
+#~ msgstr "Data limite em"
 
 #~ msgid "Proposal already Rated by you."
 #~ msgstr "Proposta anteriormente votada por Você."
