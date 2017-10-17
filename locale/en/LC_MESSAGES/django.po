@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-16 15:48-0200\n"
+"POT-Creation-Date: 2017-10-17 19:41-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,25 +18,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: api/permissions.py:10 deck/tests/test_functional.py:301
-#: deck/tests/test_functional.py:776 deck/views.py:144 deck/views.py:166
-#: deck/views.py:178 deck/views.py:216 deck/views.py:384 deck/views.py:448
-#: deck/views.py:515 deck/views.py:582
+#: deck/tests/test_functional.py:776 deck/views.py:147 deck/views.py:169
+#: deck/views.py:181 deck/views.py:217 deck/views.py:351 deck/views.py:415
+#: deck/views.py:482 deck/views.py:549
 msgid "You are not allowed to see this page."
 msgstr ""
 
-#: core/forms.py:13
+#: core/forms.py:14
 msgid "Username"
 msgstr ""
 
-#: core/forms.py:14 organization/models.py:16
+#: core/forms.py:15 organization/models.py:16
 msgid "Name"
 msgstr ""
 
-#: core/forms.py:15
+#: core/forms.py:16
 msgid "Email"
 msgstr ""
 
-#: core/forms.py:38
+#: core/forms.py:39
 #, python-format
 msgid "The \"%s\" username are already being used by someone."
 msgstr ""
@@ -546,7 +546,7 @@ msgstr ""
 #: core/templates/account/profile.html:223
 #: deck/templates/event/event_create_schedule.html:42
 #: deck/templates/event/event_create_schedule.html:199
-#: deck/templates/event/event_create_schedule.html:223
+#: deck/templates/event/event_create_schedule.html:224
 #: deck/templates/event/event_form.html:59
 #: deck/templates/proposal/proposal_form.html:78
 #: organization/templates/organization/organization_form.html:59
@@ -582,7 +582,7 @@ msgid "Change Language"
 msgstr ""
 
 #: core/templates/account/profile.html:117 core/templates/sidebar.html:24
-#: deck/models.py:293 deck/templates/event/event_create_schedule.html:19
+#: deck/models.py:326 deck/templates/event/event_create_schedule.html:19
 #: deck/templates/event/event_detail.html:24
 #: deck/templates/event/event_form.html:24
 #: deck/templates/event/event_list.html:9
@@ -592,7 +592,7 @@ msgstr ""
 msgid "Events"
 msgstr ""
 
-#: core/templates/account/profile.html:134 deck/models.py:190
+#: core/templates/account/profile.html:134 deck/models.py:203
 #: deck/templates/event/event_detail.html:70
 #: deck/templates/proposal/my_proposals.html:40 deck/tests/test_unit.py:164
 msgid "Proposals"
@@ -801,8 +801,8 @@ msgstr ""
 msgid "OpenID Sign In"
 msgstr ""
 
-#: core/templates/public_layout.html:55 deck/views.py:431 deck/views.py:498
-#: deck/views.py:565
+#: core/templates/public_layout.html:55 deck/views.py:398 deck/views.py:465
+#: deck/views.py:532
 msgid "You need to be logged in to continue to the next step."
 msgstr ""
 
@@ -944,7 +944,7 @@ msgstr ""
 msgid "The \"@%s\" already is being part of this jury."
 msgstr ""
 
-#: deck/models.py:64 deck/models.py:257
+#: deck/models.py:64 deck/models.py:270
 msgid "Title"
 msgstr ""
 
@@ -982,113 +982,113 @@ msgstr ""
 msgid "Proposal doesn't accept Public Voting."
 msgstr ""
 
-#: deck/models.py:141 deck/models.py:189
+#: deck/models.py:150 deck/models.py:202
 #: deck/templates/event/event_create_schedule.html:161
 #: deck/tests/test_unit.py:161
 msgid "Proposal"
 msgstr ""
 
-#: deck/models.py:142
+#: deck/models.py:151
 msgid "Workshop"
 msgstr ""
 
-#: deck/models.py:143
+#: deck/models.py:152
 msgid "Openning"
 msgstr ""
 
-#: deck/models.py:144
+#: deck/models.py:153
 msgid "Coffee Break"
 msgstr ""
 
-#: deck/models.py:145
+#: deck/models.py:154
 msgid "Lunch"
 msgstr ""
 
-#: deck/models.py:146
+#: deck/models.py:155
 msgid "Lightning Talks"
 msgstr ""
 
-#: deck/models.py:147
+#: deck/models.py:156
 msgid "Ending"
 msgstr ""
 
-#: deck/models.py:150
+#: deck/models.py:159
 msgid "Start Timetable"
 msgstr ""
 
-#: deck/models.py:152
+#: deck/models.py:161
 msgid "End Timetable"
 msgstr ""
 
-#: deck/models.py:153
+#: deck/models.py:162
 msgid "Order"
 msgstr ""
 
-#: deck/models.py:155
+#: deck/models.py:164
 msgid "Type"
 msgstr ""
 
-#: deck/models.py:163
+#: deck/models.py:172
 msgid "Activity"
 msgstr ""
 
-#: deck/models.py:164
+#: deck/models.py:173
 msgid "Activities"
 msgstr ""
 
-#: deck/models.py:178
+#: deck/models.py:191
 msgid "Is approved"
 msgstr ""
 
-#: deck/models.py:180
+#: deck/models.py:193
 msgid "More information"
 msgstr ""
 
-#: deck/models.py:182
+#: deck/models.py:195
 msgid "speakerdeck.com"
 msgstr ""
 
-#: deck/models.py:195 deck/tests/test_functional.py:386 deck/views.py:297
+#: deck/models.py:208 deck/tests/test_functional.py:386 deck/views.py:264
 msgid "This Event doesn't accept Proposals anymore."
 msgstr ""
 
-#: deck/models.py:244
+#: deck/models.py:257
 msgid "This Proposal was already approved."
 msgstr ""
 
-#: deck/models.py:250
+#: deck/models.py:263
 msgid "This Proposal was already disapproved."
 msgstr ""
 
-#: deck/models.py:265
+#: deck/models.py:278
 msgid "Track"
 msgstr ""
 
-#: deck/models.py:266
+#: deck/models.py:279
 msgid "Tracks"
 msgstr ""
 
-#: deck/models.py:279
+#: deck/models.py:312
 msgid "Allow Public Voting"
 msgstr ""
 
-#: deck/models.py:282
+#: deck/models.py:315
 msgid "Slots"
 msgstr ""
 
-#: deck/models.py:288
+#: deck/models.py:321
 msgid "Anonymous Voting?"
 msgstr ""
 
-#: deck/models.py:292 deck/tests/test_unit.py:48
+#: deck/models.py:325 deck/tests/test_unit.py:48
 msgid "Event"
 msgstr ""
 
-#: deck/models.py:355
+#: deck/models.py:397
 msgid "Welcome"
 msgstr ""
 
-#: deck/models.py:385
+#: deck/models.py:427
 #, python-format
 msgid "Proposal from %s just got deleted"
 msgstr ""
@@ -1219,11 +1219,11 @@ msgstr ""
 msgid "Update timetable"
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:238
+#: deck/templates/event/event_create_schedule.html:239
 msgid "Copy and Paste on your site"
 msgstr ""
 
-#: deck/templates/event/event_create_schedule.html:249
+#: deck/templates/event/event_create_schedule.html:250
 msgid "Raw API"
 msgstr ""
 
@@ -1360,12 +1360,12 @@ msgstr ""
 
 #: deck/templates/event/snippets/event_list_item.html:20
 #: deck/templates/proposal/my_proposals.html:29
-msgid "Due date pasted since the day"
+msgid "Proposals closed in"
 msgstr ""
 
 #: deck/templates/event/snippets/event_list_item.html:23
 #: deck/templates/proposal/my_proposals.html:32
-msgid "Due date in"
+msgid "Accepting proposals until"
 msgstr ""
 
 #: deck/templates/event/snippets/event_list_item.html:30
@@ -1547,71 +1547,75 @@ msgstr ""
 msgid "See in Event"
 msgstr ""
 
-#: deck/tests/test_functional.py:292 deck/views.py:157
+#: deck/tests/test_functional.py:292 deck/views.py:160
 msgid "Event deleted."
 msgstr ""
 
-#: deck/tests/test_functional.py:766 deck/views.py:375
+#: deck/tests/test_functional.py:766 deck/views.py:342
 msgid "Proposal deleted."
 msgstr ""
 
-#: deck/views.py:94
+#: deck/views.py:97
 msgid "Event created."
 msgstr ""
 
-#: deck/views.py:100
+#: deck/views.py:103
 msgid "Your event is ready to receive proposals"
 msgstr ""
 
-#: deck/views.py:136
+#: deck/views.py:139
 msgid "Event updated."
 msgstr ""
 
-#: deck/views.py:186
+#: deck/views.py:189
 msgid "Author"
 msgstr ""
 
-#: deck/views.py:187
+#: deck/views.py:190
 msgid "Author E-Mail"
 msgstr ""
 
-#: deck/views.py:188
+#: deck/views.py:191
 msgid "Vote Rate"
 msgstr ""
 
-#: deck/views.py:189
+#: deck/views.py:192
 msgid "Votes Count"
 msgstr ""
 
-#: deck/views.py:320
+#: deck/views.py:233
+msgid "You must pass at least one activity."
+msgstr ""
+
+#: deck/views.py:287
 msgid "Proposal created."
 msgstr ""
 
-#: deck/views.py:329
+#: deck/views.py:296
 msgid "Your event has new proposals"
 msgstr ""
 
-#: deck/views.py:341
+#: deck/views.py:308
 msgid "Your proposal was submitted"
 msgstr ""
 
-#: deck/views.py:366
+#: deck/views.py:333
 msgid "Proposal updated."
 msgstr ""
 
-#: deck/views.py:399 deck/views.py:418
+#: deck/views.py:366 deck/views.py:385
 msgid "Rate Index not found."
 msgstr ""
 
-#: deck/views.py:405 deck/views.py:422
+#: deck/views.py:372 deck/views.py:389
 msgid "Proposal rated."
 msgstr ""
 
-#: deck/views.py:475 deck/views.py:489
+#: deck/views.py:442 deck/views.py:456
 msgid "Proposal approved."
 msgstr ""
 
-#: deck/views.py:542 deck/views.py:556
+#: deck/views.py:509 deck/views.py:523
 msgid "Proposal disapproved."
 msgstr ""
 
@@ -1709,11 +1713,11 @@ msgstr ""
 msgid "Organization created."
 msgstr ""
 
-#: organization/views.py:33
+#: organization/views.py:34
 msgid "Organization updated."
 msgstr ""
 
-#: organization/views.py:40
+#: organization/views.py:49
 msgid "Organization deleted."
 msgstr ""
 
