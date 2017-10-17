@@ -61,7 +61,16 @@
           </div>
         {% endif %}
 
-        {% bootstrap_form form layout="inline" %}
+        {% bootstrap_field form.title layout="inline" %}
+        {% bootstrap_field form.description layout="inline" %}
+        {% bootstrap_field form.more_information layout="inline" %}
+
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon3">speakerdeck.com/</span>
+          {{ form.slides_url }}
+        </div>
+
+        {% bootstrap_field form.is_published layout="inline" %}
 
         {% buttons %}
           <button type="submit" class="btn-flat success text-upper">

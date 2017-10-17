@@ -66,6 +66,11 @@ class ProposalForm(forms.ModelForm):
         ]
         widgets = {
             'title': forms.TextInput(attrs={'class': 'inline-input'}),
+            'slides_url': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'jane_doe/talk',
+                }),
         }
 
 
