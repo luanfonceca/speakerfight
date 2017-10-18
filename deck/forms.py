@@ -97,11 +97,9 @@ class ActivityTimetableForm(forms.ModelForm):
     class Meta:
         model = Activity
         fields = [
-            'title', 'start_timetable', 'end_timetable',
-            'description'
+            'start_timetable', 'end_timetable',
         ]
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'inline-input'}),
             'start_timetable': CustomTimeInputWidget(format='%H:%M'),
             'end_timetable': CustomTimeInputWidget(format='%H:%M'),
         }

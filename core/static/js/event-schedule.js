@@ -128,6 +128,51 @@ $(function () {
     $(modal).modal();
   });
 
+  $('.proposal-container').delegate('.update-proposal', 'click', function(e) {
+    e.preventDefault();
+    var modal = $('#update-proposal-modal');
+    $.ajax({
+      url: $(this).parents('.panel').attr('data-href'),
+      method: 'GET',
+    }).success(function(data, status, xhr) {
+      $(modal).find('#id_start_timetable').val(data.start_timetable);
+      $(modal).find('#id_end_timetable').val(data.end_timetable);
+    });
+
+    $(modal).attr('data-href', $(this).parents('.panel').attr('data-href'));
+    $(modal).modal();
+  });
+
+  $('#update-proposal-form').submit(function (e) {
+    e.preventDefault();
+    var modal = $('#update-proposal-modal');
+
+    $.ajax({
+      url: $(modal).attr('data-href'),
+      method: 'PATCH',
+      headers: {
+        'X-CSRFToken': getCookie('csrftoken')
+      },
+      data: {
+        start_timetable: $(modal).find('#id_start_timetable').val(),
+        end_timetable: $(modal).find('#id_end_timetable').val(),
+      }
+    }).success(function(data, status, xhr) {
+
+      var activityBlock = $('#' + data.slug);
+      $(activityBlock).find('.proposal-timetable .timetable').text(data.timetable);
+      $(activityBlock).find('.proposal-timetable').removeClass('hide');
+      $(modal).modal('hide');
+    }).error(function(data, status, xhr) {
+      if (data.status == 403) {
+        alert(data.responseJSON.detail)
+      };
+      for (field in data.responseJSON){
+        $('[name="' + field + '"]').parents('.form-group').addClass('has-error');
+      }
+    });
+  });
+
   $('#update-activity-form').submit(function (e) {
     e.preventDefault();
     var modal = $('#update-activity-modal');
