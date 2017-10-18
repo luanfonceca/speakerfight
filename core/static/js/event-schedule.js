@@ -176,7 +176,6 @@ $(function () {
   $('#update-activity-form').submit(function (e) {
     e.preventDefault();
     var modal = $('#update-activity-modal');
-    console.log("asdasdasd");
     $.ajax({
       url: $(modal).attr('data-href'),
       method: 'PATCH',
