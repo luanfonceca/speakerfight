@@ -131,7 +131,7 @@ $(function () {
   $('#update-activity-form').submit(function (e) {
     e.preventDefault();
     var modal = $('#update-activity-modal');
-
+    console.log("asdasdasd");
     $.ajax({
       url: $(modal).attr('data-href'),
       method: 'PATCH',
@@ -140,7 +140,7 @@ $(function () {
       },
       data: {
         title: $(modal).find('#id_title').val(),
-        description: $(modal).find('#id_description').val(),
+        description: $(modal).find('#id_description_ifr').contents().find("[data-id=id_description]").html(),
         start_timetable: $(modal).find('#id_start_timetable').val(),
         end_timetable: $(modal).find('#id_end_timetable').val(),
       }
