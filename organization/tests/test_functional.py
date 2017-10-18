@@ -96,3 +96,18 @@ class OrganizationTest(TestCase):
 
         with self.assertRaises(Organization.DoesNotExist):
             Organization.objects.get(slug=organization.slug)
+
+    def test_delete_organization_requires_owner(self):
+        organization = Organization.objects.create(
+            name='Speakerfight Corp',
+            about='Cool company',
+            created_by=self.user,
+        )
+        url = reverse('delete_organization', kwargs={'slug': organization.slug})
+
+        # Login as another user to check for security errors
+        self.client.logout()
+        self.client.login(user='another', password='another')
+
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, 404)
