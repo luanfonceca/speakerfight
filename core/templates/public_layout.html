@@ -44,25 +44,27 @@
   <body>
     {% include "navbar.html" with show_main_header=True %}
 
-    <div class="row">
-      <div class="content-wrap col-md-offset-1 col-md-10">
-        {% if redirect_field_value %}
-          <div>
-            <div class="col-md-12">
-              <div class="alert alert-info alert-dismissable">
-                <i class="icon-exclamation-sign"></i>
-                {% trans "You need to be logged in to continue to the next step." %}
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#215;</button>
-              </div>
-            </div>
-          </div>
-        {% endif %}
+    <div id="pad-wrapper">
+		<div class="row">
+		  <div class="content-wrap col-md-offset-1 col-md-10">
+			{% if redirect_field_value %}
+			  <div>
+				<div class="col-md-12">
+				  <div class="alert alert-info alert-dismissable">
+					<i class="icon-exclamation-sign"></i>
+					{% trans "You need to be logged in to continue to the next step." %}
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#215;</button>
+				  </div>
+				</div>
+			  </div>
+			{% endif %}
 
-        {% bootstrap_messages messages %}
+			{% bootstrap_messages messages %}
 
-        {% block content %}{% endblock content %}
-      </div>
-    </div>
+			{% block content %}{% endblock content %}
+		  </div>
+		</div>
+	</div>
 
     {% include "footer.html" %}
 
