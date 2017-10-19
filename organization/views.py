@@ -4,10 +4,15 @@ from __future__ import unicode_literals
 from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.utils.translation import ugettext as _
+
+from vanilla import ListView
+
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
 
 from . models import Organization
 from core.mixins import LoginRequiredMixin, FormValidRedirectMixing
+from deck.models import Event
 
 
 class BaseOrganizationView(LoginRequiredMixin, FormValidRedirectMixing):
@@ -41,6 +46,13 @@ class UpdateOrganization(BaseOrganizationView, UpdateView):
             raise Http404
         return super(UpdateOrganization, self).dispatch(*args, **kwargs)
 
+
+class ListAllUserOrganizations(BaseOrganizationView, ListView):
+
+    def get_queryset(self):
+        queryset = super(ListAllUserOrganizations, self).get_queryset()
+        logged_user = self.request.user
+        return queryset.filter(created_by=logged_user)
 
 class DeleteOrganization(BaseOrganizationView, DeleteView):
     template_Name = 'organization/organization_confirm_delete.html'

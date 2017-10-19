@@ -10,7 +10,11 @@ urlpatterns = (
     url(regex=r'/<slug:slug>/update/',
         view=views.UpdateOrganization.as_view(),
         name='update_organization'),
+    url(regex=r'/list/',
+        view=views.ListAllUserOrganizations.as_view(),
+        name='list_all_user_organizations'),
     url(regex=r'/<slug:slug>/delete/',
         view=views.DeleteOrganization.as_view(),
         name='delete_organization'),
+
 )
