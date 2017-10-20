@@ -762,6 +762,9 @@ div.show-more a:after {
   right: 0;
 }
 
+.navbar-inverse .navbar-nav .dropdown .dropdown-toggle {
+  height: 50px;
+}
 .btn-group.btn-group-justified .btn {
   height: 50px;
 }
