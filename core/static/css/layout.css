@@ -758,7 +758,8 @@ div.show-more a:after {
 }
 
 .navbar-inverse .navbar-nav .dropdown .dropdown-menu {
-  left: -54px !important;
+  left: auto !important;
+  right: 0;
 }
 
 .btn-group.btn-group-justified .btn {
