@@ -118,6 +118,7 @@ $(function () {
     }).success(function(data, status, xhr) {
       $(modal).find('#id_title').val(data.title);
       $(modal).find('#id_description').val(data.description);
+      $(modal).find('#id_activity_type').val(data.activity_type);
       tinymce.get('id_description').setContent(data.description);
       $(modal).find('#id_start_timetable').val(data.start_timetable);
       $(modal).find('#id_end_timetable').val(data.end_timetable);
@@ -185,6 +186,7 @@ $(function () {
       },
       data: {
         title: $(modal).find('#id_title').val(),
+        activity_type: $(modal).find('#id_activity_type').val(),
         description: $(modal).find('#id_description').val(),
         start_timetable: $(modal).find('#id_start_timetable').val(),
         end_timetable: $(modal).find('#id_end_timetable').val(),
@@ -200,6 +202,7 @@ $(function () {
       var activityBlock = $('#' + data.slug);
       $(activityBlock).find('.proposal-points').addClass('hide');
       $(activityBlock).find('.proposal-timetable .timetable').text(data.timetable);
+      $(activityBlock).find('.activity-type').text(data.activity_type_display);
       $(activityBlock).find('.proposal-title a').text(data.title);
       $(activityBlock).find('.proposal-timetable').removeClass('hide');
       $(modal).modal('hide');
