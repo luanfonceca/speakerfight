@@ -21,6 +21,11 @@
     <a href="{{ proposal.get_absolute_url }}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'See the proposal in Event.' %}">
       <i class="icon-eye-open"></i> {% trans "See in Event" %}
     </a>
+
+    <a href="javascript:;" data-toggle="modal" data-target="#share-proposal-modal" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Share this proposal.' %}">
+      <i class="icon-share"></i> {% trans "Share" %}
+    </a>
+
     {% if proposal.author_id == request.user.id or request.user.is_superuser %}
       <a href="{% url 'update_proposal' event_slug=proposal.event.slug slug=proposal.slug %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Edit the proposal.' %}">
         <i class="icon-pencil"></i> {% trans "Edit" %}
@@ -29,5 +34,22 @@
         <i class="icon-trash"></i> {% trans "Delete" %}
       </a>
     {% endif %}
+  </div>
+</div>
+
+<div class="modal fade" id="share-proposal-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">{% trans "Share your proposal!" %}</h4>
+        </div>
+
+        <div class="modal-body">
+          <div class="addthis_native_toolbox"></div>
+        </div>
+    </div>
   </div>
 </div>
