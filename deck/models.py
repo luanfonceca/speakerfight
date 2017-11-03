@@ -197,7 +197,6 @@ class Proposal(Activity):
     def get_full_slides_url(self):
         return '{0}{1}'.format('http://www.speakerdeck.com/', self.slides_url)
 
-
     # relations
     event = models.ForeignKey(to='deck.Event', related_name='proposals')
 
