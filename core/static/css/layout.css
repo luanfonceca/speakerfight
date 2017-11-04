@@ -76,6 +76,9 @@ input.search {
   font-size: 21px; }
   .navbar-inverse .notification-dropdown {
   position: relative; }
+  .navbar-inverse .notification-dropdown .trigger {
+    height: 50px;
+  }
   .navbar-inverse .notification-dropdown > a:hover,
   .navbar-inverse .notification-dropdown > a.active {
     background: #254261 !important;
@@ -758,9 +761,13 @@ div.show-more a:after {
 }
 
 .navbar-inverse .navbar-nav .dropdown .dropdown-menu {
-  left: -54px !important;
+  left: auto !important;
+  right: 0;
 }
 
+.navbar-inverse .navbar-nav .dropdown .dropdown-toggle {
+  height: 50px;
+}
 .btn-group.btn-group-justified .btn {
   height: 50px;
 }
