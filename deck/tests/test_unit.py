@@ -267,6 +267,9 @@ class ProposalObjectTest(TestCase):
     def test_assert_proposal_slides_url(self):
         self.assertEquals(u'jane_doe/talk', self.proposal.slides_url)
 
+    def test_assert_proposal_get_full_slides_url(self):
+        self.assertEquals(u'http://www.speakerdeck.com/jane_doe/talk', self.proposal.get_full_slides_url())
+
     def test_assert_proposal_author(self):
         self.assertEquals(1, self.proposal.author_id)
 
