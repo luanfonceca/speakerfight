@@ -26,6 +26,7 @@ class ActivitySerializer(serializers.HyperlinkedModelSerializer):
     author = UserSerializer(read_only=True)
     timetable = serializers.SerializerMethodField()
     url_api_event_activity = serializers.SerializerMethodField()
+    activity_type_display = serializers.SerializerMethodField()
 
     class Meta:
         model = Activity
@@ -33,11 +34,14 @@ class ActivitySerializer(serializers.HyperlinkedModelSerializer):
             'title', 'slug', 'description', 'timetable',
             'activity_type', 'author',
             'start_timetable', 'end_timetable',
-            'url_api_event_activity',
+            'url_api_event_activity', 'activity_type_display',
         )
 
     def get_timetable(self, activity):
         return activity.timetable
+
+    def get_activity_type_display(self, activity):
+        return activity.get_activity_type_display()
 
     def get_url_api_event_activity(self, activity):
         event = activity.track.event
