@@ -55,12 +55,30 @@ class OrganizationTest(TestCase):
         self.assertEqual(organization.name, 'Speakerfight School')
         self.assertEqual(organization.about, 'Cool school')
 
+    def test_update_event_requires_owner(self):
+        Organization.objects.create(
+            name='Speakerfight Corp',
+            about='Cool company',
+            created_by=self.user,
+        )
+        url = reverse('update_organization', kwargs={'slug': 'speakerfight-corp'})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+        # Login as another user to check for security errors
+        self.client.logout()
+        self.client.login(user='another', password='another')
+
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
     def test_delete_organization_confirmation(self):
         organization = Organization.objects.create(
             name='Speakerfight Corp',
             about='Cool company',
             created_by=self.user,
         )
+
         url = reverse('delete_organization', kwargs={'slug': organization.slug})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -78,3 +96,18 @@ class OrganizationTest(TestCase):
 
         with self.assertRaises(Organization.DoesNotExist):
             Organization.objects.get(slug=organization.slug)
+
+    def test_delete_organization_requires_owner(self):
+        organization = Organization.objects.create(
+            name='Speakerfight Corp',
+            about='Cool company',
+            created_by=self.user,
+        )
+        url = reverse('delete_organization', kwargs={'slug': organization.slug})
+
+        # Login as another user to check for security errors
+        self.client.logout()
+        self.client.login(user='another', password='another')
+
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, 404)

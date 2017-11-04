@@ -18,9 +18,12 @@ from django.utils.translation import ugettext as _
 from vanilla import CreateView, DeleteView, DetailView, ListView, UpdateView
 from djqscsv import render_to_csv_response
 
-from .models import Event, Proposal, Vote, Activity
+from .models import Event, Proposal, Vote, Activity, get_activities_by_parameters_order
 from .forms import EventForm, ProposalForm, ActivityForm, ActivityTimetableForm
 from core.mixins import LoginRequiredMixin, FormValidRedirectMixing
+from deck.permissions import has_manage_schedule_permission
+from deck.use_cases import initialize_event_schedule, rearrange_event_schedule
+from deck.exceptions import EmptyActivitiesArrangementException
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -41,7 +44,7 @@ class ListEvents(BaseEventView, ListView):
 
         # When it should only show past events
         if self.past_events:
-            queryset = queryset.filter(due_date__lt=timezone.now())
+            queryset = queryset.filter(closing_date__lt=timezone.now())
 
         criteria = self.request.GET.get(u'search', None)
         if criteria:
@@ -209,9 +212,7 @@ class CreateEventSchedule(BaseEventView, DetailView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         self.object = self.get_object()
-        in_jury = self.object.jury.users.filter(
-            pk=self.request.user.pk).exists()
-        if (not in_jury and not self.request.user.is_superuser):
+        if not has_manage_schedule_permission(self.request.user, self.object):
             messages.error(
                 self.request, _(u'You are not allowed to see this page.'))
             return HttpResponseRedirect(
@@ -220,51 +221,17 @@ class CreateEventSchedule(BaseEventView, DetailView):
         return super(CreateEventSchedule, self).dispatch(*args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        track = self.object.tracks.first()
-
-        # On the first time we generate a schedule based on the Slots.
-        if not track.activities.exists():
-            top_not_approved_ones = self.object.get_not_approved_schedule()
-            order = 0
-            for proposal in top_not_approved_ones[:self.object.slots]:
-                proposal.track = track
-                proposal.is_approved = True
-                proposal.track_order = order
-                proposal.save()
-                order += 1
+        initialize_event_schedule(self.object)
         return super(CreateEventSchedule, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        approved_activities_pks = self.request.POST.getlist(
-            'approved_activities')
-
-        track = self.object.tracks.first()
-        track.proposals.update(is_approved=False)
-        track.activities.update(track=None, track_order=None)
-
-        if not approved_activities_pks:
-            return HttpResponseRedirect(
-                reverse('create_event_schedule',
-                        kwargs={'slug': self.object.slug}),
-            )
-
-        order = 0
-        for activity_pk in approved_activities_pks:
-            activity = Activity.objects.get(pk=activity_pk)
-            activity.track = track
-            activity.track_order = order
-            activity.save()
-            if activity.activity_type == Activity.PROPOSAL:
-                activity.proposal.is_approved = True
-                activity.proposal.save()
-            order += 1
-
-        return HttpResponseRedirect(
-            reverse('create_event_schedule',
-                    kwargs={'slug': self.object.slug}),
-        )
+        approved_activities_pks = self.request.POST.getlist('approved_activities')
+        new_activites_arrange = get_activities_by_parameters_order(approved_activities_pks)
+        try:
+            rearrange_event_schedule(self.object, new_activites_arrange)
+        except EmptyActivitiesArrangementException:
+             messages.error(self.request, _(u'You must pass at least one activity.'))
+        return HttpResponseRedirect(reverse('create_event_schedule', kwargs={'slug': self.object.slug}))
 
 
 class DetailEventSchedule(BaseEventView, DetailView):
@@ -291,7 +258,7 @@ class CreateProposal(LoginRequiredMixin,
     def get(self, request, *args, **kwargs):
         data = self.get_context_data()
         event = data.get('event')
-        if event.due_date_is_passed:
+        if event.closing_date_is_passed:
             messages.error(
                 self.request,
                 _(u"This Event doesn't accept Proposals anymore."))
