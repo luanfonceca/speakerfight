@@ -65,7 +65,6 @@ $(function () {
       },
       data: {
         title: $(modal).find('#id_title').val(),
-        description: $(modal).find('#id_description').val(),
         activity_type: $(modal).find('#id_activity_type').val(),
         start_timetable: $(modal).find('#id_start_timetable').val(),
         end_timetable: $(modal).find('#id_end_timetable').val(),
@@ -117,6 +116,26 @@ $(function () {
       url: $(this).parents('.panel').attr('data-href'),
       method: 'GET',
     }).success(function(data, status, xhr) {
+      $(modal).find('#id_title').val(data.title);
+      $(modal).find('#id_description').val(data.description);
+      $(modal).find('#id_activity_type').val(data.activity_type);
+      tinymce.get('id_description').setContent(data.description);
+      $(modal).find('#id_start_timetable').val(data.start_timetable);
+      $(modal).find('#id_end_timetable').val(data.end_timetable);
+      $(modal).find('#oldSlug').val(data.slug);
+    });
+
+    $(modal).attr('data-href', $(this).parents('.panel').attr('data-href'));
+    $(modal).modal();
+  });
+
+  $('.proposal-container').delegate('.update-proposal', 'click', function(e) {
+    e.preventDefault();
+    var modal = $('#update-proposal-modal');
+    $.ajax({
+      url: $(this).parents('.panel').attr('data-href'),
+      method: 'GET',
+    }).success(function(data, status, xhr) {
       $(modal).find('#id_start_timetable').val(data.start_timetable);
       $(modal).find('#id_end_timetable').val(data.end_timetable);
     });
@@ -125,9 +144,9 @@ $(function () {
     $(modal).modal();
   });
 
-  $('#update-activity-form').submit(function (e) {
+  $('#update-proposal-form').submit(function (e) {
     e.preventDefault();
-    var modal = $('#update-activity-modal');
+    var modal = $('#update-proposal-modal');
 
     $.ajax({
       url: $(modal).attr('data-href'),
@@ -140,10 +159,55 @@ $(function () {
         end_timetable: $(modal).find('#id_end_timetable').val(),
       }
     }).success(function(data, status, xhr) {
+
+      var activityBlock = $('#' + data.slug);
+      $(activityBlock).find('.proposal-timetable .timetable').text(data.timetable);
+      $(activityBlock).find('.proposal-timetable').removeClass('hide');
+      $(modal).modal('hide');
+    }).error(function(data, status, xhr) {
+      if (data.status == 403) {
+        alert(data.responseJSON.detail)
+      };
+      for (field in data.responseJSON){
+        $('[name="' + field + '"]').parents('.form-group').addClass('has-error');
+      }
+    });
+  });
+
+  $('#update-activity-form').submit(function (e) {
+    e.preventDefault();
+    var modal = $('#update-activity-modal');
+    $.ajax({
+      url: $(modal).attr('data-href'),
+      method: 'PATCH',
+      headers: {
+        'X-CSRFToken': getCookie('csrftoken')
+      },
+      data: {
+        title: $(modal).find('#id_title').val(),
+        description: $(modal).find('#id_description_ifr').contents().find("[data-id=id_description]").html(),
+        activity_type: $(modal).find('#id_activity_type').val(),
+        description: $(modal).find('#id_description').val(),
+        start_timetable: $(modal).find('#id_start_timetable').val(),
+        end_timetable: $(modal).find('#id_end_timetable').val(),
+      }
+    }).success(function(data, status, xhr) {
+      var oldSlug = $(modal).find('#oldSlug').val();
+
+      $(modal).attr('data-href', data.url_api_event_activity)
+      $('#' + oldSlug).attr('data-href', data.url_api_event_activity);
+      $('#' + oldSlug).attr('id', data.slug);
+
       var activityBlock = $('#' + data.slug);
       $(activityBlock).find('.proposal-points').addClass('hide');
       $(activityBlock).find('.proposal-timetable .timetable').text(data.timetable);
+      $(activityBlock).find('.proposal-timetable p').text(data.activity_type_display);
+      $(activityBlock).find('.activity-type').text(data.activity_type_display);
+      $(activityBlock).find('.proposal-title a').text(data.title);
       $(activityBlock).find('.proposal-timetable').removeClass('hide');
+      if (data.activity_type != 'proposal') {
+        $(activityBlock).find('.proposal-title .proposal-metadata').html(data.description);
+      }
       $(modal).modal('hide');
     }).error(function(data, status, xhr) {
       if (data.status == 403) {
@@ -293,5 +357,14 @@ $(function () {
         }
       }
     });
+  });
+
+  tinymce.init({
+    selector: "[name='description']",
+    menubar: false,
+    skin: 'light',
+    plugins: 'link paste preview textcolor',
+    toolbar: "bold italic underline forecolor | alignleft aligncenter alignright | link unlink | undo redo removeformat | formatselect fontsizeselect pastetext | preview",
+    body_class: 'form-control',
   });
 });

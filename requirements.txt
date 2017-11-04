@@ -9,7 +9,7 @@ Pygments==2.2.0
 Werkzeug==0.12.2
 asn1crypto==0.23.0
 backports.shutil-get-terminal-size==1.0.0
-bcrypt==3.1.3
+bcrypt==3.1.4
 blessings==1.6
 bpython==0.16
 certifi==2017.7.27.1
@@ -37,7 +37,7 @@ ipaddress==1.0.18
 ipdb==0.10.3
 ipython-genutils==0.2.0
 ipython==5.4.1
-master-sake==0.9.7
+master-sake==1.0
 mccabe==0.6.1
 model-mommy==1.4.0
 networkx==2.0
@@ -69,3 +69,4 @@ unicodecsv==0.14.1
 urllib3==1.22
 wcwidth==0.1.7
 Pillow==4.3.0
+mock==2.0.0
