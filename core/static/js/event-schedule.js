@@ -189,7 +189,6 @@ $(function () {
         end_timetable: $(modal).find('#id_end_timetable').val(),
       }
     }).success(function(data, status, xhr) {
-
       var oldSlug = $(modal).find('#oldSlug').val();
 
       $(modal).attr('data-href', data.url_api_event_activity)
@@ -201,6 +200,9 @@ $(function () {
       $(activityBlock).find('.proposal-timetable .timetable').text(data.timetable);
       $(activityBlock).find('.proposal-title a').text(data.title);
       $(activityBlock).find('.proposal-timetable').removeClass('hide');
+      if (data.activity_type != 'proposal') {
+        $(activityBlock).find('.proposal-title .proposal-metadata').html(data.description);
+      }
       $(modal).modal('hide');
     }).error(function(data, status, xhr) {
       if (data.status == 403) {
