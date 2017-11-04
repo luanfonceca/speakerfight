@@ -4,8 +4,8 @@
 
 <div class="btn-group social-account">
   {% for provider in socialaccount_providers %}
-    <a class="btn btn-flat btn-large icon icon-black" href="{% provider_login_url provider.id process=process %}">
-      <i class="icon-white icon-{% if provider.id == 'google' %}google-plus{% else %}{{ provider.id }}{% endif %}"></i>
+    <a class="btn btn-flat btn-large" href="{% provider_login_url provider.id process=process %}">
+      <i class="icon icon-white icon-{% if provider.id == 'google' %}google-plus{% else %}{{ provider.id }}{% endif %}"></i>
       <span>{{ provider.name|title }}</span>
     </a>
   {% endfor %}

@@ -101,32 +101,34 @@
                     </div>
                   </div>
                 {% endif %}
-                {% else %}
-                  <div id="{{ activity.slug }}"  data-href="{% url 'api_event_activity' event_slug=event.slug slug=activity.slug %}" class="panel panel-success proposal-item event-activity">
-                    <div class="panel-body">
-                      <input checked="checked" name="approved_activities" value="{{ activity.pk }}" class="hide" type="checkbox" />
-                      <div class="pull-right proposal-actions">
-                        <button type="button" class="btn-flat gray text-upper update-activity">
-                          <i class="icon-pencil"></i>
-                        </button>
-                        <button type="button" class="btn-flat gray text-upper remove-activity">
-                          <i class="icon-trash"></i>
-                        </button>
-                      </div>
-                      <div class="pull-left text-center proposal-rate">
-                        <div class="proposal-timetable">
-                          <p>{{ activity.get_activity_type_display }}</p>
-                          <span class="timetable">{{ activity.timetable }}</span>
-                        </div>
-                      </div>
-                      <div>
-                        <h3 class="panel-title proposal-title">
-                          <a href="#{{ activity.slug }}">{{ activity }}</a>
-                          <p class="proposal-metadata">{{ activity.description }}</p>
-                        </h3>
+              {% else %}
+                <div id="{{ activity.slug }}"  data-href="{% url 'api_event_activity' event_slug=event.slug slug=activity.slug %}" class="panel panel-success proposal-item event-activity">
+                  <div class="panel-body">
+                    <input checked="checked" name="approved_activities" value="{{ activity.pk }}" class="hide" type="checkbox" />
+                    <div class="pull-right proposal-actions">
+                      <button type="button" class="btn-flat gray text-upper update-activity">
+                        <i class="icon-pencil"></i>
+                      </button>
+                      <button type="button" class="btn-flat gray text-upper remove-activity">
+                        <i class="icon-trash"></i>
+                      </button>
+                    </div>
+                    <div class="pull-left text-center proposal-rate">
+                      <div class="proposal-timetable">
+                        <p>{{ activity.get_activity_type_display }}</p>
+                        <span class="timetable">{{ activity.timetable }}</span>
                       </div>
                     </div>
+                    <div>
+                      <h3 class="panel-title proposal-title">
+                        <a href="#{{ activity.slug }}">{{ activity }}</a>
+                        <div class="proposal-metadata">
+                          {{ activity.description|safe }}
+                        </div>
+                      </h3>
+                    </div>
                   </div>
+                </div>
               {% endif %}
           {% endfor %}
         </div>
