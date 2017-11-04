@@ -10,6 +10,17 @@ from . models import Organization
 from core.mixins import LoginRequiredMixin, FormValidRedirectMixing
 
 
+class OwnerRequiredMixin(object):
+
+    def dispatch(self, *args, **kwargs):
+        """Only owners can manage organizations."""
+        organization = self.get_object()
+        if self.request.user != organization.created_by \
+                and not self.request.user.is_superuser:
+            raise Http404
+        return super(OwnerRequiredMixin, self).dispatch(*args, **kwargs)
+
+
 class BaseOrganizationView(LoginRequiredMixin, FormValidRedirectMixing):
     model = Organization
     fields = ['name', 'about']
@@ -27,22 +38,14 @@ class CreateOrganization(BaseOrganizationView, CreateView):
         return self.success_redirect(_(u'Organization created.'))
 
 
-class UpdateOrganization(BaseOrganizationView, UpdateView):
+class UpdateOrganization(OwnerRequiredMixin, BaseOrganizationView, UpdateView):
 
     def form_valid(self, form):
         self.object = form.save()
         return self.success_redirect(_(u'Organization updated.'))
 
-    def dispatch(self, *args, **kwargs):
-        # Only owners can edit the organization
-        organization = self.get_object()
-        if self.request.user != organization.created_by \
-                and not self.request.user.is_superuser:
-            raise Http404
-        return super(UpdateOrganization, self).dispatch(*args, **kwargs)
 
-
-class DeleteOrganization(BaseOrganizationView, DeleteView):
+class DeleteOrganization(OwnerRequiredMixin, BaseOrganizationView, DeleteView):
     template_Name = 'organization/organization_confirm_delete.html'
 
     def form_valid(self, form):
