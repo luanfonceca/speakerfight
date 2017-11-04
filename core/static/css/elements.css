@@ -188,20 +188,20 @@
 .btn-flat.danger:active {
   background: #6e354a;
 }
-.btn-flat.icon {
+.social-account .btn-flat {
   padding: 7px 10px;
   color: #1a2129;
   background: #e6ebf3;
   border: 1px solid #d8dde4;
   box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.4) inset, 0px 1px 0px 0px #cccccc;
 }
-.btn-flat.icon:active {
+.social-account .btn-flat:active {
   background: #e0e6ef;
   -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.3) inset;
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.3) inset;
   box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.3) inset;
 }
-.btn-flat.icon i {
+.social-account .btn-flat i {
   font-size: 14px;
 }
 
