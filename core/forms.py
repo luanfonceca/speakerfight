@@ -2,6 +2,7 @@
 
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django import forms
 
@@ -79,3 +80,12 @@ class ProfileChangeLanguageForm(forms.ModelForm):
         super(ProfileChangeLanguageForm, self).__init__(*args, **kwargs)
         field = self.fields['language']
         field.choices = field.choices[1:]
+
+
+class SignupForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ['email', 'username', 'first_name', 'last_name']
+
+    def signup(self, request, user):
+        pass

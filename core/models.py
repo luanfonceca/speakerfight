@@ -21,6 +21,8 @@ class Profile(models.Model):
         _('Github username'), max_length=50, null=True, blank=True)
     facebook = models.CharField(
         _('Facebook username'), max_length=50, null=True, blank=True)
+    twitter = models.CharField(
+        _('Twitter username'), max_length=50, null=True, blank=True)
     site = models.URLField(
         _('Site url'), max_length=200, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
@@ -45,6 +47,10 @@ class Profile(models.Model):
     def get_facebook_url(self):
         if self.facebook:
             return 'https://facebook.com/{}'.format(self.facebook)
+
+    def get_twitter_url(self):
+        if self.twitter:
+            return 'https://twitter.com/{}'.format(self.twitter)
 
     def get_site_url(self):
         return self.site
