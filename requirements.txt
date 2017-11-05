@@ -12,7 +12,7 @@ backports.shutil-get-terminal-size==1.0.0
 bcrypt==3.1.4
 blessings==1.6
 bpython==0.16
-certifi==2017.7.27.1
+certifi==2017.11.5
 cffi==1.11.0
 chardet==3.0.4
 contextlib2==0.5.5
