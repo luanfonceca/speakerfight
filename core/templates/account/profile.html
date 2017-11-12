@@ -100,7 +100,7 @@
                 <a href="javascript:;" data-toggle="modal" data-target="#update-profile-modal" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Edit profile.' %}">
                   <i class="icon-pencil"></i> {% trans "Edit" %}
                 </a>
-                {% if not request.user.socialaccount_set.all %}
+                {% if not request.user.socialaccount_set.exists %}
                   <a href="{% url 'account_change_password' %}" class="btn-flat gray text-upper" data-toggle="tooltip" title="{% trans 'Change Language.' %}">
                     <i class="icon-lock"></i> {% trans "Change Password" %}
                   </a>
