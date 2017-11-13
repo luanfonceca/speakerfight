@@ -3,18 +3,37 @@
 {% load i18n %}
 
 <!DOCTYPE html>
-<html>
+<html prefix="og: http://ogp.me/ns">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="{% static 'img/speakerfight.ico' %}"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+
+    <title>Speakerfight - {{ event }}</title>
 
     <!-- open sans font -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
 
+    <link rel="shortcut icon" href="{% static 'img/speakerfight.ico' %}"/>
     <link rel="stylesheet" href="{% static 'schedule/style.css' %}">
-    <title>Speakerfight - {{ event }}</title>
+
+    <!-- Facebook  -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://speakerfight.com/events/{{event.slug}}/schedule/">
+    <meta property="og:title" content="{{ event }}">
+    <meta property="og:site_name" content="Speakerfight">
+    <meta property="og:description" content="{{ event.description }}">
+    <meta property="og:image" content="{% static 'img/speakerfight-share.png' %}">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="761">
+    <meta property="og:image:height" content="420">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" value="summary_large_image">
+    <meta name="twitter:site" value="https://speakerfight.com/events/{{event.slug}}/schedule/">
+    <meta name="twitter:title" content="{{ event }}">
   </head>
+
   <body>
     <div class="event-header">
       <h1>{{ event.title }}</h1>
@@ -64,4 +83,5 @@
     <script type="text/javascript" src="{% static 'schedule/main.js' %}"></script>
     <script type="text/javascript" src="{% static 'schedule/iframeResizer.contentWindow.min.js' %}"></script>
   </body>
+
 </html>
