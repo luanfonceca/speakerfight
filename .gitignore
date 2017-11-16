@@ -68,3 +68,6 @@ db.sqlite3
 
 # Node modules
 node_modules/
+
+# Schedule CSS Files
+core/static/schedule/css/*
