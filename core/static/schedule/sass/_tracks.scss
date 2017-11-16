@@ -10,25 +10,6 @@ $imgUrl: '../icons';
     position: relative;
 
     &.lightning-talks {
-      .name {
-        &:before {
-          content: '';
-          font-weight: 700;
-          line-height: 30px;
-          text-transform: uppercase;
-          display: inline-block;
-          height: 30px;
-          width: 30px;
-          border-radius: 100%;
-          position: absolute;
-          left: -35px;
-          top: 0px;
-          background: #ffcc00;
-          color: #fff;
-          // display: none;
-        }
-      }
-
       .short {
         &:before {
           background-color: $green-primary;
@@ -42,25 +23,6 @@ $imgUrl: '../icons';
         &:before {
           background-color: $blue-primary;
           background-image: url($imgUrl + '/proposal.svg');
-        }
-      }
-
-      .name {
-        &:after {
-          content: '';
-          font-weight: 700;
-          line-height: 30px;
-          text-transform: uppercase;
-          display: inline-block;
-          height: 30px;
-          width: 30px;
-          border-radius: 100%;
-          position: absolute;
-          left: -35px;
-          top: 0px;
-          background: #15c129;
-          color: #fff;
-          // display: none;
         }
       }
     }
