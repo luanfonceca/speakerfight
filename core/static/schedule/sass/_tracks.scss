@@ -132,15 +132,19 @@ $imgUrl: '../icons';
     color: $gray;
   }
 
-  figure {
+  .face {
     margin: 0 20px 20px;
     width: 120px;
     height: 120px;
     border-radius: 100%;
     display: block;
     float: left;
-    background-size: cover;
-    background-position: center center;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .more-button {
