@@ -2,7 +2,7 @@ body {
   -webkit-font-smoothing: antialiased;
   background-color: white;
   color: #333;
-  font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+  font-family: $ff-default;
   font-size: 1em;
   line-height: 1.5;
   padding: 0;
@@ -19,7 +19,7 @@ input,
 label,
 select {
   display: block;
-  font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+  font-family: $ff-default;
   font-size: 1em;
 }
 

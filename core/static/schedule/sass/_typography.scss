@@ -4,7 +4,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+  font-family: $ff-default;
   line-height: 1.25;
   margin: 0;
   text-rendering: optimizeLegibility;
@@ -43,14 +43,16 @@ a {
   -webkit-transition: color 0.1s linear;
   -moz-transition: color 0.1s linear;
   transition: color 0.1s linear;
-  color: #477DCA;
-  text-decoration: none;
-}
 
-a:hover {
-  color: #2c5999;
-}
-a:active, a:focus {
-  color: #2c5999;
-  outline: none;
+  color: $blue-light;
+  text-decoration: none;
+
+  &:hover {
+    color: $blue-light-hover;
+  }
+
+  &:active, &:focus {
+    color: $blue-light-hover;
+    outline: none;
+  }
 }
