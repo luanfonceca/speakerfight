@@ -1,0 +1,31 @@
+@media screen and (max-width: 40em) {
+  .event-list {
+    .short {
+      padding: 50px 10px 10px 80px;
+    }
+
+    .long {
+      padding: 20px;
+    }
+
+    .timer {
+      font-size: 1.125em;
+      top: 15px;
+    }
+
+    figure {
+      float: inherit;
+    }
+
+    .title {
+      font-size: 1.125em;
+      line-height: 1.1em;
+      margin-bottom: 1ex;
+    }
+
+    .person {
+      font-size: 1em;
+      line-height: 1.1em;
+    }
+  }
+}

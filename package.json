@@ -1,0 +1,30 @@
+{
+  "name": "speakerfight",
+  "version": "1.0.0",
+  "description": "The Easier way to choose the best talks.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "preinstall": "npm i -g gulp-cli",
+    "sass": "gulp sass",
+    "sass:w": "gulp sass:watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thulioph/speakerfight.git"
+  },
+  "author": "Thulio Philipe <thulioph@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thulioph/speakerfight/issues"
+  },
+  "homepage": "https://github.com/thulioph/speakerfight#readme",
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=8.2.0",
+    "npm": ">=5.5.0"
+  }
+}

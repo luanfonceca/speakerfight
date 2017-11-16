@@ -66,3 +66,8 @@ db.sqlite3
 # files with ~ at the end
 *.*~
 
+# Node modules
+node_modules/
+
+# Schedule CSS Files
+core/static/schedule/css/*

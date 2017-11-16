@@ -63,3 +63,17 @@ $ docker-compose run web make setup
 $ docker-compose up
 ```
 
+<h3>Schedule - Compiling SASS to CSS</h3>
+<h4>
+	<h5>Dependencies:</h5>
+	<ul>
+		<li><a href="https://nodejs.org/en/download/" target="_blank">Nodejs</a></li>
+	</ul>
+</h4>
+
+```sh
+$ npm install
+$ npm run sass
+$ npm run sass:w
+```
+

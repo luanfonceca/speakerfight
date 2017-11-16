@@ -1,0 +1,170 @@
+$imgUrl: '../icons';
+
+.schedule {
+  background: white;
+  position: relative;
+
+  .event {
+    border: 3px solid $white;
+    border-bottom: none;
+    position: relative;
+
+    &.lightning-talks {
+      .short {
+        &:before {
+          background-color: $green-primary;
+          background-image: url($imgUrl + '/lightning-talks.svg');
+        }
+      }
+    }
+
+    &.proposal {
+      .short {
+        &:before {
+          background-color: $blue-primary;
+          background-image: url($imgUrl + '/proposal.svg');
+        }
+      }
+    }
+
+    &.workshop {
+      .short {
+        &:before {
+          background-color: $green-primary;
+          background-image: url($imgUrl + '/workshop.svg');
+        }
+      }
+    }
+
+    &.openning {
+      .short {
+        &:before {
+          background-color: $green-primary;
+          background-image: url($imgUrl + '/openning.svg');
+        }
+      }
+    }
+
+    &.coffee-break {
+      .short {
+        &:before {
+          background-color: $green-primary;
+          background-image: url($imgUrl + '/coffee-break.svg');
+        }
+      }
+    }
+
+    &.lunch {
+      .short {
+        &:before {
+          background-color: $green-primary;
+          background-image: url($imgUrl + '/lunch.svg');
+        }
+      }
+    }
+
+    &.ending {
+      .short {
+        &:before {
+          background-color: $green-primary;
+          background-image: url($imgUrl + '/ending.svg');
+        }
+      }
+    }
+  }
+
+  .short {
+    padding: 20px 80px 20px 240px;
+    display: inline-block;
+    position: relative;
+
+    &:before {
+      content: '';
+      display: block;
+      width: 60px;
+      position: absolute;
+      left: -3px;
+      top: -3px;
+      bottom: 0px;
+
+      background: $green-primary;
+      background-size: auto 40px;
+      background-repeat: no-repeat;
+      background-position: center 19px;
+    }
+  }
+
+  .long {
+    padding: 20px 80px 20px 240px;
+    background: $white;
+    position: relative;
+
+    p {
+      margin: 0;
+      line-height: 1.25em;
+    }
+  }
+
+  .timer {
+    position: absolute;
+    left: 80px;
+    top: 20px;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: $gray;
+  }
+
+  .name {
+    position: relative;
+    min-width: 100px;
+  }
+
+  .title {
+    font-size: 1.25em;
+    font-weight: 700;
+    display: flex;
+  }
+
+  .person {
+    font-size: 1.125em;
+    font-weight: 700;
+    display: block;
+    color: $gray;
+  }
+
+  .face {
+    margin: 0 20px 20px;
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    display: block;
+    float: left;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .more-button {
+    display: inline-block;
+    background: $gray;
+    padding: 4px 8px;
+    font-size: 1em;
+    font-weight: 500;
+    color: $white;
+    line-height: 1em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    position: relative;
+    z-index: 100000;
+    cursor: pointer;
+  }
+
+  .buttons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+}

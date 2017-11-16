@@ -12,7 +12,7 @@
     <!-- open sans font -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
 
-    <link rel="stylesheet" href="{% static 'schedule/style.css' %}">
+    <link rel="stylesheet" href="{% static 'schedule/css/main.css' %}">
     <title>Speakerfight - {{ event }}</title>
   </head>
   <body>
@@ -28,23 +28,38 @@
               {% for activity in track.activities.cached_authors %}
                 <li class="event {{ activity.activity_type }}">
                   <div class="short">
-                    <div class="time">{{ activity.timetable }}</div>
+                    <div class="timer">
+                      {{ activity.timetable }}
+                    </div>
+
                     <div class="name">
                       {% if activity.activity_type == activity.PROPOSAL or activity.activity_type == activity.WORKSHOP %}
-                        <figure class="face" style="background-image: url({{ activity.author|get_user_photo }})">&nbsp;</figure>
-                        <span class="title">{{ activity.title|title }}</span>
-                        <a class="person" target="_blank" href="{% url 'user_profile' activity.author.username %}">{{ activity.author.get_full_name|default:activity.author.username }}</a>
+                        <figure class="face">
+                          <img src="{{ activity.author|get_user_photo }}" alt="">
+                        </figure>
+
+                        <span class="title">
+                          {{ activity.title|title }}
+                        </span>
+
+                        <a class="person" href="{% url 'user_profile' activity.author.username %}" target="_blank" rel="noopener">
+                          {{ activity.author.get_full_name|default:activity.author.username }}
+                        </a>
                       {% else %}
-                        <span class="title">{{ activity.title }}</span>
+                        <span class="title">
+                          {{ activity.title }}
+                        </span>
                       {% endif %}
                     </div>
                   </div>
+
                   {% if activity.description %}
                     <div class="long" style="display: none;">
                       {{ activity.description|safe|linebreaks }}
                     </div>
+
                     <div class="buttons">
-                      <a href="javascript:;" class="more-button">{% trans "More" %}</a>
+                      <a href="#" class="more-button">{% trans "More" %}</a>
                     </div>
                   {% endif %}
                 </li>
@@ -53,9 +68,12 @@
           </div>
         {% endfor %}
       </div>
-      <div id="footer">
-        <a href="{{ 'https://'|add:request.get_host }}" target="_blank">
-          <figure class="logo" style="background-image: url({% static 'img/speakerfight.png' %})">&nbsp;</figure>
+
+      <div id="footer" class="footer">
+        <a href="{{ 'https://'|add:request.get_host }}" target="_blank" rel="noopener">
+          <figure class="logo">
+            <img src="{% static 'img/speakerfight.png' %}" alt="Speakerfight logo">
+          </figure>
         </a>
       </div>
     </div>
