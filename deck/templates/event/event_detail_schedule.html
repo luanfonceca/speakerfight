@@ -55,8 +55,10 @@
       </div>
 
       <div id="footer" class="footer">
-        <a href="{{ 'https://'|add:request.get_host }}" target="_blank">
-          <figure class="logo" style="background-image: url({% static 'img/speakerfight.png' %})">&nbsp;</figure>
+        <a href="{{ 'https://'|add:request.get_host }}" target="_blank" rel="noopener">
+          <figure class="logo">
+            <img src="{% static 'img/speakerfight.png' %}" alt="Speakerfight logo">
+          </figure>
         </a>
       </div>
     </div>
