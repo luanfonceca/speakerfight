@@ -28,7 +28,7 @@
               {% for activity in track.activities.cached_authors %}
                 <li class="event {{ activity.activity_type }}">
                   <div class="short">
-                    <div class="time">{{ activity.timetable }}</div>
+                    <div class="timer">{{ activity.timetable }}</div>
                     <div class="name">
                       {% if activity.activity_type == activity.PROPOSAL or activity.activity_type == activity.WORKSHOP %}
                         <figure class="face" style="background-image: url({{ activity.author|get_user_photo }})">&nbsp;</figure>
@@ -53,7 +53,8 @@
           </div>
         {% endfor %}
       </div>
-      <div id="footer">
+
+      <div id="footer" class="footer">
         <a href="{{ 'https://'|add:request.get_host }}" target="_blank">
           <figure class="logo" style="background-image: url({% static 'img/speakerfight.png' %})">&nbsp;</figure>
         </a>
