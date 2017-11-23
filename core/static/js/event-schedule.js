@@ -17,41 +17,40 @@ $(function () {
   }
   var csrftoken = getCookie('csrftoken');
 
-  dragula([
-    $('#event-approved-proposals')[0],
-    $('#event-not-approved-proposals')[0],
-    $('#event-activities')[0],
-  ], {
-    accepts: function (el, target, source, sibling) {
-      var isNotApprovedContainer = $(target).attr('id') == 'event-not-approved-proposals';
-      var isEventActivityItem = $(el).hasClass('event-activity');
-      if (isNotApprovedContainer && isEventActivityItem) {
-        return false;
-      }
-      return true;
-    }
-  }).on('drop', function (el, container, source) {
-    if (source == container) {
-      return;
-    }
-    $(el).removeClass('panel-success panel-warning panel-default');
+  $("#event-approved-proposals").sortable({
+    stop: function (event, ui) {
+      var activities = $("#event-approved-proposals").sortable("toArray");
+      var serializedActivities = [];
 
-    if ($(container).attr('id') == 'event-approved-proposals') {
-      $(el).addClass('panel-success');
-      $(el).find(':checkbox').attr('checked', 'checked');
-      $(el).find('.proposal-points').addClass('hide');
-      $(el).find('.proposal-timetable').removeClass('hide');
-      $(el).find('.update-activity').removeClass('hide');
-      $(el).find('.author-photo').addClass('hide');
-    } else {
-      $(el).addClass('panel-default');
-      $(el).find(':checkbox').removeAttr('checked');
-      $(el).find('.proposal-points').removeClass('hide');
-      $(el).find('.proposal-timetable').addClass('hide');
-      $(el).find('.update-activity').addClass('hide');
-      $(el).find('.author-photo').removeClass('hide');
+      for (var i = 0; i < activities.length; i++) {
+        serializedActivities.push({
+          slug: activities[i],
+          order: i
+        });
+      }
+
+      $.ajax({
+        url: $("#event-approved-proposals").attr('data-href'),
+        method: 'PATCH',
+        headers: {
+          'X-CSRFToken': getCookie('csrftoken')
+        },
+        data: {
+          activities: JSON.stringify(serializedActivities)
+        }
+      }).error(function(data, status, xhr) {
+        if (data.status == 403) {
+          alert(data.responseJSON.detail);
+        }
+
+        for (field in data.responseJSON){
+          $('[name="' + field + '"]').parents('.form-group').addClass('has-error');
+        }
+      });
     }
   });
+
+  $("#event-approved-proposals").disableSelection();
 
   $('#add-activity-form').submit(function (e) {
     e.preventDefault();
