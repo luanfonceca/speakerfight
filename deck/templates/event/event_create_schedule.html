@@ -56,7 +56,7 @@
 
         </div>
         <p class="text-center text-muted">{% trans "Approved talks" %}</p>
-        <div id="event-approved-proposals" class="proposal-container">
+        <div id="event-approved-proposals" class="proposal-container" data-href="{% url 'api_update_event_schedule' slug=event.slug %}">
           {% for activity in event.get_schedule %}
               {% if activity.activity_type == 'proposal' %}
                 {% if activity.proposal.is_approved %}
