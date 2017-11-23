@@ -11,7 +11,7 @@ urlpatterns = (
     ),
     url(
         r'/events/<slug:slug>/schedule/order/',
-        views.UpdateEventScheduleOrder.as_view(),
+        views.UpdateEventScheduleOrderView.as_view(),
         name='api_update_event_schedule'
     ),
     url(
