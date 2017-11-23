@@ -1,4 +1,7 @@
+import json
+
 from rest_framework import generics
+from rest_framework.response import Response
 
 from django.shortcuts import get_object_or_404
 
@@ -41,3 +44,17 @@ class ActivityView(permissions.DeckPermissionMixing,
             queryset,
             track__event__slug=self.kwargs.get('event_slug'),
             slug=self.kwargs.get('slug'))
+
+class UpdateEventScheduleOrderView(permissions.DeckPermissionMixing,
+                               generics.UpdateAPIView):
+    queryset = Event.objects.all()
+    lookup_field = 'slug'
+
+    def update(self, request, *args, **kwargs):
+        activities = json.loads(request.data.get("activities"))
+        event = self.get_object()
+
+        for activity in activities:
+            Activity.objects.filter(slug=activity['slug']).update(track_order=activity['order'])
+
+        return Response({})
