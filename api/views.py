@@ -46,7 +46,7 @@ class ActivityView(permissions.DeckPermissionMixing,
             slug=self.kwargs.get('slug'))
 
 class UpdateEventScheduleOrderView(permissions.DeckPermissionMixing,
-                               generics.UpdateAPIView):
+                                   generics.UpdateAPIView):
     queryset = Event.objects.all()
     lookup_field = 'slug'
 
