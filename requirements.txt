@@ -3,7 +3,7 @@
 Django==1.11.7
 Fabric==1.14.0
 MarkupSafe==1.0
-PyNaCl==1.2.0
+PyNaCl==1.2.1
 PyYAML==3.12
 Pygments==2.2.0
 Werkzeug==0.12.2
