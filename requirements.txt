@@ -6,7 +6,7 @@ MarkupSafe==1.0
 PyNaCl==1.2.0
 PyYAML==3.12
 Pygments==2.2.0
-Werkzeug==0.12.2
+Werkzeug==0.14.1
 asn1crypto==0.23.0
 backports.shutil-get-terminal-size==1.0.0
 bcrypt==3.1.4
