@@ -10,7 +10,7 @@ Werkzeug==0.12.2
 asn1crypto==0.23.0
 backports.shutil-get-terminal-size==1.0.0
 bcrypt==3.1.4
-blessings==1.6
+blessings==1.6.1
 bpython==0.16
 certifi==2017.7.27.1
 cffi==1.11.0
