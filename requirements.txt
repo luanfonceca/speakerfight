@@ -31,7 +31,7 @@ django-vanilla-views==1.0.4
 djangorestframework==3.7.1
 enum34==1.1.6
 fixmydjango==0.3.1
-greenlet==0.4.12
+greenlet==0.4.13
 idna==2.6
 ipaddress==1.0.18
 ipdb==0.10.3
