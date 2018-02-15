@@ -34,7 +34,7 @@ fixmydjango==0.3.1
 greenlet==0.4.12
 idna==2.6
 ipaddress==1.0.18
-ipdb==0.10.3
+ipdb==0.11
 ipython-genutils==0.2.0
 ipython==5.4.1
 master-sake==1.0
