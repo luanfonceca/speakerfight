@@ -36,7 +36,7 @@ idna==2.6
 ipaddress==1.0.18
 ipdb==0.10.3
 ipython-genutils==0.2.0
-ipython==5.4.1
+ipython==6.3.0
 master-sake==1.0
 mccabe==0.6.1
 model-mommy==1.4.0
