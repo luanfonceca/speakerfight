@@ -20,7 +20,7 @@ cryptography==2.2.2
 curtsies==0.3.0
 decorator==4.3.0
 django-allauth==0.35.0
-django-anymail==2.2
+django-anymail==3.0
 django-bootstrap3==10.0.0
 django-coverage==1.2.4
 django-datetime-widget==0.9.3
