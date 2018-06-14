@@ -15,19 +15,20 @@ deployment:
     heroku:
       appname: speakerfight
       commands:
-        - python manage.py clean_pyc
-        - python manage.py migrate --noinput --verbosity=0
-        - python manage.py collectstatic --noinput --verbosity=0
-        - python manage.py compilemessages
+        - git push git@heroku.com:foo-bar-123.git $CIRCLE_SHA1:master
+        - heroku run python manage.py clean_pyc
+        - heroku run python manage.py migrate --noinput --verbosity=0
+        - heroku run python manage.py collectstatic --noinput --verbosity=0
+        - heroku run python manage.py compilemessages
   staging:
     branch: migration-to-heroku
     heroku:
       appname: staging-speakerfight
       commands:
-        - python manage.py clean_pyc
-        - python manage.py migrate --noinput --verbosity=0
-        - python manage.py collectstatic --noinput --verbosity=0
-        - python manage.py compilemessages
+        - heroku run python manage.py clean_pyc
+        - heroku run python manage.py migrate --noinput --verbosity=0
+        - heroku run python manage.py collectstatic --noinput --verbosity=0
+        - heroku run python manage.py compilemessages
   # staging:
   #   branch: migration-to-heroku
   #   commands:
