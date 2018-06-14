@@ -35,7 +35,7 @@ $(function () {
       return;
     }
     $(el).removeClass('panel-success panel-warning panel-default');
-    
+
     if ($(container).attr('id') == 'event-approved-proposals') {
       $(el).addClass('panel-success');
       $(el).find(':checkbox').attr('checked', 'checked');
@@ -65,7 +65,6 @@ $(function () {
       },
       data: {
         title: $(modal).find('#id_title').val(),
-        description: $(modal).find('#id_description').val(),
         activity_type: $(modal).find('#id_activity_type').val(),
         start_timetable: $(modal).find('#id_start_timetable').val(),
         end_timetable: $(modal).find('#id_end_timetable').val(),
@@ -117,6 +116,26 @@ $(function () {
       url: $(this).parents('.panel').attr('data-href'),
       method: 'GET',
     }).success(function(data, status, xhr) {
+      $(modal).find('#id_title').val(data.title);
+      $(modal).find('#id_description').val(data.description);
+      $(modal).find('#id_activity_type').val(data.activity_type);
+      tinymce.get('id_description').setContent(data.description);
+      $(modal).find('#id_start_timetable').val(data.start_timetable);
+      $(modal).find('#id_end_timetable').val(data.end_timetable);
+      $(modal).find('#oldSlug').val(data.slug);
+    });
+
+    $(modal).attr('data-href', $(this).parents('.panel').attr('data-href'));
+    $(modal).modal();
+  });
+
+  $('.proposal-container').delegate('.update-proposal', 'click', function(e) {
+    e.preventDefault();
+    var modal = $('#update-proposal-modal');
+    $.ajax({
+      url: $(this).parents('.panel').attr('data-href'),
+      method: 'GET',
+    }).success(function(data, status, xhr) {
       $(modal).find('#id_start_timetable').val(data.start_timetable);
       $(modal).find('#id_end_timetable').val(data.end_timetable);
     });
@@ -125,9 +144,9 @@ $(function () {
     $(modal).modal();
   });
 
-  $('#update-activity-form').submit(function (e) {
+  $('#update-proposal-form').submit(function (e) {
     e.preventDefault();
-    var modal = $('#update-activity-modal');
+    var modal = $('#update-proposal-modal');
 
     $.ajax({
       url: $(modal).attr('data-href'),
@@ -140,10 +159,55 @@ $(function () {
         end_timetable: $(modal).find('#id_end_timetable').val(),
       }
     }).success(function(data, status, xhr) {
+
+      var activityBlock = $('#' + data.slug);
+      $(activityBlock).find('.proposal-timetable .timetable').text(data.timetable);
+      $(activityBlock).find('.proposal-timetable').removeClass('hide');
+      $(modal).modal('hide');
+    }).error(function(data, status, xhr) {
+      if (data.status == 403) {
+        alert(data.responseJSON.detail)
+      };
+      for (field in data.responseJSON){
+        $('[name="' + field + '"]').parents('.form-group').addClass('has-error');
+      }
+    });
+  });
+
+  $('#update-activity-form').submit(function (e) {
+    e.preventDefault();
+    var modal = $('#update-activity-modal');
+    $.ajax({
+      url: $(modal).attr('data-href'),
+      method: 'PATCH',
+      headers: {
+        'X-CSRFToken': getCookie('csrftoken')
+      },
+      data: {
+        title: $(modal).find('#id_title').val(),
+        description: $(modal).find('#id_description_ifr').contents().find("[data-id=id_description]").html(),
+        activity_type: $(modal).find('#id_activity_type').val(),
+        description: $(modal).find('#id_description').val(),
+        start_timetable: $(modal).find('#id_start_timetable').val(),
+        end_timetable: $(modal).find('#id_end_timetable').val(),
+      }
+    }).success(function(data, status, xhr) {
+      var oldSlug = $(modal).find('#oldSlug').val();
+
+      $(modal).attr('data-href', data.url_api_event_activity)
+      $('#' + oldSlug).attr('data-href', data.url_api_event_activity);
+      $('#' + oldSlug).attr('id', data.slug);
+
       var activityBlock = $('#' + data.slug);
       $(activityBlock).find('.proposal-points').addClass('hide');
       $(activityBlock).find('.proposal-timetable .timetable').text(data.timetable);
+      $(activityBlock).find('.proposal-timetable p').text(data.activity_type_display);
+      $(activityBlock).find('.activity-type').text(data.activity_type_display);
+      $(activityBlock).find('.proposal-title a').text(data.title);
       $(activityBlock).find('.proposal-timetable').removeClass('hide');
+      if (data.activity_type != 'proposal') {
+        $(activityBlock).find('.proposal-title .proposal-metadata').html(data.description);
+      }
       $(modal).modal('hide');
     }).error(function(data, status, xhr) {
       if (data.status == 403) {
@@ -178,5 +242,129 @@ $(function () {
         alert(data.responseJSON.detail)
       };
     });
+  });
+
+  $(".proposal-actions").on('click', '.approve-link', function(e) {
+    e.preventDefault();
+    var self = $(this);
+    if (!self.attr('href')) {
+      return;
+    }
+
+    $.ajax({
+      url: self.attr('href'),
+      method: 'POST'
+    }).success(function(data, status, xhr) {
+      var old_href = self.attr('href');
+      var new_href = old_href.replace('/approve_proposal', '/disapprove_proposal');
+      self.attr('href', new_href);
+      var old_title = self.attr('data-original-title');
+      var new_title = old_title.replace(
+        gettext('Approve the proposal.'), gettext('Disapprove the proposal.'));
+      self.attr('data-original-title', new_title);
+      self.removeClass('approve-link');
+      self.addClass('disapprove-link');
+      self.find('i').attr('class', 'icon-check-empty');
+      self.find('span').html(gettext('Disapprove'));
+      self.blur();
+      self.parents('.proposal-item').find('.update-activity').removeClass('hide');
+
+      // move to approved list
+      self.parents('.proposal-item').appendTo("#event-approved-proposals");
+
+      var successAlert = '<div class="alert alert-success alert-dismissable text-left" id="succes-approved-alert">' +
+                           '<i class="icon-exclamation-sign"></i>' +
+                             data.message +
+                           '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
+                         '</div>';
+      $('#message').append(successAlert);
+      window.setTimeout(function() {
+        $("#succes-approved-alert").alert('close');
+      }, 3000);
+    }).error(function(xhr, status, error) {
+      if (xhr.responseJSON) {
+        if (xhr.responseJSON.redirectUrl) {
+          window.location.href = xhr.responseJSON.redirectUrl;
+        } else if (xhr.responseJSON.message) {
+          var errorAlert = '<div class="alert alert-danger alert-dismissable text-left">' +
+                             '<i class="icon-exclamation-sign"></i>' +
+                               xhr.responseJSON.message +
+                             '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
+                           '</div>';
+          $('#message').append(errorAlert);
+        }
+      }
+    });
+  });
+
+
+  $.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+      if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+        // Only send the token to relative URLs i.e. locally.
+        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+      }
+    }
+  });
+
+  $(".proposal-actions").on('click', '.disapprove-link', function(e) {
+    e.preventDefault();
+    var self = $(this);
+    if (!self.attr('href')) {
+      return;
+    }
+
+    $.ajax({
+      url: self.attr('href'),
+      method: 'POST'
+    }).success(function(data, status, xhr) {
+      var old_href = self.attr('href');
+      var new_href = old_href.replace('/disapprove_proposal', '/approve_proposal');
+      self.attr('href', new_href);
+      var old_title = self.attr('data-original-title');
+      var new_title = old_title.replace(
+        gettext('Disapprove the proposal.'), gettext('Approve the proposal.'));
+      self.attr('data-original-title', new_title);
+      self.removeClass('disapprove-link');
+      self.addClass('approve-link');
+      self.find('i').attr('class', 'icon-check');
+      self.find('span').html(gettext('Approve'));
+      self.blur();
+      self.parents('.proposal-item').find('.update-activity').addClass('hide');
+
+      self.parents('.proposal-item').appendTo("#event-not-approved-proposals");
+
+      var successAlert = '<div class="alert alert-success alert-dismissable text-left" id="succes-disapproved-alert">' +
+                           '<i class="icon-exclamation-sign"></i>' +
+                             data.message +
+                           '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
+                         '</div>';
+      $('#message').append(successAlert);
+      window.setTimeout(function() {
+        $("#succes-disapproved-alert").alert('close');
+      }, 3000);
+    }).error(function(xhr, status, error) {
+      if (xhr.responseJSON) {
+        if (xhr.responseJSON.redirectUrl) {
+          window.location.href = xhr.responseJSON.redirectUrl;
+        } else if (xhr.responseJSON.message) {
+          var errorAlert = '<div class="alert alert-danger alert-dismissable text-left">' +
+                             '<i class="icon-exclamation-sign"></i>' +
+                               xhr.responseJSON.message +
+                             '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
+                           '</div>';
+          $('#message').append(errorAlert);
+        }
+      }
+    });
+  });
+
+  tinymce.init({
+    selector: "[name='description']",
+    menubar: false,
+    skin: 'light',
+    plugins: 'link paste preview textcolor',
+    toolbar: "bold italic underline forecolor | alignleft aligncenter alignright | link unlink | undo redo removeformat | formatselect fontsizeselect pastetext | preview",
+    body_class: 'form-control',
   });
 });

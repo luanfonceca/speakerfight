@@ -1,5 +1,5 @@
-
 from collections import namedtuple
+import datetime
 import json
 
 from django.conf import settings
@@ -29,8 +29,8 @@ class EventTest(TestCase):
 
     def test_create_event(self):
         event_data = self.event_data.copy()
-        event_data['due_date'] = (
-            event_data['due_date'].strftime('%d/%m/%Y %H:%M')
+        event_data['closing_date'] = (
+            event_data['closing_date'].strftime('%d/%m/%Y %H:%M')
         )
         with self.settings(LANGUAGE_CODE='pt-BR'):
             response = self.client.post(reverse('create_event'),
@@ -52,8 +52,8 @@ class EventTest(TestCase):
             return
 
         event_data = self.event_data.copy()
-        event_data['due_date'] = (
-            event_data['due_date'].strftime('%d/%m/%Y %H:%M')
+        event_data['closing_date'] = (
+            event_data['closing_date'].strftime('%d/%m/%Y %H:%M')
         )
         with self.settings(LANGUAGE_CODE='pt-BR'):
             self.client.post(reverse('create_event'),
@@ -67,8 +67,8 @@ class EventTest(TestCase):
 
     def test_create_event_with_jury(self):
         event_data = self.event_data.copy()
-        event_data['due_date'] = (
-            event_data['due_date'].strftime('%d/%m/%Y %H:%M')
+        event_data['closing_date'] = (
+            event_data['closing_date'].strftime('%d/%m/%Y %H:%M')
         )
         with self.settings(LANGUAGE_CODE='pt-BR'):
             response = self.client.post(reverse('create_event'),
@@ -104,7 +104,7 @@ class EventTest(TestCase):
         past_event_data = self.event_data.copy()
         past_event_data.update(
             title='Python Nordeste',
-            due_date=now() - timedelta(days=7)
+            closing_date=now() - timedelta(days=7)
         )
         Event.objects.create(**past_event_data)
 
@@ -122,7 +122,7 @@ class EventTest(TestCase):
         past_event_data.update(
             title='Python Nordeste',
             is_published=True,
-            due_date=now() - timedelta(days=7)
+            closing_date=now() - timedelta(days=7)
         )
         Event.objects.create(**past_event_data)
 
@@ -140,7 +140,7 @@ class EventTest(TestCase):
         past_event_data.update(
             title='Python Nordeste',
             is_published=True,
-            due_date=now() - timedelta(days=7)
+            closing_date=now() - timedelta(days=7)
         )
         Event.objects.create(**past_event_data)
 
@@ -174,6 +174,22 @@ class EventTest(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertQuerysetEqual(response.context['event_list'],
                                  ["<Event: RuPy - 0>"])
+
+    def test_list_past_events(self):
+        # A future far far away
+        future_event_data = self.event_data.copy()
+        future_event_data.update(is_published=True,
+                                 closing_date=datetime.datetime(3000, 1, 1))
+        Event.objects.create(**future_event_data)
+        past_event_data = self.event_data.copy()
+        past_event_data.update(title='Speakerfight rocks',
+                               is_published=True,
+                               closing_date=datetime.datetime(1900, 1, 1))
+        Event.objects.create(**past_event_data)
+
+        response = self.client.get(reverse('past_events'))
+        self.assertEquals(response.status_code, 200)
+        self.assertEquals(len(response.context['event_list']), 1)
 
     def test_detail_event(self):
         event = Event.objects.create(**self.event_data)
@@ -263,6 +279,27 @@ class EventTest(TestCase):
         self.assertEquals('event/event_detail.html', response.template_name[0])
         self.assertEquals('RuPy', event.title)
 
+    def test_delete_event(self):
+        new_event_data = self.event_data.copy()
+        new_event_data['author_id'] = User.objects.get(username='user').id
+        new_event_data['description'] = 'A good candidate to be deleted.'
+        event = Event.objects.create(**new_event_data)
+
+        self.client.login(username='user', password='user')
+        response = self.client.post(
+            reverse('delete_event', kwargs={'slug': event.slug}), follow=True)
+        self.assertEquals(response.status_code, 200)
+        self.assertContains(response, _('Event deleted.'))
+        self.assertEquals(Event.objects.filter(slug=event.slug).count(), 0)
+
+    def test_not_allowed_to_delete_event(self):
+        event = Event.objects.create(**self.event_data)
+        self.client.login(username='user', password='user')
+        response = self.client.post(
+            reverse('delete_event', kwargs={'slug': event.slug}), follow=True)
+        self.assertEqual(200, response.status_code)
+        self.assertContains(response, _('You are not allowed to see this page.'))
+
     def test_publish_event(self):
         event = Event.objects.create(**self.event_data)
         event_data = self.event_data.copy()
@@ -338,9 +375,9 @@ class EventTest(TestCase):
                           response.context_data.get('redirect_field_value'))
         self.assertEquals(0, event.proposals.count())
 
-    def test_event_create_event_proposal_with_passed_due_date(self):
+    def test_event_create_event_proposal_with_passed_closing_date(self):
         event_data = self.event_data.copy()
-        event_data.update(due_date=now() - timedelta(hours=24))
+        event_data.update(closing_date=now() - timedelta(hours=24))
         event = Event.objects.create(**event_data)
         response = self.client.post(
             reverse('create_event_proposal', kwargs={'slug': event.slug}),
@@ -674,15 +711,7 @@ class ProposalTest(TestCase):
     def test_update_proposal(self):
         new_proposal_data = self.proposal_data.copy()
         new_proposal_data['description'] = 'A really really good proposal.'
-
-        self.assertEquals(self.proposal_data['description'],
-                          self.proposal.description)
-
-        response = self.client.get(
-            reverse('update_proposal',
-                    kwargs={'event_slug': self.event.slug,
-                            'slug': self.proposal.slug}))
-        self.assertEqual(response.context['event'], self.event)
+        new_proposal_data['slides_url'] = 'john_doe/talk'
 
         response = self.client.post(
             reverse('update_proposal',
@@ -693,21 +722,28 @@ class ProposalTest(TestCase):
         self.assertEquals(200, response.status_code)
         self.proposal = response.context['event'].proposals.first()
         self.assertEquals('Python For Zombies', self.proposal.title)
-        self.assertEquals('A really really good proposal.',
+        self.assertEquals(new_proposal_data['description'],
                           self.proposal.description)
+        self.assertEquals(new_proposal_data['slides_url'],
+                          self.proposal.slides_url)
 
     def test_anonymous_user_update_proposal(self):
         self.client.logout()
         new_proposal_data = self.proposal_data.copy()
         new_proposal_data['description'] = 'A really really good proposal.'
+        new_proposal_data['slides_url'] = 'john_doe/talk'
+
         proposal_update_url = reverse(
-            'update_proposal',
-            kwargs={'event_slug': self.event.slug,
-                    'slug': self.proposal.slug})
+                'update_proposal',
+                kwargs={'event_slug': self.event.slug,
+                        'slug': self.proposal.slug}
+        )
+
         response = self.client.post(
             proposal_update_url,
             new_proposal_data, follow=True
         )
+
         self.assertEquals(200, response.status_code)
         self.assertEquals(proposal_update_url,
                           response.context_data.get('redirect_field_value'))
@@ -1288,5 +1324,5 @@ class ProposalTest(TestCase):
         self.proposal.author = user
         self.proposal.save()
         response = self.client.get(reverse('my_proposals'))
-        self.assertQuerysetEqual(response.context['object_list'],
-                                 ['<Proposal: Python For Zombies>'])
+        self.assertContains(response, 'RuPy')
+        self.assertContains(response, 'Python For Zombies')

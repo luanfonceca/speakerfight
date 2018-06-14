@@ -33,7 +33,7 @@ class DeckBaseManager(models.QuerySet):
         return self.cached_authors().filter(is_published=True)
 
     def upcoming(self, published_only=True):
-        return self.filter(due_date__gte=timezone.now(), is_published=published_only)
+        return self.filter(closing_date__gte=timezone.now(), is_published=published_only)
 
     def order_by_never_voted(self, user_id):
         if self.model != Proposal:
@@ -129,6 +129,15 @@ class Vote(models.Model):
         return super(Vote, self).save(*args, **kwargs)
 
 
+def get_activities_by_parameters_order(ids):
+    activities = []
+    for id_ in ids:
+        activities.append(
+            Activity.objects.get(id=id_)
+        )
+    return activities
+
+
 class Activity(DeckBaseModel):
     PROPOSAL = 'proposal'
     WORKSHOP = 'workshop'
@@ -173,11 +182,20 @@ class Activity(DeckBaseModel):
             self.end_timetable.strftime('%H:%M')
         )
 
+    @property
+    def is_proposal(self):
+        return self.activity_type == self.PROPOSAL
+
 
 class Proposal(Activity):
     is_approved = models.BooleanField(_('Is approved'), default=False)
     more_information = models.TextField(
         _('More information'), max_length=10000, null=True, blank=True)
+    slides_url = models.CharField(
+        _('speakerdeck.com/'), max_length=250, null=True, blank=True)
+
+    def get_full_slides_url(self):
+        return '{0}{1}'.format('http://www.speakerdeck.com/', self.slides_url)
 
     # relations
     event = models.ForeignKey(to='deck.Event', related_name='proposals')
@@ -188,7 +206,7 @@ class Proposal(Activity):
         verbose_name_plural = _('Proposals')
 
     def save(self, *args, **kwargs):
-        if not self.pk and self.event.due_date_is_passed:
+        if not self.pk and self.event.closing_date_is_passed:
             raise ValidationError(
                 _("This Event doesn't accept Proposals anymore."))
         return super(Proposal, self).save(*args, **kwargs)
@@ -272,34 +290,53 @@ class Track(models.Model):
             pk__in=self.activities.values_list('pk', flat=True)
         )
 
+    def has_activities(self):
+        return self.activities.exists()
+
+    def add_proposal_to_slot(self, proposal, slot_index):
+        proposal.track = self
+        proposal.is_approved = True
+        proposal.track_order = slot_index
+        proposal.save()
+
+    def add_activity_to_slot(self, activity, slot_index):
+        activity.track = self
+        activity.track_order = slot_index
+        activity.save()
+        if activity.is_proposal:
+            self.add_proposal_to_slot(activity.proposal, slot_index)
+
+    def refresh_track(self):
+        self.proposals.update(is_approved=False)
+        self.activities.update(track=None, track_order=None)
+
 
 class Event(DeckBaseModel):
     allow_public_voting = models.BooleanField(_('Allow Public Voting'),
                                               default=True)
-    due_date = models.DateTimeField(null=True, blank=True)
+    closing_date = models.DateTimeField(null=False, blank=False)
     slots = models.SmallIntegerField(_('Slots'), default=10)
 
     # relations
     jury = models.OneToOneField(to='jury.Jury', related_name='event',
                                 null=True, blank=True)
-    anonymous_voting = models.BooleanField(_('Anonymous Voting?'), default=False)
+    anonymous_voting = models.BooleanField(
+        _('Anonymous Voting?'), default=False)
 
     class Meta:
-        ordering = ['-due_date', '-created_at']
+        ordering = ['-closing_date', '-created_at']
         verbose_name = _('Event')
         verbose_name_plural = _('Events')
 
     @property
-    def due_date_is_passed(self):
-        if not self.due_date:
-            return False
-        return timezone.now() > self.due_date
+    def closing_date_is_passed(self):
+        return timezone.now() > self.closing_date
 
     @property
-    def due_date_is_close(self):
-        if self.due_date_is_passed:
+    def closing_date_is_close(self):
+        if self.closing_date_is_passed:
             return False
-        return timezone.now() > self.due_date - timezone.timedelta(days=7)
+        return timezone.now() > self.closing_date - timezone.timedelta(days=7)
 
     def get_absolute_url(self):
         return reverse('view_event', kwargs={'slug': self.slug})
@@ -344,6 +381,15 @@ class Event(DeckBaseModel):
             .filter(
                 models.Q(is_approved=False) |
                 models.Q(track__isnull=True))
+
+    def get_main_track(self):
+        return self.tracks.first()
+
+    def filter_not_scheduled_by_slots(self):
+        return self.get_not_approved_schedule()[:self.slots]
+
+    def user_in_jury(self, user):
+        return self.jury.users.filter(pk=user.pk).exists()
 
 
 @receiver(user_signed_up)

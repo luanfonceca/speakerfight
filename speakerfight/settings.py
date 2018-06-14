@@ -114,6 +114,7 @@ THIRD_PARTY_APPS = [
     'raven.contrib.django.raven_compat',
     'rest_framework',
     'anymail',
+    'fixmydjango',
 ]
 
 LOCAL_APPS = [
@@ -121,6 +122,7 @@ LOCAL_APPS = [
     'core',
     'jury',
     'api',
+    'organization',
 ]
 
 INSTALLED_APPS = LOCAL_APPS + THIRD_PARTY_APPS + DEFAULT_APPS
@@ -242,6 +244,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_EMAIL_REQUIRED = True
 SOCIALACCOUNT_QUERY_EMAIL = True
+ACCOUNT_SIGNUP_FORM_CLASS = 'core.forms.SignupForm'
 
 # Django Debug Toolbar
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
