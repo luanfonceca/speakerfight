@@ -11,9 +11,14 @@ general:
     - 'coverage'
 deployment:
   production:
-    branch: master
-    commands:
-      - fab deploy
+    branch: migration-to-heroku
+    heroku:
+      appname: speakerfight
+      commands:
+        - python manage.py clean_pyc
+        - python manage.py migrate --noinput --verbosity=0
+        - python manage.py collectstatic --noinput --verbosity=0
+        - python manage.py compilemessages
   staging:
     branch: migration-to-heroku
     heroku:
