@@ -52,7 +52,7 @@ python-openid==2.2.5
 pytz==2018.4
 raven==6.7.0
 requests-oauthlib==0.8.0
-requests==2.18.4
+requests==2.19.1
 scandir==1.7
 sh==1.12.14
 simplegeneric==0.8.1
