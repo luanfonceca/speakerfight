@@ -14,12 +14,12 @@ deployment:
     branch: migration-to-heroku
     heroku:
       appname: speakerfight
-      commands:
-        - git push git@heroku.com:foo-bar-123.git $CIRCLE_SHA1:master
-        - heroku run python manage.py clean_pyc
-        - heroku run python manage.py migrate --noinput --verbosity=0
-        - heroku run python manage.py collectstatic --noinput --verbosity=0
-        - heroku run python manage.py compilemessages
+      # commands:
+      #   - git push git@heroku.com:foo-bar-123.git $CIRCLE_SHA1:master
+      #   - heroku run python manage.py clean_pyc
+      #   - heroku run python manage.py migrate --noinput --verbosity=0
+      #   - heroku run python manage.py collectstatic --noinput --verbosity=0
+      #   - heroku run python manage.py compilemessages
   staging:
     branch: migration-to-heroku
     heroku:
