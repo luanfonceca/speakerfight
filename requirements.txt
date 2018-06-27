@@ -4,7 +4,7 @@ Django==1.11.12
 Fabric==1.14.0
 MarkupSafe==1.0
 PyNaCl==1.2.1
-PyYAML==3.12
+PyYAML==4.1
 Pygments==2.2.0
 Werkzeug==0.14.1
 asn1crypto==0.24.0
