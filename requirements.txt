@@ -30,7 +30,7 @@ django-vanilla-views==1.0.5
 djangorestframework==3.8.2
 enum34==1.1.6
 fixmydjango==0.3.2
-greenlet==0.4.13
+greenlet==0.4.14
 idna==2.6
 ipaddress==1.0.22
 master-sake==1.1
