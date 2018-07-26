@@ -45,7 +45,7 @@ pickleshare==0.7.4
 prompt-toolkit==1.0.15
 psycopg2==2.7.4
 ptyprocess==0.5.2
-pyasn1==0.4.2
+pyasn1==0.4.4
 pycparser==2.18
 python-coveralls==2.9.1
 python-openid==2.2.5
