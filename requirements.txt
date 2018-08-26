@@ -25,7 +25,7 @@ django-bootstrap3==10.0.0
 django-coverage==1.2.4
 django-datetime-widget==0.9.3
 django-debug-toolbar==1.9.1
-django-extensions==2.0.7
+django-extensions==2.1.1
 django-vanilla-views==1.0.5
 djangorestframework==3.8.2
 enum34==1.1.6
