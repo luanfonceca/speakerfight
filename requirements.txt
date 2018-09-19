@@ -36,7 +36,7 @@ ipaddress==1.0.22
 master-sake==1.1
 mccabe==0.6.1
 model-mommy==1.5.1
-networkx==2.1
+networkx==2.2
 oauthlib==2.0.7
 paramiko==2.4.1
 pathlib2==2.3.2
