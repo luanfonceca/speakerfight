@@ -41,7 +41,7 @@ oauthlib==2.0.7
 paramiko==2.4.1
 pathlib2==2.3.2
 pexpect==4.5.0
-pickleshare==0.7.4
+pickleshare==0.7.5
 prompt-toolkit==1.0.15
 psycopg2==2.7.4
 ptyprocess==0.5.2
