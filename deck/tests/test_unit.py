@@ -19,7 +19,7 @@ EVENT_DATA = {
     'author_id': 1,
     'is_published': False,
     'slots': 30,
-    'due_date': now() + timedelta(days=7),
+    'closing_date': now() + timedelta(days=7),
 }
 
 PROPOSAL_DATA = {
@@ -266,6 +266,9 @@ class ProposalObjectTest(TestCase):
 
     def test_assert_proposal_slides_url(self):
         self.assertEquals(u'jane_doe/talk', self.proposal.slides_url)
+
+    def test_assert_proposal_get_full_slides_url(self):
+        self.assertEquals(u'http://www.speakerdeck.com/jane_doe/talk', self.proposal.get_full_slides_url())
 
     def test_assert_proposal_author(self):
         self.assertEquals(1, self.proposal.author_id)
