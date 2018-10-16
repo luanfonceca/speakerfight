@@ -1,5 +1,6 @@
 # coding: utf-8
 
+from allauth.socialaccount.models import SocialAccount
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
 from django.utils.translation import get_language
@@ -121,3 +122,19 @@ class ProfileUpdateTest(TestCase):
         ]
         self.assertQuerysetEqual(response.context['proposals'],
                                  exceped_proposals)
+
+    def test_update_password_link_on_profile(self):
+        # A common account using password authentication
+        response = self.client.get(
+            reverse('user_profile', kwargs={
+                'user__username': self.profile.user.username
+            }))
+        self.assertContains(response, reverse('account_change_password'))
+
+        # A social account using django-allauth
+        SocialAccount.objects.create(user=self.profile.user, provider='github')
+        response = self.client.get(
+            reverse('user_profile', kwargs={
+                'user__username': self.profile.user.username
+            }))
+        self.assertNotContains(response, reverse('account_change_password'))
