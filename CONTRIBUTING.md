@@ -15,7 +15,7 @@ with a fix.
 
 ## Submission Guidelines
 
-### Asigning a issue to yourself
+### Assigning a issue to yourself
 
 If you want to fix an issue, please comment in the issue thread to show everyone that you want to do that. Ask anything about it, explain your thoughts. It is very important for us to have that conversation in order to avoid misconceptions, bugs, non-necesseracy implementations and over-engineering.
 

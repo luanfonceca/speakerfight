@@ -1,8 +1,11 @@
 # coding: utf-8
 
+from django.contrib.auth import get_user_model
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 from django.utils.translation import get_language
+from model_mommy import mommy
 
 from core.models import Profile
 
@@ -121,3 +124,28 @@ class ProfileUpdateTest(TestCase):
         ]
         self.assertQuerysetEqual(response.context['proposals'],
                                  exceped_proposals)
+
+
+class ProfileTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        tomorrow = timezone.now() + timezone.timedelta(days=1)
+        cls.user = mommy.make(get_user_model())
+        cls.profile = cls.user.profile
+        cls.proposal_1 = mommy.make(
+            'deck.Proposal',
+            author=cls.user,
+            event__closing_date=tomorrow
+        )
+        cls.proposal_2 = mommy.make(
+            'deck.Proposal',
+            author=cls.user,
+            event__anonymous_voting=True,
+            event__closing_date=tomorrow
+        )
+
+    def test_should_not_see_proposals_from_anonymous_voting_events(self):
+        proposals = self.profile.get_profile_proposals()
+
+        self.assertEqual(proposals.count(), 1)
+        self.assertIn(self.proposal_1, proposals)

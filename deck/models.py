@@ -192,7 +192,11 @@ class Proposal(Activity):
     more_information = models.TextField(
         _('More information'), max_length=10000, null=True, blank=True)
     slides_url = models.CharField(
-        _('speakerdeck.com'), max_length=250, null=True, blank=True)
+        _('speakerdeck.com/'), max_length=250, null=True, blank=True)
+
+    def get_full_slides_url(self):
+        if self.slides_url:
+            return 'http://www.speakerdeck.com/{0}'.format(self.slides_url)
 
     # relations
     event = models.ForeignKey(to='deck.Event', related_name='proposals')
