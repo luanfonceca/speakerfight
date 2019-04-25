@@ -32,6 +32,7 @@ class EventTest(TestCase):
         event_data['closing_date'] = (
             event_data['closing_date'].strftime('%d/%m/%Y %H:%M')
         )
+        event_data['accept_proposals_at'] = (now() + timedelta(days=-20)).strftime('%d/%m/%Y %H:%M')
         with self.settings(LANGUAGE_CODE='pt-BR'):
             response = self.client.post(reverse('create_event'),
                                         event_data, follow=True)
