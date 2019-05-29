@@ -66,3 +66,5 @@ db.sqlite3
 # files with ~ at the end
 *.*~
 
+# Hidden files on OSx
+.DS_Store
