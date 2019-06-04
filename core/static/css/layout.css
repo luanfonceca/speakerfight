@@ -30,7 +30,6 @@ body.menu {
   box-shadow: none; }
 
 input.search {
-  background: url("../../img/lens.png") #fcfcfc no-repeat 95%;
   box-shadow: none;
   height: 25px;
   width: 220px;
@@ -57,7 +56,6 @@ input.search {
   height: 27px;
   width: 220px;
   padding: 3px 6px;
-  background: url("../../img/lens.png") #0f1217 no-repeat 95%;
   border: 1px solid #0f1217;
   position: relative;
   border-radius: 4px;
@@ -455,7 +453,6 @@ input.search {
     float: left;
     width: 9px;
     height: 10px;
-    background: url("../../img/skin-nav-bullets.png") 0 0 no-repeat;
     margin: 15px 15px 0 5px; }
     .content .skins-nav a.selected .icon {
     background-position: 0 -9px; }

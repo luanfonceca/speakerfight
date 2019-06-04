@@ -64,6 +64,22 @@ def deploy():
     print green('Deploy succefully done!')
 
 
+def heroku_deploy():
+    print yellow('Cleanning the .pyc files')
+    _run('manage.py clean_pyc')
+
+    print yellow('Migrate the DB')
+    _run('manage.py migrate --noinput --verbosity=0')
+
+    print yellow('Collecting the static files')
+    _run('manage.py collectstatic --noinput --verbosity=0')
+
+    print yellow('Compiling the strings')
+    _run('manage.py compilemessages')
+
+    print green('App succefully updated')
+
+
 def load_initial_data():
     fixtures = [
         'deck/fixtures/user.json',

@@ -64,5 +64,9 @@ uWSGI==2.0.15
 unicodecsv==0.14.1
 urllib3==1.22
 wcwidth==0.1.7
+gunicorn==19.6.0
+dj-database-url==0.4.1
+python-decouple==3.1
+whitenoise==3.2
 Pillow==5.1.0
 mock==2.0.0

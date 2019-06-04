@@ -389,12 +389,6 @@
   position: relative;
   overflow: hidden;
   background: #ffffff;
-  background: url("../../img/select-bg.png"), -moz-linear-gradient(top, white 0%, #f0f1f2 100%);
-  background: url("../../img/select-bg.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #f0f1f2));
-  background: url("../../img/select-bg.png"), -webkit-linear-gradient(top, white 0%, #f0f1f2 100%);
-  background: url("../../img/select-bg.png"), -o-linear-gradient(top, white 0%, #f0f1f2 100%);
-  background: url("../../img/select-bg.png"), -ms-linear-gradient(top, white 0%, #f0f1f2 100%);
-  background: url("../../img/select-bg.png"), linear-gradient(to bottom, white 0%, #f0f1f2 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f0f1f2',GradientType=0 );
   display: inline-block;
   border: 1px solid #cfdde8;
@@ -427,7 +421,6 @@
 .ui-state-default,
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
-  background: url("../../img/jquery-ui/slider-handler.png") no-repeat;
   border: none;
   width: 16px;
   height: 17px;
@@ -436,7 +429,6 @@
 }
 
 .ui-slider.vertical-handler .ui-state-default {
-  background: url("../../img/jquery-ui/slider-handler2.png") no-repeat;
   width: 11px;
   height: 21px;
   top: -8px;
