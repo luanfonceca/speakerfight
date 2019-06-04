@@ -62,6 +62,7 @@ class Profile(models.Model):
         return Proposal.objects.filter(
             author=self.user,
             event__is_published=True,
+            event__anonymous_voting=False,
             is_published=True,
         )
 

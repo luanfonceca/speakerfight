@@ -1,6 +1,6 @@
 # Contributing to Speakerfight
 
-We'd love your contribution to our project and to make Speakerfight. Here are the guidelines we'd like you to follow:
+We'd love to have your contribution to our project and to make Speakerfight. Here are the guidelines we'd like you to follow:
 
 - [Issues and Bugs](#issues-and-bugs)
 - [Submission Guidelines](#submission-guidelines)
@@ -10,23 +10,23 @@ We'd love your contribution to our project and to make Speakerfight. Here are th
 ## Issues and Bugs
 
 If you find a bug in the source code or a mistake in the documentation, you can help us by
-submitting an issue to our [GitHub repository][speakerfight]. Even better you can submit a pull request
+submitting an issue to our [GitHub repository][speakerfight]. Even better, you can submit a pull request
 with a fix.
 
 ## Submission Guidelines
 
-### Asigning to you a issue
+### Assigning a issue to yourself
 
-If you want to fix a issue, please comment in the issue thread to show to everyone that you want to do that, ask anything about it, explain your thoughts. It is so much important for us to have that conversation to avoid misconceptions, bugs, non-necesseracy implementations and over-engineering.
+If you want to fix an issue, please comment in the issue thread to show everyone that you want to do that. Ask anything about it, explain your thoughts. It is very important for us to have that conversation in order to avoid misconceptions, bugs, non-necesseracy implementations and over-engineering.
 
 ### Submitting an Issue
 
-Before you submit your issue search the archive, maybe your problem was already answered.
-Also check if there is no work in progress to fix your problem (when no issue to the problem was created).
+Before you submit your issue, search in the archive, maybe your problem was already answered.
+Also check if there is no work in progress to fix your problem (when it wasn't created any issue for the problem ).
 
 ### Submitting a pull request
 
-Building the environment:
+Build the environment:
 
 ```
 $ git clone git@github.com:luanfonceca/speakerfight.git
