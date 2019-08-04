@@ -3,6 +3,8 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.staticfiles.urls import static
 
+from vanilla import TemplateView
+
 
 urlpatterns = (
     url(r'^admin/', admin.site.urls),
@@ -27,3 +29,5 @@ if settings.DEBUG:
         urlpatterns += (
             url(r'^__debug__/', include(debug_toolbar.urls)),
         )
+
+handler500 = TemplateView.as_view(template_name='500.html')

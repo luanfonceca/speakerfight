@@ -1,5 +1,6 @@
 {% extends "public_layout.html" %}
 {% load i18n %}
+{% load raven %}
 
 {% block head_title %}{% trans "Internal Server Error" %}{% endblock head_title %}
 
@@ -9,7 +10,24 @@
     <div class="col-md-8">
       <h1>{% trans "Internal Server Error" %}</h1>
       <h3>{% trans "I'm sorry, that page is currently unavailable due to a server misconfiguration. The server administrator has been notified, and we apologise for any inconvenience." %}</h3>
+      <div class="row">
+        <div class="col-md-3 col-md-offset-5">
+          <button id="#report-sentry" class="btn-flat info text-center">Report Bug</button>
+        </div>
+      </div>
     </div>
     <div class="col-md-2"></div>
   </div>
+
+<script src="https://cdn.ravenjs.com/3.18.1/raven.min.js" crossorigin="anonymous"></script>
+<script>Raven.config('{% sentry_public_dsn %}').install()</script>
+{% if request.sentry.id %}
+  <script>
+    document.getElementById('#report-sentry').addEventListener('click', showReportDialog, false);
+
+    function showReportDialog() {
+      Raven.showReportDialog({eventId: '{{ request.sentry.id }}'});
+    };
+  </script>
+{% endif %}
 {% endblock content %}
