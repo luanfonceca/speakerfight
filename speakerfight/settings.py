@@ -66,6 +66,7 @@ DEFAULT_FROM_EMAIL = NO_REPLY_EMAIL = 'Speakerfight <noreply@speakerfight.com>'
 
 ALLOWED_HOSTS = [
     "localhost",
+    "127.0.0.1",
     "speakerfight.com",
 ]
 
