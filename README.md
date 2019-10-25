@@ -42,6 +42,8 @@
 ```sh
 $ git clone git@github.com:luanfonceca/speakerfight.git
 $ cd speakerfight
+$ virtualenv -p python3 .venv
+$ source .venv/bin/activate
 $ make setup
 $ python manage.py runserver
 ```
