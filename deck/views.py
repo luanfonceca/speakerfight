@@ -290,7 +290,8 @@ class CreateProposal(LoginRequiredMixin,
         proposal = self.object
         context = {
             'event_title': proposal.event.title,
-            'proposal_title': proposal.title
+            'proposal_title': proposal.title,
+            'proposal_url': proposal.get_absolute_url()
         }
         message = render_to_string('mailing/jury_new_proposal.txt', context)
         subject = _(u'Your event has new proposals')
