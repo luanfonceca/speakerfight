@@ -87,9 +87,9 @@ class DeckBaseModel(models.Model):
 class Vote(models.Model):
     ANGRY, SLEEPY, SAD, HAPPY, LAUGHING = range(-1, 4)
     VOTE_TITLES = dict(
-        angry=_('Angry'), sad=_('Sad'),
-        sleepy=_('Sleepy'), happy=_('Happy'),
-        laughing=_('Laughing')
+        angry=_("I don't want to see it"), sad =_("I doesn't like it"),
+        sleepy=_("I'm indifferent"), happy=_('I liked it'),
+        laughing=_('I really want to see it')
     )
     VOTE_RATES = ((ANGRY, 'angry'),
                   (SAD, 'sad'),
