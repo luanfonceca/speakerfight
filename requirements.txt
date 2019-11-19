@@ -1,6 +1,6 @@
 -e git+https://github.com/azavea/django-queryset-csv.git@f71b905a4f7ab649b6ad093c3acf4fb82baf713b#egg=django_queryset_csv
 -e git+https://github.com/luzfcb/django-activelink.git@39a5640e90f0c13b6bb4f1b277ac4196b6d07bec#egg=django_activelink
-Django==1.11.12
+Django==1.11.17
 Fabric==1.14.0
 MarkupSafe==1.0
 PyNaCl==1.2.1
@@ -64,5 +64,5 @@ uWSGI==2.0.15
 unicodecsv==0.14.1
 urllib3==1.22
 wcwidth==0.1.7
-Pillow==5.1.0
+Pillow==6.2.1
 mock==2.0.0
