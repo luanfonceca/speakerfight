@@ -13,7 +13,7 @@ class RetrieveEventScheduleView(generics.RetrieveAPIView):
     lookup_field = 'slug'
 
 
-class CreateActivityView(permissions.DeckPermissionMixing,
+class CreateActivityView(permissions.DeckPermissionMixin,
                          generics.CreateAPIView):
     serializer_class = serializers.CreateActivitySerializer
     form_class = ActivityForm
@@ -26,7 +26,7 @@ class CreateActivityView(permissions.DeckPermissionMixing,
         )
 
 
-class ActivityView(permissions.DeckPermissionMixing,
+class ActivityView(permissions.DeckPermissionMixin,
                    generics.RetrieveAPIView,
                    generics.UpdateAPIView,
                    generics.DestroyAPIView):
