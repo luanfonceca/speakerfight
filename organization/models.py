@@ -21,7 +21,7 @@ class Organization(models.Model):
 
     # relations
     created_by = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL, related_name='organizations'
+        to=settings.AUTH_USER_MODEL, related_name='organizations', on_delete=models.CASCADE
     )
 
     def __str__(self):

@@ -16,7 +16,7 @@ class IsJuryPermission(permissions.BasePermission):
         return is_in_jury or request.user.is_superuser
 
 
-class DeckPermissionMixing(object):
+class DeckPermissionMixing():
     permission_classes = (
         permissions.IsAuthenticated,
         IsJuryPermission,

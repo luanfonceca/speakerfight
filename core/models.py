@@ -1,6 +1,6 @@
 
 from django.core.exceptions import AppRegistryNotReady
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save, pre_save
@@ -28,7 +28,7 @@ class Profile(models.Model):
     image = models.ImageField(null=True, blank=True)
 
     # relations
-    user = models.OneToOneField(to=settings.AUTH_USER_MODEL)
+    user = models.OneToOneField(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _('Profile')

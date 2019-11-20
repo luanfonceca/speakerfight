@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import Http404
 from django.utils.translation import ugettext as _
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from . models import Organization
-from core.mixins import LoginRequiredMixin, FormValidRedirectMixing
+from core.mixins import LoginRequiredMixin, FormValidRedirectMixin
 
 
-class OwnerRequiredMixin(object):
+class OwnerRequiredMixin():
 
     def dispatch(self, *args, **kwargs):
         """Only owners can manage organizations."""
@@ -21,7 +21,7 @@ class OwnerRequiredMixin(object):
         return super(OwnerRequiredMixin, self).dispatch(*args, **kwargs)
 
 
-class BaseOrganizationView(LoginRequiredMixin, FormValidRedirectMixing):
+class BaseOrganizationView(LoginRequiredMixin, FormValidRedirectMixin):
     model = Organization
     fields = ['name', 'about']
     template_Name = 'organization/organization_form.html'

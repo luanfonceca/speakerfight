@@ -11,7 +11,7 @@ from vanilla import TemplateView, DetailView, UpdateView
 from deck.models import Event, Proposal
 from core.models import Profile
 from core.forms import ProfileForm, ProfilePictureForm, ProfileChangeLanguageForm
-from core.mixins import LoginRequiredMixin, FormValidRedirectMixing
+from core.mixins import LoginRequiredMixin, FormValidRedirectMixin
 
 
 class IndexView(TemplateView):
@@ -40,7 +40,7 @@ class ProfileView(DetailView):
         queryset = self.get_queryset()
         username = self.kwargs.get('user__username')
 
-        if not username and self.request.user.is_authenticated():
+        if not username and self.request.user.is_authenticated:
             return self.request.user.profile
         else:
             return get_object_or_404(queryset, user__username=username)
@@ -58,7 +58,7 @@ class ProfileView(DetailView):
 
 
 class ProfileUpdateView(LoginRequiredMixin,
-                        FormValidRedirectMixing,
+                        FormValidRedirectMixin,
                         UpdateView):
     template_name = 'account/profile.html'
     model = Profile
@@ -69,7 +69,7 @@ class ProfileUpdateView(LoginRequiredMixin,
         queryset = self.get_queryset()
         username = self.kwargs.get('user__username')
 
-        if not username and self.request.user.is_authenticated():
+        if not username and self.request.user.is_authenticated:
             return self.request.user.profile
         elif (username == self.request.user.username or
               self.request.user.is_superuser):

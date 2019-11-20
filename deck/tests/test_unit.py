@@ -89,7 +89,7 @@ class EventModelIntegrityTest(TestCase):
         self.assertIn('author', get_all_field_names(Event))
 
     def test_assert_event_author_should_be_an_User(self):
-        self.assertEquals(User, self.fields['author'].rel.to)
+        self.assertEquals(User, self.fields['author'].remote_field.model)
 
     def test_assert_event_author_should_be_a_ForeignKey(self):
         self.assertIsInstance(self.fields['author'], ForeignKey)
@@ -99,7 +99,7 @@ class EventModelIntegrityTest(TestCase):
         self.assertEquals(False, self.fields['author'].blank)
 
     def test_assert_event_author_should_have_a_related_name(self):
-        self.assertEquals('events', self.fields['author'].rel.related_name)
+        self.assertEquals('events', self.fields['author'].remote_field.related_name)
 
     def test_assert_event_should_have_a_publish_flag(self):
         self.assertIn('is_published', get_all_field_names(Event))
@@ -114,7 +114,7 @@ class EventModelIntegrityTest(TestCase):
         self.assertIn('jury', get_all_field_names(Event))
 
     def test_assert_event_jury_should_be_an_Jury(self):
-        self.assertEquals(Jury, self.fields['jury'].rel.to)
+        self.assertEquals(Jury, self.fields['jury'].remote_field.model)
 
     def test_assert_event_jury_should_be_a_ForeignKey(self):
         self.assertIsInstance(self.fields['jury'], ForeignKey)
@@ -124,7 +124,7 @@ class EventModelIntegrityTest(TestCase):
         self.assertEquals(True, self.fields['jury'].blank)
 
     def test_assert_event_jury_should_have_a_related_name(self):
-        self.assertEquals('event', self.fields['jury'].rel.related_name)
+        self.assertEquals('event', self.fields['jury'].remote_field.related_name)
 
 
 class EventObjectTest(TestCase):
@@ -193,7 +193,7 @@ class ProposalModelIntegrityTest(TestCase):
         self.assertIn('author', get_all_field_names(Proposal))
 
     def test_assert_proposal_author_should_be_an_User(self):
-        self.assertEquals(User, self.fields['author'].rel.to)
+        self.assertEquals(User, self.fields['author'].remote_field.model)
 
     def test_assert_proposal_author_should_be_a_ForeignKey(self):
         self.assertIsInstance(self.fields['author'], ForeignKey)
@@ -203,13 +203,13 @@ class ProposalModelIntegrityTest(TestCase):
         self.assertEquals(False, self.fields['author'].blank)
 
     def test_assert_proposal_event_should_have_a_related_name(self):
-        self.assertEquals('proposals', self.fields['event'].rel.related_name)
+        self.assertEquals('proposals', self.fields['event'].remote_field.related_name)
 
     def test_assert_proposal_should_have_a_event(self):
         self.assertIn('event', get_all_field_names(Proposal))
 
     def test_assert_proposal_event_should_be_an_Event(self):
-        self.assertEquals(Event, self.fields['event'].rel.to)
+        self.assertEquals(Event, self.fields['event'].remote_field.model)
 
     def test_assert_proposal_event_should_be_a_ForeignKey(self):
         self.assertIsInstance(self.fields['event'], ForeignKey)
@@ -343,7 +343,7 @@ class VoteModelIntegrityTest(TestCase):
         self.assertIn('proposal', get_all_field_names(Vote))
 
     def test_assert_vote_proposal_should_be_an_Proposal(self):
-        self.assertEquals(Proposal, self.fields['proposal'].rel.to)
+        self.assertEquals(Proposal, self.fields['proposal'].remote_field.model)
 
     def test_assert_vote_proposal_should_be_a_ForeignKey(self):
         self.assertIsInstance(self.fields['proposal'], ForeignKey)
@@ -353,13 +353,13 @@ class VoteModelIntegrityTest(TestCase):
         self.assertEquals(False, self.fields['proposal'].blank)
 
     def test_assert_vote_proposal_should_have_a_related_name(self):
-        self.assertEquals('votes', self.fields['proposal'].rel.related_name)
+        self.assertEquals('votes', self.fields['proposal'].remote_field.related_name)
 
     def test_assert_vote_should_have_a_author(self):
         self.assertIn('user', get_all_field_names(Vote))
 
     def test_assert_vote_user_should_be_an_User(self):
-        self.assertEquals(User, self.fields['user'].rel.to)
+        self.assertEquals(User, self.fields['user'].remote_field.model)
 
     def test_assert_vote_user_should_be_a_ForeignKey(self):
         self.assertIsInstance(self.fields['user'], ForeignKey)
@@ -369,7 +369,7 @@ class VoteModelIntegrityTest(TestCase):
         self.assertEquals(False, self.fields['user'].blank)
 
     def test_assert_vote_event_should_have_a_related_name(self):
-        self.assertEquals('votes', self.fields['user'].rel.related_name)
+        self.assertEquals('votes', self.fields['user'].remote_field.related_name)
 
 
 class VoteObjectTest(TestCase):

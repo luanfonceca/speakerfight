@@ -1,4 +1,4 @@
-{% load activelink %}
+{% load active_link_tags %}
 {% load i18n %}
 
 {% block scripts %}
@@ -18,26 +18,26 @@
 
 <div id="sidebar-nav">
   <ul id="dashboard-menu">
-    <li {% ifstartswith "/events/" %}class="active"{% endifstartswith %}>
+    <li class="{% active_link 'list_events' %}">
       <a href="{% url 'list_events' %}">
         <i class="icon-calendar-empty"></i>
         <span>{% trans "Events" %}</span>
       </a>
     </li>
-    <li {% ifstartswith "/past_events/" %}class="active"{% endifstartswith %}>
+    <li class="{% active_link 'past_events' %}">
       <a href="{% url 'past_events' %}">
         <i class="icon-time"></i>
         <span>{% trans "Past Events" %}</span>
       </a>
     </li>
     {% if request.user.is_authenticated %}
-    <li {% ifstartswith "/my_events/" %}class="active"{% endifstartswith %}>
+    <li class="{% active_link 'my_events' %}">
       <a href="{% url 'my_events' %}">
         <i class="icon-calendar"></i>
         <span>{% trans "My Events" %}</span>
       </a>
     </li>
-    <li {% ifstartswith "/my_proposals/" %}class="active"{% endifstartswith %}>
+    <li class="{% active_link 'my_proposals' %}">
       <a href="{% url 'my_proposals' %}">
         <i class="icon-comment"></i>
         <span>{% trans "My Proposals" %}</span>

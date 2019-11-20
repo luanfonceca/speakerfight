@@ -85,7 +85,7 @@ DEFAULT_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    'activelink',
+    'active_link',
     'django_extensions',
     'vanilla',
     'bootstrap3',
@@ -96,11 +96,10 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.facebook',
     'debug_toolbar',
-    'datetimewidget',
+    'bootstrap_datepicker_plus',
     'raven.contrib.django.raven_compat',
     'rest_framework',
     'anymail',
-    'fixmydjango',
 ]
 
 LOCAL_APPS = [
@@ -169,7 +168,7 @@ AUTHENTICATION_BACKENDS = global_settings.AUTHENTICATION_BACKENDS + [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-MIDDLEWARE_CLASSES = global_settings.MIDDLEWARE_CLASSES + [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

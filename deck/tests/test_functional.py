@@ -6,7 +6,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core import mail
 from django.utils import six
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import TestCase, Client
 from django.utils.timezone import now, timedelta
 
@@ -161,7 +161,7 @@ class EventTest(TestCase):
         self.assertQuerysetEqual(response.context['event_list'], [])
 
     def test_list_event_pagination(self):
-        for x in xrange(0, 16):
+        for x in range(0, 16):
             event_data = self.event_data.copy()
             event_data.update(
                 is_published=True,
@@ -383,8 +383,8 @@ class EventTest(TestCase):
             reverse('create_event_proposal', kwargs={'slug': event.slug}),
             self.proposal_data, follow=True
         )
-        message = _(u'This Event doesn\'t accept Proposals anymore.')
-        self.assertIn(six.text_type(message), six.text_type(response.content))
+        message = _(u"This Event doesn't accept Proposals anymore.")
+        self.assertIn(message, response.content.decode())
         self.assertEquals(0, event.proposals.count())
 
         response = self.client.get(

@@ -21,7 +21,7 @@ def allowed_to_vote(user, proposal):
 
 @register.filter
 def get_rate_display(user, proposal):
-    if user.is_authenticated():
+    if user.is_authenticated:
         vote = proposal.votes.filter(user=user)
         if vote:
             return vote.first().get_rate_display()
@@ -69,7 +69,7 @@ def event_get_embedded_code(schedule_url):
 def urlize(*args, **kwargs):
     urlized = '&'.join([
         '{0}={1}'.format(*kwarg)
-        for kwarg in kwargs.iteritems()
+        for kwarg in kwargs.items()
         if kwarg[1]
     ])
     return '?{0}'.format(urlized)

@@ -3,16 +3,9 @@ from django.utils.translation import ugettext as _
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
-from datetimewidget.widgets import DateTimeWidget
+from bootstrap_datepicker_plus import DateTimePickerInput
 
 from .models import Event, Proposal, Activity
-
-
-class CustomDateTimeWidget(DateTimeWidget):
-    def format_output(self, *args, **kwargs):
-        return super(CustomDateTimeWidget, self)\
-            .format_output(*args, **kwargs).replace(
-                '<i class="icon-th"></i>', '<i class="icon-th hide"></i>')
 
 
 class CustomTimeInputWidget(forms.TimeInput):
@@ -25,7 +18,7 @@ class EventForm(forms.ModelForm):
         exclude = ['author', 'jury']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'inline-input'}),
-            'closing_date': CustomDateTimeWidget(attrs={
+            'closing_date': DateTimePickerInput(attrs={
                 'id': 'id_closing_date',
                 'class': 'inline-input',
                 'placeholder': 'Closing Date'

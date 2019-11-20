@@ -1,5 +1,5 @@
 from django.test import TestCase, Client
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 # from django.core.exceptions import ValidationError
 from django.utils import six
 from django.utils.translation import ugettext as _

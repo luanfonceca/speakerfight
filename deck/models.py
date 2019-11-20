@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db import models, transaction
 from django.db.models import Count
@@ -71,7 +71,8 @@ class DeckBaseModel(models.Model):
 
     # relations
     author = models.ForeignKey(to=settings.AUTH_USER_MODEL,
-                               related_name='%(class)ss')
+                               related_name='%(class)ss',
+                               on_delete=models.CASCADE)
 
     # managers
     objects = DeckBaseManager.as_manager()
@@ -100,8 +101,11 @@ class Vote(models.Model):
                                     choices=VOTE_RATES)
 
     # relations
-    proposal = models.ForeignKey(to='deck.Proposal', related_name='votes')
-    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name='votes')
+    proposal = models.ForeignKey(to='deck.Proposal', related_name='votes', on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
+        related_name='votes',
+        on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _('Vote')
@@ -165,7 +169,7 @@ class Activity(DeckBaseModel):
 
     # relations
     track = models.ForeignKey(to='deck.Track', related_name='activities',
-                              null=True, blank=True)
+                              null=True, blank=True, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('track_order', 'start_timetable', 'pk')
@@ -199,7 +203,7 @@ class Proposal(Activity):
             return 'http://www.speakerdeck.com/{0}'.format(self.slides_url)
 
     # relations
-    event = models.ForeignKey(to='deck.Event', related_name='proposals')
+    event = models.ForeignKey(to='deck.Event', related_name='proposals', on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['title']
@@ -276,7 +280,7 @@ class Track(models.Model):
                          max_length=200, unique=True, db_index=True)
 
     # relations
-    event = models.ForeignKey(to='deck.Event', related_name='tracks')
+    event = models.ForeignKey(to='deck.Event', related_name='tracks', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _('Track')
@@ -320,7 +324,7 @@ class Event(DeckBaseModel):
 
     # relations
     jury = models.OneToOneField(to='jury.Jury', related_name='event',
-                                null=True, blank=True)
+                                null=True, blank=True, on_delete=models.CASCADE)
     anonymous_voting = models.BooleanField(
         _('Anonymous Voting?'), default=False)
 
@@ -348,8 +352,7 @@ class Event(DeckBaseModel):
             can_see_proposals = True
         elif self.allow_public_voting:
             can_see_proposals = True
-        elif (not user.is_anonymous() and
-              self.jury.users.filter(pk=user.pk).exists()):
+        elif user.is_authenticated and self.jury.users.filter(pk=user.pk).exists():
             can_see_proposals = True
         return can_see_proposals
 

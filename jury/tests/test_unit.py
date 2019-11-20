@@ -15,10 +15,10 @@ class JuryModelIntegrityTest(TestCase):
     def test_assert_jury_should_have_users(self):
         self.assertIn('users', get_all_field_names(Jury))
 
-    def test_assert_jury_users_should_be_an_User(self):
-        self.assertEquals(User, self.fields['users'].rel.to)
+    def test_assert_jury_users_should_be_a_user(self):
+        self.assertEquals(User, self.fields['users'].remote_field.model)
 
-    def test_assert_jury_users_should_be_a_ManyToManyField(self):
+    def test_assert_jury_users_should_be_a_manytomanyfield(self):
         self.assertIsInstance(self.fields['users'], ManyToManyField)
 
     def test_assert_jury_users_should_be_required(self):
@@ -26,4 +26,4 @@ class JuryModelIntegrityTest(TestCase):
         self.assertEquals(False, self.fields['users'].blank)
 
     def test_assert_jury_event_should_have_a_related_name(self):
-        self.assertEquals('juries', self.fields['users'].rel.related_name)
+        self.assertEquals('juries', self.fields['users'].remote_field.get_accessor_name())

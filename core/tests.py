@@ -2,7 +2,7 @@
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase, Client
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import get_language
 from model_mommy import mommy

@@ -7,7 +7,7 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import IntegrityError, models
 from django.template.loader import render_to_string
 from django.http import HttpResponse, HttpResponseRedirect
@@ -20,7 +20,7 @@ from djqscsv import render_to_csv_response
 
 from .models import Event, Proposal, Vote, Activity, get_activities_by_parameters_order
 from .forms import EventForm, ProposalForm, ActivityForm, ActivityTimetableForm
-from core.mixins import LoginRequiredMixin, FormValidRedirectMixing
+from core.mixins import LoginRequiredMixin, FormValidRedirectMixin
 from deck.permissions import has_manage_schedule_permission
 from deck.use_cases import initialize_event_schedule, rearrange_event_schedule
 from deck.exceptions import EmptyActivitiesArrangementException
@@ -28,7 +28,7 @@ from deck.exceptions import EmptyActivitiesArrangementException
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-class BaseEventView(object):
+class BaseEventView():
     model = Event
     form_class = EventForm
     lookup_field = 'slug'
@@ -83,7 +83,7 @@ class ListEvents(BaseEventView, ListView):
 class CreateEvent(LoginRequiredMixin,
                   BaseEventView,
                   CreateView,
-                  FormValidRedirectMixing):
+                  FormValidRedirectMixin):
     template_name = 'event/event_form.html'
 
     def form_valid(self, form):
@@ -113,10 +113,10 @@ class DetailEvent(BaseEventView, DetailView):
         context['vote_rates'] = Vote.VOTE_RATES
         event_proposals = self.object.proposals.cached_authors()
         if self.object.user_can_see_proposals(self.request.user):
-            if not self.request.user.is_anonymous():
+            if self.request.user.is_authenticated:
                 event_proposals = event_proposals.order_by_never_voted(
                     user_id=self.request.user.id)
-        elif not self.request.user.is_anonymous():
+        elif self.request.user.is_authenticated:
             event_proposals = event_proposals.filter(author=self.request.user)
         else:
             event_proposals = event_proposals.none()
@@ -131,7 +131,7 @@ class ListMyEvents(LoginRequiredMixin, BaseEventView, ListView):
         return Event.objects.filter(author_id=self.request.user.id)
 
 
-class UpdateEvent(BaseEventView, UpdateView, FormValidRedirectMixing):
+class UpdateEvent(BaseEventView, UpdateView, FormValidRedirectMixin):
     template_name = 'event/event_form.html'
 
     def form_valid(self, form):
@@ -238,7 +238,7 @@ class DetailEventSchedule(BaseEventView, DetailView):
     template_name = 'event/event_detail_schedule.html'
 
 
-class BaseProposalView(object):
+class BaseProposalView():
     model = Proposal
     form_class = ProposalForm
     lookup_field = 'slug'
@@ -247,7 +247,7 @@ class BaseProposalView(object):
 class CreateProposal(LoginRequiredMixin,
                      BaseProposalView,
                      CreateView,
-                     FormValidRedirectMixing):
+                     FormValidRedirectMixin):
     template_name = 'proposal/proposal_form.html'
 
     def get_context_data(self, **kwargs):
@@ -320,7 +320,7 @@ class ListMyProposals(LoginRequiredMixin, BaseProposalView, ListView):
 class UpdateProposal(LoginRequiredMixin,
                      BaseProposalView,
                      UpdateView,
-                     FormValidRedirectMixing):
+                     FormValidRedirectMixin):
     template_name = 'proposal/proposal_form.html'
 
     def get_context_data(self, **kwargs):
@@ -394,7 +394,7 @@ class RateProposal(BaseProposalView, UpdateView):
         view_event_url = reverse(
             'view_event', kwargs={'slug': proposal.event.slug})
 
-        if not self.request.user.is_authenticated():
+        if not self.request.user.is_authenticated:
             message = _(u'You need to be logged in to '
                         u'continue to the next step.')
             if self.request.method == 'GET':
@@ -461,7 +461,7 @@ class ApproveProposal(BaseProposalView, UpdateView):
         view_event_url = reverse(
             'view_event', kwargs={'slug': proposal.event.slug})
 
-        if not self.request.user.is_authenticated():
+        if not self.request.user.is_authenticated:
             message = _(u'You need to be logged in to '
                         u'continue to the next step.')
             if self.request.method == 'GET':
@@ -528,7 +528,7 @@ class DisapproveProposal(BaseProposalView, UpdateView):
         view_event_url = reverse(
             'view_event', kwargs={'slug': proposal.event.slug})
 
-        if not self.request.user.is_authenticated():
+        if not self.request.user.is_authenticated:
             message = _(u'You need to be logged in to '
                         u'continue to the next step.')
             if self.request.method == 'GET':
