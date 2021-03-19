@@ -27,7 +27,7 @@ django-datetime-widget==0.9.3
 django-debug-toolbar==1.9.1
 django-extensions==2.0.7
 django-vanilla-views==1.0.5
-djangorestframework==3.8.2
+djangorestframework==3.11.2
 enum34==1.1.6
 fixmydjango==0.3.2
 greenlet==0.4.13
